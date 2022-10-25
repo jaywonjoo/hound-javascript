@@ -11,9 +11,23 @@ const openModalBtn = document.querySelector("#open-modal-btn");
 const closeModalBtn = document.querySelector("#close-modal-btn")
 const overlay = document.querySelector('#overlay');
 
+openModalBtn.addEventListener("click", () => {
+    modal.classList.add("open");
+    overlay.classList.add("open");
+})
+
+closeModalBtn.addEventListener("click", closeModal)
+overlay.addEventListener("click", closeModal)
+
+function closeModal() {
+    modal.classList.remove("open");
+    overlay.classList.remove("open");
+}
+
+/*
 // TODO: 3. Create a click event listener for the open-modal-btn that adds the class "open" to the modal
 // BONUS: Also add the class "open" to the overlay
-openModalBtn.addEventListener('click', e => {
+openModalBtn.addEventListener('click', () => {
     modal.classList.add("open");
     overlay.classList.add("open")
 })
@@ -30,6 +44,7 @@ overlay.addEventListener('click', e => {
     overlay.classList.remove("open");
     modal.classList.remove("open");
 })
+
 
 
 /*
