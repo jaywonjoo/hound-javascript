@@ -15,6 +15,13 @@ const questionItem = document.querySelectorAll(".question-item");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  //    6. BONUS: Make sure unanswered questions show up as incorrect. The easiest way to do this is to add the incorrect class and removing the correct class from all question items before checking the correct answers
+  for (let i = 0; i < 12; i++) {
+    if (answer[i].checked != "true") {
+      answer[i].closest(".question-item").classList.add("incorrect");
+    }
+  }
+
   //    2. Get all selected answers (use the `checked` property on the input to determine if it is selected or not)
   //    3. Loop through the selected answer to see if they are correct or not (Check the value of the answer to see if it is the string "true")
   for (let i = 0; i < 12; i++) {
@@ -37,5 +44,4 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-//    6. BONUS: Make sure unanswered questions show up as incorrect. The easiest way to do this is to add the incorrect class and removing the correct class from all question items before checking the correct answers
 //    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
