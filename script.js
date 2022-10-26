@@ -16,8 +16,13 @@ form.addEventListener("submit", (e) => {
 
   //    2. Get all selected answers (use the `checked` property on the input to determine if it is selected or not)
   //    3. Loop through the selected answer to see if they are correct or not (Check the value of the answer to see if it is the string "true")
-  for (let i = 0; i < 11; i++) {
-    console.log(answer[i].checked);
+  for (let i = 0; i < 12; i++) {
+    //console.log(answer[i].checked);
+    //console.log(answer[i].value);
+
+    if (answer[i].checked && answer[i].value == "true") {
+      console.log("yay");
+    }
   }
 });
 
