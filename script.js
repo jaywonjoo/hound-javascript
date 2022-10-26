@@ -9,6 +9,7 @@
 const form = document.querySelector("#quiz-form");
 const answer = document.querySelectorAll(".answer");
 const questionItem = document.querySelectorAll(".question-item");
+const popup = document.querySelector("#alert");
 
 // TODO: 3. Create a submit event listener for the form that does the following.
 //    1. Prevent the default behaviour
@@ -41,7 +42,15 @@ form.addEventListener("submit", (e) => {
       answer[i].closest(".question-item").classList.add("incorrect");
       answer[i].closest(".question-item").classList.remove("correct");
     }
+
+    //    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
+    if (answer[1].checked && answer[6].checked && answer[8].checked) {
+      //console.log("congrats!");
+      popup.classList.add("active");
+
+      setTimeout(() => {
+        popup.classList.remove("active");
+      }, "1000");
+    }
   }
 });
-
-//    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
