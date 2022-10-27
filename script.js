@@ -1,56 +1,102 @@
-/*
-  TODO: 2. Select all elements needed
-    * The form element (has the id `quiz-form`)
-    * The answer inputs (have the class `answer`)
-    * BONUS: The questions (have the class `question-item`)
-    * BONUS: The alert (has the id `alert`)
-*/
+// TODO: Select all elements needed
+//    Use the HTML to figure out what classes/ids will work best for selecting each element
 
-const form = document.querySelector("#quiz-form");
-const answer = document.querySelectorAll(".answer");
-const questionItem = document.querySelectorAll(".question-item");
-const popup = document.querySelector("#alert");
+const form = document.querySelector("#form");
+const username = document.getElementById("username");
+const errors = document.querySelector(".errors");
+const errorList = document.querySelector(".errors-list");
+const password = document.getElementById("password");
+const passwordCheck = document.getElementById("password-confirmation");
+const terms = document.getElementById("terms");
 
-// TODO: 3. Create a submit event listener for the form that does the following.
-//    1. Prevent the default behaviour
+// TODO: Create an event listener for when the form is submitted and do the following inside of it.
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  //console.log("blah")
 
-  //    6. BONUS: Make sure unanswered questions show up as incorrect. The easiest way to do this is to add the incorrect class and removing the correct class from all question items before checking the correct answers
-  for (let i = 0; i < 12; i++) {
-    if (answer[i].checked != "true") {
-      answer[i].closest(".question-item").classList.add("incorrect");
-    }
+  //    TODO: Create an array to store all error messages and clear any old error messages
+  let errorMessages = [];
+  //errorList.appendChild(errorMessages);
+
+  //    TODO: Define the following validation checks with appropriate error messages
+  //      1. Ensure the username is at least 6 characters long
+
+  console.log(username.value.length);
+  if (username.value.length < 6) {
+    //console.log("blah")
+    errors.classList.add("show");
+
+    let newListItem = document.createElement("li");
+    //newListItem.classList.add("one");
+    let usernameLengthWarning = document.createTextNode(
+      "Username must be at least 6 characters long"
+    );
+    //d.textcontent="butts";
+    newListItem.appendChild(usernameLengthWarning);
+    errorList.appendChild(newListItem);
+  } else if (username.value.length > 5) {
+    clearErrors();
   }
 
-  //    2. Get all selected answers (use the `checked` property on the input to determine if it is selected or not)
-  //    3. Loop through the selected answer to see if they are correct or not (Check the value of the answer to see if it is the string "true")
-  for (let i = 0; i < 12; i++) {
-    //console.log(answer[i].checked);
-    //console.log(answer[i].value);
+  //      2. Ensure the password is at least 10 characters long
+  if (password.value.length < 10) {
+    console.log(password);
+    errors.classList.add("show");
 
-    //    4. For each correct answer add the class `correct` to the parent with the class `question-item` and remove the class `incorrect`.
-    if (answer[i].checked && answer[i].value == "true") {
-      //console.log("yay");
-      //console.log(answer[i].closest(".question-item"));
-      answer[i].closest(".question-item").classList.add("correct");
-      answer[i].closest(".question-item").classList.remove("incorrect");
-    }
+    let newListItem = document.createElement("li");
+    //newListItem.classList.add("two");
+    let passwordLengthWarning = document.createTextNode(
+      "Password must be at least 10 characters long"
+    );
 
-    //    5. For each incorrect answer add the class `incorrect` to the parent with the class `question-item` and remove the class `correct`.
-    if (answer[i].checked && answer[i].value == "false") {
-      answer[i].closest(".question-item").classList.add("incorrect");
-      answer[i].closest(".question-item").classList.remove("correct");
-    }
-
-    //    7. BONUS: If all answers are correct show the element with the id `alert` and hide it after one second (look into setTimeout) (use the class active to show the alert and remove the class to hide it)
-    if (answer[1].checked && answer[6].checked && answer[8].checked) {
-      //console.log("congrats!");
-      popup.classList.add("active");
-
-      setTimeout(() => {
-        popup.classList.remove("active");
-      }, "1000");
-    }
+    newListItem.appendChild(passwordLengthWarning);
+    errorList.appendChild(newListItem);
   }
+
+  //      3. Ensure the password and confirmation password match
+  if (password.value !== passwordCheck.value) {
+    errors.classList.add("show");
+
+    let newListItem = document.createElement("li");
+    //newListItem.classList.add("three");
+    let passwordMismatchWarning = document.createTextNode(
+      "Passwords do not match"
+    );
+
+    newListItem.appendChild(passwordMismatchWarning);
+    errorList.appendChild(newListItem);
+  }
+
+  //      4. Ensure the terms checkbox is checked
+  if (!terms.checked) {
+    errors.classList.add("show");
+
+    let newListItem = document.createElement("li");
+    //newListItem.classList.add("four");
+    let termsChecked = document.createTextNode(
+      "Please agree to our terms and conditions"
+    );
+
+    newListItem.appendChild(termsChecked);
+    errorList.appendChild(newListItem);
+  }
+
+  //    TODO: If there are any errors then prevent the form from submitting and show the error messages
 });
+
+// TODO: Define this function
+function clearErrors() {
+  // Loop through all the children of the error-list element and remove them
+  // IMPORTANT: This cannot be done with a forEach loop or a normal for loop since as you remove children it will modify the list you are looping over which will not work
+  // I recommend using a while loop to accomplish this task
+  // This is the trickiest part of this exercise so if you get stuck and are unable to progress you can also set the innerHTML property of the error-list to an empty string and that will also clear the children. I recommend trying to accomplish this with a while loop, though, for practice.
+  // Also, make sure you remove the show class to the errors container
+}
+
+// TODO: Define this function
+function showErrors(errorMessages) {
+  // Add each error to the error-list element
+  // Make sure to use an li as the element for each error
+  // Also, make sure you add the show class to the errors container
+}
