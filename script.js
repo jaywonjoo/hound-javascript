@@ -16,70 +16,29 @@ form.addEventListener("submit", (e) => {
   //console.log("blah")
 
   //    TODO: Create an array to store all error messages and clear any old error messages
-  let errorMessages = [];
+  //let errorMessages = [];
   //errorList.appendChild(errorMessages);
 
   //    TODO: Define the following validation checks with appropriate error messages
+
   //      1. Ensure the username is at least 6 characters long
-
-  console.log(username.value.length);
   if (username.value.length < 6) {
-    //console.log("blah")
-    errors.classList.add("show");
-
-    let newListItem = document.createElement("li");
-    //newListItem.classList.add("one");
-    let usernameLengthWarning = document.createTextNode(
-      "Username must be at least 6 characters long"
-    );
-    //d.textcontent="butts";
-    newListItem.appendChild(usernameLengthWarning);
-    errorList.appendChild(newListItem);
-  } else if (username.value.length > 5) {
-    clearErrors();
+    showErrors("Username must be at least 6 characters long");
   }
 
   //      2. Ensure the password is at least 10 characters long
   if (password.value.length < 10) {
-    console.log(password);
-    errors.classList.add("show");
-
-    let newListItem = document.createElement("li");
-    //newListItem.classList.add("two");
-    let passwordLengthWarning = document.createTextNode(
-      "Password must be at least 10 characters long"
-    );
-
-    newListItem.appendChild(passwordLengthWarning);
-    errorList.appendChild(newListItem);
+    showErrors("Password must be at least 10 characters long");
   }
 
   //      3. Ensure the password and confirmation password match
   if (password.value !== passwordCheck.value) {
-    errors.classList.add("show");
-
-    let newListItem = document.createElement("li");
-    //newListItem.classList.add("three");
-    let passwordMismatchWarning = document.createTextNode(
-      "Passwords do not match"
-    );
-
-    newListItem.appendChild(passwordMismatchWarning);
-    errorList.appendChild(newListItem);
+    showErrors("Passwords do not match");
   }
 
   //      4. Ensure the terms checkbox is checked
   if (!terms.checked) {
-    errors.classList.add("show");
-
-    let newListItem = document.createElement("li");
-    //newListItem.classList.add("four");
-    let termsChecked = document.createTextNode(
-      "Please agree to our terms and conditions"
-    );
-
-    newListItem.appendChild(termsChecked);
-    errorList.appendChild(newListItem);
+    showErrors("Please agree to our terms and conditions");
   }
 
   //    TODO: If there are any errors then prevent the form from submitting and show the error messages
@@ -99,4 +58,12 @@ function showErrors(errorMessages) {
   // Add each error to the error-list element
   // Make sure to use an li as the element for each error
   // Also, make sure you add the show class to the errors container
+
+  errors.classList.add("show");
+
+  let newListItem = document.createElement("li");
+  let a = document.createTextNode(errorMessages);
+  newListItem.appendChild(a);
+  //newListItem.classList.add(c);
+  errorList.appendChild(newListItem);
 }
