@@ -1,34 +1,30 @@
-// Need something for add
-// Need something for remove
-// add hover effect to remove
-
-const form = document.querySelector("#new-item-form");
-const input = document.querySelector("#item-input");
-const list = document.querySelector("#list");
-const div = document.querySelector("div");
+const form = document.getElementById("new-todo-form");
+const input = document.querySelector("#todo-input");
+// const list = document.querySelector("#list");
+//const div = document.querySelector("div");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  //   console.log(e);
-  //   console.log(input.value);
-
-  // create new div
-  const newDiv = document.createElement("div");
+  // create new li
+  const newEmptyListItem = document.createElement("li");
 
   // grab value inputted to input
   let todoItem = input.value;
 
-  // put inputted value into div
-  newDiv.innerHTML = todoItem;
+  // put a checkbox on the list item
+  // put a delete button on the list item
 
-  // append div to list
-  let newListItem = list.appendChild(newDiv);
+  // put inputted value into <li>
+  newEmptyListItem.innerHTML = todoItem;
 
-  // add class list to created div
-  newListItem.classList.add("list-item");
+  // append <li> to list
+  let newListItem = list.appendChild(newEmptyListItem);
 
-  //const createdItem = document.getElementsByClassName("list-item");
+  // add class list to created li
+  newListItem.classList.add("list-item-label");
+
+  const createdItem = document.getElementsByClassName("list-item-label");
   newListItem.addEventListener("click", () => {
     // console.log("blah");
     newListItem.remove();
