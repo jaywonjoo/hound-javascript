@@ -1,28 +1,37 @@
-// 1. Select all elements
+// Need something for add
+// Need something for remove
+// add hover effect to remove
+
 const form = document.querySelector("#new-item-form");
-const list = document.querySelector("#list");
 const input = document.querySelector("#item-input");
+const list = document.querySelector("#list");
+const div = document.querySelector("div");
 
-// 2. When I submit the form add a new element
-form.addEventListener('submit', e => {
-    e.preventDefault()
-    
-    //console.log(input.value)
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    // 1. Create a new item
-    const item = document.createElement('div')
-    item.innerText = input.value
-    item.classList.add("list-item")
+  //   console.log(e);
+  //   console.log(input.value);
 
-    // 2. Add that item to the list
-    list.appendChild(item)
-    
-    // 3. Clear input
-    input.value = ""
+  // create new div
+  const newDiv = document.createElement("div");
 
-    // 4. Setup event listener to delete item when clicked
-    item.addEventListener("click", () => {
-        item.remove()
-    })
+  // grab value inputted to input
+  let todoItem = input.value;
 
-})
+  // put inputted value into div
+  newDiv.innerHTML = todoItem;
+
+  // append div to list
+  let newListItem = list.appendChild(newDiv);
+
+  // add class list to created div
+  newListItem.classList.add("list-item");
+
+  //const createdItem = document.getElementsByClassName("list-item");
+  newListItem.addEventListener("click", () => {
+    // console.log("blah");
+    newListItem.remove();
+    // console.log(div.innerHTML);
+  });
+});
