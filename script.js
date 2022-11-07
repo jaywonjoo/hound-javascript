@@ -18,6 +18,9 @@ const openModalButton = document.querySelector("#open-modal-btn")
 const closeModalButton = document.querySelector("#close-modal-btn")
 const overlay = document.querySelector("#overlay")
 
+
+
+
 button.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -45,6 +48,12 @@ function createProject() {
   newProject.classList.add("project-card");
 
   closeModal()
+
+  // click on div to redirect user to another page
+  const projectCard = document.querySelector(".project-card")
+  projectCard.addEventListener("click", (e) => {
+    window.location.href="project-page.html";
+  })
 }
 
 
@@ -54,4 +63,9 @@ overlay.addEventListener("click", closeModal)
 function closeModal() {
   modal.classList.remove("open")
   overlay.classList.remove("open")
+}
+
+
+function redirect() {
+  
 }
