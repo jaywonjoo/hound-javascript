@@ -4,9 +4,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Firebase 9</title>
+
+  <style>
+      #modal.open {
+        display: block;
+      }
+      #overlay.open {
+        display: block;
+      }
+    </style>
 </head>
 <body>
-  <h1>Getting Started with Firebase 9</h1>
+  <!-- <h1>Getting Started with Firebase 9</h1>
 
   <h2>Firebase Firestore</h2>
 
@@ -24,7 +33,31 @@
     <input type="text" name="id" required>
 
     <button>delete a book</button>
-  </form>
+  </form> -->
+
+
+
+
+
+ 
+
+  <h2>Projects</h2>
+  <div id="project-section">
+      <button id="button">New Project</button>
+      <div id="project-container"></div>
+  </div>
+
+   <!-- merge -->
+  <div id="overlay"></div>
+
+  <div id="modal">
+      <h3>Add New Project</h3>
+      <h4>Project Name</h4>
+      <input type="text" id="item-input">
+      
+      <button id="close-modal-btn">Close Modal</button>
+  </div>
+
 
   <script src="bundle.js"></script>
 </body>
