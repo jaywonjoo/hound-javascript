@@ -51,12 +51,27 @@
   <div id="overlay"></div>
 
   <div id="modal">
-      <h3>Add New Project</h3>
+      <!-- <h3>Add New Project</h3>
       <h4>Project Name</h4>
       <input type="text" id="item-input">
       
-      <button id="close-modal-btn">Close Modal</button>
+      <button id="close-modal-btn">Close Modal</button> -->
+
+      <form class="add">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+        
+        <button id="close-modal-btn">add a new Project</button>
+      </form>
+
   </div>
+
+  <form class="delete">
+    <label for="id">Document id:</label>
+    <input type="text" name="id" required>
+
+    <button>delete a Project</button>
+  </form>
 
 
   <script src="bundle.js"></script>

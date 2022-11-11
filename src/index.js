@@ -15,102 +15,74 @@ const firebaseConfig = {
     appId: "1:361705338046:web:f04df4040689f429aa9aef"
   };
 
-// init firebase app
-  initializeApp(firebaseConfig)
-
-// // init services
-// const db = getFirestore()
-
-// // collection ref
-// const colRef = collection(db, 'books')
-
-// // realtime collection data
-// onSnapshot(colRef, (snapshot) => {
-//     let books = []
-//     snapshot.docs.forEach((doc) => {
-//         books.push({ ...doc.data(), id: doc.id })
-//     })
-//     console.log(books)
-// })
-
-// // adding documents
-// const addBookForm = document.querySelector('.add')
-// addBookForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
-
-//     addDoc(colRef, {
-//         title: addBookForm.title.value,
-//         author: addBookForm.author.value,
-//     })
-//     .then(() => {
-//         addBookForm.reset()
-//     })
-// })
-
-// // deleting documents
-// const deleteBookForm = document.querySelector('.delete')
-// deleteBookForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
-    
-//     const docRef = doc(db, 'books', deleteBookForm.id.value)
-//     deleteDoc(docRef)
-//         .then(() => {
-//             deleteBookForm.reset()
-//         })
-
-// })
-
-
-// merge
-
-
-// const projectSection = document.querySelector("#project-section");
-
 const button = document.getElementById("button");
 const projectContainer = document.querySelector("#project-container");
 const newProject = document.createElement("div");
-
-// button.addEventListener("click", (e) => {
-//   e.preventDefault();
-//   projectContainer.appendChild(newProject);
-//   newProject.innerText = "blah";
-//   newProject.classList.add("project-card");
-// });
-
-
 
 const modal = document.querySelector("#modal")
 const openModalButton = document.querySelector("#open-modal-btn")
 const closeModalButton = document.querySelector("#close-modal-btn")
 const overlay = document.querySelector("#overlay")
 
+// init firebase app
+  initializeApp(firebaseConfig)
+
+// init services
+const db = getFirestore()
+
+// collection ref
+const colRef = collection(db, 'projects')
+
+// realtime collection data
+onSnapshot(colRef, (snapshot) => {
+    let projects = []
+    snapshot.docs.forEach((doc) => {
+        projects.push({ ...doc.data(), id: doc.id })
+    })
+    console.log(projects)
+})
 
 
 
+// open modal
 button.addEventListener("click", (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    openModal()
+  openModal()
 })
 
 
 // click on "New Project" to open modal
 function openModal() {
-    modal.classList.add("open")
-    overlay.classList.add("open")
+  modal.classList.add("open")
+  overlay.classList.add("open")
 }
 
-// user inputs project name
-// user presses "close modal" button
-// JS takes the input and sets it as the inner text of the created div
 
-closeModalButton.addEventListener("click", createProject)
+
+// adding documents
+const addProjectForm = document.querySelector('.add')
+addProjectForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    addDoc(colRef, {
+        name: addProjectForm.name.value,
+    })
+    .then(() => {
+        addProjectForm.reset()
+    })
+
+    createProject();
+
+    closeModal();
+})
+
 
 function createProject() {
-  const input = document.querySelector("#item-input");
+  const input = document.querySelector(".add");
   
   projectContainer.appendChild(newProject);
-  newProject.innerText = input.value;
+  newProject.innerText = addProjectForm.name.value;
   newProject.classList.add("project-card");
 
   closeModal()
@@ -122,16 +94,33 @@ function createProject() {
   })
 }
 
-
-// click on overlay to cancel operation
-overlay.addEventListener("click", closeModal)
-
 function closeModal() {
   modal.classList.remove("open")
   overlay.classList.remove("open")
 }
 
 
+// click on overlay to cancel operation
+overlay.addEventListener("click", closeModal)
+
+
+
+
 function redirect() {
   
 }
+
+
+
+// deleting documents
+const deleteProjectForm = document.querySelector('.delete')
+deleteProjectForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    const docRef = doc(db, 'projects', deleteProjectForm.id.value)
+    deleteDoc(docRef)
+        .then(() => {
+            deleteProjectForm.reset()
+        })
+
+})
