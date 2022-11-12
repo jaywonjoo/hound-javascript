@@ -38,10 +38,35 @@ onSnapshot(colRef, (snapshot) => {
     let projects = []
     snapshot.docs.forEach((doc) => {
         projects.push({ ...doc.data(), id: doc.id })
-    })
+
+        if (projects[0]) {
+          createProject()
+          newProject.innerText = projects[0].name;
+        }
+
+       
+     })
     console.log(projects)
+    
+
 })
 
+
+function createProject() {
+  const input = document.querySelector(".add");
+  
+  projectContainer.appendChild(newProject);
+  newProject.innerText = addProjectForm.name.value;
+  newProject.classList.add("project-card");
+
+  closeModal()
+
+  // click on div to redirect user to another page
+  const projectCard = document.querySelector(".project-card")
+  projectCard.addEventListener("click", (e) => {
+    window.location.href="project-page.html";
+  })
+}
 
 
 // open modal
@@ -78,21 +103,7 @@ addProjectForm.addEventListener('submit', (e) => {
 })
 
 
-function createProject() {
-  const input = document.querySelector(".add");
-  
-  projectContainer.appendChild(newProject);
-  newProject.innerText = addProjectForm.name.value;
-  newProject.classList.add("project-card");
 
-  closeModal()
-
-  // click on div to redirect user to another page
-  const projectCard = document.querySelector(".project-card")
-  projectCard.addEventListener("click", (e) => {
-    window.location.href="project-page.html";
-  })
-}
 
 function closeModal() {
   modal.classList.remove("open")
@@ -104,14 +115,6 @@ function closeModal() {
 overlay.addEventListener("click", closeModal)
 
 
-
-
-function redirect() {
-  
-}
-
-
-
 // deleting documents
 const deleteProjectForm = document.querySelector('.delete')
 deleteProjectForm.addEventListener('submit', (e) => {
@@ -121,6 +124,12 @@ deleteProjectForm.addEventListener('submit', (e) => {
     deleteDoc(docRef)
         .then(() => {
             deleteProjectForm.reset()
+            let projects = []
+            if (!projects[0]) {
+              projectContainer.removeChild(newProject)
+            }
         })
+
+         
 
 })
