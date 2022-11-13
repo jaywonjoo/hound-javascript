@@ -83,8 +83,8 @@ const addProjectForm = document.querySelector('.modal-create-project-button')
         closeModal();
     })
     // b. Create a div for the created project to live in
+      // BUG: OVERWRITES EXISTING DIV INSTEAD OF CREATING A NEW ONE???
     function createProject() {
-      const input = document.querySelector(".modal-create-project-button");
       // const projectContainer = document.querySelector("#project-container");
       // const newProject = document.createElement("div");
       projectContainer.appendChild(newProject);
