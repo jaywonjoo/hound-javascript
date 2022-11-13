@@ -162,10 +162,8 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 
 
+// 5. clear selected ticket info when deleted
 
-
-// 4. display selected ticket info
-// 4.1 populate selected ticket info when clicked
 
 
 
