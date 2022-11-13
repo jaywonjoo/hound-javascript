@@ -20,6 +20,12 @@
     background-color: rgba(0, 0, 0, .75);
   }
 
+.create-ticket-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .ticket-section {
    background-color: rgb(229, 229, 229);
    width: 100%;

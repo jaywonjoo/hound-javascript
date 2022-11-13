@@ -125,6 +125,9 @@ newTicketButton.addEventListener('click', () => {
             author: createTicketForm.author.value,
             description: createTicketForm.description.value,
             title: createTicketForm.title.value,
+            status: createTicketForm.status.value,
+            priority: createTicketForm.priority.value,
+            type: createTicketForm.type.value,
         })
         .then(() => {
             createTicketForm.reset()
