@@ -10,10 +10,13 @@ module.exports = {
         ],
     },
   mode: 'development',
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    projects: './src/projects.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
   watch: true
 }
