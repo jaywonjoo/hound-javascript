@@ -19,3 +19,13 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, .75);
   }
+
+.ticket-section {
+   background-color: rgb(229, 229, 229);
+   width: 500px;
+   height: 200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
