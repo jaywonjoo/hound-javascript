@@ -46,8 +46,12 @@ onSnapshot(colRef, (snapshot) => {
     for (i = 0; i < projects.length; i++) {
       const newProject = document.createElement("div");
       projectContainer.appendChild(newProject);
-      newProject.innerText = projects[i].id;
+      newProject.innerText = projects[i].name;
       newProject.classList.add("project-card");
+      const newProjectId = document.createElement("div")
+      newProject.appendChild(newProjectId)
+      newProjectId.innerText = projects[i].id;
+      newProjectId.classList.add("project-id-card");
 
       // // click on div to redirect user to another page
       // newProject.addEventListener("click", (e) => {
@@ -60,7 +64,7 @@ onSnapshot(colRef, (snapshot) => {
     const projectCards = document.querySelectorAll(".project-card")
     projectCards.forEach((card) => {
       card.addEventListener("click", () => {
-        const result = card.textContent;
+        const result = card.lastChild.textContent;
         const projectPage = ['project-page.html?project=' + result]
         // console.log(projectPage)
         // console.log(result);
