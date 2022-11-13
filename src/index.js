@@ -3,7 +3,7 @@ import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc,
 } from 'firebase/firestore';
-import "./styles.css";
+import "./index.css";
 
 
 const firebaseConfig = {

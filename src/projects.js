@@ -42,30 +42,31 @@ const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
             showTicket()
 
             function showTicket() {
+                ticketContainer.appendChild(ticketLi)
+                ticketLi.appendChild(ticketUl)
                 TicketTitle.innerText = tickets[0].title;
-                ticketContainer.appendChild(TicketTitle)
+                ticketUl.appendChild(TicketTitle)
 
                 TicketDescription.innerText = tickets[0].description;
-                ticketContainer.appendChild(TicketDescription)
+                ticketUl.appendChild(TicketDescription)
 
                 TicketAuthor.innerText = tickets[0].author;
-                ticketContainer.appendChild(TicketAuthor)
+                ticketUl.appendChild(TicketAuthor)
+                ticketLi.classList.add("ticket-li");
             }
         })
         console.log(tickets)
-
-
     })
 // 2. append tickets to tickets list
-    // a. need constant for ticket <ul>
+    // a. create and append <li><ul><li></li></ul></li> to ticketContainer
     const ticketContainer = document.querySelector("#tickets")
-
-    // b. need constant that creates an <li> we can append to the <ul>
+    const ticketLi = document.createElement("li")
+    const ticketUl = document.createElement("ul")
     const TicketTitle = document.createElement("li");
     const TicketDescription = document.createElement("li");
     const TicketAuthor = document.createElement("li");
 
-    // c. need function that does (2)
+    // b. need function that does (2)
         // function was place inside the snapshot!
 
 
