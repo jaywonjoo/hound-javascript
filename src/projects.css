@@ -22,7 +22,7 @@
 
 .ticket-section {
    background-color: rgb(229, 229, 229);
-   width: 500px;
+   width: 100%;
    height: 200px;
    display: flex;
    flex-direction: column;
@@ -30,6 +30,25 @@
    align-items: center;
 }
 
-.ticket-li {
-  background-color: gray;
+.ticket-ul {
+  background-color: rgb(255, 255, 255);
+  gap: 100px;
+  width: 100%;
+  display: flex;
+  border-bottom: solid 1px;
+  list-style: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.ticket-header {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 200px;
+  margin-left: 275px
+  
 }

@@ -54,9 +54,9 @@ const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
 
                 TicketAuthor.innerText = tickets[0].author;
                 ticketUl.appendChild(TicketAuthor)
-                ticketLi.classList.add("ticket-li");
+                ticketUl.classList.add("ticket-ul");
                 
-                const test = document.querySelector('.ticket-li')
+                const test = document.querySelector('.ticket-ul')
                 test.addEventListener("click", () => {
                     console.log("boop")
                 })
