@@ -22,8 +22,19 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref
-const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
+// const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
 
+// *relevant* collection ref
+  // need variable that changes based on project selected
+    // using query parameter to pass data from one page to another!
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+      });
+      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+      let value = params.project; // "some_value"
+      console.log(value)
+  // setting colRef to selected project!
+  const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
 
 
 

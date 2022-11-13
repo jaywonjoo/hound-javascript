@@ -48,14 +48,33 @@ onSnapshot(colRef, (snapshot) => {
       projectContainer.appendChild(newProject);
       newProject.innerText = projects[i].name;
       newProject.classList.add("project-card");
-      
-      // click on div to redirect user to another page
-      newProject.addEventListener("click", (e) => {
-        window.location.href="project-page.html";
+
+      // // click on div to redirect user to another page
+      // newProject.addEventListener("click", (e) => {
+      //   window.location.href="project-page.html?project=coyote";
+      // })
+
+    }      
+
+    // click on div to redirect user to project specific page 
+    const projectCards = document.querySelectorAll(".project-card")
+    projectCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const result = card.textContent;
+        const projectPage = ['project-page.html?project=' + result]
+        // console.log(projectPage)
+        // console.log(result);
+        window.location.href=projectPage;
       })
-    } 
+    })
+
     console.log(projects)
 })
+
+
+
+
+
 
 // Make tickets clear and repopulate after deletion
 function clearProjects() {
@@ -133,4 +152,7 @@ deleteProjectForm.addEventListener('submit', (e) => {
             deleteProjectForm.reset()
         })
 })
+
+
+
 
