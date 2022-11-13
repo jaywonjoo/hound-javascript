@@ -30,7 +30,13 @@ const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
 // display ticket info in ticket list
 // 1. link tickets to page
     onSnapshot(colRef, (snapshot) => {
+        // create empty array to populate
         let tickets = []
+
+        // function to clear tickets array on every refresh
+        clearTickets()
+
+        // then populate it with whatever is in the tickets section
         snapshot.docs.forEach((doc) => {
             tickets.push({ ...doc.data(), id: doc.id })
             showTicket()
@@ -114,6 +120,7 @@ deleteTicketForm.addEventListener('submit', (e) => {
     deleteDoc(docRef)
         .then(() => {
             deleteTicketForm.reset()
+            
         })
 })
 
@@ -124,3 +131,9 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 // 4. display selected ticket info
 // 4.1 populate selected ticket info when clicked
+
+function clearTickets() {
+    while (tickets.children[0] != null) {
+        tickets.removeChild(tickets.children[0]);
+    }
+}

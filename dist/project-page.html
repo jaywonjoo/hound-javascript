@@ -22,13 +22,18 @@
 
     <!-- ticket section -->
     <div class="ticket-section">
-      <ul id="tickets">Tickets<button id="newTicketButton">New Ticket</button></ul>
+      <h3>Tickets</h3>
+      <button id="newTicketButton">New Ticket</button>
+      <ul id="tickets"></ul>
+
       <form class="delete-ticket-form">
         <label for="id">Ticket id:</label>
         <input type="text" name="id" required>
         <button>delete a Ticket</button>
       </form>
+
       <div id="overlay"></div>
+
       <div id="modal">
         <form class="create-ticket-btn">
           <label for="author">Author:</label>
