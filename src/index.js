@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 const button = document.getElementById("button");
 const projectContainer = document.querySelector("#project-container");
-const newProject = document.createElement("div");
+// const newProject = document.createElement("li");
 
 const modal = document.querySelector("#modal")
 const openModalButton = document.querySelector("#open-modal-btn")
@@ -39,10 +39,10 @@ onSnapshot(colRef, (snapshot) => {
     snapshot.docs.forEach((doc) => {
         projects.push({ ...doc.data(), id: doc.id })
 
-        if (projects[0]) {
-          createProject()
-          newProject.innerText = projects[0].name;
-        }
+        // if (projects[0]) {
+        //   createProjectDiv()
+        //   newProject.innerText = projects[0].name;
+        // }
 
        
      })
@@ -78,15 +78,16 @@ const addProjectForm = document.querySelector('.modal-create-project-button')
             addProjectForm.reset()
         })
 
-        createProject();
+        createProjectDiv();
 
         closeModal();
     })
     // b. Create a div for the created project to live in
       // BUG: OVERWRITES EXISTING DIV INSTEAD OF CREATING A NEW ONE???
-    function createProject() {
+    function createProjectDiv() {
       // const projectContainer = document.querySelector("#project-container");
-      // const newProject = document.createElement("div");
+      // const newProject = document.createElement("li");
+      const newProject = document.createElement("li");
       projectContainer.appendChild(newProject);
       newProject.innerText = addProjectForm.name.value;
       newProject.classList.add("project-card");
