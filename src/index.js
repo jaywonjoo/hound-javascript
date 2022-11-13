@@ -46,7 +46,7 @@ onSnapshot(colRef, (snapshot) => {
     for (i = 0; i < projects.length; i++) {
       const newProject = document.createElement("div");
       projectContainer.appendChild(newProject);
-      newProject.innerText = projects[i].name;
+      newProject.innerText = projects[i].id;
       newProject.classList.add("project-card");
 
       // // click on div to redirect user to another page

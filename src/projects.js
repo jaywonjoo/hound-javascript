@@ -22,7 +22,7 @@ initializeApp(firebaseConfig)
 const db = getFirestore()
 
 // collection ref
-// const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
+// const colRef = collection(db, 'projects', value, 'tickets')
 
 // *relevant* collection ref
   // need variable that changes based on project selected
@@ -34,7 +34,7 @@ const db = getFirestore()
       let value = params.project; // "some_value"
       console.log(value)
   // setting colRef to selected project!
-  const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
+  const colRef = collection(db, 'projects', value, 'tickets')
 
 
 
@@ -154,7 +154,7 @@ const deleteTicketForm = document.querySelector('.delete-ticket-form')
 deleteTicketForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    const docRef = doc(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets', deleteTicketForm.id.value)
+    const docRef = doc(db, 'projects', value, 'tickets', deleteTicketForm.id.value)
     deleteDoc(docRef)
         .then(() => {
             deleteTicketForm.reset()
