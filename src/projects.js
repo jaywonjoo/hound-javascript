@@ -39,9 +39,11 @@ const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
         // then populate it with whatever is in the tickets section
         snapshot.docs.forEach((doc) => {
             tickets.push({ ...doc.data(), id: doc.id })
-            showTicket()
+            
+            //(2b)
+            populateTicket()
 
-            function showTicket() {
+            function populateTicket() {
                 ticketContainer.appendChild(ticketLi)
                 ticketLi.appendChild(ticketUl)
                 TicketTitle.innerText = tickets[0].title;
@@ -53,6 +55,11 @@ const colRef = collection(db, 'projects', 'FbLa2ligAuIL1PdyolJH', 'tickets')
                 TicketAuthor.innerText = tickets[0].author;
                 ticketUl.appendChild(TicketAuthor)
                 ticketLi.classList.add("ticket-li");
+                
+                const test = document.querySelector('.ticket-li')
+                test.addEventListener("click", () => {
+                    console.log("boop")
+                })
             }
         })
         console.log(tickets)
@@ -125,7 +132,15 @@ deleteTicketForm.addEventListener('submit', (e) => {
         })
 })
 
+    // Make tickets clear and repopulate after deletion
+    function clearTickets() {
+        while (tickets.children[0] != null) {
+            tickets.removeChild(tickets.children[0]);
+        }
+    }
+
 // ***************************************************************************************************
+
 
 
 
@@ -133,8 +148,3 @@ deleteTicketForm.addEventListener('submit', (e) => {
 // 4. display selected ticket info
 // 4.1 populate selected ticket info when clicked
 
-function clearTickets() {
-    while (tickets.children[0] != null) {
-        tickets.removeChild(tickets.children[0]);
-    }
-}
