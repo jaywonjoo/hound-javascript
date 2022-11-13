@@ -48,10 +48,15 @@ onSnapshot(colRef, (snapshot) => {
       projectContainer.appendChild(newProject);
       newProject.innerText = projects[i].name;
       newProject.classList.add("project-card");
-    }
-    
+      
+      // click on div to redirect user to another page
+      newProject.addEventListener("click", (e) => {
+        window.location.href="project-page.html";
+      })
+    } 
     console.log(projects)
 })
+
 // Make tickets clear and repopulate after deletion
 function clearProjects() {
   while (projectContainer.children[0] != null) {
@@ -103,11 +108,6 @@ const addProjectForm = document.querySelector('.modal-create-project-button')
 
       closeModal()
 
-      // click on div to redirect user to another page
-      const projectCard = document.querySelector(".project-card")
-      projectCard.addEventListener("click", (e) => {
-        window.location.href="project-page.html";
-      })
     }
 // 3. Close the modal
 function closeModal() {
@@ -131,9 +131,6 @@ deleteProjectForm.addEventListener('submit', (e) => {
     deleteDoc(docRef)
         .then(() => {
             deleteProjectForm.reset()
-            let projects = []
-            if (!projects[0]) {
-              projectContainer.removeChild(newProject)
-            }
         })
 })
+
