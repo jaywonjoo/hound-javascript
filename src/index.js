@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 const button = document.getElementById("button");
 const projectContainer = document.querySelector("#project-container");
-// const newProject = document.createElement("li");
+// const newProject = document.createElement("div");
 
 const modal = document.querySelector("#modal")
 const openModalButton = document.querySelector("#open-modal-btn")
@@ -34,21 +34,30 @@ const db = getFirestore()
 const colRef = collection(db, 'projects')
 
 // realtime collection data
+let i = 0
 onSnapshot(colRef, (snapshot) => {
+    clearProjects()
+    
     let projects = []
     snapshot.docs.forEach((doc) => {
         projects.push({ ...doc.data(), id: doc.id })
-
-        // if (projects[0]) {
-        //   createProjectDiv()
-        //   newProject.innerText = projects[0].name;
-        // }
-
-       
      })
+     
+    for (i = 0; i < projects.length; i++) {
+      const newProject = document.createElement("div");
+      projectContainer.appendChild(newProject);
+      newProject.innerText = projects[i].name;
+      newProject.classList.add("project-card");
+    }
+    
     console.log(projects)
 })
-
+// Make tickets clear and repopulate after deletion
+function clearProjects() {
+  while (projectContainer.children[0] != null) {
+      projectContainer.removeChild(projectContainer.children[0]);
+  }
+}
 
 // **************************************************************************************** // 
 
@@ -86,8 +95,8 @@ const addProjectForm = document.querySelector('.modal-create-project-button')
       // BUG: OVERWRITES EXISTING DIV INSTEAD OF CREATING A NEW ONE???
     function createProjectDiv() {
       // const projectContainer = document.querySelector("#project-container");
-      // const newProject = document.createElement("li");
-      const newProject = document.createElement("li");
+      // const newProject = document.createElement("div");
+      const newProject = document.createElement("div");
       projectContainer.appendChild(newProject);
       newProject.innerText = addProjectForm.name.value;
       newProject.classList.add("project-card");
