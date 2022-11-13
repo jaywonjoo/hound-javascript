@@ -6,10 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script defer src="projects.bundle.js"></script>
+
+    <style>
+        #modal.open {
+          display: block;
+        }
+        #overlay.open {
+          display: block;
+        }
+      </style>
 </head>
 <body>
+    <!-- Team Members Section -->
     <ul id="team">Team Members</ul>
-    <ul id="tickets">Tickets</ul>
+
+    <!-- ticket section -->
+    <ul id="tickets">Tickets<button id="newTicketButton">New Ticket</button></ul>
+    <form class="delete-ticket-form">
+      <label for="id">Ticket id:</label>
+      <input type="text" name="id" required>
+      <button>delete a Ticket</button>
+    </form>
+    <div id="overlay"></div>
+    <div id="modal">
+      <form class="create-ticket-btn">
+        <label for="author">Author:</label>
+        <input type="text" name="author" required>
+        <label for="description">Description:</label>
+        <input type="text" name="description" required>
+        <label for="title">Title:</label>
+        <input type="text" name="title" required>
+        
+        <button id="modal-create-ticket-btn">add a new Project</button>
+      </form>
+    </div>
+    
+    <!-- Selected Ticket Info Section -->
     <ul id="ticket-info">Selected Ticket Info</ul>
+
+    
+
 </body>
 </html>
