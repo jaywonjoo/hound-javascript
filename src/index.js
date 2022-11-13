@@ -47,75 +47,72 @@ onSnapshot(colRef, (snapshot) => {
        
      })
     console.log(projects)
-    
-
 })
 
 
-function createProject() {
-  const input = document.querySelector(".add");
-  
-  projectContainer.appendChild(newProject);
-  newProject.innerText = addProjectForm.name.value;
-  newProject.classList.add("project-card");
-
-  closeModal()
-
-  // click on div to redirect user to another page
-  const projectCard = document.querySelector(".project-card")
-  projectCard.addEventListener("click", (e) => {
-    window.location.href="project-page.html";
-  })
-}
+// **************************************************************************************** // 
 
 
-// open modal
+// FEATURE: Create a new project
+// 1. click on "New Project" to open modal & overlay
 button.addEventListener("click", (e) => {
   e.preventDefault();
 
   openModal()
 })
+    // a. Actual function that opens the modal and overlay
+    function openModal() {
+      modal.classList.add("open")
+      overlay.classList.add("open")
+    }
+// 2. Click on "Create Project" button to
+const addProjectForm = document.querySelector('.modal-create-project-button')
+    // a. Write the created project to Firestore (and reset the form after it's been submitted)
+    addProjectForm.addEventListener('submit', (e) => {
+        e.preventDefault()
 
+        addDoc(colRef, {
+            name: addProjectForm.name.value,
+        })
+        .then(() => {
+            addProjectForm.reset()
+        })
 
-// click on "New Project" to open modal
-function openModal() {
-  modal.classList.add("open")
-  overlay.classList.add("open")
-}
+        createProject();
 
-
-
-// adding documents
-const addProjectForm = document.querySelector('.add')
-addProjectForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-
-    addDoc(colRef, {
-        name: addProjectForm.name.value,
+        closeModal();
     })
-    .then(() => {
-        addProjectForm.reset()
-    })
+    // b. Create a div for the created project to live in
+    function createProject() {
+      const input = document.querySelector(".modal-create-project-button");
+      // const projectContainer = document.querySelector("#project-container");
+      // const newProject = document.createElement("div");
+      projectContainer.appendChild(newProject);
+      newProject.innerText = addProjectForm.name.value;
+      newProject.classList.add("project-card");
 
-    createProject();
+      closeModal()
 
-    closeModal();
-})
-
-
-
-
+      // click on div to redirect user to another page
+      const projectCard = document.querySelector(".project-card")
+      projectCard.addEventListener("click", (e) => {
+        window.location.href="project-page.html";
+      })
+    }
+// 3. Close the modal
 function closeModal() {
   modal.classList.remove("open")
   overlay.classList.remove("open")
 }
 
-
-// click on overlay to cancel operation
+// BONUS 4. Click on overlay to cancel operation
 overlay.addEventListener("click", closeModal)
 
 
-// deleting documents
+// **************************************************************************************** // 
+
+
+// FEATURE: Deleting Documents
 const deleteProjectForm = document.querySelector('.delete')
 deleteProjectForm.addEventListener('submit', (e) => {
     e.preventDefault()
@@ -129,7 +126,4 @@ deleteProjectForm.addEventListener('submit', (e) => {
               projectContainer.removeChild(newProject)
             }
         })
-
-         
-
 })
