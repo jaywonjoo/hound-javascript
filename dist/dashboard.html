@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase 9</title>
+
+  <style>
+      #modal.open {
+        display: block;
+      }
+      #overlay.open {
+        display: block;
+      }
+    </style>
+</head>
+<body>
+
+  <h2>Projects</h2>
+  <div id="project-section">
+      <button id="button">New Project</button>
+      <div id="project-container"></div>
+  </div>
+
+   <!-- merge -->
+  <div id="overlay"></div>
+
+  <div id="modal">
+
+      <form class="modal-create-project-button">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+        
+        <button id="close-modal-btn">Create Project</button>
+      </form>
+
+  </div>
+
+  <form class="delete">
+    <label for="id">Document id:</label>
+    <input type="text" name="id" required>
+
+    <button>delete a Project</button>
+  </form>
+
+
+  <script src="dashboard.bundle.js"></script>
+</body>
+</html>
