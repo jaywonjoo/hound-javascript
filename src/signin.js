@@ -9,3 +9,9 @@ const signUpLink = document.querySelector("#signUpLink");
 signUpLink.addEventListener("click", () => {
   window.location.href = "signup.html";
 });
+
+// button to take you to the dashboard
+const signInButton = document.querySelector("#signInButton");
+signInButton.addEventListener("click", () => {
+  window.location.href = "dashboard.html";
+});

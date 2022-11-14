@@ -15,7 +15,7 @@
   \***********************/
 /***/ (() => {
 
-eval("// button to take you back to the homepage\nconst logoHomeButton = document.querySelector(\"#logoHomeButton\");\nlogoHomeButton.addEventListener(\"click\", () => {\n  window.location.href = \"index.html\";\n});\n\n// button to take you to the signin page\nconst signUpLink = document.querySelector(\"#signUpLink\");\nsignUpLink.addEventListener(\"click\", () => {\n  window.location.href = \"signup.html\";\n});\n\n\n//# sourceURL=webpack://jssimplified/./src/signin.js?");
+eval("// button to take you back to the homepage\nconst logoHomeButton = document.querySelector(\"#logoHomeButton\");\nlogoHomeButton.addEventListener(\"click\", () => {\n  window.location.href = \"index.html\";\n});\n\n// button to take you to the signin page\nconst signUpLink = document.querySelector(\"#signUpLink\");\nsignUpLink.addEventListener(\"click\", () => {\n  window.location.href = \"signup.html\";\n});\n\n// button to take you to the dashboard\nconst signInButton = document.querySelector(\"#signInButton\");\nsignInButton.addEventListener(\"click\", () => {\n  window.location.href = \"dashboard.html\";\n});\n\n\n//# sourceURL=webpack://jssimplified/./src/signin.js?");
 
 /***/ })
 
