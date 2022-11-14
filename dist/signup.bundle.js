@@ -15,7 +15,7 @@
   \***********************/
 /***/ (() => {
 
-eval("\n\n//# sourceURL=webpack://jssimplified/./src/signup.js?");
+eval("// button to take you back to the homepage\nconst logoHomeButton = document.querySelector(\"#logoHomeButton\");\nlogoHomeButton.addEventListener(\"click\", () => {\n  window.location.href = \"index.html\";\n});\n\nconst signInLink = document.querySelector(\"#signInLink\");\nsignInLink.addEventListener(\"click\", () => {\n  window.location.href = \"signin.html\";\n});\n\n\n//# sourceURL=webpack://jssimplified/./src/signup.js?");
 
 /***/ })
 
