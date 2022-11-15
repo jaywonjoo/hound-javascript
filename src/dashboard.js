@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
+import { getAuth, signOut } from "firebase/auth";
 import "./dashboard.css";
 
 const firebaseConfig = {
@@ -35,6 +36,29 @@ const db = getFirestore();
 
 // collection ref
 const colRef = collection(db, "projects");
+
+// FEATURE: SECURITY WALL
+const auth = getAuth()
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("body").style.display = "block";
+  } else {
+    window.location.replace("signin.html")
+  }
+});
+
+// FEATURE: LOGOUT BUTTON
+const logoutButton = document.querySelector('#logoutButton')
+logoutButton.addEventListener('click', () => {
+  signOut(auth)
+    .then(() => {
+      console.log('the user signed out')
+      window.location.href = "signin.html";
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
+})
 
 // realtime collection data
 let i = 0;

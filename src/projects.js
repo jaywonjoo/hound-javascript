@@ -3,6 +3,7 @@ import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc,
 } from 'firebase/firestore';
+import { getAuth, signOut } from "firebase/auth";
 import "./projects.css";
 
 const firebaseConfig = {
@@ -21,8 +22,28 @@ initializeApp(firebaseConfig)
 // init services
 const db = getFirestore()
 
-// collection ref
-// const colRef = collection(db, 'projects', value, 'tickets')
+// FEATURE: SECURITY WALL
+const auth = getAuth()
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    document.getElementById("body").style.display = "block";
+  } else {
+    window.location.replace("signin.html")
+  }
+});
+
+// FEATURE: LOGOUT BUTTON
+const logoutButton = document.querySelector('#logoutButton')
+logoutButton.addEventListener('click', () => {
+  signOut(auth)
+    .then(() => {
+      console.log('the user signed out')
+      window.location.href = "signin.html";
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
+})
 
 // *relevant* collection ref
   // need variable that changes based on project selected

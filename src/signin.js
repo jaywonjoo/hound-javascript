@@ -1,3 +1,21 @@
+import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",
+  authDomain: "hound-e43f0.firebaseapp.com",
+  projectId: "hound-e43f0",
+  storageBucket: "hound-e43f0.appspot.com",
+  messagingSenderId: "361705338046",
+  appId: "1:361705338046:web:f04df4040689f429aa9aef",
+};
+
+// init firebase app
+initializeApp(firebaseConfig);
+
+// link authentication features
+const auth = getAuth();
+
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector("#logoHomeButton");
 logoHomeButton.addEventListener("click", () => {
@@ -10,8 +28,22 @@ signUpLink.addEventListener("click", () => {
   window.location.href = "signup.html";
 });
 
-// button to take you to the dashboard
-const signInButton = document.querySelector("#signInButton");
-signInButton.addEventListener("click", () => {
-  window.location.href = "dashboard.html";
-});
+
+// FEATURE: AUTHENTICATION - SIGN IN FORM
+const signinForm = document.querySelector("#signinForm")
+signinForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const email = signinForm.email.value;
+  const password = signinForm.password.value
+
+  // const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("user logged in", userCredential.user)
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      console.log(err.message)
+    });
+})

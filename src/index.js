@@ -1,8 +1,10 @@
 import "./index.css";
 
+// ****************************************************************************************** //
+
 // button to take users to the signin page
 const loginButton = document.querySelector("#loginButton");
-loginButton.addEventListener("click", () => {
+loginButton.addEventListener("click", () => {  
   window.location.href = "signin.html";
 });
 
