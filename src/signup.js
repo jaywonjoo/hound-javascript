@@ -26,23 +26,22 @@ signInLink.addEventListener("click", () => {
 });
 
 // FEATURE: AUTHENTICATION - SIGN UP FORM
-const signupForm = document.querySelector("#signupForm")
+const signupForm = document.querySelector("#signupForm");
 signupForm.addEventListener("submit", (e) => {
-  e.preventDefault()
+  e.preventDefault();
 
   const email = signupForm.email.value;
-  const password = signupForm.password.value
+  const password = signupForm.password.value;
 
   // Initialize Firebase Authentication and get a reference to the service
   const auth = getAuth();
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      console.log('user created:', userCredential.user)
-      signupForm.reset()
-      // window.location.href = "dashboard.html";
-  })
-  .catch((error) => {
-    console.log(err.message)
-  });
-
-})
+      console.log("user created:", userCredential.user);
+      signupForm.reset();
+      window.location.href = "dashboard.html";
+    })
+    .catch((error) => {
+      console.log(err.message);
+    });
+});
