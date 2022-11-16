@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { getAuth, signOut, getIdToken } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./dashboard.css";
 
 const firebaseConfig = {
@@ -63,52 +63,58 @@ logoutButton.addEventListener("click", () => {
 });
 
 // queries
-// const user = auth.currentUser;
-// const uid = user.uid;
-const userProjects = query(
-  colRef,
-  where("creator", "==", "TxF1wFnjDmSaz0mFQeXSVYkMBR43")
-);
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    const userProjects = query(colRef, where("creator", "==", uid));
 
-// realtime collection data
-let i = 0;
-onSnapshot(userProjects, (snapshot) => {
-  clearProjects();
+    // realtime collection data
+    let i = 0;
+    onSnapshot(userProjects, (snapshot) => {
+      clearProjects();
 
-  let projects = [];
-  snapshot.docs.forEach((doc) => {
-    projects.push({ ...doc.data(), id: doc.id });
-  });
+      let projects = [];
+      snapshot.docs.forEach((doc) => {
+        projects.push({ ...doc.data(), id: doc.id });
+      });
 
-  for (i = 0; i < projects.length; i++) {
-    const newProject = document.createElement("div");
-    projectContainer.appendChild(newProject);
-    newProject.innerText = projects[i].name;
-    newProject.classList.add("project-card");
-    const newProjectId = document.createElement("div");
-    newProject.appendChild(newProjectId);
-    newProjectId.innerText = projects[i].id;
-    newProjectId.classList.add("project-id-card");
+      for (i = 0; i < projects.length; i++) {
+        const newProject = document.createElement("div");
+        projectContainer.appendChild(newProject);
+        newProject.innerText = projects[i].name;
+        newProject.classList.add("project-card");
+        const newProjectId = document.createElement("div");
+        newProject.appendChild(newProjectId);
+        newProjectId.innerText = projects[i].id;
+        newProjectId.classList.add("project-id-card");
 
-    // // click on div to redirect user to another page
-    // newProject.addEventListener("click", (e) => {
-    //   window.location.href="project-page.html?project=coyote";
-    // })
-  }
+        // // click on div to redirect user to another page
+        // newProject.addEventListener("click", (e) => {
+        //   window.location.href="project-page.html?project=coyote";
+        // })
+      }
 
-  // click on div to redirect user to project specific page
-  const projectCards = document.querySelectorAll(".project-card");
-  projectCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const result = card.lastChild.textContent;
-      const projectPage = ["project-page.html?project=" + result];
-      // console.log(projectPage)
-      // console.log(result);
-      window.location.href = projectPage;
+      // click on div to redirect user to project specific page
+      const projectCards = document.querySelectorAll(".project-card");
+      projectCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const result = card.lastChild.textContent;
+          const projectPage = ["project-page.html?project=" + result];
+          // console.log(projectPage)
+          // console.log(result);
+          window.location.href = projectPage;
+        });
+      });
+
+      console.log(projects);
     });
-  });
-
-  console.log(projects);
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
 });
 
 // Make tickets clear and repopulate after deletion
