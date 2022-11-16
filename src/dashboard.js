@@ -6,6 +6,8 @@ import {
   addDoc,
   deleteDoc,
   doc,
+  query,
+  where,
 } from "firebase/firestore";
 import { getAuth, signOut, getIdToken } from "firebase/auth";
 import "./dashboard.css";
@@ -60,9 +62,17 @@ logoutButton.addEventListener("click", () => {
     });
 });
 
+// queries
+// const user = auth.currentUser;
+// const uid = user.uid;
+const userProjects = query(
+  colRef,
+  where("creator", "==", "TxF1wFnjDmSaz0mFQeXSVYkMBR43")
+);
+
 // realtime collection data
 let i = 0;
-onSnapshot(colRef, (snapshot) => {
+onSnapshot(userProjects, (snapshot) => {
   clearProjects();
 
   let projects = [];
