@@ -7,7 +7,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, getIdToken } from "firebase/auth";
 import "./dashboard.css";
 
 const firebaseConfig = {
@@ -38,27 +38,27 @@ const db = getFirestore();
 const colRef = collection(db, "projects");
 
 // FEATURE: SECURITY WALL
-const auth = getAuth()
+const auth = getAuth();
 auth.onAuthStateChanged((user) => {
   if (user) {
     document.getElementById("body").style.display = "block";
   } else {
-    window.location.replace("signin.html")
+    window.location.replace("signin.html");
   }
 });
 
 // FEATURE: LOGOUT BUTTON
-const logoutButton = document.querySelector('#logoutButton')
-logoutButton.addEventListener('click', () => {
+const logoutButton = document.querySelector("#logoutButton");
+logoutButton.addEventListener("click", () => {
   signOut(auth)
     .then(() => {
-      console.log('the user signed out')
+      console.log("the user signed out");
       window.location.href = "signin.html";
     })
     .catch((err) => {
-      console.log(err.message)
-    })
-})
+      console.log(err.message);
+    });
+});
 
 // realtime collection data
 let i = 0;
@@ -128,11 +128,30 @@ const addProjectForm = document.querySelector(".modal-create-project-button");
 addProjectForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  addDoc(colRef, {
-    name: addProjectForm.name.value,
-  }).then(() => {
-    addProjectForm.reset();
-  });
+  // outputs current user id ************************************
+  const user = auth.currentUser;
+  if (user !== null) {
+    // The user object has basic properties such as display name, email, etc.
+    // const displayName = user.displayName;
+    // const email = user.email;
+    // const photoURL = user.photoURL;
+    // const emailVerified = user.emailVerified;
+
+    // The user's ID, unique to the Firebase project. Do NOT use
+    // this value to authenticate with your backend server, if
+    // you have one. Use User.getToken() instead.
+    const uid = user.uid;
+    console.log(uid);
+
+    // ***********************************************************
+
+    addDoc(colRef, {
+      name: addProjectForm.name.value,
+      creator: uid,
+    }).then(() => {
+      addProjectForm.reset();
+    });
+  }
 
   createProjectDiv();
 
