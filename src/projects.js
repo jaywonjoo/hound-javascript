@@ -114,13 +114,28 @@ logoutButton.addEventListener('click', () => {
 
                     ticketUl.classList.add("ticket-ul");
                     ticketId.classList.add("hidden")
-
-                    // const newProjectId = document.createElement("div");
-                    // newProject.appendChild(newProjectId);
-                    // newProjectId.innerText = projects[i].id;
-                    // newProjectId.classList.add("project-id-card");
                 }
             }
+
+            // // click on ticket to redirect user to project specific page
+            const selectedTicketUl = document.querySelectorAll(".ticket-ul")
+            selectedTicketUl.forEach((ticket) => {
+                ticket.addEventListener("click", () => {
+                    const selectedTicketId = ticket.lastChild.textContent;
+                    console.log(selectedTicketId)
+                })
+            })
+
+            // const projectCards = document.querySelectorAll(".project-card");
+            // projectCards.forEach((card) => {
+            //     card.addEventListener("click", () => {
+            //     const result = card.lastChild.textContent;
+            //     const projectPage = ["project-page.html?project=" + result];
+            //     // console.log(projectPage)
+            //     // console.log(result);
+            //     window.location.href = projectPage;
+            //     });
+            // });
 
             // 4. populate selected ticket info section on click
             const populateTicketInfo = document.querySelectorAll('.ticket-ul')
@@ -143,7 +158,7 @@ logoutButton.addEventListener('click', () => {
                     populatedTicketSection.innerHTML = tickets[i].priority;
                     populatedTypeSection.innerHTML = tickets[i].type;
                     // console.log(tickets[0].title)
-                    console.log(i)
+                    // console.log(i)
                 })
             
 
