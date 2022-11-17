@@ -112,27 +112,31 @@ logoutButton.addEventListener('click', () => {
                 }
             }
 
-            // // 4. populate selected ticket info section on click
-            // const populateTicketInfo = document.querySelector('.ticket-ul')
-            // populateTicketInfo.addEventListener("click", () => {
-            //     // console.log("boop")
-            //     const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-            //     const populatedAuthorSection = document.querySelector("#populated-author-section")
-            //     const populatedDescriptionSection = document.querySelector("#populated-description-section")
-            //     const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-            //     const populatedTicketSection = document.querySelector("#populated-priority-section")
-            //     const populatedTypeSection = document.querySelector("#populated-type-section")
+            // 4. populate selected ticket info section on click
+            const populateTicketInfo = document.querySelectorAll('.ticket-ul')
+            populateTicketInfo.forEach((ticket) => {
+                ticket.addEventListener("click", () => {
+                    // console.log("boop")
+                    let i = 0
 
-            //     populatedTicketTitleSection.innerHTML = tickets[0].title;
-            //     populatedAuthorSection.innerHTML = tickets[0].author;
-            //     populatedDescriptionSection.innerHTML = tickets[0].description;
-            //     populatedTicketInfoSection.innerHTML = tickets[0].status;
-            //     populatedTicketSection.innerHTML = tickets[0].priority;
-            //     populatedTypeSection.innerHTML = tickets[0].type;
-            //     // console.log(tickets[0].title)
-
+                    const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                    const populatedAuthorSection = document.querySelector("#populated-author-section")
+                    const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                    const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                    const populatedTicketSection = document.querySelector("#populated-priority-section")
+                    const populatedTypeSection = document.querySelector("#populated-type-section")
+    
+                    populatedTicketTitleSection.innerHTML = tickets[i].title;
+                    populatedAuthorSection.innerHTML = tickets[i].author;
+                    populatedDescriptionSection.innerHTML = tickets[i].description;
+                    populatedTicketInfoSection.innerHTML = tickets[i].status;
+                    populatedTicketSection.innerHTML = tickets[i].priority;
+                    populatedTypeSection.innerHTML = tickets[i].type;
+                    // console.log(tickets[0].title)
+                    console.log(i)
+                })
             
-    //         })
+            })
             
     //     })
     //     console.log(tickets)
