@@ -1,3 +1,7 @@
+/* body {
+  font-family: Graphik-Semibold,sans-serif;
+} */
+
 #modal {
     display: none;
     position: absolute;
@@ -87,10 +91,42 @@ ul {
   width: 100%;
   height: 400px;
   background-color: white;
+
 }
 
 .chatbox {
-  background-color: gray;
+  background-color: rgb(40, 40, 40);
   height: 90%;
-  width: 100%
+  width: 100%;
+  /* font-family: Graphik-Semibold,sans-serif; */
+}
+
+.entire-message {
+  display: flex;
+  background-color: rgb(148, 148, 148);
+}
+
+.user-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+  color: white;
+  min-width: 30px;
+  min-height: 30px;
+  max-width: 30px;
+  max-height: 30px;
+  border-radius: 50%;
+  margin: 0 10px 0 10px
+}
+
+.name-and-timestamp-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: bold;
+}
+
+.message-content {
+  width: 100%;
 }
