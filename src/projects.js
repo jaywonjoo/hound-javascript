@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, onSnapshot,
-    addDoc, deleteDoc, doc,
+    addDoc, deleteDoc, doc, serverTimestamp, Firestore,
 } from 'firebase/firestore';
 import { getAuth, signOut } from "firebase/auth";
 import "./projects.css";
@@ -52,10 +52,10 @@ logoutButton.addEventListener('click', () => {
         get: (searchParams, prop) => searchParams.get(prop),
       });
       // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let value = params.project; // "some_value"
-      console.log(value)
+      let projectID = params.project; // "some_value"
+      console.log(projectID)
   // setting colRef to selected project!
-  const colRef = collection(db, 'projects', value, 'tickets')
+  const colRef = collection(db, 'projects', projectID, 'tickets')
 
 
 
@@ -107,10 +107,13 @@ logoutButton.addEventListener('click', () => {
                 populatedTicketSection.innerHTML = tickets[0].priority;
                 populatedTypeSection.innerHTML = tickets[0].type;
                 // console.log(tickets[0].title)
-            })
 
+            
+            })
+            
         })
         console.log(tickets)
+        
     })
 // 2. append tickets to tickets list
     // a. create and append <li><ul><li></li></ul></li> to ticketContainer
@@ -175,7 +178,7 @@ const deleteTicketForm = document.querySelector('.delete-ticket-form')
 deleteTicketForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    const docRef = doc(db, 'projects', value, 'tickets', deleteTicketForm.id.value)
+    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.projectID)
     deleteDoc(docRef)
         .then(() => {
             deleteTicketForm.reset()
@@ -196,6 +199,26 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 // 5. clear selected ticket info when deleted
 
+
+
+
+// FEATURE: CHAT ***************************************************************************************************
+
+const commentRef = collection(db, 'projects', projectID, 'tickets', '9fpZNq3uBhc0mdWABhnn', 'comments')
+const commentInputForm = document.querySelector(".comment-input-form")
+commentInputForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // newProject.innerText = addProjectForm.name.value;
+    addDoc(commentRef, {
+        firstName: "Jaywon",
+        lastName: "Joo",
+        message: commentInputForm.comment.value,
+        createdAt: serverTimestamp(),
+    })
+    .then(() => {
+        commentInputForm.reset()
+    })
+})
 
 
 
