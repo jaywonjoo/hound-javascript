@@ -59,13 +59,14 @@ signupForm.addEventListener("submit", (e) => {
         name: "john",
       }).then(() => {
         console.log("blah")
+        signupForm.reset();
+        window.location.href = "dashboard.html";
       });
       // .catch((error) => {
       //   console.log(err.message);
       // });
 
-      signupForm.reset();
-      // window.location.href = "dashboard.html";
+
     })
     // .catch((error) => {
     //   console.log(err.message);
