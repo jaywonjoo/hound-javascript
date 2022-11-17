@@ -98,17 +98,27 @@ logoutButton.addEventListener('click', () => {
                     const TicketTitle = document.createElement("li");
                     const TicketDescription = document.createElement("li");
                     const TicketAuthor = document.createElement("li");
+                    const ticketId = document.createElement("li")
+
                     ticketContainer.appendChild(ticketLi)
                     ticketLi.appendChild(ticketUl)
+                        ticketUl.appendChild(TicketTitle)
+                        ticketUl.appendChild(TicketDescription)
+                        ticketUl.appendChild(TicketAuthor)
+                        ticketUl.appendChild(ticketId)
+
                     TicketTitle.innerText = tickets[i].title;
-                    ticketUl.appendChild(TicketTitle)
-
                     TicketDescription.innerText = tickets[i].description;
-                    ticketUl.appendChild(TicketDescription)
+                    TicketAuthor.innerText = tickets[i].author;   
+                    ticketId.innerText = tickets[i].id;             
 
-                    TicketAuthor.innerText = tickets[i].author;
-                    ticketUl.appendChild(TicketAuthor)
                     ticketUl.classList.add("ticket-ul");
+                    ticketId.classList.add("hidden")
+
+                    // const newProjectId = document.createElement("div");
+                    // newProject.appendChild(newProjectId);
+                    // newProjectId.innerText = projects[i].id;
+                    // newProjectId.classList.add("project-id-card");
                 }
             }
 
@@ -136,6 +146,8 @@ logoutButton.addEventListener('click', () => {
                     console.log(i)
                 })
             
+
+                // comments should also load here ***************************************************
             })
             
     //     })

@@ -1,6 +1,9 @@
 /* body {
   font-family: Graphik-Semibold,sans-serif;
 } */
+.hidden {
+  display: none;
+}
 
 #modal {
     display: none;
@@ -130,3 +133,4 @@ ul {
 .message-content {
   width: 100%;
 }
+
