@@ -1,4 +1,14 @@
 import { initializeApp } from "firebase/app";
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const firebaseConfig = {
@@ -12,6 +22,12 @@ const firebaseConfig = {
 
 // init firebase app
 initializeApp(firebaseConfig);
+
+// init services
+const db = getFirestore();
+
+// collection ref
+const colRef = collection(db, "users");
 
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector("#logoHomeButton");
@@ -38,10 +54,20 @@ signupForm.addEventListener("submit", (e) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log("user created:", userCredential.user);
+
+      addDoc(colRef, {
+        name: "john",
+      }).then(() => {
+        console.log("blah")
+      });
+      // .catch((error) => {
+      //   console.log(err.message);
+      // });
+
       signupForm.reset();
-      window.location.href = "dashboard.html";
+      // window.location.href = "dashboard.html";
     })
-    .catch((error) => {
-      console.log(err.message);
-    });
+    // .catch((error) => {
+    //   console.log(err.message);
+    // });
 });
