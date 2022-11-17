@@ -54,9 +54,12 @@ signupForm.addEventListener("submit", (e) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log("user created:", userCredential.user);
-
+      const uid = userCredential.user.uid;
       addDoc(colRef, {
-        name: "john",
+        firstName: "Steve",
+        lastName: "Carell",
+        phoneNumber: "(123)456-7890",
+        id: uid,
       }).then(() => {
         console.log("blah")
         signupForm.reset();
@@ -65,7 +68,6 @@ signupForm.addEventListener("submit", (e) => {
       // .catch((error) => {
       //   console.log(err.message);
       // });
-
 
     })
     // .catch((error) => {
