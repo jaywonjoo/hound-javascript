@@ -15,6 +15,18 @@ const firebaseConfig = {
     appId: "1:361705338046:web:f04df4040689f429aa9aef"
   };
 
+// 2. append tickets to tickets list
+    // a. create and append <li><ul><li></li></ul></li> to ticketContainer
+    const ticketContainer = document.querySelector("#tickets")
+    const ticketLi = document.createElement("li")
+    const ticketUl = document.createElement("ul")
+    const TicketTitle = document.createElement("li");
+    const TicketDescription = document.createElement("li");
+    const TicketAuthor = document.createElement("li");
+
+    // b. need function that does (2)
+        // function was place inside the snapshot!
+
 
 // init firebase app
 initializeApp(firebaseConfig)
@@ -71,61 +83,61 @@ logoutButton.addEventListener('click', () => {
         // then populate it with whatever is in the tickets section
         snapshot.docs.forEach((doc) => {
             tickets.push({ ...doc.data(), id: doc.id })
+        });
+            //console.log(tickets[1])
             
+            let i = 0;
             //(2b)
-            populateTicket()
+            for (i = 0; i < tickets.length; i++) {
+                populateTicket()
 
-            function populateTicket() {
-                ticketContainer.appendChild(ticketLi)
-                ticketLi.appendChild(ticketUl)
-                TicketTitle.innerText = tickets[0].title;
-                ticketUl.appendChild(TicketTitle)
+                function populateTicket() {
+                    const ticketContainer = document.querySelector("#tickets")
+                    const ticketLi = document.createElement("li")
+                    const ticketUl = document.createElement("ul")
+                    const TicketTitle = document.createElement("li");
+                    const TicketDescription = document.createElement("li");
+                    const TicketAuthor = document.createElement("li");
+                    ticketContainer.appendChild(ticketLi)
+                    ticketLi.appendChild(ticketUl)
+                    TicketTitle.innerText = tickets[i].title;
+                    ticketUl.appendChild(TicketTitle)
 
-                TicketDescription.innerText = tickets[0].description;
-                ticketUl.appendChild(TicketDescription)
+                    TicketDescription.innerText = tickets[i].description;
+                    ticketUl.appendChild(TicketDescription)
 
-                TicketAuthor.innerText = tickets[0].author;
-                ticketUl.appendChild(TicketAuthor)
-                ticketUl.classList.add("ticket-ul");
+                    TicketAuthor.innerText = tickets[i].author;
+                    ticketUl.appendChild(TicketAuthor)
+                    ticketUl.classList.add("ticket-ul");
+                }
             }
 
-            // 4. populate selected ticket info section on click
-            const populateTicketInfo = document.querySelector('.ticket-ul')
-            populateTicketInfo.addEventListener("click", () => {
-                // console.log("boop")
-                const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                const populatedAuthorSection = document.querySelector("#populated-author-section")
-                const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                const populatedTicketSection = document.querySelector("#populated-priority-section")
-                const populatedTypeSection = document.querySelector("#populated-type-section")
+            // // 4. populate selected ticket info section on click
+            // const populateTicketInfo = document.querySelector('.ticket-ul')
+            // populateTicketInfo.addEventListener("click", () => {
+            //     // console.log("boop")
+            //     const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+            //     const populatedAuthorSection = document.querySelector("#populated-author-section")
+            //     const populatedDescriptionSection = document.querySelector("#populated-description-section")
+            //     const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+            //     const populatedTicketSection = document.querySelector("#populated-priority-section")
+            //     const populatedTypeSection = document.querySelector("#populated-type-section")
 
-                populatedTicketTitleSection.innerHTML = tickets[0].title;
-                populatedAuthorSection.innerHTML = tickets[0].author;
-                populatedDescriptionSection.innerHTML = tickets[0].description;
-                populatedTicketInfoSection.innerHTML = tickets[0].status;
-                populatedTicketSection.innerHTML = tickets[0].priority;
-                populatedTypeSection.innerHTML = tickets[0].type;
-                // console.log(tickets[0].title)
+            //     populatedTicketTitleSection.innerHTML = tickets[0].title;
+            //     populatedAuthorSection.innerHTML = tickets[0].author;
+            //     populatedDescriptionSection.innerHTML = tickets[0].description;
+            //     populatedTicketInfoSection.innerHTML = tickets[0].status;
+            //     populatedTicketSection.innerHTML = tickets[0].priority;
+            //     populatedTypeSection.innerHTML = tickets[0].type;
+            //     // console.log(tickets[0].title)
 
             
-            })
+    //         })
             
-        })
-        console.log(tickets)
+    //     })
+    //     console.log(tickets)
         
     })
-// 2. append tickets to tickets list
-    // a. create and append <li><ul><li></li></ul></li> to ticketContainer
-    const ticketContainer = document.querySelector("#tickets")
-    const ticketLi = document.createElement("li")
-    const ticketUl = document.createElement("ul")
-    const TicketTitle = document.createElement("li");
-    const TicketDescription = document.createElement("li");
-    const TicketAuthor = document.createElement("li");
-
-    // b. need function that does (2)
-        // function was place inside the snapshot!
 
 
 // 3. create ticket form
