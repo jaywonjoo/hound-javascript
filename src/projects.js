@@ -147,11 +147,62 @@ logoutButton.addEventListener('click', () => {
                         
                     })
 
-                    // comments should also load here ***************************************************
-                    // const comments = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                    let comments = [1,2,3]
 
-                    const chatbox = document.querySelector(".chatbox");
+                    // let i = 0;
+                    // onSnapshot(userProjects, (snapshot) => {
+                    //   clearProjects();
+                
+                    //   let projects = [];
+                    //   snapshot.docs.forEach((doc) => {
+                    //     projects.push({ ...doc.data(), id: doc.id });
+                    //   });
+
+    // // setting colRef to selected project!
+    // const colRef = collection(db, 'projects', projectID, 'tickets')
+
+
+
+    // // display ticket info in ticket list
+    // // 1. link tickets to page
+    //     onSnapshot(colRef, (snapshot) => {
+    //         // create empty array to populate
+    //         let tickets = []
+
+    //         // function to clear tickets array on every refresh
+    //         clearTickets()
+
+    //         // then populate it with whatever is in the tickets section
+    //         snapshot.docs.forEach((doc) => {
+    //             tickets.push({ ...doc.data(), id: doc.id })
+    //         });
+    //             //console.log(tickets[1])
+                
+    //             let i = 0;
+    //             //(2b)
+    //             for (i = 0; i < tickets.length; i++) {
+    //                 populateTicket()
+
+                    
+                    // comments should also load here ***************************************************
+                    const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                    
+                    onSnapshot(commentsRef, (snapshot) => {
+                        let comments = []
+
+                        // refresh chatbox
+                        const chatbox = document.querySelector(".chatbox");
+
+                        clearChatbox();
+                        
+                        function clearChatbox() {
+                            while (chatbox.children[0] != null) {
+                                chatbox.removeChild(chatbox.children[0]);
+                            }
+                        }
+                        snapshot.docs.forEach((doc) => {
+                            comments.push({ ...doc.data(), id: doc.id })
+                        });
+
                     for (i = 0; i < comments.length; i++) {
                         const newComment = document.createElement("div");
                             const userIcon = document.createElement("div");
@@ -182,6 +233,7 @@ logoutButton.addEventListener('click', () => {
                         timeStamp.innerText = "today at 8:51am";
                         messageContent.innerText = "Lorem ipsum";
                     }
+                })
                     // **************************************************************************************************
 
                 })
