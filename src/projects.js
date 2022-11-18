@@ -1,7 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, onSnapshot,
-    addDoc, deleteDoc, doc, serverTimestamp, Firestore,
+    addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
+  where, getDoc, 
 } from 'firebase/firestore';
 import { getAuth, signOut } from "firebase/auth";
 import "./projects.css";
@@ -122,9 +123,43 @@ logoutButton.addEventListener('click', () => {
             selectedTicketUl.forEach((ticket) => {
                 ticket.addEventListener("click", () => {
                     const selectedTicketId = ticket.lastChild.textContent;
-                    console.log(selectedTicketId)
+                    // console.log(selectedTicketId)
+
+                                        // 4. populate selected ticket info!
+                                        // console.log("boop")
+                                        // let i = selectedTicketId
+                                        // let i = 0
+                                        // const i = query(colRef, where("id", "==", selectedTicketId));
+                                        // const i = query(colRef, where("author", "==", "Jaywon Joo"));
+
+                                        const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+                                        getDoc(ticketRef).then((snapshot) => {
+
+                                            console.log(snapshot.data().title)
+
+                                            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                                            const populatedAuthorSection = document.querySelector("#populated-author-section")
+                                            const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                                            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                                            const populatedTicketSection = document.querySelector("#populated-priority-section")
+                                            const populatedTypeSection = document.querySelector("#populated-type-section")
+                            
+                                            populatedTicketTitleSection.innerHTML = snapshot.data().title;
+                                            populatedAuthorSection.innerHTML = snapshot.data().author;
+                                            populatedDescriptionSection.innerHTML = snapshot.data().description;
+                                            populatedTicketInfoSection.innerHTML = snapshot.data().status;
+                                            populatedTicketSection.innerHTML = snapshot.data().priority;
+                                            populatedTypeSection.innerHTML = snapshot.data().type;
+                                            
+                                        })
+                                
+
+                                    // comments should also load here ***************************************************
+                                    // const comments = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                                })
+
                 })
-            })
+
 
             // const projectCards = document.querySelectorAll(".project-card");
             // projectCards.forEach((card) => {
@@ -137,33 +172,7 @@ logoutButton.addEventListener('click', () => {
             //     });
             // });
 
-            // 4. populate selected ticket info section on click
-            const populateTicketInfo = document.querySelectorAll('.ticket-ul')
-            populateTicketInfo.forEach((ticket) => {
-                ticket.addEventListener("click", () => {
-                    // console.log("boop")
-                    let i = 0
 
-                    const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                    const populatedAuthorSection = document.querySelector("#populated-author-section")
-                    const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                    const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                    const populatedTicketSection = document.querySelector("#populated-priority-section")
-                    const populatedTypeSection = document.querySelector("#populated-type-section")
-    
-                    populatedTicketTitleSection.innerHTML = tickets[i].title;
-                    populatedAuthorSection.innerHTML = tickets[i].author;
-                    populatedDescriptionSection.innerHTML = tickets[i].description;
-                    populatedTicketInfoSection.innerHTML = tickets[i].status;
-                    populatedTicketSection.innerHTML = tickets[i].priority;
-                    populatedTypeSection.innerHTML = tickets[i].type;
-                    // console.log(tickets[0].title)
-                    // console.log(i)
-                })
-            
-
-                // comments should also load here ***************************************************
-            })
             
     //     })
     //     console.log(tickets)
