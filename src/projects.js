@@ -72,6 +72,7 @@ logoutButton.addEventListener('click', () => {
 
 
 
+
 // display ticket info in ticket list
 // 1. link tickets to page
     onSnapshot(colRef, (snapshot) => {
@@ -227,46 +228,7 @@ logoutButton.addEventListener('click', () => {
                 // const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
                 //     getDoc(ticketRef).then((snapshot) => {
 
-                    const userRef = collection(db, "users");
-                    onAuthStateChanged(auth, (user) => {
-                        const uid = user.uid;
-                        const currentUser = query(userRef, where("id", "==", uid));
-                        
-                        onSnapshot(currentUser, (snapshot) => {
-                            let currentUserList = [];
-                            
-                            snapshot.docs.forEach((doc) => {
-                                currentUserList.push({ ...doc.data(), id: doc.id });
-                            });
-                            console.log(currentUserList)
-
-    
-                        // for (i = 0; i < projects.length; i++) {
-
-                
-// FEATURE: COMMENT CREATION ***************************************************************************************************
-                                const commentRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                                const commentInputForm = document.querySelector(".comment-input-form")
-                                commentInputForm.addEventListener('submit', (e) => {
-                                    e.preventDefault();
-                                    // newProject.innerText = addProjectForm.name.value;
-                                    addDoc(commentRef, {
-                                        firstName: currentUserList[0].firstName,
-                                        lastName: currentUserList[0].lastName,
-                                        message: commentInputForm.comment.value,
-                                        createdAt: serverTimestamp(),
-                                    })
-                                    .then(() => {
-                                        commentInputForm.reset()
-                                    })
-                                })
-                    // **************************************************************************************************
-
-                        
-                        })
-                    })
-                    // **************************************************************************************************
-
+  
                 })
             })
     //     console.log(tickets)
@@ -345,6 +307,60 @@ deleteTicketForm.addEventListener('submit', (e) => {
 // 5. clear selected ticket info when deleted
 
 
+
+
+
+
+// const userRef = collection(db, "users");
+// onAuthStateChanged(auth, (user) => {
+//     const uid = user.uid;
+//     const currentUser = query(userRef, where("id", "==", uid));
+    
+//     onSnapshot(currentUser, (snapshot) => {
+//         let currentUserList = [];
+        
+//         snapshot.docs.forEach((doc) => {
+//             currentUserList.push({ ...doc.data(), id: doc.id });
+//         });
+//         console.log(currentUserList)
+// const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
+
+
+// FEATURE: COMMENT CREATION ***************************************************************************************************
+            const commentInputForm = document.querySelector(".comment-input-form")
+
+            commentInputForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+
+  //grab global selected ticket id
+const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+  });
+  // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+  let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
+  console.log(globalSelectedticketId)
+
+  const commentRef = collection(db, 'projects', projectID, 'tickets', globalSelectedticketId, 'comments')
+
+
+                // newProject.innerText = addProjectForm.name.value;
+                addDoc(commentRef, {
+                    firstName: "daddy",
+                    lastName: "daddy",
+                    message: commentInputForm.comment.value,
+                    createdAt: serverTimestamp(),
+                })
+                .then(() => {
+                    commentInputForm.reset()
+                })
+            })
+// **************************************************************************************************
+
+    
+//     })
+// })
+// // **************************************************************************************************
 
 
 
