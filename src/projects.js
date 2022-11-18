@@ -4,7 +4,7 @@ import {
     addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
   where, getDoc, 
 } from 'firebase/firestore';
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.css";
 
 const firebaseConfig = {
@@ -192,8 +192,8 @@ logoutButton.addEventListener('click', () => {
                         timeStamp.classList.add("message-timestamp");
                         messageContent.classList.add("message-content");
 
-                        userIcon.innerText = "JJ";
-                        userName.innerText = "Jaywon Joo";
+                        userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
+                        userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
                         timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
                         messageContent.innerText = comments[i].message;
                     }
@@ -201,22 +201,65 @@ logoutButton.addEventListener('click', () => {
                     
                 })
 
+                               // const colRef = collection(db, "projects");
+                // onAuthStateChanged(auth, (user) => {
+                //     if (user) {
+                //       // User is signed in, see docs for a list of available properties
+                //       // https://firebase.google.com/docs/reference/js/firebase.User
+                //       const uid = user.uid;
+                //       const userProjects = query(colRef, where("creator", "==", uid));
+                  
+                //       // realtime collection data
+                //       let i = 0;
+                //       onSnapshot(userProjects, (snapshot) => {
+                //         clearProjects();
+                  
+                //         let projects = [];
+                //         snapshot.docs.forEach((doc) => {
+                //           projects.push({ ...doc.data(), id: doc.id });
+                //         });
+
+                // const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+                //     getDoc(ticketRef).then((snapshot) => {
+
+                    const userRef = collection(db, "users");
+                    onAuthStateChanged(auth, (user) => {
+                        const uid = user.uid;
+                        const currentUser = query(userRef, where("id", "==", uid));
+                        
+                        onSnapshot(currentUser, (snapshot) => {
+                            let currentUserList = [];
+                            
+                            snapshot.docs.forEach((doc) => {
+                                currentUserList.push({ ...doc.data(), id: doc.id });
+                            });
+                            console.log(currentUserList)
+
+    
+                        // for (i = 0; i < projects.length; i++) {
+
+                
 // FEATURE: COMMENT CREATION ***************************************************************************************************
-                const commentRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                const commentInputForm = document.querySelector(".comment-input-form")
-                commentInputForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    // newProject.innerText = addProjectForm.name.value;
-                    addDoc(commentRef, {
-                        firstName: "Jaywon",
-                        lastName: "Joo",
-                        message: commentInputForm.comment.value,
-                        createdAt: serverTimestamp(),
+                                const commentRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                                const commentInputForm = document.querySelector(".comment-input-form")
+                                commentInputForm.addEventListener('submit', (e) => {
+                                    e.preventDefault();
+                                    // newProject.innerText = addProjectForm.name.value;
+                                    addDoc(commentRef, {
+                                        firstName: currentUserList[0].firstName,
+                                        lastName: currentUserList[0].lastName,
+                                        message: commentInputForm.comment.value,
+                                        createdAt: serverTimestamp(),
+                                    })
+                                    .then(() => {
+                                        commentInputForm.reset()
+                                    })
+                                })
+                    // **************************************************************************************************
+
+                        
+                        })
                     })
-                    .then(() => {
-                        commentInputForm.reset()
-                    })
-                })
                     // **************************************************************************************************
 
                 })
@@ -309,8 +352,7 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 
 
-
-
+ 
 
 
 
