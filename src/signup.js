@@ -55,9 +55,12 @@ signupForm.addEventListener("submit", (e) => {
     .then((userCredential) => {
       console.log("user created:", userCredential.user);
       const uid = userCredential.user.uid;
+      const firstName = document.querySelector(".firstName")
+      const lastName = document.querySelector(".lastName")
+
       addDoc(colRef, {
-        firstName: "Steve",
-        lastName: "Carell",
+        firstName: firstName.value,
+        lastName: lastName.value,
         phoneNumber: "(123)456-7890",
         id: uid,
       }).then(() => {
@@ -74,3 +77,4 @@ signupForm.addEventListener("submit", (e) => {
     //   console.log(err.message);
     // });
 });
+
