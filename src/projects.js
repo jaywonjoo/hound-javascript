@@ -125,6 +125,11 @@ logoutButton.addEventListener('click', () => {
                     const selectedTicketId = ticket.lastChild.textContent;
                     // console.log(selectedTicketId)
 
+                       //paste selectedTicketId into webpage
+                       const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
+                       window.history.pushState( {} , '', projectPage );
+
+
                     // 4. populate selected ticket info USING TICKET ID!!
                     const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
                     getDoc(ticketRef).then((snapshot) => {
