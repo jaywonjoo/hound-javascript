@@ -125,58 +125,68 @@ logoutButton.addEventListener('click', () => {
                     const selectedTicketId = ticket.lastChild.textContent;
                     // console.log(selectedTicketId)
 
-                                        // 4. populate selected ticket info!
-                                        // console.log("boop")
-                                        // let i = selectedTicketId
-                                        // let i = 0
-                                        // const i = query(colRef, where("id", "==", selectedTicketId));
-                                        // const i = query(colRef, where("author", "==", "Jaywon Joo"));
+                    // 4. populate selected ticket info USING TICKET ID!!
+                    const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+                    getDoc(ticketRef).then((snapshot) => {
 
-                                        const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
-                                        getDoc(ticketRef).then((snapshot) => {
+                        console.log(snapshot.data().title)
 
-                                            console.log(snapshot.data().title)
+                        const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                        const populatedAuthorSection = document.querySelector("#populated-author-section")
+                        const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                        const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                        const populatedTicketSection = document.querySelector("#populated-priority-section")
+                        const populatedTypeSection = document.querySelector("#populated-type-section")
+        
+                        populatedTicketTitleSection.innerHTML = snapshot.data().title;
+                        populatedAuthorSection.innerHTML = snapshot.data().author;
+                        populatedDescriptionSection.innerHTML = snapshot.data().description;
+                        populatedTicketInfoSection.innerHTML = snapshot.data().status;
+                        populatedTicketSection.innerHTML = snapshot.data().priority;
+                        populatedTypeSection.innerHTML = snapshot.data().type;
+                        
+                    })
 
-                                            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                                            const populatedAuthorSection = document.querySelector("#populated-author-section")
-                                            const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                                            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                                            const populatedTicketSection = document.querySelector("#populated-priority-section")
-                                            const populatedTypeSection = document.querySelector("#populated-type-section")
-                            
-                                            populatedTicketTitleSection.innerHTML = snapshot.data().title;
-                                            populatedAuthorSection.innerHTML = snapshot.data().author;
-                                            populatedDescriptionSection.innerHTML = snapshot.data().description;
-                                            populatedTicketInfoSection.innerHTML = snapshot.data().status;
-                                            populatedTicketSection.innerHTML = snapshot.data().priority;
-                                            populatedTypeSection.innerHTML = snapshot.data().type;
-                                            
-                                        })
-                                
+                    // comments should also load here ***************************************************
+                    // const comments = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                    let comments = [1,2,3]
 
-                                    // comments should also load here ***************************************************
-                                    // const comments = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                                })
+                    const chatbox = document.querySelector(".chatbox");
+                    for (i = 0; i < comments.length; i++) {
+                        const newComment = document.createElement("div");
+                            const userIcon = document.createElement("div");
+                            const commentRight = document.createElement("div");
+                                const nameAndTimestamp = document.createElement("div");
+                                    const userName = document.createElement("div");
+                                    const timeStamp = document.createElement("div");
+                                const messageContent = document.createElement("div");
+
+                        chatbox.appendChild(newComment);
+                            newComment.appendChild(userIcon);
+                            newComment.appendChild(commentRight);
+                                commentRight.appendChild(nameAndTimestamp);
+                                    nameAndTimestamp.appendChild(userName);
+                                    nameAndTimestamp.appendChild(timeStamp);
+                                commentRight.appendChild(messageContent);
+
+                        newComment.classList.add("entire-message");
+                        userIcon.classList.add("user-icon");
+                        commentRight.classList.add("comment-right");
+                        nameAndTimestamp.classList.add("name-and-timestamp-section");
+                        userName.classList.add("user-name");
+                        timeStamp.classList.add("message-timestamp");
+                        messageContent.classList.add("message-content");
+
+                        userIcon.innerText = "JJ";
+                        userName.innerText = "Jaywon Joo";
+                        timeStamp.innerText = "today at 8:51am";
+                        messageContent.innerText = "Lorem ipsum";
+                    }
+                    // **************************************************************************************************
 
                 })
-
-
-            // const projectCards = document.querySelectorAll(".project-card");
-            // projectCards.forEach((card) => {
-            //     card.addEventListener("click", () => {
-            //     const result = card.lastChild.textContent;
-            //     const projectPage = ["project-page.html?project=" + result];
-            //     // console.log(projectPage)
-            //     // console.log(result);
-            //     window.location.href = projectPage;
-            //     });
-            // });
-
-
-            
-    //     })
+            })
     //     console.log(tickets)
-        
     })
 
 
