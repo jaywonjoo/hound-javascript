@@ -197,6 +197,25 @@ logoutButton.addEventListener('click', () => {
                         timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
                         messageContent.innerText = comments[i].message;
                     }
+
+                    
+                })
+
+// FEATURE: COMMENT CREATION ***************************************************************************************************
+                const commentRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                const commentInputForm = document.querySelector(".comment-input-form")
+                commentInputForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    // newProject.innerText = addProjectForm.name.value;
+                    addDoc(commentRef, {
+                        firstName: "Jaywon",
+                        lastName: "Joo",
+                        message: commentInputForm.comment.value,
+                        createdAt: serverTimestamp(),
+                    })
+                    .then(() => {
+                        commentInputForm.reset()
+                    })
                 })
                     // **************************************************************************************************
 
@@ -280,23 +299,9 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 
 
-// FEATURE: CHAT ***************************************************************************************************
 
-const commentRef = collection(db, 'projects', projectID, 'tickets', '9fpZNq3uBhc0mdWABhnn', 'comments')
-const commentInputForm = document.querySelector(".comment-input-form")
-commentInputForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // newProject.innerText = addProjectForm.name.value;
-    addDoc(commentRef, {
-        firstName: "Jaywon",
-        lastName: "Joo",
-        message: commentInputForm.comment.value,
-        createdAt: serverTimestamp(),
-    })
-    .then(() => {
-        commentInputForm.reset()
-    })
-})
+
+
 
 
 
