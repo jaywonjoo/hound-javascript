@@ -23,6 +23,9 @@ const firebaseConfig = {
 
 const button = document.getElementById("button");
 const projectContainer = document.querySelector("#project-container");
+const sharedProjectContainer = document.querySelector("#shared-project-container");
+
+
 // const newProject = document.createElement("div");
 
 const modal = document.querySelector("#modal");
@@ -62,13 +65,14 @@ logoutButton.addEventListener("click", () => {
     });
 });
 
-// queries
+// your projects queries
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
     const userProjects = query(colRef, where("creator", "==", uid));
+    const sharedProjects = query(colRef, where("collaborators", "==", uid));
 
     // realtime collection data
     let i = 0;
@@ -106,16 +110,21 @@ onAuthStateChanged(auth, (user) => {
           // console.log(result);
           window.location.href = projectPage;
         });
+        
       });
 
+      
       console.log(projects);
     });
+
+    
     // ...
   } else {
     // User is signed out
     // ...
   }
 });
+
 
 // Make tickets clear and repopulate after deletion
 function clearProjects() {
@@ -206,3 +215,69 @@ deleteProjectForm.addEventListener("submit", (e) => {
     deleteProjectForm.reset();
   });
 });
+
+
+
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    const userProjects = query(colRef, where("creator", "==", uid));
+    const sharedProjects = query(colRef, where("collaborators", "==", uid));
+
+    // realtime collection data
+    let i = 0;
+onSnapshot(sharedProjects, (snapshot) => {
+  clearSharedProjects();
+
+  let sharedProjects = [];
+  snapshot.docs.forEach((doc) => {
+    sharedProjects.push({ ...doc.data(), id: doc.id });
+  });
+
+  for (i = 0; i < sharedProjects.length; i++) {
+    const newProject = document.createElement("div");
+    sharedProjectContainer.appendChild(newProject);
+    newProject.innerText = sharedProjects[i].name;
+    newProject.classList.add("project-card");
+    const newProjectId = document.createElement("div");
+    newProject.appendChild(newProjectId);
+    newProjectId.innerText = sharedProjects[i].id;
+    newProjectId.classList.add("project-id-card");
+
+    // // click on div to redirect user to another page
+    // newProject.addEventListener("click", (e) => {
+    //   window.location.href="project-page.html?project=coyote";
+    // })
+  }
+
+  // click on div to redirect user to project specific page
+  const projectCards = document.querySelectorAll(".project-card");
+  projectCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const result = card.lastChild.textContent;
+      const projectPage = ["project-page.html?project=" + result];
+      // console.log(projectPage)
+      // console.log(result);
+      window.location.href = projectPage;
+    });
+  });
+
+  console.log(projects);
+});
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
+
+// Make tickets clear and repopulate after deletion
+function clearSharedProjects() {
+  while (sharedProjectContainer.children[0] != null) {
+    sharedProjectContainer.removeChild(sharedProjectContainer.children[0]);
+  }
+}
