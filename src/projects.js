@@ -311,19 +311,19 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 
 
-// const userRef = collection(db, "users");
-// onAuthStateChanged(auth, (user) => {
-//     const uid = user.uid;
-//     const currentUser = query(userRef, where("id", "==", uid));
+const userRef = collection(db, "users");
+onAuthStateChanged(auth, (user) => {
+    const uid = user.uid;
+    const currentUser = query(userRef, where("id", "==", uid));
     
-//     onSnapshot(currentUser, (snapshot) => {
-//         let currentUserList = [];
+    onSnapshot(currentUser, (snapshot) => {
+        let currentUserList = [];
         
-//         snapshot.docs.forEach((doc) => {
-//             currentUserList.push({ ...doc.data(), id: doc.id });
-//         });
-//         console.log(currentUserList)
-// const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
+        snapshot.docs.forEach((doc) => {
+            currentUserList.push({ ...doc.data(), id: doc.id });
+        });
+        console.log(currentUserList)
+const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
 
 
 // FEATURE: COMMENT CREATION ***************************************************************************************************
@@ -333,21 +333,24 @@ deleteTicketForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
 
-  //grab global selected ticket id
-const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => searchParams.get(prop),
-  });
-  // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-  let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
-  console.log(globalSelectedticketId)
+                
 
-  const commentRef = collection(db, 'projects', projectID, 'tickets', globalSelectedticketId, 'comments')
+                        //grab global selected ticket id
+                        const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
+                            get: (searchParams, prop) => searchParams.get(prop),
+                        });
+                        // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
+                        let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
+                        console.log(globalSelectedticketId)
+
+                        const commentRef = collection(db, 'projects', projectID, 'tickets', globalSelectedticketId, 'comments')
 
 
                 // newProject.innerText = addProjectForm.name.value;
                 addDoc(commentRef, {
-                    firstName: "daddy",
-                    lastName: "daddy",
+
+                    firstName: currentUserList[0].firstName,
+                    lastName: currentUserList[0].lastName,
                     message: commentInputForm.comment.value,
                     createdAt: serverTimestamp(),
                 })
@@ -358,9 +361,9 @@ const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
 // **************************************************************************************************
 
     
-//     })
-// })
-// // **************************************************************************************************
+    })
+})
+// **************************************************************************************************
 
 
 
