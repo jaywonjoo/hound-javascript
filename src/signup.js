@@ -55,6 +55,7 @@ signupForm.addEventListener("submit", (e) => {
     .then((userCredential) => {
       console.log("user created:", userCredential.user);
       const uid = userCredential.user.uid;
+      const userEmail = userCredential.user.email;
       const firstName = document.querySelector(".firstName")
       const lastName = document.querySelector(".lastName")
 
@@ -63,6 +64,7 @@ signupForm.addEventListener("submit", (e) => {
         lastName: lastName.value,
         phoneNumber: "(123)456-7890",
         id: uid,
+        email: userEmail,
       }).then(() => {
         console.log("blah")
         signupForm.reset();
