@@ -1,10 +1,24 @@
 body {
   font-family: Graphik-Semibold,sans-serif;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0; */
 }
 
 .hidden {
   display: none;
 }
+
+
+
+
+ul,li { list-style-type: none;
+        list-style-position:inside;
+        margin:0;
+        padding:0; }
 
 
 #modal {
@@ -80,8 +94,8 @@ body {
     height: 100%;
     display: flex;
     gap: 200px;
-    /* margin: 0 0 0 275px; */
     border-bottom: solid black;
+    
   }
 
   .ticket-ul {
@@ -91,13 +105,11 @@ body {
     width: 100%;
     display: flex;
     border-bottom: solid black;
-    list-style: none;
+    list-style-type: none;
     padding-left: 0;
+    margin-left: 0;
   }
 
-  ul {
-    list-style: none;
-  }
 
 
   /* ticket section **************************************************************** */
@@ -109,11 +121,18 @@ body {
 
 .ticket-info {
   background-color: rgb(229, 229, 229);
-  width: 100%;
+  width: 90%;
   height: 100%;
-  margin-top: 50px;
   border: solid black;
   display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+.ticket-info-section {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
 }
 
 .ticket-info-row {
@@ -122,16 +141,12 @@ body {
   margin-bottom: 30px;
 }
 
-.ticket-info-section {
-  display: flex;
-  flex-direction: column;
-}
-
 .right-chat-section {
-  width: 100%;
+  width: 50%;
   height: 400px;
   background-color: white;
-
+  /* justify-content: right; */
+  /* align-items: right; */
 }
 
 .chatbox {
