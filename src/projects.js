@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
-  where, getDoc, 
+  where, getDoc, orderBy, 
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.css";
@@ -155,8 +155,9 @@ logoutButton.addEventListener('click', () => {
            
                     // comments should also load here ***************************************************
                     const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                    const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
                     
-                    onSnapshot(commentsRef, (snapshot) => {
+                    onSnapshot(orderedCommentsRef, (snapshot) => {
                         let comments = []
 
                         // refresh chatbox
