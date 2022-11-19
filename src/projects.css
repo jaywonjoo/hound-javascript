@@ -162,8 +162,7 @@ ul,li { list-style-type: none;
           width: 100%;
           /* border-left: solid black ;
           border-right: solid black ; */
-          overflow-y: auto;
-
+          overflow: auto;
         }
         
         .comment-input-form {

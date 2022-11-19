@@ -163,6 +163,7 @@ logoutButton.addEventListener('click', () => {
                         // refresh chatbox
                         const chatbox = document.querySelector(".chatbox");
 
+
                         clearChatbox();
                         
                         function clearChatbox() {
@@ -204,7 +205,9 @@ logoutButton.addEventListener('click', () => {
                         timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
                         messageContent.innerText = comments[i].message;
                     }
-
+                    
+                    // chatbox load bottom
+                    chatbox.scrollTop = chatbox.scrollHeight;
                     
                 })
   
