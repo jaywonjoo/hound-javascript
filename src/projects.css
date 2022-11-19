@@ -29,8 +29,10 @@ ul,li { list-style-type: none;
     transform: translate(-50%, -50%);
     border: 1px solid black;
     padding: 1rem;
-    border-radius: .25rem;
+    border-radius: .75rem;
     background-color: white;
+    width: 20%;
+    height: 50%;
   }
   
   #overlay {
@@ -41,6 +43,7 @@ ul,li { list-style-type: none;
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, .75);
+    backdrop-filter: blur(5px);
   }
 
 
