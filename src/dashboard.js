@@ -74,13 +74,7 @@ onAuthStateChanged(auth, (user) => {
     const userProjects = query(colRef, where("creator", "==", uid));
 
 
-    i = 0
-    for (i = 0; i < collaborators.length; i++) {
-      collaborators = []
-
-      collaborators[i]
-      const sharedProjects = query(colRef, where(collaborators[i], "==", uid));
-    }
+    const sharedProjects = query(colRef, where("collaborators", "==", uid));
 
 
     // realtime collection data
