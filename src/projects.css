@@ -70,6 +70,15 @@ ul,li { list-style-type: none;
     border: solid black;
     padding: 30px;
   }
+
+  .team-member-header {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 20%;
+    border-bottom: solid black;
+  }
   /* team member section **************************************************************** */
   
 
