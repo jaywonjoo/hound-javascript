@@ -375,7 +375,7 @@ const deleteTicketForm = document.querySelector('.delete-ticket-form')
 deleteTicketForm.addEventListener('submit', (e) => {
     e.preventDefault()
 
-    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.projectID)
+    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
     deleteDoc(docRef)
         .then(() => {
             deleteTicketForm.reset()
