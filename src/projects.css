@@ -50,14 +50,15 @@ ul,li { list-style-type: none;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 5%
+  /* gap: 5% */
+  margin: 0 5% 0 5%;
 }
 
   /* team member section **************************************************************** */
 
   .team-members {
     background-color: rgb(229, 229, 229);
-    width: 40%;
+    width: 30%;
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -78,7 +79,7 @@ ul,li { list-style-type: none;
 
   .ticket-section {
     background-color: rgb(229, 229, 229);
-    width: 40%;
+    width: 70%;
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -99,7 +100,7 @@ ul,li { list-style-type: none;
   }
 
   .ticket-ul {
-    color: blue;
+    color: rgb(50, 125, 255);
     background-color: rgb(255, 255, 255);
     gap: 200px;
     width: 100%;
@@ -133,7 +134,7 @@ ul,li { list-style-type: none;
 .ticket-info-section {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 60%;
 }
 
 .ticket-info-row {
@@ -143,48 +144,85 @@ ul,li { list-style-type: none;
 }
 
 .right-chat-section {
-  width: 50%;
+  width: 40%;
   height: 400px;
-  background-color: white;
+  background-color: rgb(229, 229, 229);
+  border-left: solid black
+
   /* justify-content: right; */
   /* align-items: right; */
 }
+        /* Chatbox Section **************************************************************** */
 
-.chatbox {
-  background-color: rgb(40, 40, 40);
-  height: 90%;
-  width: 100%;
-  
-}
+        .chatbox {
+          height: 90%;
+          width: 100%;
+          /* border-left: solid black ;
+          border-right: solid black ; */
+          overflow-y: auto;
 
-.entire-message {
-  display: flex;
-  background-color: rgb(148, 148, 148);
-}
+        }
+        
+        .comment-input-form {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+        }
 
-.user-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: blue;
-  color: white;
-  min-width: 30px;
-  min-height: 30px;
-  max-width: 30px;
-  max-height: 30px;
-  border-radius: 50%;
-  margin: 0 10px 0 10px
-}
+        .comment-input-form-input {
+          width: 70%;
+          border-radius: 10px;
+        }
 
-.name-and-timestamp-section {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-weight: bold;
-}
+        .comment-input-form-button {
+          border-radius: 10px;
+          border: solid rgb(50, 125, 255);
+          background-color: rgb(50, 125, 255);
+          color: white;
+        }
 
-.message-content {
-  width: 100%;
-}
+        .entire-message {
+          display: flex;
+          padding: 10px;
+        }
+
+        .user-icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgb(184, 184, 184);
+          color: white;
+          min-width: 40px;
+          min-height: 40px;
+          max-width: 40px;
+          max-height: 40px;
+          border-radius: 50%;
+          margin: 3px 8px 0 10px
+        }
+
+        .comment-right {
+          width: 50%;
+          padding-bottom: 15px;
+        }
+
+        .name-and-timestamp-section {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          font-weight: light;
+          color: gray;
+        }
+
+        .message-content {
+          background-color: rgb(50, 125, 255);
+          color: white;
+          width: 100%;
+          padding: 10px;
+          border-radius: 10px;
+        }
+        /* Chatbox Section **************************************************************** */
+
 
 /* Selected Ticket Info Section **************************************************************** */

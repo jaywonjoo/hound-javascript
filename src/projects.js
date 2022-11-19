@@ -206,28 +206,6 @@ logoutButton.addEventListener('click', () => {
 
                     
                 })
-
-                               // const colRef = collection(db, "projects");
-                // onAuthStateChanged(auth, (user) => {
-                //     if (user) {
-                //       // User is signed in, see docs for a list of available properties
-                //       // https://firebase.google.com/docs/reference/js/firebase.User
-                //       const uid = user.uid;
-                //       const userProjects = query(colRef, where("creator", "==", uid));
-                  
-                //       // realtime collection data
-                //       let i = 0;
-                //       onSnapshot(userProjects, (snapshot) => {
-                //         clearProjects();
-                  
-                //         let projects = [];
-                //         snapshot.docs.forEach((doc) => {
-                //           projects.push({ ...doc.data(), id: doc.id });
-                //         });
-
-                // const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
-                //     getDoc(ticketRef).then((snapshot) => {
-
   
                 })
             })
