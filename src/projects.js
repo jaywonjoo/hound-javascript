@@ -76,49 +76,16 @@ logoutButton.addEventListener('click', () => {
     
     const ProjectUsersDocRef = doc(db, 'projects', projectID)
     getDoc(ProjectUsersDocRef).then((snapshot) => {
-        // grab project creator
-        let creator = snapshot.data().creator;
-        // console.log(creator)
-
-        // grab project collaborators
-
-
-        let collaborators = snapshot.data().collaborators
-        let i = 0
-        for (i = 0; i < collaborators.length; i++) {
-            // console.log(collaborators[i])
-
-            let collaboratorsList = []
-
-            collaboratorsList.push(collaborators[i])
-            console.log(collaboratorsList[0])
-            
-            // const userCollaboratorDocRef = query(userRef, where("id", "==", collaboratorsList[0]));
-            // console.log(userCollaboratorDocRef[0])
-
-            // let j = 0;
-            // for (j = 0; j < collaboratorsList.length; j++) {
-            //     let subCollaboratorsList = []
-            //     const userCollaboratorDocRef = query(userRef, where("id", "==", collaboratorsList[j]));
-            //     subCollaboratorsList.push(userCollaboratorDocRef[j])
-            //     // console.log(subCollaboratorsList)
-            //     console.log(subCollaboratorsList[0])
-            // }
-
-        }
-
-        const teamMemberBody = document.querySelector(".team-member-body") 
-
-        const teamMemberLineItem = document.createElement("div")
-            const teamMemberLineItemName = document.createElement("div")
-            const teamMemberLineItemEmail = document.createElement("div")
-            const teamMemberLineItemPhone = document.createElement("div")
 
         const userRef = collection(db, 'users')
 
 
+        // grab project creator
+        let creator = snapshot.data().creator;
+        // console.log(creator)
 
-    
+
+
 
         const userCreatorDocRef = query(userRef, where("id", "==", creator));
         onSnapshot(userCreatorDocRef, (snapshot) => {
@@ -128,13 +95,20 @@ logoutButton.addEventListener('click', () => {
                 userListOne.push({ ...doc.data(), id: doc.id });
 
                 // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
+                const teamMemberBody = document.querySelector(".team-member-body") 
+
+                const teamMemberLineItem = document.createElement("div")
+                    const teamMemberLineItemName = document.createElement("div")
+                    const teamMemberLineItemEmail = document.createElement("div")
+                    const teamMemberLineItemPhone = document.createElement("div")
+
 
                 teamMemberBody.appendChild(teamMemberLineItem)
                     teamMemberLineItem.appendChild(teamMemberLineItemName)
                     teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                     teamMemberLineItem.appendChild(teamMemberLineItemPhone)
 
-                let fullName = userListOne[0].firstName + "" + userListOne[0].lastName
+                let fullName = userListOne[0].firstName + " " + userListOne[0].lastName
 
                 teamMemberLineItemName.innerText = fullName;
                 teamMemberLineItemEmail.innerText = userListOne[0].email;
@@ -144,6 +118,52 @@ logoutButton.addEventListener('click', () => {
                 
             })
         })
+
+        // grab project collaborators
+        let collaborators = snapshot.data().collaborators
+        // console.log(collaborators)
+        let i = 0
+        for (i = 0; i < collaborators.length; i++) {
+            // console.log(collaborators[i])
+            
+            const userCurrentCollaboratorDocRef = query(userRef, where("id", "==", collaborators[i]));
+            // console.log(userCurrentCollaboratorDocRef)
+
+
+
+            onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
+                snapshot.docs.forEach((doc) => {
+    
+                    let collaboratorList = []
+
+                    collaboratorList.push({ ...doc.data(), id: doc.id });
+
+                    // console.log(collaboratorList[0].firstName)
+
+                    const teamMemberBody = document.querySelector(".team-member-body") 
+
+                    const teamMemberLineItem = document.createElement("div")
+                        const teamMemberLineItemName = document.createElement("div")
+                        const teamMemberLineItemEmail = document.createElement("div")
+                        const teamMemberLineItemPhone = document.createElement("div")
+                        
+    
+                    teamMemberBody.appendChild(teamMemberLineItem)
+                        teamMemberLineItem.appendChild(teamMemberLineItemName)
+                        teamMemberLineItem.appendChild(teamMemberLineItemEmail)
+                        teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+    
+                    let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
+    
+                    teamMemberLineItemName.innerText = fullName;
+                    teamMemberLineItemEmail.innerText = collaboratorList[0].email;
+                    teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
+    
+                    teamMemberLineItem.classList.add("team-member-line-item");
+                })
+            })
+
+        }
 
 
     })
