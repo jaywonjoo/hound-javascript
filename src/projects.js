@@ -280,25 +280,15 @@ newTicketButton.addEventListener('click', () => {
     })    
 
 
-// 4. Delete Ticket Form
-const deleteTicketForm = document.querySelector('.delete-ticket-form')
-deleteTicketForm.addEventListener('submit', (e) => {
-    e.preventDefault()
 
-    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.projectID)
-    deleteDoc(docRef)
-        .then(() => {
-            deleteTicketForm.reset()
-            
-        })
-})
 
-    // Make tickets clear and repopulate after deletion
-    function clearTickets() {
-        while (tickets.children[0] != null) {
-            tickets.removeChild(tickets.children[0]);
-        }
+
+// Make tickets clear and repopulate after deletion
+function clearTickets() {
+    while (tickets.children[0] != null) {
+        tickets.removeChild(tickets.children[0]);
     }
+}
 
 // ***************************************************************************************************
 
@@ -380,6 +370,18 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
 
 
 
+// 4. Delete Ticket Form
+const deleteTicketForm = document.querySelector('.delete-ticket-form')
+deleteTicketForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.projectID)
+    deleteDoc(docRef)
+        .then(() => {
+            deleteTicketForm.reset()
+            
+        })
+})
 
 
 

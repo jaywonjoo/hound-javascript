@@ -72,7 +72,16 @@ onAuthStateChanged(auth, (user) => {
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
     const userProjects = query(colRef, where("creator", "==", uid));
-    const sharedProjects = query(colRef, where("collaborators", "==", uid));
+
+
+    i = 0
+    for (i = 0; i < collaborators.length; i++) {
+      collaborators = []
+
+      collaborators[i]
+      const sharedProjects = query(colRef, where(collaborators[i], "==", uid));
+    }
+
 
     // realtime collection data
     let i = 0;

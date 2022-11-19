@@ -20,25 +20,37 @@
 
     <button id="logoutButton">logout</button>
 
-    <!-- Team Members Section -->
-    <ul id="team">Team Members</ul>
-
-    <!-- ticket section -->
-    <div class="ticket-section">
-      <h3>Tickets</h3>
-      <button id="newTicketButton">New Ticket</button>
-      <div class="ticket-header">
-        <p>Ticket Title</p>
-        <p>Description</p>
-        <p>Ticket Author</p>
+    <div class="top-row"> 
+      <!-- Team Members Section -->
+      <div class="team-members">
+        <h3>Team Members</h3>
+        <button id="new-team-member-button">New Ticket</button>
+        <div class="team-member-header">
+          <p>Ticket Title</p>
+          <p>Description</p>
+          <p>Ticket Author</p>
+        </div>
+        <ul  id="team-members">Team Members</ul>
       </div>
-      <ul id="tickets"></ul>
+      
 
-      <form class="delete-ticket-form">
-        <label for="id">Ticket id:</label>
-        <input type="text" name="id" required>
-        <button>delete a Ticket</button>
-      </form>
+      <!-- ticket section -->
+      <div class="ticket-section">
+        <h3>Tickets</h3>
+        <button id="newTicketButton">New Ticket</button>
+        <div class="ticket-header">
+          <p>Ticket Title</p>
+          <p>Description</p>
+          <p>Ticket Author</p>
+        </div>
+        <ul id="tickets"></ul>
+
+        <form class="delete-ticket-form">
+          <label for="id">Ticket id:</label>
+          <input type="text" name="id" required>
+          <button>delete a Ticket</button>
+        </form>
+    </div>
 
       <div id="overlay"></div>
 

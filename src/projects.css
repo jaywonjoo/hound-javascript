@@ -1,9 +1,11 @@
-/* body {
+body {
   font-family: Graphik-Semibold,sans-serif;
-} */
+}
+
 .hidden {
   display: none;
 }
+
 
 #modal {
     display: none;
@@ -27,49 +29,84 @@
     background-color: rgba(0, 0, 0, .75);
   }
 
-.create-ticket-btn {
+
+/* top row **************************************************************** */
+.top-row {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5%
 }
 
-.ticket-section {
-   background-color: rgb(229, 229, 229);
-   width: 100%;
-   height: 200px;
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
-   border: solid black;
-}
+  /* team member section **************************************************************** */
 
-.ticket-ul {
-  color: blue;
-  background-color: rgb(255, 255, 255);
-  gap: 100px;
-  width: 100%;
-  display: flex;
-  border-bottom: solid black;
-  list-style: none;
-}
+  .team-members {
+    background-color: rgb(229, 229, 229);
+    width: 40%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid black;
+    padding: 30px;
+  }
+  /* team member section **************************************************************** */
+  
 
-ul {
-  list-style: none;
-}
+  /* ticket section **************************************************************** */
+  .create-ticket-btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.ticket-header {
-  background-color: white;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  gap: 200px;
-  margin: 0 0 0 275px;
-  border-bottom: solid black;
-}
+  .ticket-section {
+    background-color: rgb(229, 229, 229);
+    width: 40%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid black;
+    padding: 30px;
+  }
+
+  .ticket-header {
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 200px;
+    /* margin: 0 0 0 275px; */
+    border-bottom: solid black;
+  }
+
+  .ticket-ul {
+    color: blue;
+    background-color: rgb(255, 255, 255);
+    gap: 200px;
+    width: 100%;
+    display: flex;
+    border-bottom: solid black;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  ul {
+    list-style: none;
+  }
 
 
-/* Selected ticket info section */
+  /* ticket section **************************************************************** */
+/* top row **************************************************************** */
+
+
+
+/* Selected Ticket Info Section **************************************************************** */
+
 .ticket-info {
   background-color: rgb(229, 229, 229);
   width: 100%;
@@ -101,7 +138,7 @@ ul {
   background-color: rgb(40, 40, 40);
   height: 90%;
   width: 100%;
-  /* font-family: Graphik-Semibold,sans-serif; */
+  
 }
 
 .entire-message {
@@ -134,3 +171,4 @@ ul {
   width: 100%;
 }
 
+/* Selected Ticket Info Section **************************************************************** */
