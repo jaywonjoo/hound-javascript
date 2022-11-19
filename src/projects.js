@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
-  where, getDoc, orderBy, 
+  where, getDoc, orderBy, connectFirestoreEmulator, 
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.css";
@@ -69,6 +69,143 @@ logoutButton.addEventListener('click', () => {
       console.log(projectID)
   // setting colRef to selected project!
   const colRef = collection(db, 'projects', projectID, 'tickets')
+
+
+
+// FEATURE: TEAM MEMBER SECTION ************************************************************************************************************************
+    
+    const ProjectUsersDocRef = doc(db, 'projects', projectID)
+    getDoc(ProjectUsersDocRef).then((snapshot) => {
+        // grab project creator
+        let creator = snapshot.data().creator;
+        // console.log(creator)
+
+        // grab project collaborators
+
+
+        let collaborators = snapshot.data().collaborators
+        let i = 0
+        for (i = 0; i < collaborators.length; i++) {
+            // console.log(collaborators[i])
+
+            let collaboratorsList = []
+
+            collaboratorsList.push(collaborators[i])
+            console.log(collaboratorsList[0])
+            
+            // const userCollaboratorDocRef = query(userRef, where("id", "==", collaboratorsList[0]));
+            // console.log(userCollaboratorDocRef[0])
+
+            // let j = 0;
+            // for (j = 0; j < collaboratorsList.length; j++) {
+            //     let subCollaboratorsList = []
+            //     const userCollaboratorDocRef = query(userRef, where("id", "==", collaboratorsList[j]));
+            //     subCollaboratorsList.push(userCollaboratorDocRef[j])
+            //     // console.log(subCollaboratorsList)
+            //     console.log(subCollaboratorsList[0])
+            // }
+
+        }
+
+        const teamMemberBody = document.querySelector(".team-member-body") 
+
+        const teamMemberLineItem = document.createElement("div")
+            const teamMemberLineItemName = document.createElement("div")
+            const teamMemberLineItemEmail = document.createElement("div")
+            const teamMemberLineItemPhone = document.createElement("div")
+
+        const userRef = collection(db, 'users')
+
+
+
+    
+
+        const userCreatorDocRef = query(userRef, where("id", "==", creator));
+        onSnapshot(userCreatorDocRef, (snapshot) => {
+            snapshot.docs.forEach((doc) => {
+
+                let userListOne = []
+                userListOne.push({ ...doc.data(), id: doc.id });
+
+                // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
+
+                teamMemberBody.appendChild(teamMemberLineItem)
+                    teamMemberLineItem.appendChild(teamMemberLineItemName)
+                    teamMemberLineItem.appendChild(teamMemberLineItemEmail)
+                    teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+
+                let fullName = userListOne[0].firstName + "" + userListOne[0].lastName
+
+                teamMemberLineItemName.innerText = fullName;
+                teamMemberLineItemEmail.innerText = userListOne[0].email;
+                teamMemberLineItemPhone.innerText = userListOne[0].phoneNumber;
+
+                teamMemberLineItem.classList.add("team-member-line-item");
+                
+            })
+        })
+
+
+    })
+
+
+        // // 4. Delete Ticket Form
+    // const deleteTicketForm = document.querySelector('.delete-ticket-form')
+    // deleteTicketForm.addEventListener('submit', (e) => {
+    // e.preventDefault()
+
+    // const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
+    // deleteDoc(docRef)
+    //     .then(() => {
+    //         deleteTicketForm.reset()
+            
+    //     })
+    // })
+
+
+
+    // need to populate array with creator of project + users linked to project
+    // let userList = []
+
+    // clearUsers()
+
+    // snapshot.doc.forEach(doc)
+
+
+
+
+
+    // read creator of project
+    // take that id and populate list with name, email, and phone number
+
+
+        // // 4. populate selected ticket info USING TICKET ID!!
+        // const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+        // getDoc(ticketRef).then((snapshot) => {
+
+        //     console.log(snapshot.data().title)
+
+        //     const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+        //     const populatedAuthorSection = document.querySelector("#populated-author-section")
+        //     const populatedDescriptionSection = document.querySelector("#populated-description-section")
+        //     const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+        //     const populatedTicketSection = document.querySelector("#populated-priority-section")
+        //     const populatedTypeSection = document.querySelector("#populated-type-section")
+
+        //     populatedTicketTitleSection.innerHTML = snapshot.data().title;
+        //     populatedAuthorSection.innerHTML = snapshot.data().author;
+        //     populatedDescriptionSection.innerHTML = snapshot.data().description;
+        //     populatedTicketInfoSection.innerHTML = snapshot.data().status;
+        //     populatedTicketSection.innerHTML = snapshot.data().priority;
+        //     populatedTypeSection.innerHTML = snapshot.data().type;
+            
+        // })
+
+
+
+// *****************************************************************************************************************************************************
+
+
 
 
 
