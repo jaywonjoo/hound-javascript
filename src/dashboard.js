@@ -223,32 +223,35 @@ deleteProjectForm.addEventListener("submit", (e) => {
 
 
 
+
+
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
-    const userProjects = query(colRef, where("creator", "==", uid));
-    const sharedProjects = query(colRef, where("collaborators", "==", uid));
+    console.log(uid)
+    // const userProjects = query(colRef, where("creator", "==", uid));
+    const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
 
     // realtime collection data
     let i = 0;
 onSnapshot(sharedProjects, (snapshot) => {
   clearSharedProjects();
 
-  let sharedProjects = [];
+  let sharedProjectsArray = [];
   snapshot.docs.forEach((doc) => {
-    sharedProjects.push({ ...doc.data(), id: doc.id });
+    sharedProjectsArray.push({ ...doc.data(), id: doc.id });
   });
 
-  for (i = 0; i < sharedProjects.length; i++) {
+  for (i = 0; i < sharedProjectsArray.length; i++) {
     const newProject = document.createElement("div");
     sharedProjectContainer.appendChild(newProject);
-    newProject.innerText = sharedProjects[i].name;
+    newProject.innerText = sharedProjectsArray[i].name;
     newProject.classList.add("project-card");
     const newProjectId = document.createElement("div");
     newProject.appendChild(newProjectId);
-    newProjectId.innerText = sharedProjects[i].id;
+    newProjectId.innerText = sharedProjectsArray[i].id;
     newProjectId.classList.add("project-id-card");
 
     // // click on div to redirect user to another page
@@ -269,7 +272,7 @@ onSnapshot(sharedProjects, (snapshot) => {
     });
   });
 
-  console.log(projects);
+  console.log(sharedProjectsArray);
 });
     // ...
   } else {
@@ -284,3 +287,5 @@ function clearSharedProjects() {
     sharedProjectContainer.removeChild(sharedProjectContainer.children[0]);
   }
 }
+
+
