@@ -94,6 +94,37 @@ ul,li { list-style-type: none;
     border-bottom: solid black;
   }
 
+  .populated-member-list {
+    border: solid black;
+    width: 90%;
+    min-height: auto;
+  }
+
+  .new-member-main-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: auto;
+    width: auto;
+    gap: 10%;
+    padding: 3%;
+    border-bottom: solid black;
+  }
+
+  .new-member-icon-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(184, 184, 184);
+    color: white;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    margin: 3px 8px 0 10px
+  }
 
   /* team member section **************************************************************** */
   

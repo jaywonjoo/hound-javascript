@@ -98,6 +98,11 @@ function setDataIndex() {
           overlay[ElementIndex].classList.add("open")
         };
     }
+
+    // modal_btn_multi[0].onclick = function() {
+    //     populateUserModal()
+    // }
+
 }
 
 // Close modal using overlay
@@ -250,7 +255,56 @@ createTicketForm.addEventListener('submit', (e) => {
     })
 
 
+    // FEATURE: ADD TEAM MEMBERS ************************************************************************
 
+populateUserModal()
+function populateUserModal() {
+
+
+        const systemUsers = collection(db, 'users')
+        const alphabetizedSystemUsers = query(systemUsers, orderBy("firstName"))
+
+        onSnapshot(alphabetizedSystemUsers, (snapshot) => {
+            let SystemUsersList = []
+
+            snapshot.docs.forEach((doc) => {
+                SystemUsersList.push({ ...doc.data(), id: doc.id })
+            })
+            console.log(SystemUsersList)
+
+
+            let i = 0
+            for (i = 0; i < SystemUsersList.length; i++) {
+                const populatableMemberDiv = document.querySelector("#populatable-member-div")
+                
+                const newMemberMainDiv = document.createElement("div")
+                const newMemberIconDiv = document.createElement("div")
+                const newMemberNameDiv = document.createElement("div")
+                const newMemberIdDiv = document.createElement("div")
+
+        
+                populatableMemberDiv.appendChild(newMemberMainDiv);
+                    newMemberMainDiv.appendChild(newMemberIconDiv);
+                    newMemberMainDiv.appendChild(newMemberNameDiv);
+                    newMemberMainDiv.appendChild(newMemberIdDiv);
+        
+                newMemberIconDiv.innerText = (SystemUsersList[i].firstName.charAt(0) + SystemUsersList[i].lastName.charAt(0));
+                newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
+                newMemberIdDiv.innerText = (SystemUsersList[i].id);
+
+        
+                newMemberMainDiv.classList.add("new-member-main-div")
+                newMemberIconDiv.classList.add("new-member-icon-div")
+                newMemberIdDiv.classList.add("hidden")
+            }
+        })
+
+    }
+        
+    // ***********************************************************************************
+
+
+    
 // *****************************************************************************************************************************************************
 
 
