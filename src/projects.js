@@ -546,8 +546,28 @@ deleteTicketForm.addEventListener('submit', (e) => {
     deleteDoc(docRef)
         .then(() => {
             deleteTicketForm.reset()
-            
+
+            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+            const populatedAuthorSection = document.querySelector("#populated-author-section")
+            const populatedDescriptionSection = document.querySelector("#populated-description-section")
+            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+            const populatedTicketSection = document.querySelector("#populated-priority-section")
+            const populatedTypeSection = document.querySelector("#populated-type-section")
+
+            populatedTicketTitleSection.innerHTML = "";
+            populatedAuthorSection.innerHTML = "";
+            populatedDescriptionSection.innerHTML = "";
+            populatedTicketInfoSection.innerHTML = "";
+            populatedTicketSection.innerHTML = "";
+            populatedTypeSection.innerHTML = "";
+
+            const chatbox = document.querySelector(".chatbox");
+            chatbox.innerHTML = "";
+
         })
+
+
+
 })
 
 
