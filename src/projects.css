@@ -1,5 +1,5 @@
 body {
-  font-family: Graphik-Semibold,sans-serif;
+  font-family: Graphik,sans-serif;
   /* display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +91,7 @@ ul,li { list-style-type: none;
     background-color: white;
     padding: 0;
     margin: 0;
+    border-bottom: solid black;
   }
 
 
