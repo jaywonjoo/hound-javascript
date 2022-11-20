@@ -96,7 +96,7 @@ ul,li { list-style-type: none;
   
 
   /* ticket section **************************************************************** */
-  .create-ticket-btn {
+  .create-ticket-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
