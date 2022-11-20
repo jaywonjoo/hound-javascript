@@ -71,6 +71,87 @@ logoutButton.addEventListener('click', () => {
   const colRef = collection(db, 'projects', projectID, 'tickets')
 
 
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
+const modalparent = document.getElementsByClassName("modal");
+
+// Get the button that opens the modal
+
+const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
+
+setDataIndex()
+
+// When the user clicks the button, open the modal
+function setDataIndex() {
+    let i = 0
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].setAttribute('data-index', i);
+        modalparent[i].setAttribute('data-index', i);
+        overlay[i].setAttribute('data-index', i);
+    }
+
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].onclick = function() {
+            var ElementIndex = this.getAttribute('data-index');
+          modalparent[ElementIndex].classList.add("open")
+          overlay[ElementIndex].classList.add("open")
+        };
+    }
+}
+
+// Close modal using overlay
+const overlays = document.querySelectorAll("#overlay");
+overlays.forEach((overlayer) => {
+    overlayer.addEventListener("click", closeModal)
+    function closeModal() {
+        const modalss = document.querySelectorAll("#modal");
+        modalss.forEach((modalll) => {
+            modalll.classList.remove("open")
+        })
+        overlayer.classList.remove("open")
+    }
+})
+
+
+// linking firestore project collection
+const projectRef = collection(db, 'projects')
+// submit form after clicking
+const createTicketForm = document.querySelector('.create-ticket-form')
+createTicketForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    addDoc(colRef, {
+        author: createTicketForm.author.value,
+        description: createTicketForm.description.value,
+        title: createTicketForm.title.value,
+        status: createTicketForm.status.value,
+        priority: createTicketForm.priority.value,
+        type: createTicketForm.type.value,
+    })
+    .then(() => {
+        createTicketForm.reset()
+    })
+
+    // createTicket()
+    closeModal();
+    function closeModal() {
+        const overlayer = document.querySelectorAll("#overlay");
+        overlayer.forEach((overlayer) => {
+            overlayer.classList.remove("open")
+        })
+
+        const modalss = document.querySelectorAll("#modal");
+        modalss.forEach((modalll) => {
+            modalll.classList.remove("open")
+        })
+    }
+})    
+
+
+
+
+
 
 // FEATURE: TEAM MEMBER SECTION ************************************************************************************************************************
     
@@ -321,49 +402,49 @@ logoutButton.addEventListener('click', () => {
     })
 
 
-// 3. create ticket form
-const newTicketButton = document.querySelector("#newTicketButton")
-newTicketButton.addEventListener('click', () => {
-    // click on button to open "new ticket" form
-    // click on button to open modal
-    openModal()
-})
+// // 3. create ticket form
+// const newTicketButton = document.querySelector("#newTicketButton")
+// newTicketButton.addEventListener('click', () => {
+//     // click on button to open "new ticket" form
+//     // click on button to open modal
+//     openModal()
+// })
 
-    // click on "New Project" to open modal
-    function openModal() {
-        modal.classList.add("open")
-        overlay.classList.add("open")
-    }
+//     // click on "New Project" to open modal
+//     function openModal() {
+//         modal.classList.add("open")
+//         overlay.classList.add("open")
+//     }
 
-    // click on overlay to cancel operation
-    overlay.addEventListener("click", closeModal)
-    function closeModal() {
-        modal.classList.remove("open")
-        overlay.classList.remove("open")
-    }
+//     // click on overlay to cancel operation
+//     overlay.addEventListener("click", closeModal)
+//     function closeModal() {
+//         modal.classList.remove("open")
+//         overlay.classList.remove("open")
+//     }
 
-    // linking firestore project collection
-    const projectRef = collection(db, 'projects')
-    // submit form after clicking
-    const createTicketForm = document.querySelector('.create-ticket-btn')
-    createTicketForm.addEventListener('submit', (e) => {
-        e.preventDefault()
+    // // linking firestore project collection
+    // const projectRef = collection(db, 'projects')
+    // // submit form after clicking
+    // const createTicketForm = document.querySelector('.create-ticket-form')
+    // createTicketForm.addEventListener('submit', (e) => {
+    //     e.preventDefault()
         
-        addDoc(colRef, {
-            author: createTicketForm.author.value,
-            description: createTicketForm.description.value,
-            title: createTicketForm.title.value,
-            status: createTicketForm.status.value,
-            priority: createTicketForm.priority.value,
-            type: createTicketForm.type.value,
-        })
-        .then(() => {
-            createTicketForm.reset()
-        })
+    //     addDoc(colRef, {
+    //         author: createTicketForm.author.value,
+    //         description: createTicketForm.description.value,
+    //         title: createTicketForm.title.value,
+    //         status: createTicketForm.status.value,
+    //         priority: createTicketForm.priority.value,
+    //         type: createTicketForm.type.value,
+    //     })
+    //     .then(() => {
+    //         createTicketForm.reset()
+    //     })
 
-        // createTicket()
-        closeModal();
-    })    
+    //     // createTicket()
+    //     closeModal();
+    // })    
 
 
 
