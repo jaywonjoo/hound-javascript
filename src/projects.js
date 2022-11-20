@@ -169,59 +169,6 @@ logoutButton.addEventListener('click', () => {
     })
 
 
-        // // 4. Delete Ticket Form
-    // const deleteTicketForm = document.querySelector('.delete-ticket-form')
-    // deleteTicketForm.addEventListener('submit', (e) => {
-    // e.preventDefault()
-
-    // const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
-    // deleteDoc(docRef)
-    //     .then(() => {
-    //         deleteTicketForm.reset()
-            
-    //     })
-    // })
-
-
-
-    // need to populate array with creator of project + users linked to project
-    // let userList = []
-
-    // clearUsers()
-
-    // snapshot.doc.forEach(doc)
-
-
-
-
-
-    // read creator of project
-    // take that id and populate list with name, email, and phone number
-
-
-        // // 4. populate selected ticket info USING TICKET ID!!
-        // const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
-        // getDoc(ticketRef).then((snapshot) => {
-
-        //     console.log(snapshot.data().title)
-
-        //     const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-        //     const populatedAuthorSection = document.querySelector("#populated-author-section")
-        //     const populatedDescriptionSection = document.querySelector("#populated-description-section")
-        //     const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-        //     const populatedTicketSection = document.querySelector("#populated-priority-section")
-        //     const populatedTypeSection = document.querySelector("#populated-type-section")
-
-        //     populatedTicketTitleSection.innerHTML = snapshot.data().title;
-        //     populatedAuthorSection.innerHTML = snapshot.data().author;
-        //     populatedDescriptionSection.innerHTML = snapshot.data().description;
-        //     populatedTicketInfoSection.innerHTML = snapshot.data().status;
-        //     populatedTicketSection.innerHTML = snapshot.data().priority;
-        //     populatedTypeSection.innerHTML = snapshot.data().type;
-            
-        // })
-
-
 
 // *****************************************************************************************************************************************************
 
