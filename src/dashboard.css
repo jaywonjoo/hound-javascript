@@ -2,6 +2,10 @@
   display: flex;
 }
 
+#shared-project-container {
+  display: flex;
+}
+
 .project-section-header {
   display: flex;
   flex-direction: row;

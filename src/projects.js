@@ -45,6 +45,12 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
+const dashboardButton = document.querySelector('#dashboardButton')
+dashboardButton.addEventListener('click', () => {
+    window.location.href = "dashboard.html";
+})
+
+
 // FEATURE: LOGOUT BUTTON
 const logoutButton = document.querySelector('#logoutButton')
 logoutButton.addEventListener('click', () => {
