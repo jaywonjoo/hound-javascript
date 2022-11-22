@@ -284,23 +284,35 @@ function populateUserModal() {
                 const populatableMemberDiv = document.querySelector("#populatable-member-div")
                 
                 const newMemberMainDiv = document.createElement("div")
-                const newMemberIconDiv = document.createElement("div")
+                // const newMemberIconDiv = document.createElement("div")
+                const newMemberCheckboxDiv = document.createElement("input")
+                newMemberCheckboxDiv.setAttribute("type", "checkbox");
                 const newMemberNameDiv = document.createElement("div")
+                const newMemberEmailDiv = document.createElement("div")
+                // const newMemberKebabDiv = document.createElement("div")
                 const newMemberIdDiv = document.createElement("div")
 
         
                 populatableMemberDiv.appendChild(newMemberMainDiv);
-                    newMemberMainDiv.appendChild(newMemberIconDiv);
+                    // newMemberMainDiv.appendChild(newMemberIconDiv);
+                    newMemberMainDiv.appendChild(newMemberCheckboxDiv);
                     newMemberMainDiv.appendChild(newMemberNameDiv);
+                    newMemberMainDiv.appendChild(newMemberEmailDiv);
+                    // newMemberMainDiv.appendChild(newMemberKebabDiv);
                     newMemberMainDiv.appendChild(newMemberIdDiv);
         
-                newMemberIconDiv.innerText = (SystemUsersList[i].firstName.charAt(0) + SystemUsersList[i].lastName.charAt(0));
+                // newMemberIconDiv.innerText = (SystemUsersList[i].firstName.charAt(0) + SystemUsersList[i].lastName.charAt(0));
                 newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
+                newMemberEmailDiv.innerText = (SystemUsersList[i].email);
+                // newMemberKebabDiv.innerText = "..."
                 newMemberIdDiv.innerText = (SystemUsersList[i].id);
 
         
                 newMemberMainDiv.classList.add("new-member-main-div")
-                newMemberIconDiv.classList.add("new-member-icon-div")
+                // newMemberIconDiv.classList.add("new-member-icon-div")
+                newMemberNameDiv.classList.add("new-member-name-div")
+                newMemberEmailDiv.classList.add("new-member-email-div")
+                // newMemberKebabDiv.classList.add("new-member-kebab-div")
                 newMemberIdDiv.classList.add("hidden")
             }
         })

@@ -126,6 +126,20 @@ ul,li { list-style-type: none;
     margin: 3px 8px 0 10px
   }
 
+  .new-member-name-div {
+    width: 40%;
+    height: auto;
+  }
+
+  .new-member-email-div {
+    height: auto;
+    width: 50%
+  }
+
+  .new-member-kebab-div {
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+  }
   /* team member section **************************************************************** */
   
 
