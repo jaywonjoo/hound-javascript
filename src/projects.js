@@ -193,20 +193,28 @@ createTicketForm.addEventListener('submit', (e) => {
                     const teamMemberLineItemName = document.createElement("div")
                     const teamMemberLineItemEmail = document.createElement("div")
                     const teamMemberLineItemPhone = document.createElement("div")
+                    const teamMemberLineItemKebab = document.createElement("div")
 
 
                 teamMemberBody.appendChild(teamMemberLineItem)
                     teamMemberLineItem.appendChild(teamMemberLineItemName)
                     teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                     teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+                    teamMemberLineItem.appendChild(teamMemberLineItemKebab)
 
                 let fullName = userListOne[0].firstName + " " + userListOne[0].lastName
 
                 teamMemberLineItemName.innerText = fullName;
                 teamMemberLineItemEmail.innerText = userListOne[0].email;
                 teamMemberLineItemPhone.innerText = userListOne[0].phoneNumber;
+                teamMemberLineItemKebab.innerText = "...";
+
 
                 teamMemberLineItem.classList.add("team-member-line-item");
+                teamMemberLineItemName.classList.add("team-member-line-item-name");
+                teamMemberLineItemEmail.classList.add("team-member-line-item-email");
+                teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+                teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 
             })
         })
@@ -238,20 +246,27 @@ createTicketForm.addEventListener('submit', (e) => {
                         const teamMemberLineItemName = document.createElement("div")
                         const teamMemberLineItemEmail = document.createElement("div")
                         const teamMemberLineItemPhone = document.createElement("div")
+                        const teamMemberLineItemKebab = document.createElement("div")
                         
-    
                     teamMemberBody.appendChild(teamMemberLineItem)
                         teamMemberLineItem.appendChild(teamMemberLineItemName)
                         teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                         teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+                        teamMemberLineItem.appendChild(teamMemberLineItemKebab)
     
                     let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
     
                     teamMemberLineItemName.innerText = fullName;
                     teamMemberLineItemEmail.innerText = collaboratorList[0].email;
                     teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
+                    teamMemberLineItemKebab.innerText = "...";
+
     
                     teamMemberLineItem.classList.add("team-member-line-item");
+                    teamMemberLineItemName.classList.add("team-member-line-item-name");
+                    teamMemberLineItemEmail.classList.add("team-member-line-item-email");
+                    teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+                    teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 })
             })
 

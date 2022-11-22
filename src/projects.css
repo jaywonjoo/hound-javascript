@@ -94,6 +94,29 @@ ul,li { list-style-type: none;
     border-bottom: solid black;
   }
 
+  .team-member-line-item-name {
+    width: 30%;
+    overflow: hidden;
+  }
+
+  .team-member-line-item-email {
+    width: 20%;
+    overflow: hidden;
+
+  }
+
+  .team-member-line-item-phone {
+    width: 40%;
+    overflow: hidden;
+
+  }
+
+  .team-member-line-item-kebab {
+    writing-mode: vertical-rl;
+    text-orientation: sideways;
+    width: 10%;
+  }
+
   .populated-member-list {
     border: solid black;
     width: 90%;
@@ -136,10 +159,6 @@ ul,li { list-style-type: none;
     width: 50%
   }
 
-  .new-member-kebab-div {
-    writing-mode: vertical-rl;
-    text-orientation: sideways;
-  }
   /* team member section **************************************************************** */
   
 
