@@ -32,7 +32,7 @@ ul,li { list-style-type: none;
     border-radius: .75rem;
     background-color: white;
     width: 30%;
-    height: 40%;
+    height: auto;
     box-shadow: 0 0 10px #919191;
 
   }
