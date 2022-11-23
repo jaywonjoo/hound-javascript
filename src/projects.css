@@ -59,6 +59,16 @@ ul,li { list-style-type: none;
   margin: 0 5% 0 5%;
 }
 
+.top-row-top-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  width: 100%
+}
+
   /* team member section **************************************************************** */
 
   .team-members {
