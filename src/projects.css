@@ -226,11 +226,19 @@ ul,li { list-style-type: none;
 
 /* Selected Ticket Info Section **************************************************************** */
 
+.selected-ticket-info-header {
+  background-color: lightgray;
+  margin: 20px 5% 0 5%;
+  padding: 10px;
+  border-radius: 15px 15px 0 0;
+}
+
 .ticket-info {
   background-color: rgb(229, 229, 229);
   width: 90%;
   height: 100%;
   border: solid black;
+  border-radius: 0 0 15px 15px;
   display: flex;
   justify-content: space-between;
   margin: 0 5% 0 5%;
