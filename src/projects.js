@@ -166,7 +166,8 @@ createTicketForm.addEventListener('submit', (e) => {
 
 
 // FEATURE: TEAM MEMBER SECTION ************************************************************************************************************************
-    
+populateTeamMembers()
+function populateTeamMembers(){
     const ProjectUsersDocRef = doc(db, 'projects', projectID)
     getDoc(ProjectUsersDocRef).then((snapshot) => {
 
@@ -275,7 +276,7 @@ createTicketForm.addEventListener('submit', (e) => {
 
 
     })
-
+}
 
     // FEATURE: ADD TEAM MEMBERS ************************************************************************
 
@@ -691,6 +692,10 @@ modalAddMemberForm.addEventListener("submit", (e) => {
     
     })
 
+        const teamMemberBody = document.querySelector(".team-member-body") 
+    teamMemberBody.innerHTML = ""
+    populateTeamMembers()
+
 
 // // Atomically add a new region to the "regions" array field.
 // await updateDoc(washingtonRef, {
@@ -716,7 +721,7 @@ modalAddMemberForm.addEventListener("submit", (e) => {
         })
     }
 
-        
+
 })
 
 
