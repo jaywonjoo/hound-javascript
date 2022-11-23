@@ -687,6 +687,9 @@ modalAddMemberForm.addEventListener("submit", (e) => {
             updateDoc(projectCollaborators, {
                 collaborators: arrayUnion(selectedUserId)
             })
+            .then(() => {
+                checkbox.checked = false;
+              })
         }
 
     
