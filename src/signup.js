@@ -63,7 +63,7 @@ signupForm.addEventListener("submit", (e) => {
         firstName: firstName.value,
         lastName: lastName.value,
         phoneNumber: "(123)456-7890",
-        id: uid,
+        uid: uid,
         email: userEmail,
       }).then(() => {
         console.log("blah")

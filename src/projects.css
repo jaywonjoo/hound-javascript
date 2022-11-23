@@ -135,6 +135,10 @@ ul,li { list-style-type: none;
     border-bottom: solid black;
   }
 
+  .new-member-checkbox-div {
+    padding: auto;
+  }
+
   .new-member-icon-div {
     display: flex;
     align-items: center;

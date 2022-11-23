@@ -3,6 +3,7 @@ import {
     getFirestore, collection, onSnapshot,
     addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
   where, getDoc, orderBy, connectFirestoreEmulator, 
+  updateDoc, arrayUnion, arrayRemove,
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.css";
@@ -179,7 +180,7 @@ createTicketForm.addEventListener('submit', (e) => {
 
 
 
-        const userCreatorDocRef = query(userRef, where("id", "==", creator));
+        const userCreatorDocRef = query(userRef, where("uid", "==", creator));
         onSnapshot(userCreatorDocRef, (snapshot) => {
             snapshot.docs.forEach((doc) => {
 
@@ -226,7 +227,7 @@ createTicketForm.addEventListener('submit', (e) => {
         for (i = 0; i < collaborators.length; i++) {
             // console.log(collaborators[i])
             
-            const userCurrentCollaboratorDocRef = query(userRef, where("id", "==", collaborators[i]));
+            const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
             // console.log(userCurrentCollaboratorDocRef)
 
 
@@ -320,10 +321,10 @@ function populateUserModal() {
                 newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
                 newMemberEmailDiv.innerText = (SystemUsersList[i].email);
                 // newMemberKebabDiv.innerText = "..."
-                newMemberIdDiv.innerText = (SystemUsersList[i].id);
-
+                newMemberIdDiv.innerText = (SystemUsersList[i].uid);
         
                 newMemberMainDiv.classList.add("new-member-main-div")
+                newMemberCheckboxDiv.classList.add("new-member-checkbox-div")
                 // newMemberIconDiv.classList.add("new-member-icon-div")
                 newMemberNameDiv.classList.add("new-member-name-div")
                 newMemberEmailDiv.classList.add("new-member-email-div")
@@ -333,6 +334,7 @@ function populateUserModal() {
         })
 
     }
+
         
     // ***********************************************************************************
 
@@ -558,13 +560,13 @@ function clearTickets() {
 const userRef = collection(db, "users");
 onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
-    const currentUser = query(userRef, where("id", "==", uid));
+    const currentUser = query(userRef, where("uid", "==", uid));
     
     onSnapshot(currentUser, (snapshot) => {
         let currentUserList = [];
         
         snapshot.docs.forEach((doc) => {
-            currentUserList.push({ ...doc.data(), id: doc.id });
+            currentUserList.push({ ...doc.data(), id: doc.uid });
         });
         console.log(currentUserList)
 const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
@@ -660,3 +662,62 @@ deleteTicketForm.addEventListener('submit', (e) => {
 
 
 
+// FEATURE: ADD MEMBER BUTTON ****************************************************************************************************************
+
+const modalAddMemberForm = document.querySelector(".add-member-form")
+modalAddMemberForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // console.log("blah")
+
+    const newMemberMainDiv = document.querySelector(".new-member-main-div")
+    const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
+    // const checkedCheckbox = newMemberCheckboxDiv.parentElement.lastElementChild.innerText
+
+    newMemberCheckboxDiv.forEach((checkbox) => {
+        // let newMemberList = [];
+
+        if(checkbox.checked) {
+            // console.log("blah")
+            const selectedUserId = checkbox.parentElement.lastElementChild.innerText
+            // console.log(selectedUserId)
+            // newMemberList.push(selectedUserId)
+
+            const projectCollaborators = doc(db, 'projects', projectID)
+            updateDoc(projectCollaborators, {
+                collaborators: arrayUnion(selectedUserId)
+            })
+        }
+
+    
+    })
+
+
+// // Atomically add a new region to the "regions" array field.
+// await updateDoc(washingtonRef, {
+//     regions: arrayUnion("greater_virginia")
+// });
+
+// // Atomically remove a region from the "regions" array field.
+// await updateDoc(washingtonRef, {
+//     regions: arrayRemove("east_coast")
+// });
+
+    
+    closeModal();
+    function closeModal() {
+        const overlayer = document.querySelectorAll("#overlay");
+        overlayer.forEach((overlayer) => {
+            overlayer.classList.remove("open")
+        })
+
+        const modalss = document.querySelectorAll("#modal");
+        modalss.forEach((modalll) => {
+            modalll.classList.remove("open")
+        })
+    }
+
+        
+})
+
+
+// ************************************************************************************************************************************************
