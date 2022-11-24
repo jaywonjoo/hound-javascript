@@ -370,15 +370,15 @@ function populateUserModal() {
 
                 function populateTicket() {
                     const ticketContainer = document.querySelector("#tickets")
-                    const ticketLi = document.createElement("li")
-                    const ticketUl = document.createElement("ul")
-                    const TicketTitle = document.createElement("li");
-                    const TicketDescription = document.createElement("li");
-                    const TicketAuthor = document.createElement("li");
-                    const ticketId = document.createElement("li")
+                    // const ticketLi = document.createElement("li")
+                    const ticketUl = document.createElement("div")
+                    const TicketTitle = document.createElement("div");
+                    const TicketDescription = document.createElement("div");
+                    const TicketAuthor = document.createElement("div");
+                    const ticketId = document.createElement("div")
 
-                    ticketContainer.appendChild(ticketLi)
-                    ticketLi.appendChild(ticketUl)
+                    ticketContainer.appendChild(ticketUl)
+                    // ticketLi.appendChild(ticketUl)
                         ticketUl.appendChild(TicketTitle)
                         ticketUl.appendChild(TicketDescription)
                         ticketUl.appendChild(TicketAuthor)
