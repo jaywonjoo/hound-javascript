@@ -183,34 +183,59 @@ function populateTeamMembers(){
                     collaboratorList.push({ ...doc.data(), id: doc.id });
 
                     // console.log(collaboratorList[0].firstName)
-
+                    // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
                     const teamMemberBody = document.querySelector(".team-member-body") 
+                    const teamMemberModals = document.querySelector(".team-member-line-item-modals")
+                    const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
 
                     const teamMemberLineItem = document.createElement("div")
                         const teamMemberLineItemName = document.createElement("div")
                         const teamMemberLineItemEmail = document.createElement("div")
                         const teamMemberLineItemPhone = document.createElement("div")
-                        const teamMemberLineItemKebab = document.createElement("div")
-                        
+                        const teamMemberLineItemKebab = document.createElement("button")
+                    const teamMemberLineItemOverlay = document.createElement("div")
+                    const teamMemberLineItemModal = document.createElement("div")
+                    const teamMemberLineItemDeleteButton = document.createElement("button")
+
+
+
                     teamMemberBody.appendChild(teamMemberLineItem)
                         teamMemberLineItem.appendChild(teamMemberLineItemName)
                         teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                         teamMemberLineItem.appendChild(teamMemberLineItemPhone)
                         teamMemberLineItem.appendChild(teamMemberLineItemKebab)
-    
+                    teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
+                    teamMemberModals.appendChild(teamMemberLineItemModal)
+                        teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
+
+
+
+
                     let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
-    
+
                     teamMemberLineItemName.innerText = fullName;
                     teamMemberLineItemEmail.innerText = collaboratorList[0].email;
                     teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
                     teamMemberLineItemKebab.innerText = "...";
+                    teamMemberLineItemDeleteButton.innerText = "delete"
 
-    
+
                     teamMemberLineItem.classList.add("team-member-line-item");
                     teamMemberLineItemName.classList.add("team-member-line-item-name");
                     teamMemberLineItemEmail.classList.add("team-member-line-item-email");
                     teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
                     teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
+                    teamMemberLineItemKebab.classList.add("open-modal-btn");
+                    teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                    teamMemberLineItemModal.classList.add("modal");
+                    teamMemberLineItemModal.setAttribute("id", "modal");
+
+                    // teamMemberLineItemModal.classList.add("hidden");
+
+
+                    setDataIndex()
+                    closeOverlays()
+                    
                 })
             })
 
