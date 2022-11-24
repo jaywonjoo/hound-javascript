@@ -6,6 +6,13 @@ body {
   align-items: center;
   padding: 0;
   margin: 0; */
+  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2415x1600/e516b851c9faf9d61ce4f4cfe749a7e7/photo-1454496522488-7a8e488e8606.jpg");
+  /* background-image: url(""); */
+  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/5f2ae1035732ba4289f7619866cfd50f/photo-1621173865296-baaf7dc3afcc.jpg"); */
+  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1536x1920/28e177d9a23bdb20109c1a5abdd15e5f/photo-1660494911852-7ce46edd9cc7.jpg"); */
+  background-size: cover;
+  background-position: 80% 40%;
+  
 }
 
 .hidden {
@@ -53,40 +60,50 @@ ul,li { list-style-type: none;
 .top-row {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   /* gap: 5% */
   margin: 0 5% 0 5%;
 }
 
 .top-row-top-section {
+  background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 0;
   padding: 0;
-  width: 100%
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+  border-bottom: solid black;
 }
 
   /* team member section **************************************************************** */
 
+  .team-member-body {
+    width: 100%;
+  }
+
   .team-members {
-    background-color: rgb(229, 229, 229);
+    /* background-color: rgb(229, 229, 229); */
     width: 30%;
-    height: auto;
+    height:250px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
-    border: solid black;
-    padding: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(40px);
+    box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
+    background-color: rgba(255, 255, 255, 0.3);
+
   }
 
   .team-member-header {
-    background-color: white;
+    /* background-color: white; */
     width: 100%;
-    height: 100%;
+    height: 10%;
     display: flex;
     gap: 20%;
     border-bottom: solid black;
@@ -98,10 +115,11 @@ ul,li { list-style-type: none;
     gap: 10%;
     width: 100%;
     height: auto;
-    background-color: white;
+    /* background-color: white; */
     padding: 0;
     margin: 0;
-    border-bottom: solid black;
+    /* border-bottom: solid black; */
+    border-radius: 0 0 15px 15px;
   }
 
   .team-member-line-item-name {
@@ -185,20 +203,21 @@ ul,li { list-style-type: none;
 
   .ticket-section {
     background-color: rgb(229, 229, 229);
-    width: 70%;
-    height: 200px;
+    width: 60%;
+    height: 250px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
-    border: solid black;
-    padding: 30px;
+    border-radius: 15px;
+    /* border: solid black; */
+    /* padding: 30px; */
   }
 
   .ticket-header {
-    background-color: white;
+    /* background-color: white; */
     width: 100%;
-    height: 100%;
+    height: 10%;
     display: flex;
     gap: 200px;
     border-bottom: solid black;
@@ -222,26 +241,39 @@ ul,li { list-style-type: none;
   /* ticket section **************************************************************** */
 /* top row **************************************************************** */
 
+.big-wrap {
+border-radius: 15px 15px 15px 15px;
+margin: 2% 5% 0 5%;
+padding: 0 0 0 0;
+box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
+backdrop-filter: blur(40px);
 
+background-color: rgba(255, 255, 255, 0.3);
+
+
+}
 
 /* Selected Ticket Info Section **************************************************************** */
 
 .selected-ticket-info-header {
-  background-color: lightgray;
-  margin: 20px 5% 0 5%;
-  padding: 10px;
+  background-color: white;
   border-radius: 15px 15px 0 0;
+  margin: 0;
+  height: 50px;
+  border-bottom: solid black;
+}
+
+.left-ticket-info-section {
+  width: 100%;
 }
 
 .ticket-info {
-  background-color: rgb(229, 229, 229);
-  width: 90%;
+  /* background-color: rgb(229, 229, 229); */
   height: 100%;
-  border: solid black;
   border-radius: 0 0 15px 15px;
   display: flex;
   justify-content: space-between;
-  margin: 0 5% 0 5%;
+  /* margin: 0 5% 0 5%; */
   /* align-items: center; */
 }
 
@@ -260,11 +292,10 @@ ul,li { list-style-type: none;
 .right-chat-section {
   width: 40%;
   height: 400px;
-  background-color: rgb(229, 229, 229);
-  border-left: solid black
+  /* background-color: rgb(229, 229, 229); */
+  border-left: solid black;
+  border-radius: 0 0 15px 0;
 
-  /* justify-content: right; */
-  /* align-items: right; */
 }
         /* Chatbox Section **************************************************************** */
 
