@@ -115,6 +115,9 @@ function populateTeamMembers(){
                     const teamMemberLineItemName = document.createElement("div")
                     const teamMemberLineItemEmail = document.createElement("div")
                     const teamMemberLineItemPhone = document.createElement("div")
+                    
+                    const teamMemberLineItemKebabDiv = document.createElement("div")
+
                     const teamMemberLineItemKebab = document.createElement("button")
                 const teamMemberLineItemOverlay = document.createElement("div")
                 const teamMemberLineItemModal = document.createElement("div")
@@ -126,9 +129,12 @@ function populateTeamMembers(){
                     teamMemberLineItem.appendChild(teamMemberLineItemName)
                     teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                     teamMemberLineItem.appendChild(teamMemberLineItemPhone)
-                    teamMemberLineItem.appendChild(teamMemberLineItemKebab)
+
+                    teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
+                    
+                    teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
                 teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
-                teamMemberModals.appendChild(teamMemberLineItemModal)
+                teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
                     teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
 
 
@@ -147,12 +153,22 @@ function populateTeamMembers(){
                 teamMemberLineItemName.classList.add("team-member-line-item-name");
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
                 teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+
+                teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
+
                 teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 teamMemberLineItemKebab.classList.add("open-modal-btn");
                 teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                teamMemberLineItemOverlay.setAttribute("style", "backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 teamMemberLineItemModal.classList.add("modal");
-                teamMemberLineItemModal.setAttribute("id", "modal");
+                teamMemberLineItemModal.classList.add("delete-button-modal");
 
+                teamMemberLineItemModal.setAttribute("id", "modal");
+                // teamMemberLineItemModal.setAttribute("style", "modal");
+
+                // teamMemberLineItemModal.setAttribute("style", "display: none; position: absolute; bottom: 0; width: auto; height: auto; box-shadow: 0 0 10px #919191;");
+                
+                // teamMemberLineItemModal.setAttribute("style", "padding: 0; width: 0; border-style: none; position: absolute;");
                 // teamMemberLineItemModal.classList.add("hidden");
 
                 
@@ -182,59 +198,74 @@ function populateTeamMembers(){
 
                     collaboratorList.push({ ...doc.data(), id: doc.id });
 
-                    // console.log(collaboratorList[0].firstName)
                     // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
-                    const teamMemberBody = document.querySelector(".team-member-body") 
-                    const teamMemberModals = document.querySelector(".team-member-line-item-modals")
-                    const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
+                const teamMemberBody = document.querySelector(".team-member-body") 
+                const teamMemberModals = document.querySelector(".team-member-line-item-modals")
+                const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
 
-                    const teamMemberLineItem = document.createElement("div")
-                        const teamMemberLineItemName = document.createElement("div")
-                        const teamMemberLineItemEmail = document.createElement("div")
-                        const teamMemberLineItemPhone = document.createElement("div")
-                        const teamMemberLineItemKebab = document.createElement("button")
-                    const teamMemberLineItemOverlay = document.createElement("div")
-                    const teamMemberLineItemModal = document.createElement("div")
-                    const teamMemberLineItemDeleteButton = document.createElement("button")
+                const teamMemberLineItem = document.createElement("div")
+                    const teamMemberLineItemName = document.createElement("div")
+                    const teamMemberLineItemEmail = document.createElement("div")
+                    const teamMemberLineItemPhone = document.createElement("div")
+                    
+                    const teamMemberLineItemKebabDiv = document.createElement("div")
 
-
-
-                    teamMemberBody.appendChild(teamMemberLineItem)
-                        teamMemberLineItem.appendChild(teamMemberLineItemName)
-                        teamMemberLineItem.appendChild(teamMemberLineItemEmail)
-                        teamMemberLineItem.appendChild(teamMemberLineItemPhone)
-                        teamMemberLineItem.appendChild(teamMemberLineItemKebab)
-                    teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
-                    teamMemberModals.appendChild(teamMemberLineItemModal)
-                        teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
+                    const teamMemberLineItemKebab = document.createElement("button")
+                const teamMemberLineItemOverlay = document.createElement("div")
+                const teamMemberLineItemModal = document.createElement("div")
+                const teamMemberLineItemDeleteButton = document.createElement("button")
 
 
 
+                teamMemberBody.appendChild(teamMemberLineItem)
+                    teamMemberLineItem.appendChild(teamMemberLineItemName)
+                    teamMemberLineItem.appendChild(teamMemberLineItemEmail)
+                    teamMemberLineItem.appendChild(teamMemberLineItemPhone)
 
-                    let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
-
-                    teamMemberLineItemName.innerText = fullName;
-                    teamMemberLineItemEmail.innerText = collaboratorList[0].email;
-                    teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
-                    teamMemberLineItemKebab.innerText = "...";
-                    teamMemberLineItemDeleteButton.innerText = "delete"
-
-
-                    teamMemberLineItem.classList.add("team-member-line-item");
-                    teamMemberLineItemName.classList.add("team-member-line-item-name");
-                    teamMemberLineItemEmail.classList.add("team-member-line-item-email");
-                    teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
-                    teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
-                    teamMemberLineItemKebab.classList.add("open-modal-btn");
-                    teamMemberLineItemOverlay.setAttribute("id", "overlay");
-                    teamMemberLineItemModal.classList.add("modal");
-                    teamMemberLineItemModal.setAttribute("id", "modal");
-
-                    // teamMemberLineItemModal.classList.add("hidden");
+                    teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
+                    
+                    teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
+                teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
+                teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
+                    teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
 
 
-                    setDataIndex()
-                    closeOverlays()
+
+
+                let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
+
+                teamMemberLineItemName.innerText = fullName;
+                teamMemberLineItemEmail.innerText = collaboratorList[0].email;
+                teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
+                teamMemberLineItemKebab.innerText = "...";
+                teamMemberLineItemDeleteButton.innerText = "delete"
+
+
+                teamMemberLineItem.classList.add("team-member-line-item");
+                teamMemberLineItemName.classList.add("team-member-line-item-name");
+                teamMemberLineItemEmail.classList.add("team-member-line-item-email");
+                teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+
+                teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
+
+                teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
+                teamMemberLineItemKebab.classList.add("open-modal-btn");
+                teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                teamMemberLineItemOverlay.setAttribute("style", "backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+                teamMemberLineItemModal.classList.add("modal");
+                teamMemberLineItemModal.classList.add("delete-button-modal");
+
+                teamMemberLineItemModal.setAttribute("id", "modal");
+                // teamMemberLineItemModal.setAttribute("style", "modal");
+
+                // teamMemberLineItemModal.setAttribute("style", "display: none; position: absolute; bottom: 0; width: auto; height: auto; box-shadow: 0 0 10px #919191;");
+                
+                // teamMemberLineItemModal.setAttribute("style", "padding: 0; width: 0; border-style: none; position: absolute;");
+                // teamMemberLineItemModal.classList.add("hidden");
+
+                
+                setDataIndex()
+                closeOverlays()
                     
                 })
             })
@@ -699,6 +730,8 @@ modalAddMemberForm.addEventListener("submit", (e) => {
 
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
 const modalparent = document.getElementsByClassName("modal");
+// modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
+
 
 // Get the button that opens the modal
 

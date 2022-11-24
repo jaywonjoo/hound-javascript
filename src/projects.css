@@ -117,19 +117,40 @@ ul,li { list-style-type: none;
 #modal {
     display: none;
     position: absolute;
+    /* top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: .75rem;
+    background-color: white;
+    width: 30%;
+    height: auto;
+    box-shadow: 0 0 10px #919191; */
+  }
+
+  .all-other-modals {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* border: 1px solid black; */
+    border: 1px solid black;
     padding: 1rem;
     border-radius: .75rem;
     background-color: white;
     width: 30%;
     height: auto;
     box-shadow: 0 0 10px #919191;
-
   }
-  
+
+  #delete-button-modal {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    width: auto;
+    height: auto;
+    box-shadow: 0 0 10px #919191;
+  }
+   
   #overlay {
     display: none;
     position: absolute;
@@ -223,6 +244,11 @@ ul,li { list-style-type: none;
     width: 40%;
     overflow: hidden;
 
+  }
+  
+  .team-member-line-item-kebab-div {
+    width: auto;
+    height: auto;
   }
 
   .team-member-line-item-kebab {

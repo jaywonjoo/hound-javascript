@@ -54,6 +54,16 @@
 <!-- content --------------------------------------------------------------------------- -->
 
 <div id="overlay" class="overlay"></div>
+
+
+<div id="modal" class="modal all-other-modals">
+  <form class="add-member-form">
+    <h3>Team Members</h3>
+    <div id="populatable-member-div" class="populatable-member-div"></div>
+    <button id="modal-add-member-btn">Add Members</button>
+  </form>
+</div>
+
 <div class="team-member-line-item-overlays"></div>
 
 
@@ -161,19 +171,12 @@
     
 
 
-<div id="modal" class="modal">
-  <form class="add-member-form">
-    <h3>Team Members</h3>
-    <div id="populatable-member-div" class="populatable-member-div"></div>
-    <button id="modal-add-member-btn">Add Members</button>
-  </form>
-</div>
 
 <div class="team-member-line-item-modals"></div>
 
 
 
-<div id="modal" class="modal">
+<div id="modal" class="modal all-other-modals">
   <form class="create-ticket-form">
     <label for="author">Author:</label>
     <input type="text" name="author" required>
