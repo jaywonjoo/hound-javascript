@@ -52,7 +52,12 @@
 <!-- dashboard --------------------------------------------------------------------------- -->
 
 <!-- content --------------------------------------------------------------------------- -->
-    <div class="content-section">
+
+<div id="overlay" class="overlay"></div>
+<div class="team-member-line-item-overlays"></div>
+
+
+<div class="content-section">
     <h1>HOUND</h1>    
     <div class="top-row"> 
       <!-- Team Members Section -->
@@ -70,15 +75,7 @@
         <!-- <ul  id="team-members">Team Members</ul> -->
       </div>
     
-    <div id="overlay" class="overlay"></div>
 
-      <div id="modal" class="modal">
-        <form class="add-member-form">
-          <h3>Team Members</h3>
-          <div id="populatable-member-div" class="populatable-member-div"></div>
-          <button id="modal-add-member-btn">Add Members</button>
-        </form>
-      </div>
       
 
       <!-- ticket section -->
@@ -101,41 +98,7 @@
         </form>
     </div>
 
-      <div id="overlay" class="overlay"></div>
 
-      <div id="modal" class="modal">
-        <form class="create-ticket-form">
-          <label for="author">Author:</label>
-          <input type="text" name="author" required>
-
-          <label for="description">Description:</label>
-          <input type="text" name="description" required>
-
-          <label for="title">Title:</label>
-          <input type="text" name="title" required>
-          
-          <label for="status">Status:</label>
-          <select type="selection" name="status" required>
-            <option value="resolved">Resolved</option>
-            <option value="unresolved">Unresolved</option>
-          </select>
-
-          <label for="priority">Priority:</label>
-          <select type="selection" name="priority" required>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-
-          <label for="type">Type:</label>
-          <select type="selection" name="type" required>
-            <option value="issue">Issue</option>
-            <option value="bug">Bug</option>
-          </select>
-          
-          <button id="modal-create-ticket-btn">Add New Ticket</button>
-        </form>
-      </div>
     </div>
     
     <!-- Selected Ticket Info Section -->
@@ -189,11 +152,59 @@
     </div>
     </div>
   </div>
+
+  <div id="overlay" class="overlay"></div>
 <!-- content --------------------------------------------------------------------------- -->
 
 
 </div>
     
 
+
+<div id="modal" class="modal">
+  <form class="add-member-form">
+    <h3>Team Members</h3>
+    <div id="populatable-member-div" class="populatable-member-div"></div>
+    <button id="modal-add-member-btn">Add Members</button>
+  </form>
+</div>
+
+<div class="team-member-line-item-modals"></div>
+
+
+
+<div id="modal" class="modal">
+  <form class="create-ticket-form">
+    <label for="author">Author:</label>
+    <input type="text" name="author" required>
+
+    <label for="description">Description:</label>
+    <input type="text" name="description" required>
+
+    <label for="title">Title:</label>
+    <input type="text" name="title" required>
+    
+    <label for="status">Status:</label>
+    <select type="selection" name="status" required>
+      <option value="resolved">Resolved</option>
+      <option value="unresolved">Unresolved</option>
+    </select>
+
+    <label for="priority">Priority:</label>
+    <select type="selection" name="priority" required>
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+    </select>
+
+    <label for="type">Type:</label>
+    <select type="selection" name="type" required>
+      <option value="issue">Issue</option>
+      <option value="bug">Bug</option>
+    </select>
+    
+    <button id="modal-create-ticket-btn">Add New Ticket</button>
+  </form>
+</div>
 </body>
 </html>

@@ -78,88 +78,6 @@ logoutButton.addEventListener('click', () => {
   const colRef = collection(db, 'projects', projectID, 'tickets')
 
 
-// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
-const modalparent = document.getElementsByClassName("modal");
-
-// Get the button that opens the modal
-
-const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
-
-setDataIndex()
-
-// When the user clicks the button, open the modal
-function setDataIndex() {
-    let i = 0
-    for (i = 0; i < modal_btn_multi.length; i++)
-    {
-        modal_btn_multi[i].setAttribute('data-index', i);
-        modalparent[i].setAttribute('data-index', i);
-        overlay[i].setAttribute('data-index', i);
-    }
-
-    for (i = 0; i < modal_btn_multi.length; i++)
-    {
-        modal_btn_multi[i].onclick = function() {
-            var ElementIndex = this.getAttribute('data-index');
-          modalparent[ElementIndex].classList.add("open")
-          overlay[ElementIndex].classList.add("open")
-        };
-    }
-
-    // modal_btn_multi[0].onclick = function() {
-    //     populateUserModal()
-    // }
-
-}
-
-// Close modal using overlay
-const overlays = document.querySelectorAll("#overlay");
-overlays.forEach((overlayer) => {
-    overlayer.addEventListener("click", closeModal)
-    function closeModal() {
-        const modalss = document.querySelectorAll("#modal");
-        modalss.forEach((modalll) => {
-            modalll.classList.remove("open")
-        })
-        overlayer.classList.remove("open")
-    }
-})
-
-
-// linking firestore project collection
-const projectRef = collection(db, 'projects')
-// submit form after clicking
-const createTicketForm = document.querySelector('.create-ticket-form')
-createTicketForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    
-    addDoc(colRef, {
-        author: createTicketForm.author.value,
-        description: createTicketForm.description.value,
-        title: createTicketForm.title.value,
-        status: createTicketForm.status.value,
-        priority: createTicketForm.priority.value,
-        type: createTicketForm.type.value,
-    })
-    .then(() => {
-        createTicketForm.reset()
-    })
-
-    // createTicket()
-    closeModal();
-    function closeModal() {
-        const overlayer = document.querySelectorAll("#overlay");
-        overlayer.forEach((overlayer) => {
-            overlayer.classList.remove("open")
-        })
-
-        const modalss = document.querySelectorAll("#modal");
-        modalss.forEach((modalll) => {
-            modalll.classList.remove("open")
-        })
-    }
-})    
-
 
 
 
@@ -190,12 +108,18 @@ function populateTeamMembers(){
 
                 // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
                 const teamMemberBody = document.querySelector(".team-member-body") 
+                const teamMemberModals = document.querySelector(".team-member-line-item-modals")
+                const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
 
                 const teamMemberLineItem = document.createElement("div")
                     const teamMemberLineItemName = document.createElement("div")
                     const teamMemberLineItemEmail = document.createElement("div")
                     const teamMemberLineItemPhone = document.createElement("div")
-                    const teamMemberLineItemKebab = document.createElement("div")
+                    const teamMemberLineItemKebab = document.createElement("button")
+                const teamMemberLineItemOverlay = document.createElement("div")
+                const teamMemberLineItemModal = document.createElement("div")
+                const teamMemberLineItemDeleteButton = document.createElement("button")
+
 
 
                 teamMemberBody.appendChild(teamMemberLineItem)
@@ -203,6 +127,12 @@ function populateTeamMembers(){
                     teamMemberLineItem.appendChild(teamMemberLineItemEmail)
                     teamMemberLineItem.appendChild(teamMemberLineItemPhone)
                     teamMemberLineItem.appendChild(teamMemberLineItemKebab)
+                teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
+                teamMemberModals.appendChild(teamMemberLineItemModal)
+                    teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
+
+
+
 
                 let fullName = userListOne[0].firstName + " " + userListOne[0].lastName
 
@@ -210,6 +140,7 @@ function populateTeamMembers(){
                 teamMemberLineItemEmail.innerText = userListOne[0].email;
                 teamMemberLineItemPhone.innerText = userListOne[0].phoneNumber;
                 teamMemberLineItemKebab.innerText = "...";
+                teamMemberLineItemDeleteButton.innerText = "delete"
 
 
                 teamMemberLineItem.classList.add("team-member-line-item");
@@ -217,8 +148,19 @@ function populateTeamMembers(){
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
                 teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
                 teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
+                teamMemberLineItemKebab.classList.add("open-modal-btn");
+                teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                teamMemberLineItemModal.classList.add("modal");
+                teamMemberLineItemModal.setAttribute("id", "modal");
+
+                // teamMemberLineItemModal.classList.add("hidden");
+
                 
+                setDataIndex()
+                closeOverlays()
+
             })
+
         })
 
         // grab project collaborators
@@ -729,3 +671,89 @@ modalAddMemberForm.addEventListener("submit", (e) => {
 
 
 // ************************************************************************************************************************************************
+
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
+const modalparent = document.getElementsByClassName("modal");
+
+// Get the button that opens the modal
+
+const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
+
+// setTimeout(() => {
+
+// When the user clicks the button, open the modal
+function setDataIndex() {
+    let i = 0
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].setAttribute('data-index', i);
+        modalparent[i].setAttribute('data-index', i);
+        overlay[i].setAttribute('data-index', i);
+    }
+
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].onclick = function() {
+            var ElementIndex = this.getAttribute('data-index');
+        //   modalparent[ElementIndex].classList.remove("hidden")
+          modalparent[ElementIndex].classList.add("open")
+          overlay[ElementIndex].classList.add("open")
+        };
+    }
+
+    // modal_btn_multi[0].onclick = function() {
+    //     populateUserModal()
+    // }
+
+}
+// }, "1000")
+
+function closeOverlays() {
+    // Close modal using overlay
+    const overlays = document.querySelectorAll("#overlay");
+    overlays.forEach((overlayer) => {
+        overlayer.addEventListener("click", closeModal)
+        function closeModal() {
+            const modalss = document.querySelectorAll("#modal");
+            modalss.forEach((modalll) => {
+                modalll.classList.remove("open")
+            })
+            overlayer.classList.remove("open")
+        }
+    })
+}
+
+// linking firestore project collection
+const projectRef = collection(db, 'projects')
+// submit form after clicking
+const createTicketForm = document.querySelector('.create-ticket-form')
+createTicketForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    
+    addDoc(colRef, {
+        author: createTicketForm.author.value,
+        description: createTicketForm.description.value,
+        title: createTicketForm.title.value,
+        status: createTicketForm.status.value,
+        priority: createTicketForm.priority.value,
+        type: createTicketForm.type.value,
+    })
+    .then(() => {
+        createTicketForm.reset()
+    })
+
+    // createTicket()
+    closeModal();
+    function closeModal() {
+        const overlayer = document.querySelectorAll("#overlay");
+        overlayer.forEach((overlayer) => {
+            overlayer.classList.remove("open")
+        })
+
+        const modalss = document.querySelectorAll("#modal");
+        modalss.forEach((modalll) => {
+            modalll.classList.remove("open")
+        })
+    }
+})    
+
