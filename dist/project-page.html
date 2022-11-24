@@ -17,10 +17,40 @@
       </style>
 </head>
 <body>
-    <button id="dashboardButton">dashboard</button>
 
-    <button id="logoutButton">logout</button>
+<!-- navbar --------------------------------------------------------------------------- -->
+    <nav class="navbar">
+      <div class='nav-left'>
+        <img class='nav-logo' src="../images/hound.svg"/>
+        <h1 class='brand-title'>Hound</h1>
+      </div>
+      
+      <a href="#" class='toggle-button'>
+        <span class='bar'></span>
+        <span class='bar'></span>
+        <span class='bar'></span>
+      </a>
+      <div class='navbar-links'>
+        <button id="dashboardButton">dashboard</button>
 
+        <button id="logoutButton">logout</button>
+      </div>
+    </nav>
+<!-- navbar --------------------------------------------------------------------------- -->
+
+<div class="lower-half">
+<!-- dashboard --------------------------------------------------------------------------- -->
+<div class="dashboard-master">
+  <h3>Dashboard</h3>
+  <h3>Team Members</h3>
+  <h3>Account Settings</h3>
+  <h3>Admin</h3>
+</div>
+<!-- dashboard --------------------------------------------------------------------------- -->
+
+<!-- content --------------------------------------------------------------------------- -->
+    <div class="content-section">
+    <h1>HOUND</h1>    
     <div class="top-row"> 
       <!-- Team Members Section -->
       <div class="team-members">
@@ -107,7 +137,7 @@
     
     <!-- Selected Ticket Info Section -->
     <div class="big-wrap">
-    <h2 class="selected-ticket-info-header">Selected Ticket Info</h2>
+    <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
     <div class="ticket-info" id="ticket-info">
       <div class="left-ticket-info-section">
         <div class="ticket-info-row">
@@ -155,10 +185,11 @@
       </form>
     </div>
     </div>
-  
+  </div>
+<!-- content --------------------------------------------------------------------------- -->
 
 
-
+</div>
     
 
 </body>
