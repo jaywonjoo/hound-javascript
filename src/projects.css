@@ -206,7 +206,6 @@ ul,li { list-style-type: none;
     backdrop-filter: blur(40px);
     box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
     background-color: rgba(255, 255, 255, 0.3);
-
   }
 
   .team-member-header {
@@ -218,6 +217,12 @@ ul,li { list-style-type: none;
     border-bottom: solid black;
   }
 
+  .team-member-body {
+    overflow: scroll;
+    border-radius: 0 0 15px 15px;
+
+  }
+
   .team-member-line-item {
     display: flex;
     flex-direction: row;
@@ -227,8 +232,12 @@ ul,li { list-style-type: none;
     /* background-color: white; */
     padding: 0;
     margin: 0;
-    /* border-bottom: solid black; */
-    border-radius: 0 0 15px 15px;
+    border-bottom: solid black;
+  }
+
+  .team-member-line-item:hover {
+    background-color: rgb(255, 255, 255, .3);
+  
   }
 
   .team-member-line-item-name {
@@ -346,6 +355,7 @@ ul,li { list-style-type: none;
     width: 100%;
     margin: 0;
     padding: 0;
+    overflow: scroll;
   }
 
   .ticket-ul {
@@ -359,9 +369,14 @@ ul,li { list-style-type: none;
     list-style-type: none;
     /* padding-left: 0; */
     /* margin-left: 0; */
+    max-height: 5vh;
+    overflow: hidden;
   }
 
+.ticket-ul:hover {
+  background-color: rgb(255, 255, 255, .3);
 
+}
 
   /* ticket section **************************************************************** */
 /* top row **************************************************************** */
