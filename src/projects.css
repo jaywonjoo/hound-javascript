@@ -303,12 +303,13 @@ ul,li { list-style-type: none;
   }
 
   .team-member-line-item-kebab {
-    writing-mode: vertical-rl;
-    text-orientation: sideways;
+    /* writing-mode: vertical-rl; */
+    /* text-orientation: sideways; */
     width: 2vw;
     height: 2vh;
     background-color: transparent;
     border: transparent;
+    transform:rotate(-90deg);
   }
 
   .populated-member-list {

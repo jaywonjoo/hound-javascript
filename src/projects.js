@@ -267,6 +267,9 @@ function populateTeamMembers(){
                 // teamMemberLineItemModal.setAttribute("style", "padding: 0; width: 0; border-style: none; position: absolute;");
                 // teamMemberLineItemModal.classList.add("hidden");
 
+                teamMemberLineItemDeleteButton.addEventListener("click", () => {
+                    console.log("blah")
+                })
                 
                 setDataIndex()
                 closeOverlays()
