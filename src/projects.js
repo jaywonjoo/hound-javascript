@@ -154,7 +154,7 @@ function populateTeamMembers(){
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
                 teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
 
-                teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
+                // teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
 
                 teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 teamMemberLineItemKebab.classList.add("open-modal-btn");
@@ -246,7 +246,7 @@ function populateTeamMembers(){
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
                 teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
 
-                teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
+                // teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
 
                 teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 teamMemberLineItemKebab.classList.add("open-modal-btn");
