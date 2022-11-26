@@ -241,7 +241,7 @@ function populateTeamMembers(){
                 teamMemberLineItemDeleteButton.innerText = "delete"
 
 
-                teamMemberLineItemKebabDiv.setAttribute("style", "width: 10%");
+                teamMemberLineItemKebabDiv.setAttribute("style", "width: 5%");
 
                 teamMemberLineItem.classList.add("team-member-line-item");
                 teamMemberLineItemName.classList.add("team-member-line-item-name");
@@ -398,6 +398,10 @@ function populateUserModal() {
 
                     ticketUl.classList.add("ticket-ul");
                     ticketId.classList.add("hidden")
+                    TicketTitle.classList.add("ticket-title")
+                    TicketDescription.classList.add("ticket-description")
+                    TicketAuthor.classList.add("ticket-author")
+
                 }
             }
 
