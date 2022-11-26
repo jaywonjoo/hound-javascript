@@ -383,25 +383,51 @@ function populateUserModal() {
                     const TicketDescription = document.createElement("div");
                     const TicketAuthor = document.createElement("div");
                     const ticketId = document.createElement("div")
+                    const ticketKebabDiv = document.createElement("div")
+                    const ticketKebabButton = document.createElement("button")
+                    const ticketOverlay = document.createElement("div")
+                    const ticketModal = document.createElement("div")
+                    const ticketDeleteButton = document.createElement("button")
 
                     ticketContainer.appendChild(ticketUl)
                     // ticketLi.appendChild(ticketUl)
                         ticketUl.appendChild(TicketTitle)
                         ticketUl.appendChild(TicketDescription)
                         ticketUl.appendChild(TicketAuthor)
+                        ticketUl.appendChild(ticketKebabDiv)
+                            ticketKebabDiv.appendChild(ticketKebabButton)
+                            ticketKebabDiv.appendChild(ticketOverlay)
+                            ticketKebabDiv.appendChild(ticketModal)
+                                ticketModal.appendChild(ticketDeleteButton)
                         ticketUl.appendChild(ticketId)
-
+                        
                     TicketTitle.innerText = tickets[i].title;
                     TicketDescription.innerText = tickets[i].description;
                     TicketAuthor.innerText = tickets[i].author;   
-                    ticketId.innerText = tickets[i].id;             
+                    ticketKebabButton.innerText = "..."          
+                    ticketDeleteButton.innerText = "delete"         
+                    ticketId.innerText = tickets[i].id;
+
 
                     ticketUl.classList.add("ticket-ul");
                     ticketId.classList.add("hidden")
                     TicketTitle.classList.add("ticket-title")
                     TicketDescription.classList.add("ticket-description")
                     TicketAuthor.classList.add("ticket-author")
+                    ticketKebabDiv.setAttribute("style", "width: 5%")
+                    ticketKebabButton.classList.add("ticket-kebab-button")
+                    ticketKebabButton.classList.add("open-modal-btn")
+                    ticketOverlay.setAttribute("id", "overlay")
+                    ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+                    ticketModal.classList.add("modal")
+                    ticketModal.classList.add("delete-button-modal")
+                    ticketModal.setAttribute("id", "modal")
+                    ticketModal.setAttribute("style", "position: sticky")
+                    ticketDeleteButton.classList.add("ticket-delete-button")
 
+                    ticketDeleteButton.addEventListener("click", () => {
+                        console.log("bar")
+                    })
                 }
             }
 

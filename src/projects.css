@@ -481,6 +481,29 @@ ul,li { list-style-type: none;
   width: 20%
 }
 
+.ticket-kebab-button {
+  /* writing-mode: vertical-rl; */
+  /* text-orientation: sideways; */
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: transparent;
+  /* transform:rotate(-90deg); */
+}
+
+
+.ticket-delete-button {
+  background-color: red;
+  border: none;
+  border-radius: 0.5vw 0 0 0.5vw;
+  position: absolute;
+  height: 2vh;
+  width: 50vw;
+  right: 0;
+  top: -2.1vh;
+  animation: fadeIn .15s, slideIn .15s linear;
+}
+
   /* ticket section **************************************************************** */
 /* top row **************************************************************** */
 
