@@ -241,6 +241,8 @@ function populateTeamMembers(){
                 teamMemberLineItemDeleteButton.innerText = "delete"
 
 
+                teamMemberLineItemKebabDiv.setAttribute("style", "width: 10%");
+
                 teamMemberLineItem.classList.add("team-member-line-item");
                 teamMemberLineItemName.classList.add("team-member-line-item-name");
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
