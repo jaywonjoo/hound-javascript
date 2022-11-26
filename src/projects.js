@@ -379,6 +379,7 @@ function populateUserModal() {
                     const ticketContainer = document.querySelector("#tickets")
                     // const ticketLi = document.createElement("li")
                     const ticketUl = document.createElement("div")
+                    const populateTicketInfoSection = document.createElement("div")
                     const TicketTitle = document.createElement("div");
                     const TicketDescription = document.createElement("div");
                     const TicketAuthor = document.createElement("div");
@@ -390,16 +391,18 @@ function populateUserModal() {
                     const ticketDeleteButton = document.createElement("button")
 
                     ticketContainer.appendChild(ticketUl)
+                        ticketUl.appendChild(populateTicketInfoSection)
+
                     // ticketLi.appendChild(ticketUl)
-                        ticketUl.appendChild(TicketTitle)
-                        ticketUl.appendChild(TicketDescription)
-                        ticketUl.appendChild(TicketAuthor)
-                        ticketUl.appendChild(ticketKebabDiv)
-                            ticketKebabDiv.appendChild(ticketKebabButton)
-                            ticketKebabDiv.appendChild(ticketOverlay)
-                            ticketKebabDiv.appendChild(ticketModal)
-                                ticketModal.appendChild(ticketDeleteButton)
-                        ticketUl.appendChild(ticketId)
+                        populateTicketInfoSection.appendChild(TicketTitle)
+                        populateTicketInfoSection.appendChild(TicketDescription)
+                        populateTicketInfoSection.appendChild(TicketAuthor)
+                        populateTicketInfoSection.appendChild(ticketId)
+                            ticketUl.appendChild(ticketKebabDiv)
+                                ticketKebabDiv.appendChild(ticketKebabButton)
+                                ticketKebabDiv.appendChild(ticketOverlay)
+                                ticketKebabDiv.appendChild(ticketModal)
+                                    ticketModal.appendChild(ticketDeleteButton)
                         
                     TicketTitle.innerText = tickets[i].title;
                     TicketDescription.innerText = tickets[i].description;
@@ -410,6 +413,8 @@ function populateUserModal() {
 
 
                     ticketUl.classList.add("ticket-ul");
+                    populateTicketInfoSection.classList.add("populate-ticket-info-section")
+                    populateTicketInfoSection.setAttribute("style", "width: 100%; display: flex; flex-direction: row")
                     ticketId.classList.add("hidden")
                     TicketTitle.classList.add("ticket-title")
                     TicketDescription.classList.add("ticket-description")
@@ -432,7 +437,7 @@ function populateUserModal() {
             }
 
             // // click on ticket to redirect user to project specific page
-            const selectedTicketUl = document.querySelectorAll(".ticket-ul")
+            const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
             selectedTicketUl.forEach((ticket) => {
                 ticket.addEventListener("click", () => {
                     const selectedTicketId = ticket.lastChild.textContent;
