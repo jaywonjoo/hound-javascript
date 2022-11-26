@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script defer src="signup.bundle.js"></script>
+</head>
+<body>
+    <div id="logoHomeButton">HOUND</div>
+
+    <form id="signupForm">
+        <label for="firstName">firstName:</label>
+        <input type="text" name="firstName" class="firstName" required>
+
+        <label for="lastName">lastName:</label>
+        <input type="text" name="lastName" class="lastName" required>
+        
+        <label for="email">email:</label>
+        <input type="email" name="email" required>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" required>
+
+        <button>signup</button>
+    </form>
+    <p>Already have an account? <a id="signInLink">sign-in!</a></p>
+</body>
+</html>

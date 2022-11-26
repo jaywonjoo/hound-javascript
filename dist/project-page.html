@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Page</title>
+    <script defer src="projects.bundle.js"></script>
+    <link class="nav-icon" rel="icon" src="../images/hound.svg">
+    
+    <style>
+        #modal.open {
+          display: block;
+          z-index: 1;
+        }
+        #overlay.open {
+          display: block;
+          z-index: 1;
+        }
+      </style>
+</head>
+<body>
+
+<!-- navbar --------------------------------------------------------------------------- -->
+    <nav class="navbar">
+      <div class='nav-left'>
+        <img class='nav-logo' src="../images/hound.svg"/>
+        <h1 class='brand-title'>Hound</h1>
+      </div>
+      
+      <a href="#" class='toggle-button'>
+        <span class='bar'></span>
+        <span class='bar'></span>
+        <span class='bar'></span>
+      </a>
+      <div class='navbar-links'>
+        <button id="dashboardButton">dashboard</button>
+
+        <button id="logoutButton">logout</button>
+      </div>
+    </nav>
+<!-- navbar --------------------------------------------------------------------------- -->
+
+<div class="lower-half">
+<!-- dashboard --------------------------------------------------------------------------- -->
+<div class="dashboard-master">
+  <div class="dashboard-links">
+    <h3>Dashboard</h3>
+    <h3>Team Members</h3>
+    <h3>Account Settings</h3>
+    <h3>Admin</h3>
+  </div>
+  <img class='temp-ring' src='../images/temp-ring.svg'/>
+  <img class='temp-ring' src='../images/temp-ring.svg'/>
+  <img class='temp-ring' src='../images/temp-ring.svg'/>
+
+</div>
+<!-- dashboard --------------------------------------------------------------------------- -->
+
+<!-- content --------------------------------------------------------------------------- -->
+
+<div id="overlay" class="overlay"></div>
+
+
+<div id="modal" class="modal all-other-modals">
+  <form class="add-member-form">
+    <h3>Team Members</h3>
+    <div id="populatable-member-div" class="populatable-member-div"></div>
+    <button id="modal-add-member-btn">Add Members</button>
+  </form>
+</div>
+
+<div class="team-member-line-item-overlays"></div>
+<div class="team-member-line-item-modals"></div>
+
+
+<div class="content-section">
+    <h1 class="project-header">Hound</h1>    
+    <div class="top-row"> 
+      <!-- Team Members Section -->
+      <div class="team-members">
+        <div class="top-row-top-section">
+          <h3 class="team-members-header-label">Team Members</h3>
+          <button id="memberModalBtn" class="open-modal-btn">Add Member</button>
+        </div>
+        <div class="team-member-header">
+          <div class="team-member-line-item-name">Name</div>
+          <div class="team-member-line-item-email">Email</div>
+          <div class="team-member-line-item-phone">Phone</div>
+        </div>
+        <div class="team-member-body"></div>
+        <!-- <ul  id="team-members">Team Members</ul> -->
+      </div>
+    
+
+
+      <div id="overlay" class="overlay"></div>
+      <div id="modal" class="modal all-other-modals">
+        <form class="create-ticket-form">
+          <label for="author">Author:</label>
+          <input type="text" name="author" required>
+      
+          <label for="description">Description:</label>
+          <input type="text" name="description" required>
+      
+          <label for="title">Title:</label>
+          <input type="text" name="title" required>
+          
+          <label for="status">Status:</label>
+          <select type="selection" name="status" required>
+            <option value="resolved">Resolved</option>
+            <option value="unresolved">Unresolved</option>
+          </select>
+      
+          <label for="priority">Priority:</label>
+          <select type="selection" name="priority" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+      
+          <label for="type">Type:</label>
+          <select type="selection" name="type" required>
+            <option value="issue">Issue</option>
+            <option value="bug">Bug</option>
+          </select>
+          
+          <button id="modal-create-ticket-btn">Add New Ticket</button>
+        </form>
+      </div>
+      
+
+      <!-- ticket section -->
+      <div class="ticket-section">
+        <div class="top-row-top-section">
+          <h3 class="ticket-section-header-label">Tickets</h3>
+          <button id="ticketModalBtn" class="open-modal-btn">New Ticket</button>
+        </div>
+        <div class="ticket-header">
+          <div class="ticket-title">Ticket Title</div>
+          <div class="ticket-description">Description</div>
+          <div class="ticket-author">Ticket Author</div>
+        </div>
+        <div id="tickets"></div>
+
+        <form class="delete-ticket-form">
+          <label for="id">Ticket id:</label>
+          <input type="text" name="id" required>
+          <button>delete a Ticket</button>
+        </form>
+    </div>
+
+
+    </div>
+    
+    <!-- Selected Ticket Info Section -->
+    <div class="bottom-row"> 
+
+    <div class="big-wrap">
+    <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
+    <div class="ticket-info" id="ticket-info">
+      <div class="left-ticket-info-section">
+        <div class="ticket-info-row">
+          <div class="ticket-info-section">
+            <div>Ticket Title:</div>
+            <div id="populated-ticket-title-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+          
+          <div class="ticket-info-section">
+            <div>Author:</div>
+            <div id="populated-author-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+          
+          <div class="ticket-info-section">
+            <div>Description:</div>
+            <div id="populated-description-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+        </div>
+        <div class="ticket-info-row">
+          <div class="ticket-info-section">
+            <div>Status:</div>
+            <div id="populated-status-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+        
+          <div class="ticket-info-section">
+            <div>Priority:</div>
+            <div id="populated-priority-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+
+          <div class="ticket-info-section">
+            <div>Type:</div>
+            <div id="populated-type-section" style="color:rgb(50, 125, 255);"></div>
+          </div>
+        </div>
+      </div>
+          <!-- chat section -->
+    <div class="right-chat-section">
+
+      <div class="chatbox"></div>
+
+      <form class="comment-input-form">
+        <label for="comment"></label>
+        <input type="text" name="comment" class="comment-input-form-input" required>
+        <button class="comment-input-form-button">submit</button>
+      </form>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- content --------------------------------------------------------------------------- -->
+
+
+</div>
+    
+
+
+
+
+</body>
+</html>
