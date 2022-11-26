@@ -118,7 +118,6 @@ ul,li { list-style-type: none;
 
 #modal {
     display: none;
-    position: absolute;
     /* top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -132,6 +131,7 @@ ul,li { list-style-type: none;
   }
 
   .all-other-modals {
+    position: absolute;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -145,14 +145,24 @@ ul,li { list-style-type: none;
   }
 
   #delete-button-modal {
-    display: none;
-    position: absolute;
+    position: sticky;
     bottom: 0;
-    width: auto;
-    height: auto;
+    width: 2vw;
+    height: 2vh;
     box-shadow: 0 0 10px #919191;
   }
    
+  .team-member-delete-button {
+    background-color: red;
+    border: none;
+    border-radius: 0.5vw 0 0 0.5vw;
+    position: absolute;
+    height: 2vh;
+    width: 4vw;
+    right: 0;
+    top: -2vh;
+  }
+
   #overlay {
     display: none;
     position: absolute;
@@ -265,8 +275,10 @@ ul,li { list-style-type: none;
   .team-member-line-item-kebab {
     writing-mode: vertical-rl;
     text-orientation: sideways;
-    width: 100%;
-    height: 100%;
+    width: 2vw;
+    height: 2vh;
+    background-color: transparent;
+    border: transparent;
   }
 
   .populated-member-list {
