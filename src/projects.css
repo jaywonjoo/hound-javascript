@@ -161,7 +161,37 @@ ul,li { list-style-type: none;
     width: 4vw;
     right: 0;
     top: -2vh;
+    animation: fadeIn .15s, slideIn .15s linear;
   }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(100px);
+      animation-timing-function: ease-out;
+    }
+    /* 60% {
+      transform: translateX(30px);
+      animation-timing-function: ease-out;
+    }
+    80% {
+      transform: translateX(10px);
+      animation-timing-function: ease-out;
+    } */
+    100% {
+      transform: translateX(0px);
+      /* animation-timing-function: ease-in; */
+    }
+  }
+
+
+  @keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
   #overlay {
     display: none;
