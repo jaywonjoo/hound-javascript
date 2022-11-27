@@ -51,7 +51,7 @@
     <h3>Admin</h3>
   </div>
   
-  <div class="pie-container">
+  <!-- <div class="pie-container">
   <div class="pie" style="--p:100;--b:25px;--c:rgba(255, 255, 255, .8);">-</div>
   <div class="pie" style="--p:60;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
   <div class="pie" style="--p:30;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
@@ -62,12 +62,12 @@
     <div class="pie" style="--p:60;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
     <div class="pie" style="--p:30;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
     </div>
-    
+
     <div class="pie-container">
       <div class="pie" style="--p:100;--b:25px;--c:rgba(255, 255, 255, .8);">-</div>
       <div class="pie" style="--p:60;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
       <div class="pie" style="--p:30;--b:25px;--c:rgba(0, 0, 0, 0.5);">-</div>
-      </div>
+      </div> -->
 
 
 </div>
@@ -124,8 +124,9 @@
           
           <label for="status">Status:</label>
           <select type="selection" name="status" required>
-            <option value="resolved">Resolved</option>
             <option value="unresolved">Unresolved</option>
+            <option value="in progress">In Progress</option>
+            <option value="resolved">Resolved</option>
           </select>
       
           <label for="priority">Priority:</label>
@@ -139,6 +140,7 @@
           <select type="selection" name="type" required>
             <option value="issue">Issue</option>
             <option value="bug">Bug</option>
+            <option value="feature request">Feature Request</option>
           </select>
           
           <button id="modal-create-ticket-btn">Add New Ticket</button>

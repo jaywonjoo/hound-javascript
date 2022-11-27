@@ -908,3 +908,132 @@ createTicketForm.addEventListener('submit', (e) => {
     }
 })    
 
+
+
+// FEATURE: PIE CHARTS ******************************************************************************************
+
+
+pieChartStatus()
+
+const dashboardMaster = document.querySelector(".dashboard-master")
+
+const pieContainerOne = document.createElement("div")
+const pieUnresolved = document.createElement("div")
+const pieInProgress = document.createElement("div")
+const pieResolved = document.createElement("div")
+
+const pieContainerTwo = document.createElement("div")
+const pieIssue = document.createElement("div")
+const pieBug = document.createElement("div")
+const pieFeatureRequest = document.createElement("div")
+
+const pieContainerThree = document.createElement("div")
+const pieLow = document.createElement("div")
+const pieMedium = document.createElement("div")
+const pieHigh = document.createElement("div")
+
+
+function pieChartStatus() {
+
+
+// const colRef = collection(db, 'projects', projectID, 'tickets')
+
+    onSnapshot(colRef, (snapshot) => {
+        let ticketInfoList = []
+
+        while (ticketInfoList[0] != null) {
+            ticketInfoList.removeChild(ticketInfoList[0]);
+        }
+
+        snapshot.docs.forEach((doc) => {
+            ticketInfoList.push({ ...doc.data(), id: doc.id })
+        });
+
+        let statusList = ticketInfoList.map(a => a.status);
+        console.log(statusList)
+        let statusCount = statusList.length;
+        // let unresolvedCount = getOccurrence(statusList, "unresolved")
+        let inProgressCount = getOccurrence(statusList, "in progress")
+        let resolvedCount = getOccurrence(statusList, "resolved")
+
+        let typeList = ticketInfoList.map(a => a.type);
+        console.log(typeList)
+        let typeCount = typeList.length;
+        let bugCount = getOccurrence(typeList, "bug")
+        let featureRequestCount = getOccurrence(typeList, "feature request")
+
+        let priorityList = ticketInfoList.map(a => a.priority);
+        console.log(priorityList)
+        let priorityCount = priorityList.length;
+        let mediumCount = getOccurrence(priorityList, "medium")
+        let highCount = getOccurrence(priorityList, "high")
+
+        // let statusList = ticketInfoList.map(a => a.status);
+        // // console.log(statusList)
+        // let statusCount = statusList.length;
+        // // let unresolvedCount = getOccurrence(statusList, "unresolved")
+        // let inProgressCount = getOccurrence(statusList, "in progress")
+        // let resolvedCount = getOccurrence(statusList, "resolved")
+
+        // console.log(unresolvedCount)
+        // console.log(inProgressCount)
+        // console.log(resolvedCount)
+        
+        pieContainerOne.classList.add("pie-container")
+        pieUnresolved.classList.add("pie")
+        pieInProgress.classList.add("pie")
+        pieResolved.classList.add("pie")
+
+        pieContainerTwo.classList.add("pie-container")
+        pieIssue.classList.add("pie")
+        pieBug.classList.add("pie")
+        pieFeatureRequest.classList.add("pie")
+
+        pieContainerThree.classList.add("pie-container")
+        pieLow.classList.add("pie")
+        pieMedium.classList.add("pie")
+        pieHigh.classList.add("pie")
+
+        dashboardMaster.appendChild(pieContainerOne)
+        pieContainerOne.appendChild(pieUnresolved)
+        pieContainerOne.appendChild(pieInProgress)
+        pieContainerOne.appendChild(pieResolved)
+
+        dashboardMaster.appendChild(pieContainerTwo)
+        pieContainerTwo.appendChild(pieIssue)
+        pieContainerTwo.appendChild(pieBug)
+        pieContainerTwo.appendChild(pieFeatureRequest)
+
+        dashboardMaster.appendChild(pieContainerThree)
+        pieContainerThree.appendChild(pieLow)
+        pieContainerThree.appendChild(pieMedium)
+        pieContainerThree.appendChild(pieHigh)
+
+        pieUnresolved.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
+        pieInProgress.setAttribute("style", "--p:"+(((resolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
+        pieResolved.setAttribute("style", "--p:"+(resolvedCount/statusCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+
+        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
+        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
+        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+
+        pieLow.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
+        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
+        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+
+    })
+
+}
+
+function getOccurrence(array, value) {
+    return array.filter((v) => (v === value)).length;
+}
+
+function clearTicketInfoList(){
+    while (ticketInfoList.children[0] != null) {
+        ticketInfoList.removeChild(ticketInfoList.children[0]);
+    }
+}
+   
+
+// FEATURE: PIE CHARTS ******************************************************************************************
