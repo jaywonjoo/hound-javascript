@@ -8,8 +8,8 @@ body {
   padding: 0;
   margin: 0; */
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2415x1600/e516b851c9faf9d61ce4f4cfe749a7e7/photo-1454496522488-7a8e488e8606.jpg"); */
-  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1920/184d103167f2802a2ec8e2391c4ebb9c/photo-1443926818681-717d074a57af.jpg"); */
-  /* background-position: 0% 30%; */
+  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1920/184d103167f2802a2ec8e2391c4ebb9c/photo-1443926818681-717d074a57af.jpg");
+  background-position: 0% 30%;
   
   
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/c56650d72cd06cc688d5def49c6efe23/photo-1466854076813-4aa9ac0fc347.jpg"); */
@@ -17,8 +17,8 @@ body {
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1917x1920/4e972f0bf4457e6f248b23dbde580217/photo-1615378536579-61c7d173e8a9.jpg"); */
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x1152/c58f9cfcfe32f8855c468f76923576dd/photo-1534996858221-380b92700493.jpg"); */
   
-  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1537x1920/89431621b90c2cf351f0b77d9bda7b58/photo-1559825481-12a05cc00344.jpg");
-  background-position: 0% 80%;
+  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1537x1920/89431621b90c2cf351f0b77d9bda7b58/photo-1559825481-12a05cc00344.jpg");
+  background-position: 0% 80%; */
   
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/5f2ae1035732ba4289f7619866cfd50f/photo-1621173865296-baaf7dc3afcc.jpg"); */
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1536x1920/28e177d9a23bdb20109c1a5abdd15e5f/photo-1660494911852-7ce46edd9cc7.jpg"); */
@@ -134,6 +134,7 @@ position: relative;
 width: 80%;
 aspect-ratio: 1;
 margin-top: 3vh;
+margin-bottom: 3vh;
 }
 
 .pie {
@@ -160,14 +161,22 @@ margin-top: 3vh;
 }
 
 .legend {
-  position:sticky;
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 10px;
+  margin: 0 0 10px 0;
+
 }
+
+.text {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+}
+
 .white-dot {
   width: 10px;
   height: 10px;
