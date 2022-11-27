@@ -268,7 +268,8 @@ function populateTeamMembers(){
                         console.log("user has been removed")
                         teamMemberBody.innerHTML = ""
                         populateTeamMembers()
-                        
+                        setDataIndex()
+                        closeOverlays()
                     })
 
                 })
@@ -773,6 +774,8 @@ modalAddMemberForm.addEventListener("submit", (e) => {
             })
             .then(() => {
                 checkbox.checked = false;
+                setDataIndex()
+                closeOverlays()
               })
         }
 
