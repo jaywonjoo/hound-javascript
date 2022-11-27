@@ -168,19 +168,19 @@
             <option value="in progress">In Progress</option>
             <option value="resolved">Resolved</option>
           </select>
+
+          <label for="type">Type:</label>
+          <select type="selection" name="type" required>
+            <option value="issue">Issue</option>
+            <option value="bug">Bug</option>
+            <option value="feature request">Feature Request</option>
+          </select>
       
           <label for="priority">Priority:</label>
           <select type="selection" name="priority" required>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
-          </select>
-      
-          <label for="type">Type:</label>
-          <select type="selection" name="type" required>
-            <option value="issue">Issue</option>
-            <option value="bug">Bug</option>
-            <option value="feature request">Feature Request</option>
           </select>
           
           <button id="modal-create-ticket-btn">Add New Ticket</button>
