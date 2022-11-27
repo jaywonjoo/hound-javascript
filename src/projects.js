@@ -1010,16 +1010,16 @@ function pieChartStatus() {
         pieContainerThree.appendChild(pieHigh)
 
         pieUnresolved.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
-        pieInProgress.setAttribute("style", "--p:"+(((resolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
-        pieResolved.setAttribute("style", "--p:"+(resolvedCount/statusCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+        pieInProgress.setAttribute("style", "--p:"+(((resolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
+        pieResolved.setAttribute("style", "--p:"+(resolvedCount/statusCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3")
 
         pieIssue.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
-        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
-        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
+        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3")
 
         pieLow.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
-        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c: rgba(0, 0, 0, 0.5); z-index: 3")
-        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c: rgba(0, 0, 0, 0.5);z-index: 2")
+        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
+        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3")
 
     })
 
