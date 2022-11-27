@@ -259,7 +259,7 @@ margin-bottom: 3vh;
     border-radius: 0.5vw 0 0 0.5vw;
     position: absolute;
     height: 2vh;
-    width: 25vw;
+    width: 26.5vw;
     right: 0;
     top: -2.1vh;
     animation: fadeIn .15s, slideIn .15s linear;
@@ -594,7 +594,7 @@ margin-bottom: 3vh;
   border-radius: 0.5vw 0 0 0.5vw;
   position: absolute;
   height: 2vh;
-  width: 50vw;
+  width: 52.5vw;
   right: 0;
   top: -2.1vh;
   animation: fadeIn .15s, slideIn .15s linear;
@@ -621,14 +621,15 @@ height: 100%;
 /* Selected Ticket Info Section **************************************************************** */
 
 .selected-ticket-info-header {
-  background-color: rgb(255, 255, 255, .8);
+  /* background-color: rgb(255, 255, 255, .8);
   border-radius: 15px 15px 0 0;
   margin: 0;
   padding-left: 10px;
   height: 11%;
   border-bottom: solid black;
   display: flex;
-  align-items: center;
+  align-items: center; */
+  padding-left: 10px;
 }
 
 .left-ticket-info-section {
