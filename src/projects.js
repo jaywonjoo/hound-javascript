@@ -917,17 +917,17 @@ pieChartStatus()
 
 const dashboardMaster = document.querySelector(".dashboard-master")
 
-const pieContainerOne = document.createElement("div")
+const pieContainerOne = document.querySelector("#pie-container-one")
 const pieUnresolved = document.createElement("div")
 const pieInProgress = document.createElement("div")
 const pieResolved = document.createElement("div")
 
-const pieContainerTwo = document.createElement("div")
+const pieContainerTwo = document.querySelector("#pie-container-two")
 const pieIssue = document.createElement("div")
 const pieBug = document.createElement("div")
 const pieFeatureRequest = document.createElement("div")
 
-const pieContainerThree = document.createElement("div")
+const pieContainerThree = document.querySelector("#pie-container-three")
 const pieLow = document.createElement("div")
 const pieMedium = document.createElement("div")
 const pieHigh = document.createElement("div")
