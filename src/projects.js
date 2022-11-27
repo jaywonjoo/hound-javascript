@@ -266,9 +266,14 @@ function populateTeamMembers(){
                     })
                     .then(() => {
                         console.log("user has been removed")
+                        teamMemberBody.innerHTML = ""
+                        populateTeamMembers()
+                        
                     })
 
                 })
+
+
                 
                 
                 setDataIndex()
@@ -351,8 +356,9 @@ function populateUserModal() {
 // *****************************************************************************************************************************************************
 
 
+populateTickets()
 
-
+function populateTickets() {
 
 
 // display ticket info in ticket list
@@ -431,7 +437,34 @@ function populateUserModal() {
                     ticketDeleteButton.classList.add("ticket-delete-button")
 
                     ticketDeleteButton.addEventListener("click", () => {
-                        console.log("bar")
+                        const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
+                        console.log(selectedTicketId)
+                        const docRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId)
+                        deleteDoc(docRef)
+                        .then(() => {
+
+
+                            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                            const populatedAuthorSection = document.querySelector("#populated-author-section")
+                            const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                            const populatedTicketSection = document.querySelector("#populated-priority-section")
+                            const populatedTypeSection = document.querySelector("#populated-type-section")
+                
+                            populatedTicketTitleSection.innerHTML = "";
+                            populatedAuthorSection.innerHTML = "";
+                            populatedDescriptionSection.innerHTML = "";
+                            populatedTicketInfoSection.innerHTML = "";
+                            populatedTicketSection.innerHTML = "";
+                            populatedTypeSection.innerHTML = "";
+                
+                            const chatbox = document.querySelector(".chatbox");
+                            chatbox.innerHTML = "";
+
+                            setDataIndex()
+                            closeOverlays()
+                        })
+    
                     })
                 }
             }
@@ -533,6 +566,9 @@ function populateUserModal() {
     //     console.log(tickets)
     })
 
+}
+
+
 
 // // 3. create ticket form
 // const newTicketButton = document.querySelector("#newTicketButton")
@@ -586,6 +622,12 @@ function populateUserModal() {
 function clearTickets() {
     while (tickets.children[0] != null) {
         tickets.removeChild(tickets.children[0]);
+    }
+}
+
+function clearUsers() {
+    while (collaboratorList.children[0] != null) {
+        collaboratorList.removeChild(collaboratorList.children[0]);
     }
 }
 
@@ -842,6 +884,8 @@ createTicketForm.addEventListener('submit', (e) => {
     })
     .then(() => {
         createTicketForm.reset()
+        setDataIndex()
+        closeOverlays()
     })
 
     // createTicket()
