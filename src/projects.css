@@ -159,6 +159,34 @@ margin-top: 3vh;
           mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
 }
 
+.legend {
+  position:sticky;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+.white-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255, .8);
+}
+.gray-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(130, 130, 130);
+}
+.black-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(20, 20, 20);
+}
+
 /* dashboard ************************************************************************************ */
 
 .content-section {

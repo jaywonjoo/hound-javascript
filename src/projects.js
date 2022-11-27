@@ -952,9 +952,9 @@ function pieChartStatus() {
         let statusList = ticketInfoList.map(a => a.status);
         console.log(statusList)
         let statusCount = statusList.length;
-        // let unresolvedCount = getOccurrence(statusList, "unresolved")
+        let unresolvedCount = getOccurrence(statusList, "unresolved")
         let inProgressCount = getOccurrence(statusList, "in progress")
-        let resolvedCount = getOccurrence(statusList, "resolved")
+        // let resolvedCount = getOccurrence(statusList, "resolved")
 
         let typeList = ticketInfoList.map(a => a.type);
         console.log(typeList)
@@ -1009,9 +1009,9 @@ function pieChartStatus() {
         pieContainerThree.appendChild(pieMedium)
         pieContainerThree.appendChild(pieHigh)
 
-        pieUnresolved.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
-        pieInProgress.setAttribute("style", "--p:"+(((resolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
-        pieResolved.setAttribute("style", "--p:"+(resolvedCount/statusCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3")
+        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
+        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
+        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3")
 
         pieIssue.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1")
         pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2")
