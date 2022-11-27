@@ -361,10 +361,10 @@ populateTickets()
 
 function populateTickets() {
 
-
+const orderedTicketsRef = query(colRef, orderBy("createdAt"))
 // display ticket info in ticket list
 // 1. link tickets to page
-    onSnapshot(colRef, (snapshot) => {
+    onSnapshot(orderedTicketsRef, (snapshot) => {
         // create empty array to populate
         let tickets = []
 
@@ -437,6 +437,9 @@ function populateTickets() {
                     ticketModal.setAttribute("style", "position: sticky")
                     ticketDeleteButton.classList.add("ticket-delete-button")
 
+                    setDataIndex()
+                    closeOverlays()
+
                     ticketDeleteButton.addEventListener("click", () => {
                         const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
                         console.log(selectedTicketId)
@@ -471,6 +474,8 @@ function populateTickets() {
             }
 
             // // click on ticket to redirect user to project specific page
+            populateTicketInfoSection()
+            function populateTicketInfoSection() {
             const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
             selectedTicketUl.forEach((ticket) => {
                 ticket.addEventListener("click", () => {
@@ -538,8 +543,7 @@ function populateTickets() {
                                 break;
                             }
                         }
-                        
-
+                    // FEATURE: EDIT TICKET INFO ************************************************************************************
                         
                     })
            
@@ -605,7 +609,8 @@ function populateTickets() {
   
                 })
             })
-    //     console.log(tickets)
+        }
+        console.log(tickets)
     })
 
 }
@@ -925,6 +930,7 @@ createTicketForm.addEventListener('submit', (e) => {
         status: createTicketForm.status.value,
         priority: createTicketForm.priority.value,
         type: createTicketForm.type.value,
+        createdAt: serverTimestamp(),
     })
     .then(() => {
         createTicketForm.reset()
@@ -1076,3 +1082,340 @@ function clearTicketInfoList(){
    
 
 // FEATURE: PIE CHARTS ******************************************************************************************
+
+
+
+// FEATURE: EDIT TICKET INFO SUBMIT BUTTON ************************************************************************************
+
+
+const editTicketForm = document.querySelector(".edit-ticket-form")
+
+editTicketForm.addEventListener("submit", (e) => {
+
+    const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+    
+    let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
+    
+    const selectedTicket = doc(db, 'projects', projectID, 'tickets', globalSelectedticketId)
+
+    e.preventDefault()
+    
+    updateDoc(selectedTicket, {
+        author: editTicketForm.author.value,
+        description: editTicketForm.description.value,
+        title: editTicketForm.title.value,
+        status: editTicketForm.status.value,
+        priority: editTicketForm.priority.value,
+        type: editTicketForm.type.value,
+    })
+    .then(() => {
+        editTicketForm.reset()
+
+        console.log("the ticket has been updated!")
+
+        // clear ticket info ***************************************************************************
+
+        // const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+        // const populatedAuthorSection = document.querySelector("#populated-author-section")
+        // const populatedDescriptionSection = document.querySelector("#populated-description-section")
+        // const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+        // const populatedTicketSection = document.querySelector("#populated-priority-section")
+        // const populatedTypeSection = document.querySelector("#populated-type-section")
+
+        // populatedTicketTitleSection.innerHTML = "";
+        // populatedAuthorSection.innerHTML = "";
+        // populatedDescriptionSection.innerHTML = "";
+        // populatedTicketInfoSection.innerHTML = "";
+        // populatedTicketSection.innerHTML = "";
+        // populatedTypeSection.innerHTML = "";
+
+        // const chatbox = document.querySelector(".chatbox");
+        // chatbox.innerHTML = "";
+        // clear ticket info ***************************************************************************
+
+        // populate ***************************************************************************
+
+        getDoc(selectedTicket).then((snapshot) => {
+            console.log(snapshot.data().title)
+            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+            const populatedAuthorSection = document.querySelector("#populated-author-section")
+            const populatedDescriptionSection = document.querySelector("#populated-description-section")
+            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+            const populatedTicketSection = document.querySelector("#populated-priority-section")
+            const populatedTypeSection = document.querySelector("#populated-type-section")
+
+            populatedTicketTitleSection.innerHTML = snapshot.data().title;
+            populatedAuthorSection.innerHTML = snapshot.data().author;
+            populatedDescriptionSection.innerHTML = snapshot.data().description;
+            populatedTicketInfoSection.innerHTML = snapshot.data().status;
+            populatedTicketSection.innerHTML = snapshot.data().priority;
+            populatedTypeSection.innerHTML = snapshot.data().type;
+            // FEATURE: EDIT TICKET INFO ************************************************************************************
+            const editTicketAuthor = document.querySelector(".edit-ticket-author")
+            const editTicketDescription = document.querySelector(".edit-ticket-description")
+            const editTicketTitle = document.querySelector(".edit-ticket-title")
+            const statusList = document.querySelector(".edit-ticket-status")
+            const typeList = document.querySelector(".edit-ticket-type")
+            const priorityList = document.querySelector(".edit-ticket-priority")
+
+            editTicketAuthor.setAttribute("value", snapshot.data().author)
+            editTicketDescription.setAttribute("value", snapshot.data().description)
+            editTicketTitle.setAttribute("value", snapshot.data().title)
+
+            let statusListOptions = statusList.options.length;
+            for (let i = 0; i < statusListOptions; i++) {
+                if (statusList.options[i].value == snapshot.data().status) {
+                    statusList.options[i].selected = true;
+                    break;
+                }
+            }
+            let ticketListOptions = typeList.options.length;
+            for (let i = 0; i < ticketListOptions; i++) {
+                if (typeList.options[i].value == snapshot.data().type) {
+                    typeList.options[i].selected = true;
+                    break;
+                }
+            }
+            let priorityListOptions = priorityList.options.length;
+            for (let i = 0; i < priorityListOptions; i++) {
+                if (priorityList.options[i].value == snapshot.data().priority) {
+                    priorityList.options[i].selected = true;
+                    break;
+                }
+            }
+        // FEATURE: EDIT TICKET INFO ************************************************************************************
+            
+        })
+
+
+        // populate ***************************************************************************
+
+
+
+
+
+        // ******************************************************************************************************************************
+        
+        // const ticketRef = doc(db, 'projects', projectID, 'tickets', globalSelectedticketId);
+        // getDoc(ticketRef).then((snapshot) => {
+
+        //     console.log(snapshot.data().title)
+
+        //     const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+        //     const populatedAuthorSection = document.querySelector("#populated-author-section")
+        //     const populatedDescriptionSection = document.querySelector("#populated-description-section")
+        //     const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+        //     const populatedTicketSection = document.querySelector("#populated-priority-section")
+        //     const populatedTypeSection = document.querySelector("#populated-type-section")
+
+        //     populatedTicketTitleSection.innerHTML = snapshot.data().title;
+        //     populatedAuthorSection.innerHTML = snapshot.data().author;
+        //     populatedDescriptionSection.innerHTML = snapshot.data().description;
+        //     populatedTicketInfoSection.innerHTML = snapshot.data().status;
+        //     populatedTicketSection.innerHTML = snapshot.data().priority;
+        //     populatedTypeSection.innerHTML = snapshot.data().type;
+
+            // FEATURE: EDIT TICKET INFO ************************************************************************************
+            // const editTicketAuthor = document.querySelector(".edit-ticket-author")
+            // const editTicketDescription = document.querySelector(".edit-ticket-description")
+            // const editTicketTitle = document.querySelector(".edit-ticket-title")
+            // const statusList = document.querySelector(".edit-ticket-status")
+            // const typeList = document.querySelector(".edit-ticket-type")
+            // const priorityList = document.querySelector(".edit-ticket-priority")
+
+
+            // editTicketAuthor.setAttribute("value", snapshot.data().author)
+            // editTicketDescription.setAttribute("value", snapshot.data().description)
+            // editTicketTitle.setAttribute("value", snapshot.data().title)
+
+            // let statusListOptions = statusList.options.length;
+            // for (let i = 0; i < statusListOptions; i++) {
+            //     if (statusList.options[i].value == snapshot.data().status) {
+            //         statusList.options[i].selected = true;
+            //         break;
+            //     }
+            // }
+
+            // let ticketListOptions = typeList.options.length;
+            // for (let i = 0; i < ticketListOptions; i++) {
+            //     if (typeList.options[i].value == snapshot.data().type) {
+            //         typeList.options[i].selected = true;
+            //         break;
+            //     }
+            // }
+
+            // let priorityListOptions = priorityList.options.length;
+            // for (let i = 0; i < priorityListOptions; i++) {
+            //     if (priorityList.options[i].value == snapshot.data().priority) {
+            //         priorityList.options[i].selected = true;
+            //         break;
+            //     }
+            // }
+        // FEATURE: EDIT TICKET INFO ************************************************************************************
+            
+        // })
+
+        setDataIndex()
+        closeOverlays()
+        // ******************************************************************************************************************************
+
+        closeModal();
+        function closeModal() {
+            const overlayer = document.querySelectorAll("#overlay");
+            overlayer.forEach((overlayer) => {
+                overlayer.classList.remove("open")
+            })
+            const modalss = document.querySelectorAll("#modal");
+            modalss.forEach((modalll) => {
+                modalll.classList.remove("open")
+            })
+        }    
+    })
+    // setTimeout(() => {
+        
+        // populateTicketInfoSection()
+        // }, "4000")
+        
+})
+
+// FEATURE: EDIT TICKET INFO SUBMIT BUTTON ************************************************************************************
+
+
+// function populateTicketInfoSection() {
+//     const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
+//     selectedTicketUl.forEach((ticket) => {
+//         ticket.addEventListener("click", () => {
+//             const selectedTicketId = ticket.lastChild.textContent;
+//             // console.log(selectedTicketId)
+
+//                //paste selectedTicketId into webpage
+//                const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
+//                window.history.pushState( {} , '', projectPage );
+
+
+//             // 4. populate selected ticket info USING TICKET ID!!
+//             const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+//             getDoc(ticketRef).then((snapshot) => {
+
+//                 console.log(snapshot.data().title)
+
+//                 const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+//                 const populatedAuthorSection = document.querySelector("#populated-author-section")
+//                 const populatedDescriptionSection = document.querySelector("#populated-description-section")
+//                 const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+//                 const populatedTicketSection = document.querySelector("#populated-priority-section")
+//                 const populatedTypeSection = document.querySelector("#populated-type-section")
+
+//                 populatedTicketTitleSection.innerHTML = snapshot.data().title;
+//                 populatedAuthorSection.innerHTML = snapshot.data().author;
+//                 populatedDescriptionSection.innerHTML = snapshot.data().description;
+//                 populatedTicketInfoSection.innerHTML = snapshot.data().status;
+//                 populatedTicketSection.innerHTML = snapshot.data().priority;
+//                 populatedTypeSection.innerHTML = snapshot.data().type;
+
+//                 // FEATURE: EDIT TICKET INFO ************************************************************************************
+//                 const editTicketAuthor = document.querySelector(".edit-ticket-author")
+//                 const editTicketDescription = document.querySelector(".edit-ticket-description")
+//                 const editTicketTitle = document.querySelector(".edit-ticket-title")
+//                 const statusList = document.querySelector(".edit-ticket-status")
+//                 const typeList = document.querySelector(".edit-ticket-type")
+//                 const priorityList = document.querySelector(".edit-ticket-priority")
+
+
+//                 editTicketAuthor.setAttribute("value", snapshot.data().author)
+//                 editTicketDescription.setAttribute("value", snapshot.data().description)
+//                 editTicketTitle.setAttribute("value", snapshot.data().title)
+
+//                 let statusListOptions = statusList.options.length;
+//                 for (let i = 0; i < statusListOptions; i++) {
+//                     if (statusList.options[i].value == snapshot.data().status) {
+//                         statusList.options[i].selected = true;
+//                         break;
+//                     }
+//                 }
+
+//                 let ticketListOptions = typeList.options.length;
+//                 for (let i = 0; i < ticketListOptions; i++) {
+//                     if (typeList.options[i].value == snapshot.data().type) {
+//                         typeList.options[i].selected = true;
+//                         break;
+//                     }
+//                 }
+
+//                 let priorityListOptions = priorityList.options.length;
+//                 for (let i = 0; i < priorityListOptions; i++) {
+//                     if (priorityList.options[i].value == snapshot.data().priority) {
+//                         priorityList.options[i].selected = true;
+//                         break;
+//                     }
+//                 }
+//             // FEATURE: EDIT TICKET INFO ************************************************************************************
+                
+//             })
+   
+//             // comments should also load here ***************************************************
+//             const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+//             const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
+            
+//             onSnapshot(orderedCommentsRef, (snapshot) => {
+//                 let comments = []
+
+//                 // refresh chatbox
+//                 const chatbox = document.querySelector(".chatbox");
+
+
+//                 clearChatbox();
+                
+//                 function clearChatbox() {
+//                     while (chatbox.children[0] != null) {
+//                         chatbox.removeChild(chatbox.children[0]);
+//                     }
+//                 }
+//                 snapshot.docs.forEach((doc) => {
+//                     comments.push({ ...doc.data(), id: doc.id })
+//                 });
+
+//             for (let i = 0; i < comments.length; i++) {
+//                 const newComment = document.createElement("div");
+//                     const userIcon = document.createElement("div");
+//                     const commentRight = document.createElement("div");
+//                         const nameAndTimestamp = document.createElement("div");
+//                             const userName = document.createElement("div");
+//                             const timeStamp = document.createElement("div");
+//                         const messageContent = document.createElement("div");
+
+//                         newComment.classList.add("entire-message");
+//                         userIcon.classList.add("user-icon");
+//                         commentRight.classList.add("comment-right");
+//                         nameAndTimestamp.classList.add("name-and-timestamp-section");
+//                         userName.classList.add("user-name");
+//                         timeStamp.classList.add("message-timestamp");
+//                         messageContent.classList.add("message-content");
+
+//                         userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
+//                         userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
+//                         timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
+//                         messageContent.innerText = comments[i].message;
+
+//                 chatbox.appendChild(newComment);
+//                     newComment.appendChild(userIcon);
+//                     newComment.appendChild(commentRight);
+//                         commentRight.appendChild(nameAndTimestamp);
+//                             nameAndTimestamp.appendChild(userName);
+//                             nameAndTimestamp.appendChild(timeStamp);
+//                         commentRight.appendChild(messageContent);
+
+
+//             }
+            
+//             // chatbox load bottom
+//             chatbox.scrollTop = chatbox.scrollHeight;
+            
+//         })
+
+//         })
+//     })
+// }
+// //     console.log(tickets)
