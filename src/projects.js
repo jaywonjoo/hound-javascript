@@ -501,6 +501,45 @@ function populateTickets() {
                         populatedTicketInfoSection.innerHTML = snapshot.data().status;
                         populatedTicketSection.innerHTML = snapshot.data().priority;
                         populatedTypeSection.innerHTML = snapshot.data().type;
+
+                        // FEATURE: EDIT TICKET INFO ************************************************************************************
+                        const editTicketAuthor = document.querySelector(".edit-ticket-author")
+                        const editTicketDescription = document.querySelector(".edit-ticket-description")
+                        const editTicketTitle = document.querySelector(".edit-ticket-title")
+                        const statusList = document.querySelector(".edit-ticket-status")
+                        const typeList = document.querySelector(".edit-ticket-type")
+                        const priorityList = document.querySelector(".edit-ticket-priority")
+
+
+                        editTicketAuthor.setAttribute("value", snapshot.data().author)
+                        editTicketDescription.setAttribute("value", snapshot.data().description)
+                        editTicketTitle.setAttribute("value", snapshot.data().title)
+
+                        let statusListOptions = statusList.options.length;
+                        for (let i = 0; i < statusListOptions; i++) {
+                            if (statusList.options[i].value == snapshot.data().status) {
+                                statusList.options[i].selected = true;
+                                break;
+                            }
+                        }
+
+                        let ticketListOptions = typeList.options.length;
+                        for (let i = 0; i < ticketListOptions; i++) {
+                            if (typeList.options[i].value == snapshot.data().type) {
+                                typeList.options[i].selected = true;
+                                break;
+                            }
+                        }
+
+                        let priorityListOptions = priorityList.options.length;
+                        for (let i = 0; i < priorityListOptions; i++) {
+                            if (priorityList.options[i].value == snapshot.data().priority) {
+                                priorityList.options[i].selected = true;
+                                break;
+                            }
+                        }
+                        
+
                         
                     })
            

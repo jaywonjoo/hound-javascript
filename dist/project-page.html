@@ -278,10 +278,39 @@
 
 
 <div id="modal" class="modal all-other-modals">
-  <form class="add-member-form">
-    <h3>Team Members</h3>
-    <div id="populatable-member-div" class="populatable-member-div"></div>
-    <button id="modal-add-member-btn">Edit Ticket</button>
+  <form class="edit-ticket-form">
+    <!-- <h3>Edit Ticket</h3> -->
+    <!-- <div id="populatable-member-div" class="populatable-member-div"></div> -->
+      <label for="author">Author:</label>
+      <input class="edit-ticket-author" type="text" name="author" required>
+  
+      <label for="description">Description:</label>
+      <input class="edit-ticket-description" type="text" name="description" required>
+  
+      <label for="title">Title:</label>
+      <input class="edit-ticket-title" type="text" name="title" required>
+      
+      <label for="status">Status:</label>
+      <select class="edit-ticket-status" type="selection" name="status" required>
+        <option value="unresolved">Unresolved</option>
+        <option value="in progress">In Progress</option>
+        <option value="resolved">Resolved</option>
+      </select>
+
+      <label for="type">Type:</label>
+      <select class="edit-ticket-type" type="selection" name="type" required>
+        <option value="issue">Issue</option>
+        <option value="bug">Bug</option>
+        <option value="feature request">Feature Request</option>
+      </select>
+  
+      <label for="priority">Priority:</label>
+      <select class="edit-ticket-priority" type="selection" name="priority" required>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    <button id="edit-ticket-btn">Edit Ticket</button>
   </form>
 </div>
 
