@@ -79,9 +79,9 @@ ul,li { list-style-type: none;
   filter: invert(100%);
 }
 
-.navbar:hover {
+/* .navbar:hover {
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-}
+} */
 
 .nav-left {
   display: flex;
@@ -117,7 +117,7 @@ ul,li { list-style-type: none;
 .nav-user-icon-container {
   width: auto;
   height: auto;
-  margin-right: 25px;
+  /* margin-right: 25px; */
 }
 
 .nav-user-icon {
@@ -131,6 +131,24 @@ ul,li { list-style-type: none;
   justify-content: center;
   position: relative;
   top: -3px;
+  cursor: pointer;
+}
+
+.user-dropdown-modal {
+  position:fixed;
+  /* right: 25px; */
+  right: 0;
+  top: 5vh + 1px;
+  height: 50vh;
+  width: 15vw;
+  background-color: rgb(0, 0, 0, .5);
+  backdrop-filter: blur(100px);
+
+}
+
+.blurred-overlay {
+  background-color: transparent;
+  backdrop-filter: blur(5px);
 }
 
 /* navbar ************************************************************************************ */
@@ -357,7 +375,6 @@ margin-top: 2vh;
     right: 0;
     bottom: 0;
     /* background-color: rgba(0, 0, 0, .75); */
-    backdrop-filter: blur(5px);
   }
 
 
@@ -394,6 +411,7 @@ margin-top: 2vh;
   border-style: none;
   padding: 7px;
   margin: 0 5px;
+  cursor: pointer;
 }
 
   /* team member section **************************************************************** */
@@ -591,6 +609,7 @@ margin-top: 2vh;
     border-style: none;
     padding: 7px;
     margin: 0 5px;
+    cursor: pointer;
   }
 
   #tickets {
