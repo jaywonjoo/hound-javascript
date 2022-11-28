@@ -1007,17 +1007,20 @@ function pieChartStatus() {
         pieContainerThree.appendChild(pieHigh)
 
         let width = "84"
-        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1; width:"+width+"%;")
-        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2; width:"+width+"%;")
-        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3; width:"+width+"%;")
+        let light = "rgba(0, 0, 0, .3)"
+        let medium = "rgba(0, 0, 0, .5)"
+        let dark = "rgba(0, 0, 0, 1)"
+        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
+        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
+        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
 
-        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1; width:"+width+"%;")
-        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2; width:"+width+"%;")
-        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3; width:"+width+"%;")
+        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
+        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
+        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
 
-        pieLow.setAttribute("style", "--p: 100;--b:25px;--c: rgba(255, 255, 255, .8); z-index: 1; width:"+width+"%;")
-        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c: rgba(127, 127, 127); z-index: 2; width:"+width+"%;")
-        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c: rgba(20, 20, 20);z-index: 3; width:"+width+"%;")
+        pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
+        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
+        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
 
     })
 
