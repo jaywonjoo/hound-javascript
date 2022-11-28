@@ -66,6 +66,8 @@ logoutButton.addEventListener('click', () => {
     })
 })
 
+
+
 // *relevant* collection ref
   // need variable that changes based on project selected
     // using query parameter to pass data from one page to another!
@@ -77,6 +79,32 @@ logoutButton.addEventListener('click', () => {
       console.log(projectID)
   // setting colRef to selected project!
   const colRef = collection(db, 'projects', projectID, 'tickets')
+
+
+
+// FEATURE: USER ICON
+const ProjectUsersDocRef = doc(db, 'projects', projectID)
+getDoc(ProjectUsersDocRef).then((snapshot) => {
+    const userRef = collection(db, 'users')
+    // grab project creator
+    let creator = snapshot.data().creator;
+    // console.log(creator)
+
+    const userCreatorDocRef = query(userRef, where("uid", "==", creator));
+    onSnapshot(userCreatorDocRef, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+
+            let userListOne = []
+
+            userListOne.push({ ...doc.data(), id: doc.id });
+            // console.log(userListOne[0].firstName)
+            
+            const navUserIcon = document.querySelector(".nav-user-icon")
+
+            navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+        })
+    })
+})
 
 
 

@@ -109,6 +109,30 @@ ul,li { list-style-type: none;
   */
 }
 
+.nav-right {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-user-icon-container {
+  width: auto;
+  height: auto;
+  margin-right: 25px;
+}
+
+.nav-user-icon {
+  height: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: rgb(0, 0, 0, .5);
+  padding: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: -3px;
+}
+
 /* navbar ************************************************************************************ */
 
 .lower-half {
@@ -154,6 +178,11 @@ ul,li { list-style-type: none;
   align-items: center;
   font-size: large;
   font-weight: 800;
+  cursor: pointer;
+}
+
+.dashboard-button:hover{
+  background-color: rgb(0, 0, 0, .3);
 }
 
 .dashboard-button-icon {
@@ -422,7 +451,8 @@ margin-top: 2vh;
   }
 
   .team-member-line-item:hover {
-    background-color: rgb(255, 255, 255, .3);
+    background-color: rgb(0, 0, 0, .3);
+
   
   }
 
@@ -462,7 +492,8 @@ margin-top: 2vh;
   }
 
   .team-member-line-item-kebab:hover {
-    background-color: rgb(255, 255, 255, .3);
+    background-color: rgb(0, 0, 0, .3);
+
   }
 
 
@@ -588,7 +619,9 @@ margin-top: 2vh;
   }
 
 .ticket-ul:hover {
-  background-color: rgb(255, 255, 255, .3);
+  /* background-color: rgb(255, 255, 255, .3); */
+  background-color: rgb(0, 0, 0, .3);
+
 }
 
 .ticket-title {
