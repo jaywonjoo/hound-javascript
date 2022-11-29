@@ -3,7 +3,7 @@ body {
     justify-content: center;
     /* font-family: Graphik, Helvetica, sans-serif; */
     font-family: Helvetica;
-    background: rgb(178,198,233);
+    background: rgb(178,198,233); 
     background: linear-gradient(180deg, rgba(178,198,233,1) 0%, rgba(209,229,254,1) 15%, rgba(255,255,255,1) 30%);
 
     height: 100%;
@@ -99,12 +99,16 @@ body {
     align-items: center;
     /* flex-direction: ; */
     border-style: none;
-    box-shadow: 0 0 10px 0 rgb(0, 0, 0, .5);
+    box-shadow: 0 0 10px 0 rgb(0, 0, 0, .25);
     width: 80%;
     border-radius: .5em;
     font-size: 1em;
     padding: .5em 0;
     margin: 1em 0 0 0;
+}
+
+.provider-container:hover {
+    background-color: rgba(0, 0, 0, 0.025);
 }
 
 .provider-logo {

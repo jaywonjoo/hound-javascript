@@ -175,7 +175,7 @@ ul,li { list-style-type: none;
 /* dashboard ************************************************************************************ */
 
 .dashboard-master {
-  width: 20vw;
+  width: 20em;
   min-height: 100vh;
   background-color: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(40px);
@@ -471,8 +471,12 @@ aspect-ratio: 1;
 
   .team-member-body {
     overflow: scroll;
-    /* border-radius: 0 0 15px 15px; */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 
+  .team-member-body::-webkit-scrollbar {
+  display: none;
   }
   
 
@@ -639,7 +643,14 @@ aspect-ratio: 1;
     margin: 0;
     padding: 0;
     overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
+
+  #tickets::-webkit-scrollbar {
+    display: none;
+  }
+
 
   .ticket-ul {
     color: rgb(30, 0, 255);
