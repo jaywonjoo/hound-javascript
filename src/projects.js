@@ -1034,7 +1034,7 @@ function pieChartStatus() {
         pieContainerThree.appendChild(pieMedium)
         pieContainerThree.appendChild(pieHigh)
 
-        let width = "84"
+        let width = "100"
         let light = "rgba(0, 0, 0, .3)"
         let medium = "rgba(0, 0, 0, .5)"
         let dark = "rgba(0, 0, 0, 1)"

@@ -218,7 +218,7 @@ ul,li { list-style-type: none;
   width: 90%;
   height: 20px;
   border-bottom: solid black;
-  margin-bottom: 5%;
+  /* margin-bottom: 5%; */
 }
 
 .pie-container {
@@ -232,6 +232,7 @@ aspect-ratio: 1;
 .pie-title {
   justify-content: center;
   display: flex;
+  margin-top: 1em;
 }
 
 .pie-header {
@@ -291,7 +292,7 @@ aspect-ratio: 1;
   font-size: 25px;
   font-weight: bold;
   font-family: sans-serif;
-  margin: 0 8%;
+  /* margin: 0 8%; */
 }
 .pie:before {
   content: "";
