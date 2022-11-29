@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import "./auth.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",
@@ -17,7 +18,7 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 
 // button to take you back to the homepage
-const logoHomeButton = document.querySelector("#logoHomeButton");
+const logoHomeButton = document.querySelector(".logo-home-button-container");
 logoHomeButton.addEventListener("click", () => {
   window.location.href = "index.html";
 });
