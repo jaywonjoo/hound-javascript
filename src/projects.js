@@ -1019,17 +1019,17 @@ function pieChartStatus() {
         pieMedium.classList.add("pie")
         pieHigh.classList.add("pie")
 
-        dashboardMaster.appendChild(pieContainerOne)
+        // dashboardMaster.appendChild(pieContainerOne)
         pieContainerOne.appendChild(pieUnresolved)
         pieContainerOne.appendChild(pieInProgress)
         pieContainerOne.appendChild(pieResolved)
 
-        dashboardMaster.appendChild(pieContainerTwo)
+        // dashboardMaster.appendChild(pieContainerTwo)
         pieContainerTwo.appendChild(pieIssue)
         pieContainerTwo.appendChild(pieBug)
         pieContainerTwo.appendChild(pieFeatureRequest)
 
-        dashboardMaster.appendChild(pieContainerThree)
+        // dashboardMaster.appendChild(pieContainerThree)
         pieContainerThree.appendChild(pieLow)
         pieContainerThree.appendChild(pieMedium)
         pieContainerThree.appendChild(pieHigh)

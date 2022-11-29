@@ -218,45 +218,36 @@ ul,li { list-style-type: none;
   width: 90%;
   height: 20px;
   border-bottom: solid black;
+  margin-bottom: 5%;
 }
 
 .pie-container {
 position: relative;
 width: 80%;
 aspect-ratio: 1;
-margin-top: 2vh;
+/* margin-top: 2vh; */
 /* margin-bottom: 3vh; */
 }
 
-.pie {
-  /* --w:300px; */
-  
-  /* width: var(--w); */
-  width: 100%;
-  aspect-ratio: 1;
-  position: absolute;
-  display: inline-grid;
-  place-content: center;
-  font-size: 25px;
-  font-weight: bold;
-  font-family: sans-serif;
-  margin: 0 8%;
+.pie-title {
+  justify-content: center;
+  display: flex;
 }
-.pie:before {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  inset: 0;
-  background: conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
-  -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-          mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+
+.pie-header {
+  /* margin: 0 5%; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .legend {
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 5%;
   align-items: center;
   font-size: 10px;
   margin: 0 0 10px 0;
@@ -286,6 +277,30 @@ margin-top: 2vh;
   height: 10px;
   border-radius: 50%;
   background-color: rgba(20, 20, 20);
+}
+
+.pie {
+  /* --w:300px; */
+  
+  /* width: var(--w); */
+  width: 100%;
+  aspect-ratio: 1;
+  position: absolute;
+  display: inline-grid;
+  place-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  font-family: sans-serif;
+  margin: 0 8%;
+}
+.pie:before {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  inset: 0;
+  background: conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
+  -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+          mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
 }
 
 /* dashboard ************************************************************************************ */
