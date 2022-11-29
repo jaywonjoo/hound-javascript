@@ -32,7 +32,7 @@ const db = getFirestore();
 const colRef = collection(db, "users");
 
 // button to take you back to the homepage
-const logoHomeButton = document.querySelector("#logoHomeButton");
+const logoHomeButton = document.querySelector(".logo-home-button-container");
 logoHomeButton.addEventListener("click", () => {
   window.location.href = "index.html";
 });
@@ -58,8 +58,8 @@ signupForm.addEventListener("submit", (e) => {
       console.log("user created:", userCredential.user);
       const uid = userCredential.user.uid;
       const userEmail = userCredential.user.email;
-      const firstName = document.querySelector(".firstName")
-      const lastName = document.querySelector(".lastName")
+      const firstName = document.querySelector("#firstName")
+      const lastName = document.querySelector("#lastName")
 
       addDoc(colRef, {
         firstName: firstName.value,

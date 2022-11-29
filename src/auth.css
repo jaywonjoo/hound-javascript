@@ -12,10 +12,10 @@ body {
     background-attachment: fixed;
 }
 
-.login-parent-card {
+.parent-card {
     /* border-style: solid #000; */
     height: 60vh;
-    width: 25vw;
+    width: 25em;
     border: 10px;
     padding: 10px 10px 100px 10px;
     background-color: white;
@@ -32,7 +32,7 @@ body {
 .logo-home-button-container {
     display: flex;
     align-items: center;
-    margin: 50px 0px 25px 0px;
+    margin: 28px 0px 25px 0px;
     cursor: pointer;
 }
 
@@ -61,7 +61,23 @@ body {
 
 }
 
+.sign-up-message {
+    margin-bottom: .5em;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: rgb(63, 63, 63);
+
+}
+
 .sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.sign-up-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,6 +95,17 @@ body {
 }
 
 .sign-in-button {
+    border-style: none;
+    background-color: rgb(63, 63, 63);
+    color: white;
+    border-radius: .75em;
+    width: 81%;
+    padding: .65em 0;
+    /* font-size: 1em; */
+    margin: 1em 0 1em 0;
+}
+
+.sign-up-button {
     border-style: none;
     background-color: rgb(63, 63, 63);
     color: white;
@@ -142,6 +169,17 @@ body {
     margin: 0;
 }
 
+.sign-in-link {
+    font-size: .75em;
+    width: 80%;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
 #signUpLink {
+    color: #5384f5
+}
+
+#signInLink{
     color: #5384f5
 }
