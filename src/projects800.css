@@ -13,8 +13,10 @@
 .content-section {
     /* width: 100%; */
     /* margin: 1% 2% 0 2%; */
-    overflow: scroll;
+    overflow-y: scroll;
     height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 .top-row {
