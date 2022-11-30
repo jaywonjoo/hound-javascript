@@ -2,6 +2,10 @@
 
 /* top row **************************************************************** */
 
+.lower-half {
+    width: 100vw;
+}
+
 .dashboard-master {
     display: none;
 }
@@ -68,5 +72,12 @@
     width: 100%;
     border: none;
 }
+
+.user-dropdown-modal {
+    width: 100vh;
+    height: 100vh;
+    left: 0;
+}
+
 
 }
