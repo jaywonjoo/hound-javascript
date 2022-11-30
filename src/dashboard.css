@@ -1,3 +1,15 @@
+.user-dropdown-modal {
+  position:fixed;
+  /* right: 25px; */
+  right: 0;
+  top: 5vh + 1px;
+  height: 50vh;
+  width: 15vw;
+  background-color: rgb(0, 0, 0, .5);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+}
+
 .dashboard-master {
   width: 20em;
   min-height: 100vh;
