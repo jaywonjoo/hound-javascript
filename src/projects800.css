@@ -3,7 +3,7 @@
 /* top row **************************************************************** */
 
 body {
-    background-size: auto 100vh;
+    /* background-size: auto 100vh; */
 }
 
 #modal {
@@ -12,7 +12,7 @@ body {
 
 .master-container {
     width: 100vw;
-    height: 100vh;
+    /* height: 100vh; 113022 */
     overflow: hidden;
     /* overflow-y: scroll */
 }
@@ -48,8 +48,8 @@ body {
     /* overflow-y: visible; */
     /* height: 200vh; */
     width: 100vw;
-    overflow-x: hidden;
-    overflow-y: visible
+    /* overflow-x: hidden; 113022 */
+    /* overflow-y: visible 113022 */
 }
 
 .top-row {
