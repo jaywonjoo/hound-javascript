@@ -110,6 +110,14 @@ getDoc(ProjectUsersDocRef).then((snapshot) => {
 
 
 
+// FEATURE: AUTO POPULATE PROJECT HEADER ************************************************************************************************************************
+const projectHeader = document.querySelector(".project-header")
+const projectHeaderRef = doc(db, 'projects', projectID)
+
+getDoc(ProjectUsersDocRef).then((snapshot) => {
+    projectHeader.innerHTML = snapshot.data().name
+})
+
 
 
 
