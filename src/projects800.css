@@ -4,8 +4,9 @@
 
 body {
     width: 100vw;
-    height: 95vh;
+    height: 100vh;
     overflow-x: hidden;
+    background-size: auto 100vh;
 }
 
 .lower-half {
@@ -20,7 +21,7 @@ body {
     /* width: 100%; */
     /* margin: 1% 2% 0 2%; */
     overflow-y: scroll;
-    height: 100vh;
+    height: 95vh;
     width: 100vw;
     overflow-x: hidden;
 }
