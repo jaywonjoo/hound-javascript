@@ -1,0 +1,72 @@
+@media (max-width: 800px) {
+
+/* top row **************************************************************** */
+
+.dashboard-master {
+    display: none;
+}
+
+.content-section {
+    /* width: 100%; */
+    /* margin: 1% 2% 0 2%; */
+    overflow: scroll;
+    height: 100vh;
+}
+
+.top-row {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
+    align-items: center;
+    height: 66vh;
+  
+    /* gap: 5% */
+    /* margin: 0 5% 0 5%; */
+  }
+
+.team-members {
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.ticket-section {
+    width: 90%;
+    margin-bottom: 1em;
+}
+
+.bottom-row {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 1em 0;
+}
+
+.big-wrap {
+    margin: 0;
+    width: 90%;
+}
+
+
+.ticket-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.left-ticket-info-section {
+    border-bottom: solid black;
+}
+
+.chatbox {
+    width: 100%;
+    height: 400px;
+}
+
+.right-chat-section {
+    width: 100%;
+    border: none;
+}
+
+}
