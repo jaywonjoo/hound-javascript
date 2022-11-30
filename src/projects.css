@@ -82,6 +82,13 @@ body {
 
 /* dashboard ************************************************************************************ */
 
+.lower-half {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
 .dashboard-master {
   width: 20em;
   min-height: 100vh;

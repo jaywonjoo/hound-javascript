@@ -113,12 +113,6 @@
   
   /* navbar ************************************************************************************ */
   
-  .lower-half {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-  }
   
   .project-header {
     font-size: 5vh;

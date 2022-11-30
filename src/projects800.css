@@ -3,18 +3,39 @@
 /* top row **************************************************************** */
 
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: hidden;
     background-size: auto 100vh;
 }
 
+#modal {
+    z-index: 500;
+}
+
+.master-container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll
+}
+
 .navbar {
-    height: 5vh;
+    height: 3em;
+    position: absolute;
+    z-index: 1000;
+    width: 100vw;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-spacer {
+    height: 4em;
 }
 
 .lower-half {
     width: 100vw;
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 5vh; */
 }
 
 .dashboard-master {
@@ -24,10 +45,11 @@ body {
 .content-section {
     /* width: 100%; */
     /* margin: 1% 2% 0 2%; */
-    overflow-y: scroll;
-    height: 95vh;
+    /* overflow-y: visible; */
+    /* height: 200vh; */
     width: 100vw;
     overflow-x: hidden;
+    overflow-y: visible
 }
 
 .top-row {
@@ -57,10 +79,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    /* height: 100%; */
     margin: 1em 0;
-    padding-bottom: 6vh;
-    height: 91vh;
+    /* padding-bottom: 6vh; */
+    height: 27em;
 }
 
 .big-wrap {
@@ -80,12 +102,13 @@ body {
 
 .chatbox {
     width: 100%;
-    height: 400px;
+    /* height: 30vh; */
 }
 
 .right-chat-section {
     width: 100%;
     border: none;
+    height: 30em;
 }
 
 .user-dropdown-modal {
