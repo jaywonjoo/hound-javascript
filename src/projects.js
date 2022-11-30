@@ -7,6 +7,8 @@ import {
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.css";
+// import "./nav.css";
+
 
 const firebaseConfig = {
     apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",
