@@ -9,6 +9,10 @@ body {
     background-size: auto 100vh;
 }
 
+.navbar {
+    height: 5vh;
+}
+
 .lower-half {
     width: 100vw;
 }
