@@ -13,6 +13,7 @@
           display: block;
           z-index: 501;
         }
+
         #overlay.open {
           display: block;
           z-index: 500;
@@ -50,8 +51,10 @@
 
 <div class="lower-half">
   <div class="mobile-spacer"></div>
+  <div class="lower-half-sub-container">
 
 <!-- dashboard --------------------------------------------------------------------------- -->
+<!-- <div class="dashboard-and-bar"> -->
 <div class="dashboard-master">
   <div class="dashboard-links">
     <!-- <h3>Dashboard</h3> 
@@ -79,6 +82,7 @@
   </div>
   <span class="delineator"></span>
 
+  <div class="pie-box">
   <div class="pie-header">
   <span class="pie-title">Tickets by Status</span>
   <div class="legend">
@@ -138,10 +142,16 @@
   </div>
   </div>
   <div id="pie-container-three"></div>
-
 </div>
-<!-- dashboard --------------------------------------------------------------------------- -->
+</div>
 
+<div class="sidebar-button">
+  <div class="sidebar-button-circle">></div>
+  <div class="sidebar-button-bar"></div>
+</div>
+
+<!-- </div> -->
+<!-- dashboard --------------------------------------------------------------------------- -->
 <!-- content --------------------------------------------------------------------------- -->
 
 <div id="overlay" class="overlay blurred-overlay"></div>
@@ -343,6 +353,7 @@
   </form>
 </div>
 
+</div>
 </div>
 
 
