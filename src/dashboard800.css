@@ -6,7 +6,7 @@
         /* background-size: auto 100vh; */
         background-attachment: fixed;
     }
-    
+
     #modal {
         z-index: 500;
     }
@@ -125,6 +125,8 @@
         /* overflow-y: visible; */
         /* height: 200vh; */
         width: 100vw;
+        width: calc(100vw - 18px);
+        height: calc(100vh - 3em);
         margin: 0;
         /* overflow-x: hidden; 113022 */
         /* overflow-y: visible 113022 */
@@ -204,8 +206,6 @@
 
 
 /* NONUNIVERSAL ------------------------------------------------------------------------------------ */
-
-
 
 
 
