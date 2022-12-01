@@ -89,8 +89,8 @@ body {
 
 .project-card {
     background-color: rgb(58, 58, 58);
-    width: 150px;
-    height: 100px;
+    width: 135px; 
+    height: 90px;
     margin: 10px;
     padding: 10px;
     border-radius: 15px;

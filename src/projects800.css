@@ -7,6 +7,23 @@ body {
     background-attachment: fixed;
 }
 
+body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+    /* background: url(photos/2452.jpg) no-repeat center center; */
+    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2409x1600/f2ceef3747bc37a3970a6bae960998d7/photo-1547234935-80c7145ec969.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
 #modal {
     z-index: 500;
 }
