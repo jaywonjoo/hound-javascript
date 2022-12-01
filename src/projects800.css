@@ -96,10 +96,12 @@ body {
     right: 416px;
 } */
 
-.blurred-overlay {
+/* .blurred-overlay {
+    position: fixed;
+    height: 95vh;
     top: 9.5%;
     left: 0%;
-}
+} */
 
 .dashboard-master {
     z-index: 1002;
