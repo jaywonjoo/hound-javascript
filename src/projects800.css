@@ -74,25 +74,39 @@ body {
     /* position: absolute; */
     width: 18px;
     height: 160vh;
+    top: 0%;
+    left: 0;
+    position: fixed;
     border-right: solid black;
     background-color: rgb(255, 255, 255, .3);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
 }
 
-.dashboard-and-bar {
+.sidebar-button-bar-spacer {
+    width: 18px;
+
+}
+
+/* .dashboard-and-bar {
     display: flex;
     flex-direction: row;
     position: absolute;
     z-index: 8;
     right: 416px;
+} */
+
+.blurred-overlay {
+    top: 9.5%;
+    left: 0%;
 }
 
 .dashboard-master {
     z-index: 1002;
     /* padding: 0 20px; */
     width: 75vw;
-    position: absolute;
+    top: 9.5%;
+    position: fixed;
     height: 95vh;
     overflow: scroll;
     left: -75vw;

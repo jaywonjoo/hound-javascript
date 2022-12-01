@@ -1207,6 +1207,7 @@ const overlayer = document.querySelector(".blurred-overlay");
 
 sidebarButton.addEventListener("click", () => {
     dashboardMasterMobile.setAttribute("style", "left: 0")
+    
     overlayer.classList.add("open")
 })
 
