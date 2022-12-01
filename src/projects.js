@@ -112,7 +112,7 @@ getDoc(ProjectUsersDocRef).then((snapshot) => {
 
 
 // FEATURE: AUTO POPULATE PROJECT HEADER ************************************************************************************************************************
-const projectHeader = document.querySelector(".project-header")
+const projectHeader = document.querySelector(".page-header")
 const projectHeaderRef = doc(db, 'projects', projectID)
 
 getDoc(ProjectUsersDocRef).then((snapshot) => {
@@ -1207,7 +1207,7 @@ const overlayer = document.querySelector(".blurred-overlay");
 
 sidebarButton.addEventListener("click", () => {
     dashboardMasterMobile.setAttribute("style", "left: 0")
-    overlayer.setAttribute("style", "position: fixed; height: 95vh; top: 9.5%; left: 0%;")
+    overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
     overlayer.classList.add("open")
 
 })

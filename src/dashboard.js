@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./dashboard.css";
+import "./dashboard800.css";
 import "./nav.css";
 
 
@@ -291,3 +292,32 @@ function clearSharedProjects() {
 }
 
 
+// MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
+
+const sidebarButton = document.querySelector(".sidebar-button");
+const dashboardMasterMobile = document.querySelector(".dashboard-master")
+const overlayer = document.querySelector(".blurred-overlay");
+
+
+sidebarButton.addEventListener("click", () => {
+    dashboardMasterMobile.setAttribute("style", "left: 0")
+    overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
+    overlayer.classList.add("open")
+
+})
+
+// MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
+
+// MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
+
+dashboardMasterMobile.addEventListener("click", () => {
+    dashboardMasterMobile.removeAttribute("style", "left")
+    overlayer.classList.remove("open")
+})
+
+overlayer.addEventListener("click", () => {
+    dashboardMasterMobile.removeAttribute("style", "left")
+    overlayer.classList.remove("open")
+})
+
+// MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************

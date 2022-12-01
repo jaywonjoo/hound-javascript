@@ -45,80 +45,92 @@
 </div>
 
 <div class="lower-half">
+  <div class="mobile-spacer"></div>
+  <div class="lower-half-sub-container">
 
-<!-- dashboard --------------------------------------------------------------------------- -->
-<div class="dashboard-master">
-<div class="dashboard-links">
-<!-- <h3>Dashboard</h3> 
-    <h3>Team Members</h3>
-    <h3>Account Settings</h3>
-    <h3>Admin</h3>-->
-<div id="dashboardButton" class="dashboard-button">
-  <img class="dashboard-button-icon" src="../images/icon_home.svg">
-  Dashboard
-</div>
-<div id="dashboardButton" class="dashboard-button">
-  <span role="img" aria-label="OrganizationIcon" class="dashboard-button-icon" style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;"><svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5048 5.67168C11.9099 5.32669 11.2374 5.10082 10.5198 5.0267C11.2076 3.81639 12.5085 3 14 3C16.2092 3 18 4.79086 18 7C18 7.99184 17.639 8.89936 17.0413 9.59835C19.9512 10.7953 22 13.6584 22 17C22 17.5523 21.5523 18 21 18H18.777C18.6179 17.2987 18.3768 16.6285 18.0645 16H19.917C19.4892 13.4497 17.4525 11.445 14.8863 11.065C14.9608 10.7218 15 10.3655 15 10C15 9.58908 14.9504 9.18974 14.857 8.80763C15.5328 8.48668 16 7.79791 16 7C16 5.89543 15.1046 5 14 5C13.4053 5 12.8711 5.25961 12.5048 5.67168ZM10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12ZM14 10C14 10.9918 13.639 11.8994 13.0412 12.5984C15.9512 13.7953 18 16.6584 18 20C18 20.5523 17.5523 21 17 21H3C2.44772 21 2 20.5523 2 20C2 16.6584 4.04879 13.7953 6.95875 12.5984C6.36099 11.8994 6 10.9918 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10ZM9.99999 14C12.973 14 15.441 16.1623 15.917 19H4.08295C4.55902 16.1623 7.02699 14 9.99999 14Z" fill="currentColor"></path></svg></span>
-  <!-- <img class="dashboard-button-icon" src="../images/icon_user.svg"> -->
-  Team Members
-</div>
-<div id="dashboardButton" class="dashboard-button">
-  <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-  <!-- <img class="dashboard-button-icon" src="../images/insta_settings.svg"> -->
-  Account Settings
-</div>
-<!-- <div id="dashboardButton" class="dashboard-button">
-<svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-  Admin
-</div> -->
-</div>
-<span class="delineator"></span>
-
-</div>
-<!-- dashboard --------------------------------------------------------------------------- -->
-
-
-<div class="content-section">
-
-
-  <h2>Projects</h2>
-  <div class="project-section">
-      <div class="project-section-header">
-        <p>Your Projects</p>
-        <button id="button">New Project</button>
+    <!-- dashboard --------------------------------------------------------------------------- -->
+    <div class="dashboard-master">
+      <div class="dashboard-links">
+        <!-- <h3>Dashboard</h3> 
+            <h3>Team Members</h3>
+            <h3>Account Settings</h3>
+            <h3>Admin</h3>-->
+        <div id="dashboardButton" class="dashboard-button">
+          <img class="dashboard-button-icon" src="../images/icon_home.svg">
+          Dashboard
+        </div>
+        <div id="dashboardButton" class="dashboard-button">
+          <span role="img" aria-label="OrganizationIcon" class="dashboard-button-icon" style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;"><svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5048 5.67168C11.9099 5.32669 11.2374 5.10082 10.5198 5.0267C11.2076 3.81639 12.5085 3 14 3C16.2092 3 18 4.79086 18 7C18 7.99184 17.639 8.89936 17.0413 9.59835C19.9512 10.7953 22 13.6584 22 17C22 17.5523 21.5523 18 21 18H18.777C18.6179 17.2987 18.3768 16.6285 18.0645 16H19.917C19.4892 13.4497 17.4525 11.445 14.8863 11.065C14.9608 10.7218 15 10.3655 15 10C15 9.58908 14.9504 9.18974 14.857 8.80763C15.5328 8.48668 16 7.79791 16 7C16 5.89543 15.1046 5 14 5C13.4053 5 12.8711 5.25961 12.5048 5.67168ZM10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12ZM14 10C14 10.9918 13.639 11.8994 13.0412 12.5984C15.9512 13.7953 18 16.6584 18 20C18 20.5523 17.5523 21 17 21H3C2.44772 21 2 20.5523 2 20C2 16.6584 4.04879 13.7953 6.95875 12.5984C6.36099 11.8994 6 10.9918 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10ZM9.99999 14C12.973 14 15.441 16.1623 15.917 19H4.08295C4.55902 16.1623 7.02699 14 9.99999 14Z" fill="currentColor"></path></svg></span>
+          <!-- <img class="dashboard-button-icon" src="../images/icon_user.svg"> -->
+          Team Members
+        </div>
+        <div id="dashboardButton" class="dashboard-button">
+          <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+          <!-- <img class="dashboard-button-icon" src="../images/insta_settings.svg"> -->
+          Account Settings
+        </div>
+        <!-- <div id="dashboardButton" class="dashboard-button">
+        <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
+          Admin
+        </div> -->
       </div>
-      
-      <div id="project-container"></div>
-  </div>
+      <span class="delineator"></span>
 
-  <p>Shared Projects</p>      
-  <div id="shared-project-container"></div>
+    </div>
 
-   <!-- merge -->
-  <div id="overlay"></div>
+    <div class="sidebar-button">
+      <div class="sidebar-button-circle">></div>
+      <div class="sidebar-button-bar"></div>
+    </div>
 
-  <div id="modal">
+    <div class="sidebar-button-bar-spacer"></div>
 
-      <form class="modal-create-project-button">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required>
-        
-        <button id="close-modal-btn">Create Project</button>
+    <div id="overlay" class="overlay blurred-overlay"></div>
+    <!-- dashboard --------------------------------------------------------------------------- -->
+
+    <div class="content-section">
+
+
+      <h1 class="page-header" >Projects</h2>
+      <div class="project-section">
+          <div class="project-section-header">
+            <p>Your Projects</p>
+            <button id="button">New Project</button>
+          </div>
+          
+          <div id="project-container"></div>
+      </div>
+
+      <p>Shared Projects</p>      
+      <div id="shared-project-container"></div>
+
+      <!-- merge -->
+      <div id="overlay"></div>
+
+      <div id="modal">
+
+          <form class="modal-create-project-button">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+            
+            <button id="close-modal-btn">Create Project</button>
+          </form>
+
+      </div>
+
+      <form class="delete">
+        <label for="id">Document id:</label>
+        <input type="text" name="id" required>
+
+        <button>delete a Project</button>
       </form>
 
+      <button id="logoutButton">logout</button>
+
+      <script src="dashboard.bundle.js"></script>
+
+    </div>
   </div>
-
-  <form class="delete">
-    <label for="id">Document id:</label>
-    <input type="text" name="id" required>
-
-    <button>delete a Project</button>
-  </form>
-
-  <button id="logoutButton">logout</button>
-
-  <script src="dashboard.bundle.js"></script>
-
-  </div>
+</div>
 </body>
 </html>
