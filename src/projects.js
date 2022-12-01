@@ -1202,12 +1202,12 @@ editTicketForm.addEventListener("submit", (e) => {
 
 const sidebarButton = document.querySelector(".sidebar-button");
 const dashboardMasterMobile = document.querySelector(".dashboard-master")
+const overlayer = document.querySelector(".blurred-overlay");
+
 
 sidebarButton.addEventListener("click", () => {
-    console.log("blah")
-    // sidebarButton.classList.add("close");
-    // dashboardMasterMobile.removeAttribute("style", "z-index: -1;")
-    dashboardMasterMobile.setAttribute("style", "z-index: 10")
+    dashboardMasterMobile.setAttribute("style", "left: 0")
+    overlayer.classList.add("open")
 })
 
 // MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
@@ -1215,11 +1215,13 @@ sidebarButton.addEventListener("click", () => {
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
 
 dashboardMasterMobile.addEventListener("click", () => {
-    console.log("blah")
-    // sidebarButton.classList.add("close");
-    dashboardMasterMobile.removeAttribute("style", "z-index")
-    // dashboardMasterMobile.setAttribute("style", "z-index: 10")
+    dashboardMasterMobile.removeAttribute("style", "left")
+    overlayer.classList.remove("open")
 })
 
+overlayer.addEventListener("click", () => {
+    dashboardMasterMobile.removeAttribute("style", "left")
+    overlayer.classList.remove("open")
+})
 
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************

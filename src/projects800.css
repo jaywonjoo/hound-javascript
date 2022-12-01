@@ -26,6 +26,7 @@ body {
     overflow-x: hidden;
     padding: 0;
     margin: 0;
+    z-index: 1003;
 }
 
 
@@ -88,12 +89,14 @@ body {
 }
 
 .dashboard-master {
-    z-index: -1;
-    padding: 0 20px;
-    width: 350px;
+    z-index: 1002;
+    /* padding: 0 20px; */
+    width: 75vw;
     position: absolute;
     height: 95vh;
     overflow: scroll;
+    left: -75vw;
+    top: 3em;
 }
 
 .dashboard-links {
