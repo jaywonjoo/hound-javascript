@@ -29,7 +29,7 @@ body {
 }
 
 .mobile-spacer {
-    height: 4em;
+    height: 3em;
 }
 
 .lower-half {
@@ -49,8 +49,13 @@ body {
     /* overflow-y: visible; */
     /* height: 200vh; */
     width: 100vw;
+    margin: 0;
     /* overflow-x: hidden; 113022 */
     /* overflow-y: visible 113022 */
+}
+
+.project-header {
+    padding-left: 5%;
 }
 
 .top-row {
