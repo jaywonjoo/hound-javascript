@@ -68,6 +68,55 @@ logoutButton.addEventListener("click", () => {
     });
 });
 
+// // FEATURE: USER ICON
+// const ProjectUsersDocRef = doc(db, 'projects', projectID)
+// getDoc(ProjectUsersDocRef).then((snapshot) => {
+//     const userRef = collection(db, 'users')
+//     // grab project creator
+//     let creator = snapshot.data().creator;
+//     // console.log(creator)
+
+//     const userCreatorDocRef = query(userRef, where("uid", "==", creator));
+//     onSnapshot(userCreatorDocRef, (snapshot) => {
+//         snapshot.docs.forEach((doc) => {
+
+//             let userListOne = []
+
+//             userListOne.push({ ...doc.data(), id: doc.id });
+//             // console.log(userListOne[0].firstName)
+            
+//             const navUserIcon = document.querySelector(".nav-user-icon")
+
+//             navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+//         })
+//     })
+// })
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+
+    const userRef = collection(db, 'users')
+
+    const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+    onSnapshot(userCreatorDocRef, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
+
+            let userListOne = []
+
+            userListOne.push({ ...doc.data(), id: doc.id });
+            
+            const navUserIcon = document.querySelector(".nav-user-icon")
+
+            navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+        })
+    })
+
+}})
+
+
 // your projects queries
 onAuthStateChanged(auth, (user) => {
   if (user) {

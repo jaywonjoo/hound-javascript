@@ -256,7 +256,7 @@ body {
 
 
 
-#modal {
+.modal {
     z-index: 500;
     position: fixed;
     height: 80vh;
