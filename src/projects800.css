@@ -24,9 +24,6 @@ body:before {
     background-size: cover;
   }
 
-#modal {
-    z-index: 500;
-}
 
 .master-container {
     width: 100vw;
@@ -218,5 +215,14 @@ body:before {
     left: 0;
 }
 
+/* NONUNIVERSAL ------------------------------------------------------------------------------------ */
 
+
+
+#modal {
+    z-index: 500;
+    position: fixed;
+    height: 100vh;
+    top: 3em;
+}
 }

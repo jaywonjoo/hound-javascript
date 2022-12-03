@@ -38,10 +38,11 @@
 </nav>
 <!-- navbar --------------------------------------------------------------------------- -->
 
-<div id="overlay" class="overlay"></div>
 
 <div id="modal" class="modal user-dropdown-modal">
-  <button id="logoutButton">logout</button>
+  <div id="overlay" class="overlay" style="z-index: 0">
+    <button id="logoutButton" style="z-index: 1">logout</button>
+  </div>
 </div>
 
 <div class="lower-half">

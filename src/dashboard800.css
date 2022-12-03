@@ -23,10 +23,7 @@
         -o-background-size: cover;
         background-size: cover;
       }
-
-    #modal {
-        z-index: 500;
-    }
+    
     
     .master-container {
         width: 100vw;
@@ -224,8 +221,16 @@
 
 /* NONUNIVERSAL ------------------------------------------------------------------------------------ */
 
-
-
+#modal {
+    z-index: 500;
+    position: fixed;
+    height: 100vh;
+    top: 25.2em;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px;
+  }
     }
     
 
