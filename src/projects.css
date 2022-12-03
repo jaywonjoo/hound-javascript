@@ -662,6 +662,11 @@ height: 100%;
   height: 100%
 }
 
+.mobile-top {
+  display: flex;
+  flex-direction: row;
+}
+
 .ticket-info {
   /* background-color: rgb(229, 229, 229); */
   height: 85%;
@@ -678,10 +683,35 @@ height: 100%;
   width: 60%;
 }
 
-.ticket-info-row {
+.ticket-info-row-top {
   display: flex;
-  gap: 100px;
+  /* gap: 100px; */
   margin-bottom: 30px;
+}
+
+.ticket-info-row-bottom {
+  display: flex;
+  /* gap: 100px; */
+  margin-bottom: 30px;
+}
+
+
+.ticket-properties {
+  color: black;
+  font-size: .75em;
+  font-weight: 100;
+  margin-top: .5em;
+}
+
+.ticket-characteristics {
+  /* background-color: black; */
+  color: white;
+  width: fit-content;
+  padding: .25em .5em;
+  border-radius: 1em;
+  font-size: .75em;
+  font-weight: 100;
+  margin-top: .5em;
 }
 
 .right-chat-section {

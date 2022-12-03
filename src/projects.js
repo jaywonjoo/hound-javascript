@@ -501,12 +501,12 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                             const populatedTicketSection = document.querySelector("#populated-priority-section")
                             const populatedTypeSection = document.querySelector("#populated-type-section")
                 
-                            populatedTicketTitleSection.innerHTML = "";
-                            populatedAuthorSection.innerHTML = "";
-                            populatedDescriptionSection.innerHTML = "";
-                            populatedTicketInfoSection.innerHTML = "";
-                            populatedTicketSection.innerHTML = "";
-                            populatedTypeSection.innerHTML = "";
+                            // populatedTicketTitleSection.innerHTML = "";
+                            // populatedAuthorSection.innerHTML = "";
+                            // populatedDescriptionSection.innerHTML = "";
+                            // populatedTicketInfoSection.innerHTML = "";
+                            // populatedTicketSection.innerHTML = "";
+                            // populatedTypeSection.innerHTML = "";
                 
                             const chatbox = document.querySelector(".chatbox");
                             chatbox.innerHTML = "";
@@ -552,6 +552,10 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                         populatedTicketInfoSection.innerHTML = snapshot.data().status;
                         populatedTicketSection.innerHTML = snapshot.data().priority;
                         populatedTypeSection.innerHTML = snapshot.data().type;
+
+                        populatedTicketInfoSection.setAttribute("style", "background-color: black");
+                        populatedTicketSection.setAttribute("style", "background-color: black");
+                        populatedTypeSection.setAttribute("style", "background-color: black");
 
                         // FEATURE: EDIT TICKET INFO ************************************************************************************
                         const editTicketAuthor = document.querySelector(".edit-ticket-author")
