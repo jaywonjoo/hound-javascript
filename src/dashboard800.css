@@ -7,22 +7,6 @@
         background-attachment: fixed;
     }
 
-    body:before {
-        content: "";
-        display: block;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -10;
-        /* background: url(photos/2452.jpg) no-repeat center center; */
-        background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2409x1600/f2ceef3747bc37a3970a6bae960998d7/photo-1547234935-80c7145ec969.jpg") no-repeat center center;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
-      }
     
     
     .master-container {
@@ -43,13 +27,18 @@
         z-index: 1003;
     }
     
-    
+    #logoutButton {
+        width: 100vw;
+        height: 10vh;
+        border: none;
+    }
     
     
     .lower-half {
         width: 100vw;
         display: flex;
         flex-direction: column;
+        height: auto;
         /* margin-top: 5vh; */
     }
     
@@ -139,8 +128,8 @@
         /* overflow-y: visible; */
         /* height: 200vh; */
         width: 100vw;
-        width: calc(100vw - 18px);
-        height: calc(100vh - 3em);
+        /* width: calc(100vw - 18px);
+        height: calc(100vh - 3em); */
         margin: 0;
         /* overflow-x: hidden; 113022 */
         /* overflow-y: visible 113022 */
@@ -231,6 +220,22 @@
     padding: 0;
     border-radius: 0px;
   }
+
+  p {
+    padding-left: 5%;
+  }
+
+  #project-container {
+    padding-left: 5%;
+  }
+
+  #shared-project-container {
+    padding-left: 5%;
+  }
+  
+
+  .project-card {
+    margin: 10px 10px 10px 0;
+  }
     }
-    
 
