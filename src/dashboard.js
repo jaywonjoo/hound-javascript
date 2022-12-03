@@ -34,7 +34,7 @@ const sharedProjectContainer = document.querySelector("#shared-project-container
 const modal = document.querySelector("#modal");
 const openModalButton = document.querySelector("#open-modal-btn");
 const closeModalButton = document.querySelector("#close-modal-btn");
-const overlay = document.querySelector("#overlay");
+const overlay = document.getElementsByClassName("overlay");
 
 // init firebase app
 initializeApp(firebaseConfig);
@@ -141,18 +141,7 @@ function clearProjects() {
 
 // **************************************************************************************** //
 
-// FEATURE: Create a new project
-// 1. click on "New Project" to open modal & overlay
-button.addEventListener("click", (e) => {
-  e.preventDefault();
 
-  openModal();
-});
-// a. Actual function that opens the modal and overlay
-function openModal() {
-  modal.classList.add("open");
-  overlay.classList.add("open");
-}
 // 2. Click on "Create Project" button to
 const addProjectForm = document.querySelector(".modal-create-project-button");
 // a. Write the created project to Firestore (and reset the form after it's been submitted)
@@ -207,7 +196,7 @@ function closeModal() {
 }
 
 // BONUS 4. Click on overlay to cancel operation
-overlay.addEventListener("click", closeModal);
+// overlay.addEventListener("click", closeModal);
 
 // **************************************************************************************** //
 
@@ -321,3 +310,62 @@ overlayer.addEventListener("click", () => {
 })
 
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
+
+
+
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
+const modalparent = document.getElementsByClassName("modal");
+// modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
+
+
+// Get the button that opens the modal
+
+const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
+// const overlay = document.querySelector(".overlay")
+// setTimeout(() => {
+
+// When the user clicks the button, open the modal
+setDataIndex()
+function setDataIndex() {
+    let i = 0
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].setAttribute('data-index', i);
+        modalparent[i].setAttribute('data-index', i);
+        overlay[i].setAttribute('data-index', i);
+    }
+
+    for (i = 0; i < modal_btn_multi.length; i++)
+    {
+        modal_btn_multi[i].onclick = function() {
+            var ElementIndex = this.getAttribute('data-index');
+        //   modalparent[ElementIndex].classList.remove("hidden")
+          modalparent[ElementIndex].classList.add("open")
+          overlay[ElementIndex].classList.add("open")
+        };
+    }
+
+    // modal_btn_multi[0].onclick = function() {
+    //     populateUserModal()
+    // }
+
+}
+// }, "1000")
+
+closeOverlays()
+function closeOverlays() {
+    // Close modal using overlay
+    const overlays = document.querySelectorAll("#overlay");
+    overlays.forEach((overlayer) => {
+        overlayer.addEventListener("click", closeModal)
+        function closeModal() {
+            const modalss = document.querySelectorAll("#modal");
+            modalss.forEach((modalll) => {
+                modalll.classList.remove("open")
+            })
+            overlayer.classList.remove("open")
+        }
+    })
+}
+
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************

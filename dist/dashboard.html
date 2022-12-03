@@ -20,7 +20,7 @@
 <!-- navbar --------------------------------------------------------------------------- -->
 <nav class="navbar">
   <div class='nav-left'>
-    <img class='nav-logo' src="../images/hound.svg"/>
+    <img defer class='nav-logo' src="../images/hound.svg"/>
     <h1 class='brand-title'>Hound</h1>
   </div>
   
@@ -95,7 +95,7 @@
       <div class="project-section">
           <div class="project-section-header">
             <p>Your Projects</p>
-            <button id="button">New Project</button>
+            <button id="button" class="open-modal-btn">New Project</button>
           </div>
           
           <div id="project-container"></div>
@@ -105,9 +105,9 @@
       <div id="shared-project-container"></div>
 
       <!-- merge -->
-      <div id="overlay"></div>
+      <div id="overlay" class="overlay"></div>
 
-      <div id="modal">
+      <div id="modal" class="modal">
 
           <form class="modal-create-project-button">
             <label for="name">Name:</label>
