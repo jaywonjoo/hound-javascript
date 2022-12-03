@@ -15,6 +15,13 @@ body {
     /* overflow-y: scroll */
 }
 
+#overlay {
+    position: fixed;
+    height: 100vh;
+    /* top: 9.5%; */
+    left: 0%;
+}
+
 .navbar {
     height: 3em;
     position: fixed;
@@ -239,7 +246,8 @@ body {
 #modal {
     z-index: 500;
     position: fixed;
-    height: 100vh;
-    top: 3em;
+    height: 80vh;
+    width: 80vw;
+    top: 53vh;
 }
 }
