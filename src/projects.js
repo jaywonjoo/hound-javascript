@@ -222,6 +222,9 @@ function populateTeamMembers(){
         // grab project collaborators
         let collaborators = snapshot.data().collaborators
         // console.log(collaborators)
+
+        if (collaborators) {
+
         let i = 0
         for (i = 0; i < collaborators.length; i++) {
             // console.log(collaborators[i])
@@ -326,6 +329,10 @@ function populateTeamMembers(){
 
 
         }
+    } else {
+        setDataIndex()
+        closeOverlays()
+    }
 
 
     })
