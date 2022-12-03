@@ -136,6 +136,7 @@ body {
 
 .page-header {
     padding-left: 5%;
+    margin: 4% 0 2% 0;
 }
 
 .top-row {
@@ -166,9 +167,9 @@ body {
     justify-content: center;
     align-items: center;
     /* height: 100%; */
-    margin: 1em 0;
+    margin: 0 0 1em 0;
     /* padding-bottom: 6vh; */
-    height: 27em;
+    height: 39.5em;
 }
 
 .big-wrap {
@@ -184,17 +185,20 @@ body {
 
 .left-ticket-info-section {
     border-bottom: solid black;
+    height: 20vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .chatbox {
     width: 100%;
-    /* height: 30vh; */
+    height: 58vh;
 }
 
 .right-chat-section {
     width: 100%;
     border: none;
-    height: 30em;
+    height: 58vh;
 }
 
 .user-dropdown-modal {
