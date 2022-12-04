@@ -333,4 +333,27 @@ body {
     height: 75%;
 }
 
+.header-kebab-spacer {
+    width: 6%;
+    height: 10px;
+}
+
+.ticket-description {
+    display: none;
+}
+
+.ticket-title {
+    margin-left: 3%;
+    width: 45%;
+}
+
+.ticket-author {
+    width: 45%;
+}
+
+.ticket-kebab-div {
+    width: 20px;
+}
+
+
 }
