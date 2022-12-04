@@ -13,6 +13,7 @@ import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./dashboard.css";
 import "./dashboard800.css";
 import "./nav.css";
+import "./darkmode.css";
 
 
 const firebaseConfig = {

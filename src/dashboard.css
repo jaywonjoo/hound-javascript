@@ -49,7 +49,7 @@ body {
   width: 27px;
   height: 27px;
   margin-bottom: -2px;
-  opacity: 0.9;
+  /* opacity: 0.9; */
 }
 
 .user-dropdown-modal {

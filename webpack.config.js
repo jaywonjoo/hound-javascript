@@ -16,6 +16,7 @@ module.exports = {
     signup: "./src/signup.js",
     dashboard: "./src/dashboard.js",
     projects: "./src/projects.js",
+    darkmode: "./src/darkmode.js",
   },
   output: {
     path: path.resolve(__dirname, "dist"),

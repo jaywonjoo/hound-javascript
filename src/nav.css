@@ -164,7 +164,7 @@
   .delineator {
     width: 90%;
     height: 20px;
-    border-bottom: solid black;
+    border-bottom: solid 1px black;
     /* margin-bottom: 5%; */
   }
 

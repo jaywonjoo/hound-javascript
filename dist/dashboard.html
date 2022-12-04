@@ -5,16 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <script defer src="dashboard.bundle.js"></script>
+  <script defer src="darkmode.bundle.js"></script>
   
 </head>
-<body>
+<body class="solid light-mode-solid">
+
+  <button id="darkModeBtn" class="dark-mode-btn">
+    <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
+  </button>
 
 <div class="master-container">
 
 <!-- navbar --------------------------------------------------------------------------- -->
-<nav class="navbar">
+<nav class="navbar solid light-mode-solid">
   <div class='nav-left'>
-    <img loading="lazy" class='nav-logo' src="../images/hound.svg"/>
+    <img loading="lazy" class='nav-logo logo light-mode-logo' src="../images/hound.svg"/>
     <h1 class='brand-title'>Hound</h1>
   </div>
   
@@ -33,7 +38,7 @@
 <!-- navbar --------------------------------------------------------------------------- -->
 
 
-<div class="modal user-dropdown-modal">
+<div class="modal user-dropdown-modal transparent light-mode-transparent">
   <div class="overlay user-dropdown-overlay">
     <button id="logoutButton">logout</button>
   </div>
@@ -75,8 +80,8 @@
     </div>
 
     <div class="sidebar-button">
-      <div class="sidebar-button-circle">></div>
-      <div class="sidebar-button-bar"></div>
+      <div class="sidebar-button-circle transparent light-mode-transparent">></div>
+      <div class="sidebar-button-bar transparent light-mode-transparent"></div>
     </div>
 
     <div class="sidebar-button-bar-spacer"></div>
@@ -90,7 +95,7 @@
       <h1 class="page-header" >Projects</h2>
       <div class="project-section">
           <h2 class="project-section-header"> Your Projects 
-            <button id="button" class="open-modal-btn new-project-btn">New Project</button>
+            <button id="button" class="open-modal-btn new-project-btn button light-mode-button">New Project</button>
           </h2>
           <div id="project-container"></div>
       </div>
