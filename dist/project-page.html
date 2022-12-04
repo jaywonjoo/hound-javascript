@@ -9,12 +9,12 @@
     <link class="nav-icon" rel="icon" src="../images/hound.svg">
     
     <style>
-        #modal.open {
+        .modal.open {
           display: block;
           z-index: 501;
         }
 
-        #overlay.open {
+        .overlay.open {
           display: block;
           z-index: 500;
         }
@@ -45,8 +45,8 @@
   <!-- navbar --------------------------------------------------------------------------- -->
 
 
-  <div id="modal" class="modal user-dropdown-modal">
-    <div id="overlay" class="overlay">
+  <div class="modal user-dropdown-modal">
+    <div class="overlay">
       <button id="logoutButton">logout</button>
     </div>
   </div>
@@ -165,12 +165,12 @@
     <!-- dashboard --------------------------------------------------------------------------- -->
     <!-- content --------------------------------------------------------------------------- -->
 
-    <div id="overlay" class="overlay blurred-overlay"></div>
+    <div class="overlay blurred-overlay"></div>
 
 
 
 
-    <div id="modal" class="modal all-other-modals">
+    <div class="modal all-other-modals">
       <form class="add-member-form">
         <h3>Team Members</h3>
         <div id="populatable-member-div" class="populatable-member-div"></div>
@@ -202,8 +202,8 @@
         
 
 
-          <div id="overlay" class="overlay blurred-overlay"></div>
-          <div id="modal" class="modal all-other-modals">
+          <div class="overlay blurred-overlay"></div>
+          <div class="modal all-other-modals">
             <form class="create-ticket-form">
               <label for="author">Author:</label>
               <input type="text" name="author" required>
@@ -328,9 +328,9 @@
 
     </div>
         
-    <div id="overlay" class="overlay blurred-overlay"></div>
+    <div class="overlay blurred-overlay"></div>
 
-    <div id="modal" class="modal all-other-modals">
+    <div class="modal all-other-modals">
       <form class="edit-ticket-form">
         <!-- <h3>Edit Ticket</h3> -->
         <!-- <div id="populatable-member-div" class="populatable-member-div"></div> -->

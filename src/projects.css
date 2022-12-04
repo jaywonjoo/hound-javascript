@@ -48,6 +48,10 @@ body {
   /* overflow-y: hidden; 113022*/
 }
 
+.open {
+  display: block;
+  /* z-index: 501; */
+}
 
 .master-container {
   overflow-y: hidden;
@@ -219,7 +223,7 @@ align-items: center;
   margin: 1% 2% 0 2%;
 }
 
-#modal {
+.modal {
     display: none;
     /* top: 40%;
     left: 50%;
@@ -232,6 +236,8 @@ align-items: center;
     height: auto;
     box-shadow: 0 0 10px #919191; */
   }
+
+
 
   .all-other-modals {
     position: absolute;
@@ -296,7 +302,7 @@ align-items: center;
   }
 }
 
-  #overlay {
+  .overlay {
     display: none;
     position: absolute;
     top: 0;
@@ -305,7 +311,6 @@ align-items: center;
     bottom: 0;
     /* background-color: rgba(0, 0, 0, .75); */
   }
-
 
 /* top row **************************************************************** */
 .top-row {

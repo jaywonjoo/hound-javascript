@@ -36,6 +36,12 @@ const firebaseConfig = {
 // init firebase app
 initializeApp(firebaseConfig)
 
+const modal = document.getElementsByClassName("modal");
+const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+const overlay = document.getElementsByClassName("overlay");
+
+
+
 // init services
 const db = getFirestore()
 
@@ -290,11 +296,13 @@ function populateTeamMembers(){
                 teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
                 teamMemberLineItemKebab.classList.add("open-modal-btn");
                 teamMemberLineItemId.setAttribute("style", "display: none");
-                teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                // teamMemberLineItemOverlay.setAttribute("id", "overlay");
+                teamMemberLineItemOverlay.classList.add("overlay");
+            
                 teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 teamMemberLineItemModal.classList.add("modal");
                 teamMemberLineItemModal.classList.add("delete-button-modal");
-                teamMemberLineItemModal.setAttribute("id", "modal");
+                // teamMemberLineItemModal.setAttribute("id", "modal");
                 teamMemberLineItemModal.setAttribute("style", "position: sticky");
                 teamMemberLineItemModal.setAttribute("style", "position: sticky");
                 teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
@@ -312,7 +320,7 @@ function populateTeamMembers(){
                         teamMemberBody.innerHTML = ""
                         populateTeamMembers()
                         setDataIndex()
-                        closeOverlays()
+                        closeOverlay()
                     })
 
                 })
@@ -321,7 +329,7 @@ function populateTeamMembers(){
                 
                 
                 setDataIndex()
-                closeOverlays()
+                closeOverlay()
                     
                 })
             })
@@ -331,7 +339,7 @@ function populateTeamMembers(){
         }
     } else {
         setDataIndex()
-        closeOverlays()
+        closeOverlay()
     }
 
 
@@ -475,16 +483,18 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     ticketKebabDiv.setAttribute("style", "width: 5%")
                     ticketKebabButton.classList.add("ticket-kebab-button")
                     ticketKebabButton.classList.add("open-modal-btn")
-                    ticketOverlay.setAttribute("id", "overlay")
+                    // ticketOverlay.setAttribute("id", "overlay")
+                    ticketOverlay.classList.add("overlay")
+
                     ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                     ticketModal.classList.add("modal")
                     ticketModal.classList.add("delete-button-modal")
-                    ticketModal.setAttribute("id", "modal")
+                    // ticketModal.setAttribute("id", "modal")
                     ticketModal.setAttribute("style", "position: sticky")
                     ticketDeleteButton.classList.add("ticket-delete-button")
 
                     setDataIndex()
-                    closeOverlays()
+                    closeOverlay()
 
                     ticketDeleteButton.addEventListener("click", () => {
                         const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
@@ -512,7 +522,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                             chatbox.innerHTML = "";
 
                             setDataIndex()
-                            closeOverlays()
+                            closeOverlay()
                         })
     
                     })
@@ -823,7 +833,7 @@ modalAddMemberForm.addEventListener("submit", (e) => {
             .then(() => {
                 checkbox.checked = false;
                 setDataIndex()
-                closeOverlays()
+                closeOverlay()
               })
         }
 
@@ -833,90 +843,71 @@ modalAddMemberForm.addEventListener("submit", (e) => {
         const teamMemberBody = document.querySelector(".team-member-body") 
     teamMemberBody.innerHTML = ""
     populateTeamMembers()
-
-
-// // Atomically add a new region to the "regions" array field.
-// await updateDoc(washingtonRef, {
-//     regions: arrayUnion("greater_virginia")
-// });
-
-// // Atomically remove a region from the "regions" array field.
-// await updateDoc(washingtonRef, {
-//     regions: arrayRemove("east_coast")
-// });
-
-    
     closeModal();
-    function closeModal() {
-        const overlayer = document.querySelectorAll("#overlay");
-        overlayer.forEach((overlayer) => {
-            overlayer.classList.remove("open")
-        })
-
-        const modalss = document.querySelectorAll("#modal");
-        modalss.forEach((modalll) => {
-            modalll.classList.remove("open")
-        })
-    }
-
-
 })
 
 
 // ************************************************************************************************************************************************
 
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
-const modalparent = document.getElementsByClassName("modal");
-// modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
+// const modal = document.getElementsByClassName("modal");
+// // modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
 
 
-// Get the button that opens the modal
+// // Get the button that opens the modal
 
-const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
+// const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+// const overlay = document.getElementsByClassName("overlay");
+
+
 
 // setTimeout(() => {
 
 // When the user clicks the button, open the modal
 function setDataIndex() {
     let i = 0
-    for (i = 0; i < modal_btn_multi.length; i++)
+    for (i = 0; i < modalBtnMulti.length; i++)
     {
-        modal_btn_multi[i].setAttribute('data-index', i);
-        modalparent[i].setAttribute('data-index', i);
+        modalBtnMulti[i].setAttribute('data-index', i);
+        modal[i].setAttribute('data-index', i);
         overlay[i].setAttribute('data-index', i);
     }
 
-    for (i = 0; i < modal_btn_multi.length; i++)
+    for (i = 0; i < modalBtnMulti.length; i++)
     {
-        modal_btn_multi[i].onclick = function() {
-            var ElementIndex = this.getAttribute('data-index');
-        //   modalparent[ElementIndex].classList.remove("hidden")
-          modalparent[ElementIndex].classList.add("open")
-          overlay[ElementIndex].classList.add("open")
+        modalBtnMulti[i].onclick = function() {
+            let ElementIndex = this.getAttribute('data-index');
+            modal[ElementIndex].classList.add("open")
+            overlay[ElementIndex].classList.add("open")
         };
     }
-
-    // modal_btn_multi[0].onclick = function() {
-    //     populateUserModal()
-    // }
-
 }
-// }, "1000")
 
-function closeOverlays() {
-    // Close modal using overlay
-    const overlays = document.querySelectorAll("#overlay");
-    overlays.forEach((overlayer) => {
-        overlayer.addEventListener("click", closeModal)
-        function closeModal() {
-            const modalss = document.querySelectorAll("#modal");
-            modalss.forEach((modalll) => {
-                modalll.classList.remove("open")
-            })
-            overlayer.classList.remove("open")
-        }
-    })
+
+function closeOverlay() {
+    for (let i = 0; i < overlay.length; i++)
+    {
+        overlay[i].onclick = function() {
+            let ElementIndex = this.getAttribute('data-index');
+        //   modalparent[ElementIndex].classList.remove("hidden")
+          modal[ElementIndex].classList.remove("open")
+          overlay[ElementIndex].classList.remove("open")
+        };
+    }
 }
+
+function closeModal() {
+        const overlays = document.querySelectorAll(".overlay");
+        overlays.forEach((overlay) => {
+            overlay.classList.remove("open")
+        })
+
+        const modals = document.querySelectorAll(".modal");
+        modals.forEach((modal) => {
+            modal.classList.remove("open")
+        })
+}
+
 
 // linking firestore project collection
 const projectRef = collection(db, 'projects')
@@ -937,22 +928,9 @@ createTicketForm.addEventListener('submit', (e) => {
     .then(() => {
         createTicketForm.reset()
         setDataIndex()
-        closeOverlays()
+        closeOverlay()
+        closeModal();
     })
-
-    // createTicket()
-    closeModal();
-    function closeModal() {
-        const overlayer = document.querySelectorAll("#overlay");
-        overlayer.forEach((overlayer) => {
-            overlayer.classList.remove("open")
-        })
-
-        const modalss = document.querySelectorAll("#modal");
-        modalss.forEach((modalll) => {
-            modalll.classList.remove("open")
-        })
-    }
 })    
 
 
@@ -1189,19 +1167,8 @@ editTicketForm.addEventListener("submit", (e) => {
         })
 
         setDataIndex()
-        closeOverlays()
-
+        closeOverlay()
         closeModal();
-        function closeModal() {
-            const overlayer = document.querySelectorAll("#overlay");
-            overlayer.forEach((overlayer) => {
-                overlayer.classList.remove("open")
-            })
-            const modalss = document.querySelectorAll("#modal");
-            modalss.forEach((modalll) => {
-                modalll.classList.remove("open")
-            })
-        }    
     })
         
 })
