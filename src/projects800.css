@@ -67,7 +67,7 @@ body {
     width: 25px;
     height: 25px;
     border: solid 1px black;
-    background-color: rgb(255, 255, 255, .3);
+    /* background-color: rgb(255, 255, 255, .3); */
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     position: fixed;
@@ -90,7 +90,7 @@ body {
     left: 0;
     position: fixed;
     border-right: solid 1px black;
-    background-color: rgb(255, 255, 255, .3);
+    /* background-color: rgb(255, 255, 255, .3); */
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
 }

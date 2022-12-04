@@ -48,6 +48,39 @@ body {
   /* overflow-y: hidden; 113022*/
 }
 
+.dark-mode-button {
+  position: fixed;
+  top: 75vh;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.38);
+  border: none;
+  border-radius: 15px 0 0 15px;
+  width: 75px;
+}
+
+.dark-mode-solids {
+  /* background-color: rgb(33, 33, 33); */
+  background-color: rgb(24, 26, 27, 0.9);
+  color: #C0BBB3;
+}
+
+.light-mode-solids {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-bottom: solid 1px rgb(0, 0, 0, .25);
+  color: rgb(63, 63, 63);
+}
+
+.light-mode-transparent {
+  background-color: rgb(255, 255, 255, .3);
+  color: black;
+}
+
+.dark-mode-transparent {
+  background-color: rgba(24, 26, 27, 0.3);
+  color: #e8e6e3;
+}
+
 .modal.open {
   display: block;
   z-index: 501;
@@ -68,7 +101,7 @@ body {
   position: relative;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.9);
+  /* background-color: rgba(255, 255, 255, 0.9); */
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   padding: 0px 25px;
@@ -76,7 +109,7 @@ body {
   height: 5vh;
   /*z-index: 2;*/
   transition: box-shadow .25s;
-  border-bottom: solid 1px rgb(0, 0, 0, .25);
+  /* border-bottom: solid 1px rgb(0, 0, 0, .25); */
   z-index: 1;
 }
 
@@ -126,7 +159,7 @@ body {
 .dashboard-master {
   width: 20em;
   height: 95vh;
-  background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: rgba(255, 255, 255, 0.2); */
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   border-right: solid 1px rgb(0, 0, 0, .25);
@@ -353,7 +386,7 @@ align-items: center;
 }
 
 .top-row-top-section {
-  background-color: rgb(255, 255, 255, .8);
+  /* background-color: rgb(255, 255, 255, .8); */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -398,7 +431,7 @@ align-items: center;
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
-    background-color: rgba(255, 255, 255, 0.3);
+    /* background-color: rgba(255, 255, 255, 0.3); */
     z-index: 2;
   }
 
@@ -548,7 +581,7 @@ align-items: center;
   }
 
   .ticket-section {
-    background-color: rgb(255, 255, 255, .3);
+    /* background-color: rgb(255, 255, 255, .3); */
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     width: 65%;
@@ -697,7 +730,7 @@ box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
 backdrop-filter: blur(40px);
 -webkit-backdrop-filter: blur(40px);
 
-background-color: rgba(255, 255, 255, 0.3);
+/* background-color: rgba(255, 255, 255, 0.3); */
 height: 100%;
 }
 

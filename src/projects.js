@@ -1207,3 +1207,29 @@ overlayer.addEventListener("click", () => {
 })
 
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
+
+// FEATURE: DARK MODE ************************************************************************************************************************
+
+const darkModeBtn = document.querySelector("#darkModeBtn")
+const transparent = document.querySelectorAll(".transparent")
+const solid = document.querySelectorAll(".solid")
+
+
+darkMode()
+function darkMode() {
+    darkModeBtn.addEventListener("click", (e) => {
+        e.stopPropagation()
+
+        for (let i = 0; i < transparent.length; i++) {
+            transparent[i].classList.toggle("dark-mode-transparent")
+            transparent[i].classList.toggle("light-mode-transparent")
+        }
+
+        for (let i = 0; i < solid.length; i++) {
+            solid[i].classList.toggle("dark-mode-solids")
+            solid[i].classList.toggle("light-mode-solids")
+        }
+    })
+  }
+
+// FEATURE: DARK MODE ************************************************************************************************************************

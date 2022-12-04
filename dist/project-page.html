@@ -11,9 +11,14 @@
 </head>
 <body>
 
+<button id="darkModeBtn" class="dark-mode-button">
+  <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
+</button>
+
+
 <div class="master-container">
   <!-- navbar --------------------------------------------------------------------------- -->
-  <nav class="navbar">
+  <nav class="navbar solid light-mode-solids">
     <div class='nav-left'>
       <img loading="lazy" class='nav-logo' src="../images/hound.svg"/>
       <h1 class='brand-title'>Hound</h1>
@@ -47,7 +52,7 @@
 
   <!-- dashboard --------------------------------------------------------------------------- -->
   <!-- <div class="dashboard-and-bar"> -->
-    <div class="dashboard-master">
+    <div class="dashboard-master transparent">
 
         <div class="dashboard-links">
           <!-- <h3>Dashboard</h3> 
@@ -143,8 +148,8 @@
     </div>
 
     <div class="sidebar-button">
-      <div class="sidebar-button-circle">></div>
-      <div class="sidebar-button-bar"></div>
+      <div class="sidebar-button-circle transparent light-mode-transparent">></div>
+      <div class="sidebar-button-bar transparent light-mode-transparent"></div>
     </div>
 
     <div class="sidebar-button-bar-spacer"></div>
@@ -175,8 +180,8 @@
         <h1 class="page-header"></h1>    
         <div class="top-row"> 
           <!-- Team Members Section -->
-          <div class="team-members">
-            <div class="top-row-top-section">
+          <div class="team-members transparent light-mode-transparent">
+            <div class="top-row-top-section solid light-mode-solids">
               <h3 class="team-members-header-label">Team Members</h3>
               <button id="memberModalBtn" class="open-modal-btn">Add Member</button>
             </div>
@@ -230,8 +235,8 @@
           
 
           <!-- ticket section -->
-          <div class="ticket-section">
-            <div class="top-row-top-section">
+          <div class="ticket-section transparent light-mode-transparent">
+            <div class="top-row-top-section solid light-mode-solids">
               <h3 class="ticket-section-header-label">Tickets</h3>
               <button id="ticketModalBtn" class="open-modal-btn">New Ticket</button>
             </div>
@@ -260,8 +265,8 @@
         <!-- Selected Ticket Info Section -->
         <div class="bottom-row"> 
 
-        <div class="big-wrap">
-        <div class="top-row-top-section">
+        <div class="big-wrap transparent light-mode-transparent">
+        <div class="top-row-top-section solid light-mode-solids">
         <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
         <button id="ticketModalBtn" class="open-modal-btn">Edit Ticket</button>
         </div>
