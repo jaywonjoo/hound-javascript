@@ -48,9 +48,14 @@ body {
   /* overflow-y: hidden; 113022*/
 }
 
-.open {
+.modal.open {
   display: block;
-  /* z-index: 501; */
+  z-index: 501;
+}
+
+.overlay.open {
+  display: block;
+  z-index: 500;
 }
 
 .master-container {
@@ -253,13 +258,13 @@ align-items: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   }
 
-  #delete-button-modal {
+  /* #delete-button-modal {
     position: sticky;
     bottom: 0;
     width: 2vw;
     height: 2vh;
     box-shadow: 0 0 10px #000000;
-  }
+  } */
    
   .team-member-delete-button {
     background-color: red;
@@ -304,12 +309,26 @@ align-items: center;
 
   .overlay {
     display: none;
+    /* background-color: rgba(0, 0, 0, .75); */
+  }
+
+  .blurred-overlay {
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* background-color: rgba(0, 0, 0, .75); */
+  }
+
+  .clear-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
 /* top row **************************************************************** */

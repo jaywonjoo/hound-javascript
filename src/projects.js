@@ -338,6 +338,7 @@ function populateTeamMembers(){
 
         }
     } else {
+        populateTeamMembers()
         setDataIndex()
         closeOverlay()
     }
@@ -840,7 +841,7 @@ modalAddMemberForm.addEventListener("submit", (e) => {
     
     })
 
-        const teamMemberBody = document.querySelector(".team-member-body") 
+    const teamMemberBody = document.querySelector(".team-member-body") 
     teamMemberBody.innerHTML = ""
     populateTeamMembers()
     closeModal();
