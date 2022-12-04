@@ -287,8 +287,8 @@ function populateTeamMembers(){
                 teamMemberLineItemDeleteButton.innerText = "delete"
                 teamMemberLineItemId.innerText = collaboratorList[0].uid;
 
-
-                teamMemberLineItemKebabDiv.setAttribute("style", "width: 5%");
+                teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
+                // teamMemberLineItemKebabDiv.setAttribute("style", "width: 5%");
                 teamMemberLineItem.classList.add("team-member-line-item");
                 teamMemberLineItemName.classList.add("team-member-line-item-name");
                 teamMemberLineItemEmail.classList.add("team-member-line-item-email");
@@ -771,38 +771,38 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
 
 
 
-// 4. Delete Ticket Form
-const deleteTicketForm = document.querySelector('.delete-ticket-form')
-deleteTicketForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+// // 4. Delete Ticket Form
+// const deleteTicketForm = document.querySelector('.delete-ticket-form')
+// deleteTicketForm.addEventListener('submit', (e) => {
+//     e.preventDefault()
 
-    const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
-    deleteDoc(docRef)
-        .then(() => {
-            deleteTicketForm.reset()
+//     const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
+//     deleteDoc(docRef)
+//         .then(() => {
+//             deleteTicketForm.reset()
 
-            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-            const populatedAuthorSection = document.querySelector("#populated-author-section")
-            const populatedDescriptionSection = document.querySelector("#populated-description-section")
-            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-            const populatedTicketSection = document.querySelector("#populated-priority-section")
-            const populatedTypeSection = document.querySelector("#populated-type-section")
+//             const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+//             const populatedAuthorSection = document.querySelector("#populated-author-section")
+//             const populatedDescriptionSection = document.querySelector("#populated-description-section")
+//             const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+//             const populatedTicketSection = document.querySelector("#populated-priority-section")
+//             const populatedTypeSection = document.querySelector("#populated-type-section")
 
-            populatedTicketTitleSection.innerHTML = "";
-            populatedAuthorSection.innerHTML = "";
-            populatedDescriptionSection.innerHTML = "";
-            populatedTicketInfoSection.innerHTML = "";
-            populatedTicketSection.innerHTML = "";
-            populatedTypeSection.innerHTML = "";
+//             populatedTicketTitleSection.innerHTML = "";
+//             populatedAuthorSection.innerHTML = "";
+//             populatedDescriptionSection.innerHTML = "";
+//             populatedTicketInfoSection.innerHTML = "";
+//             populatedTicketSection.innerHTML = "";
+//             populatedTypeSection.innerHTML = "";
 
-            const chatbox = document.querySelector(".chatbox");
-            chatbox.innerHTML = "";
+//             const chatbox = document.querySelector(".chatbox");
+//             chatbox.innerHTML = "";
 
-        })
+//         })
 
 
 
-})
+// })
 
 
 

@@ -66,7 +66,7 @@ body {
     aspect-ratio: 1;
     width: 25px;
     height: 25px;
-    border: solid black;
+    border: solid 1px black;
     background-color: rgb(255, 255, 255, .3);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
@@ -80,7 +80,6 @@ body {
     margin-left: 4px;
     font-size: .75em;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-
 }
 
 .sidebar-button-bar {
@@ -90,7 +89,7 @@ body {
     top: 0%;
     left: 0;
     position: fixed;
-    border-right: solid black;
+    border-right: solid 1px black;
     background-color: rgb(255, 255, 255, .3);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
@@ -124,7 +123,7 @@ body {
     position: fixed;
     height: 95vh;
     overflow: scroll;
-    left: -75vw;
+    left: calc(-75vw - 1px);
     top: 3em;
 }
 
@@ -217,11 +216,11 @@ body {
 }
 
 .left-ticket-info-section {
-    border-bottom: solid black;
+    border-bottom: solid 1px black;
     height: 26vh;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding: .5em;
+    padding: .5em .5em .5em 3%;
 }
 
 .mobile-top {
@@ -300,6 +299,38 @@ body {
     height: 2.5vh;
     width: 87.5vw;
     top: -2.5vh;
+}
+
+.team-member-line-item-name {
+    margin-left: 3%;
+}
+
+.team-member-line-item-phone {
+    display: none;
+}
+
+.team-member-line-item-email {
+    width: 56%;
+}
+
+.team-member-line-item-kebab-div {
+    width: 6%;
+}
+
+.team-members-header-label {
+    padding-left: 3%;
+}
+
+.ticket-section-header-label {
+    padding-left: 3%;
+}
+
+.selected-ticket-info-header {
+    padding-left: 3%;
+}
+
+#tickets {
+    height: 75%;
 }
 
 }

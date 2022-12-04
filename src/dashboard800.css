@@ -66,7 +66,7 @@
         aspect-ratio: 1;
         width: 25px;
         height: 25px;
-        border: solid black;
+        border: solid 1px black;
         background-color: rgb(255, 255, 255, .3);
         backdrop-filter: blur(40px);
         -webkit-backdrop-filter: blur(40px);
@@ -80,7 +80,6 @@
         margin-left: 4px;
         font-size: .75em;
         font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-    
     }
     
     .sidebar-button-bar {
@@ -90,7 +89,7 @@
         top: 0%;
         left: 0;
         position: fixed;
-        border-right: solid black;
+        border-right: solid 1px black;
         background-color: rgb(255, 255, 255, .3);
         backdrop-filter: blur(40px);
         -webkit-backdrop-filter: blur(40px);
@@ -124,7 +123,7 @@
         position: fixed;
         height: 95vh;
         overflow: scroll;
-        left: -75vw;
+        left: calc(-75vw - 1px);
         top: 3em;
     }
     
@@ -249,9 +248,6 @@
         left: 0%;
     }
 
-    p {
-        padding-left: 5%;
-      }
     
       #project-container {
         padding-left: 5%;
@@ -263,7 +259,16 @@
       
     
       .project-card {
-        margin: 10px 10px 10px 0;
+        margin: 10px 10px 0 0;
+        width: 145px;
+      }
+
+      .project-section-header {
+        height: 3vh;
+        padding-left: 5%;
+        margin: 10px 0 0 0;
+        font-size: large;
+        font-weight: 500;
       }
 }
 
