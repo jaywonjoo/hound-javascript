@@ -47,14 +47,12 @@
     cursor: pointer;
   }
   
-  .nav-logo {
-    /* width: 30px;
-    height: 30px;*/
+  /* .nav-logo {
     width: 27px;
     height: 27px;
     margin-bottom: -2px;
     opacity: 0.9;
-  }
+  } */
   
   .brand-title {
     font-size: 1.75rem;

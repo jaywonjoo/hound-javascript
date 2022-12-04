@@ -22,9 +22,19 @@
         z-index: 1000;
         width: 100vw;
         overflow-x: hidden;
-        padding: 0;
+        padding: 0 4px 0 4px;
         margin: 0;
         z-index: 1003;
+    }
+
+    .nav-logo {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0;
+    }
+
+    .nav-user-icon {
+        margin: 0 9px 0 0;
     }
     
     #logoutButton {
