@@ -15,12 +15,6 @@ body {
     /* overflow-y: scroll */
 }
 
-#overlay {
-    position: fixed;
-    height: 100vh;
-    /* top: 9.5%; */
-    left: 0%;
-}
 
 .navbar {
     height: 3em;
@@ -269,10 +263,6 @@ body {
     width: 80vw;
     top: 53vh;
 }
-
-/* .all-other-overlays {
-    background-color: ;
-} */
 
 .blurred-overlay {
     position: fixed;

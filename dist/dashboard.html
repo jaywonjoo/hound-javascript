@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
   <script defer src="dashboard.bundle.js"></script>
-
-
-  <style>
-      #modal.open {
-        display: block;
-      }
-      #overlay.open {
-        display: block;
-      }
-    </style>
   
 </head>
 <body>
@@ -43,8 +33,8 @@
 <!-- navbar --------------------------------------------------------------------------- -->
 
 
-<div id="modal" class="modal user-dropdown-modal">
-  <div id="overlay" class="overlay" style="z-index: 0">
+<div class="modal user-dropdown-modal">
+  <div class="overlay clear-overlay" style="z-index: 0">
     <button id="logoutButton" style="z-index: 1">logout</button>
   </div>
 </div>
@@ -91,7 +81,7 @@
 
     <div class="sidebar-button-bar-spacer"></div>
 
-    <div id="overlay" class="overlay blurred-overlay"></div>
+    <div class="overlay blurred-overlay"></div>
     <!-- dashboard --------------------------------------------------------------------------- -->
 
     <div class="content-section">
@@ -111,9 +101,9 @@
       <div id="shared-project-container"></div>
 
       <!-- merge -->
-      <div id="overlay" class="overlay"></div>
+      <div class="overlay"></div>
 
-      <div id="modal" class="modal">
+      <div class="modal all-other-modals">
 
           <form class="modal-create-project-button">
             <label for="name">Name:</label>

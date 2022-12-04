@@ -31,13 +31,18 @@ const sharedProjectContainer = document.querySelector("#shared-project-container
 
 // const newProject = document.createElement("div");
 
-const modal = document.querySelector("#modal");
-const openModalButton = document.querySelector("#open-modal-btn");
-const closeModalButton = document.querySelector("#close-modal-btn");
-const overlay = document.getElementsByClassName("overlay");
+// const modal = document.querySelector("#modal");
+// const openModalButton = document.querySelector("#open-modal-btn");
+// const closeModalButton = document.querySelector("#close-modal-btn");
+// const overlay = document.getElementsByClassName("overlay");
 
 // init firebase app
 initializeApp(firebaseConfig);
+
+const modal = document.getElementsByClassName("modal");
+const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+const overlay = document.getElementsByClassName("overlay");
+
 
 // init services
 const db = getFirestore();
@@ -363,58 +368,43 @@ overlayer.addEventListener("click", () => {
 
 
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
-const modalparent = document.getElementsByClassName("modal");
-// modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
+// const modal = document.getElementsByClassName("modal");
+// const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+// const overlay = document.getElementsByClassName("overlay");
 
-
-// Get the button that opens the modal
-
-const modal_btn_multi = document.getElementsByClassName("open-modal-btn");
-// const overlay = document.querySelector(".overlay")
-// setTimeout(() => {
 
 // When the user clicks the button, open the modal
 setDataIndex()
 function setDataIndex() {
-    let i = 0
-    for (i = 0; i < modal_btn_multi.length; i++)
-    {
-        modal_btn_multi[i].setAttribute('data-index', i);
-        modalparent[i].setAttribute('data-index', i);
-        overlay[i].setAttribute('data-index', i);
-    }
+  let i = 0
+  for (i = 0; i < modalBtnMulti.length; i++)
+  {
+      modalBtnMulti[i].setAttribute('data-index', i);
+      modal[i].setAttribute('data-index', i);
+      overlay[i].setAttribute('data-index', i);
+  }
 
-    for (i = 0; i < modal_btn_multi.length; i++)
-    {
-        modal_btn_multi[i].onclick = function() {
-            var ElementIndex = this.getAttribute('data-index');
-        //   modalparent[ElementIndex].classList.remove("hidden")
-          modalparent[ElementIndex].classList.add("open")
+  for (i = 0; i < modalBtnMulti.length; i++)
+  {
+      modalBtnMulti[i].onclick = function() {
+          let ElementIndex = this.getAttribute('data-index');
+          modal[ElementIndex].classList.add("open")
           overlay[ElementIndex].classList.add("open")
-        };
-    }
-
-    // modal_btn_multi[0].onclick = function() {
-    //     populateUserModal()
-    // }
-
+      };
+  }
 }
-// }, "1000")
 
-closeOverlays()
-function closeOverlays() {
-    // Close modal using overlay
-    const overlays = document.querySelectorAll("#overlay");
-    overlays.forEach((overlayer) => {
-        overlayer.addEventListener("click", closeModal)
-        function closeModal() {
-            const modalss = document.querySelectorAll("#modal");
-            modalss.forEach((modalll) => {
-                modalll.classList.remove("open")
-            })
-            overlayer.classList.remove("open")
-        }
-    })
+closeOverlay()
+function closeOverlay() {
+  for (let i = 0; i < overlay.length; i++)
+  {
+      overlay[i].onclick = function() {
+          let ElementIndex = this.getAttribute('data-index');
+      //   modalparent[ElementIndex].classList.remove("hidden")
+        modal[ElementIndex].classList.remove("open")
+        overlay[ElementIndex].classList.remove("open")
+      };
+  }
 }
 
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
