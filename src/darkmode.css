@@ -12,11 +12,13 @@
   
   .light-mode-logo {
     filter: invert(7%) sepia(83%) saturate(11%) hue-rotate(334deg) brightness(99%) contrast(95%);
+    -webkit-filter: invert(7%) sepia(83%) saturate(11%) hue-rotate(334deg) brightness(99%) contrast(95%);
   }
   
   .dark-mode-logo {
     /* filter: invert(91%) sepia(8%) saturate(138%) hue-rotate(2deg) brightness(106%) contrast(86%); */
     filter: invert(97%) sepia(8%) saturate(201%) hue-rotate(302deg) brightness(129%) contrast(90%);
+    -webkit-filter: invert(97%) sepia(8%) saturate(201%) hue-rotate(302deg) brightness(129%) contrast(90%);
   }
   
   .light-mode-solid {
