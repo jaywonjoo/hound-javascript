@@ -261,6 +261,7 @@ function populateTeamMembers(){
                     const teamMemberLineItemPhone = document.createElement("div")
                     const teamMemberLineItemKebabDiv = document.createElement("div")
                     const teamMemberLineItemKebab = document.createElement("button")
+                    const teamMemberLineItemKebabText = document.createElement("span")
                     const teamMemberLineItemId = document.createElement("div")
                 const teamMemberLineItemOverlay = document.createElement("div")
                 const teamMemberLineItemModal = document.createElement("div")
@@ -273,6 +274,7 @@ function populateTeamMembers(){
                     teamMemberLineItem.appendChild(teamMemberLineItemPhone)
                     teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
                         teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
+                            teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
                         teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemOverlay)
                         teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
                             teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
@@ -284,7 +286,7 @@ function populateTeamMembers(){
                 teamMemberLineItemName.innerText = fullName;
                 teamMemberLineItemEmail.innerText = collaboratorList[0].email;
                 teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
-                teamMemberLineItemKebab.innerText = "...";
+                teamMemberLineItemKebabText.innerText = "...";
                 teamMemberLineItemDeleteButton.innerText = "delete"
                 teamMemberLineItemId.innerText = collaboratorList[0].uid;
 
@@ -299,6 +301,7 @@ function populateTeamMembers(){
                 teamMemberLineItemId.setAttribute("style", "display: none");
                 // teamMemberLineItemOverlay.setAttribute("id", "overlay");
                 teamMemberLineItemOverlay.classList.add("overlay");
+                teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
             
                 teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 teamMemberLineItemModal.classList.add("modal");
@@ -449,6 +452,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     const ticketId = document.createElement("div")
                     const ticketKebabDiv = document.createElement("div")
                     const ticketKebabButton = document.createElement("button")
+                    const ticketKebabButtonText = document.createElement("span")
                     const ticketOverlay = document.createElement("div")
                     const ticketModal = document.createElement("div")
                     const ticketDeleteButton = document.createElement("button")
@@ -463,6 +467,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                         populateTicketInfoSection.appendChild(ticketId)
                             ticketUl.appendChild(ticketKebabDiv)
                                 ticketKebabDiv.appendChild(ticketKebabButton)
+                                    ticketKebabButton.appendChild(ticketKebabButtonText)
                                 ticketKebabDiv.appendChild(ticketOverlay)
                                 ticketKebabDiv.appendChild(ticketModal)
                                     ticketModal.appendChild(ticketDeleteButton)
@@ -470,7 +475,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     TicketTitle.innerText = tickets[i].title;
                     TicketDescription.innerText = tickets[i].description;
                     TicketAuthor.innerText = tickets[i].author;   
-                    ticketKebabButton.innerText = "..."          
+                    ticketKebabButtonText.innerText = "..."          
                     ticketDeleteButton.innerText = "delete"         
                     ticketId.innerText = tickets[i].id;
 
@@ -486,6 +491,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     ticketKebabDiv.classList.add("ticket-kebab-div")
                     ticketKebabButton.classList.add("ticket-kebab-button")
                     ticketKebabButton.classList.add("open-modal-btn")
+                    ticketKebabButtonText.classList.add("ticket-kebab-button-text")
                     // ticketOverlay.setAttribute("id", "overlay")
                     ticketOverlay.classList.add("overlay")
 
