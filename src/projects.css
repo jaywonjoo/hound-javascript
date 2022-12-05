@@ -3,7 +3,7 @@ body {
   font-family: Helvetica;
   
   /* bluesky */
-  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2415x1600/e516b851c9faf9d61ce4f4cfe749a7e7/photo-1454496522488-7a8e488e8606.jpg");
+  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2415x1600/e516b851c9faf9d61ce4f4cfe749a7e7/photo-1454496522488-7a8e488e8606.jpg"); */
   
   /* borealis */
   /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1920/184d103167f2802a2ec8e2391c4ebb9c/photo-1443926818681-717d074a57af.jpg");
@@ -14,8 +14,8 @@ body {
   background-position: 0% 90%; */
 
   /* desert 2 */
-  /* background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1440x1920/f949d7bcad35fa0a290f009e4b2cfd2b/photo-1614935981447-893ce3858657.jpg");
-  background-position: 0% 40%; */
+  background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1440x1920/f949d7bcad35fa0a290f009e4b2cfd2b/photo-1614935981447-893ce3858657.jpg");
+  background-position: 0% 40%;
 
   /* spirit blossom sett */
   /* background-image: url("https://notagamer.net/wp-content/uploads/2022/09/FdG33yuXEAAp2JM-1920x1065-1.jpg"); */

@@ -73,7 +73,7 @@ body {
     -webkit-backdrop-filter: blur(40px);
     position: fixed;
     left: 0;
-    top: 9.5%;
+    top: 9.5vh;
     z-index: 3;
     display: flex;
     justify-content: center;
