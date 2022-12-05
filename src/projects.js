@@ -572,9 +572,9 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                         populatedTicketSection.innerHTML = snapshot.data().priority;
                         populatedTypeSection.innerHTML = snapshot.data().type;
 
-                        populatedTicketInfoSection.setAttribute("style", "background-color: black");
-                        populatedTicketSection.setAttribute("style", "background-color: black");
-                        populatedTypeSection.setAttribute("style", "background-color: black");
+                        populatedTicketInfoSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                        populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                        populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
 
                         // FEATURE: EDIT TICKET INFO ************************************************************************************
                         const editTicketAuthor = document.querySelector(".edit-ticket-author")
