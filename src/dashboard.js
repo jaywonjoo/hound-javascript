@@ -225,12 +225,13 @@ addProjectForm.addEventListener("submit", (e) => {
       creator: uid,
     }).then(() => {
       addProjectForm.reset();
+      closeModal();
+
     });
   }
 
   createProjectDiv();
 
-  closeModal();
 });
 // b. Create a div for the created project to live in
 // BUG: OVERWRITES EXISTING DIV INSTEAD OF CREATING A NEW ONE???
@@ -246,8 +247,15 @@ function createProjectDiv() {
 }
 // 3. Close the modal
 function closeModal() {
-  modal.classList.remove("open");
-  overlay.classList.remove("open");
+  const overlays = document.querySelectorAll(".overlay");
+  overlays.forEach((overlay) => {
+      overlay.classList.remove("open")
+  })
+
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+      modal.classList.remove("open")
+  })
 }
 
 // BONUS 4. Click on overlay to cancel operation
