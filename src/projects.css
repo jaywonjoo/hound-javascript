@@ -52,14 +52,19 @@ body {
   display: none;
 }
 
-.set-background-form-input {
-  border-radius: 1em;
-}
-
 .set-background-form-btn {
   background-color: transparent;
   border: none;
   color: inherit;
+}
+
+.set-background-form {
+  width: 45%;
+}
+
+.set-background-form-input {
+  border-radius: 1em;
+  width: 95%;
 }
 
 .udo-background-form {
