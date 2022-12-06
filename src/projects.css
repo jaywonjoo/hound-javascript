@@ -56,6 +56,12 @@ body {
   border-radius: 1em;
 }
 
+.set-background-form-btn {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+
 .udo-background-form {
   display: flex;
   flex-direction: row;
