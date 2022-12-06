@@ -94,6 +94,8 @@ logoutButton.addEventListener('click', () => {
 
 // FEATURE: USER ICON
 const ProjectUsersDocRef = doc(db, 'projects', projectID)
+loadBackground()
+
 getDoc(ProjectUsersDocRef).then((snapshot) => {
     const userRef = collection(db, 'users')
     // grab project creator
@@ -1221,7 +1223,6 @@ overlayer.addEventListener("click", () => {
 
 const body = document.querySelector("#body")
 
-loadBackground()
 function loadBackground() {
     getDoc(ProjectUsersDocRef).then((snapshot) => {
         let fetchedBackgroundURL = snapshot.data().background;
@@ -1229,6 +1230,13 @@ function loadBackground() {
     })
 }
 
+
+// Unhide project background input when clicked
+const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
+const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
+setBackgroundFormBtn.addEventListener("click", () => {
+    setBackgroundFormBtnInput.classList.toggle("hidden")
+})
 
 // Write background to firebase
 const setBackgroundForm = document.querySelector("#setBackgroundForm")
@@ -1239,12 +1247,12 @@ setBackgroundForm.addEventListener("submit", (e) => {
     })
     .then(() => {
         loadBackground()
+        setBackgroundForm.reset()
+        setBackgroundFormBtnInput.classList.toggle("hidden")
     })
 })
 
 
 
-// let backgroundImageURL = setBackgroundForm.backgroundURL.value
-// body.setAttribute("style", "background-image: url('"+ backgroundImageURL +"')")
 // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
 

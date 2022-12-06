@@ -16,14 +16,6 @@
   <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
 </button> -->
 
-<div class="background-image-input">
-  <form id="setBackgroundForm">
-    <label for="inputtedBackgroundURL">Url:</label>
-    <input type="text" name="inputtedBackgroundURL" placeholder="Enter image url" required>
-    <button>Set Background</button>
-  </form>
-</div>
-
 <div class="master-container">
   <!-- navbar --------------------------------------------------------------------------- -->
   <nav class="navbar solid light-mode-solid">
@@ -46,7 +38,7 @@
   </nav>
   <!-- navbar --------------------------------------------------------------------------- -->
 
-  <div class="overlay user-dropdown-overlay">
+  <div class="overlay user-dropdown-overlay"></div>
 
   <div class="modal user-dropdown-modal transparent light-mode-transparent">
       <div class="udo-master">
@@ -60,7 +52,13 @@
         </div>
         <span class="delineator-full"></span>
 
-          <span class="udo-link">Project Background</span>
+        <div class="udo-background-form">
+          <span id="setBackgroundFormBtn" class="udo-link">Project Background</span>
+          <form id="setBackgroundForm">
+            <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+          </form>
+        </div>
+
           <span class="udo-link">Account Settings</span>
           <span class="udo-link">Team Members</span>
 
@@ -80,7 +78,6 @@
         <button id="logoutButton" class="solid light-mode-solid">Log Out</button>
       </div>
     </div>
-  </div>
 
   <div class="lower-half">
     <div class="mobile-spacer"></div>

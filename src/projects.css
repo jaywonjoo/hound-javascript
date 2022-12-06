@@ -48,15 +48,18 @@ body {
   /* overflow-y: hidden; 113022*/
 }
 
-.background-image-input {
-  position: fixed;
-  top: 30em;
-  width: 100vw;
-  height: 100px;
-  z-index: 100;
-  background-color: rgb(116, 116, 116);
+.hidden {
+  display: none;
+}
+
+.set-background-form-input {
+  border-radius: 1em;
+}
+
+.udo-background-form {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
 
