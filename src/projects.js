@@ -1215,3 +1215,17 @@ overlayer.addEventListener("click", () => {
 })
 
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
+
+
+// FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+
+const body = document.querySelector("#body")
+const setBackgroundForm = document.querySelector("#setBackgroundForm")
+
+setBackgroundForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    let backgroundImageURL = setBackgroundForm.backgroundURL.value
+    body.setAttribute("style", "background-image: url('"+ backgroundImageURL +"')")
+})
+
+// FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************

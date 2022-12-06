@@ -10,12 +10,19 @@
     <link class="nav-icon" rel="icon" src="../images/hound.svg">
 
 </head>
-<body class="solid light-mode-solid">
+<body id="body" class="solid light-mode-solid">
 
 <!-- <button id="darkModeBtn" class="dark-mode-btn">
   <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
 </button> -->
 
+<div class="background-image-input">
+  <form id="setBackgroundForm">
+    <label for="background-url">Url:</label>
+    <input type="text" name="backgroundURL" placeholder="Enter image url" required>
+    <button>Set Background</button>
+  </form>
+</div>
 
 <div class="master-container">
   <!-- navbar --------------------------------------------------------------------------- -->
