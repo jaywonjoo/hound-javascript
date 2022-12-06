@@ -397,8 +397,8 @@ function setDataIndex() {
   {
       modalBtnMulti[i].onclick = function() {
           let ElementIndex = this.getAttribute('data-index');
-          modal[ElementIndex].classList.add("open")
-          overlay[ElementIndex].classList.add("open")
+          modal[ElementIndex].classList.toggle("open")
+          overlay[ElementIndex].classList.toggle("open")
       };
   }
 }

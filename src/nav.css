@@ -90,6 +90,20 @@
     /* position: relative; */
     /* top: -3px; */
   }
+
+  .user-icon-medium {
+    border-radius: 50%;
+    background-color: rgba(131, 127, 127, 0.99);
+    padding: .25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    width: 2em;
+    height: 2em;
+    margin-right: 1em;
+    font-size: 1.5em;
+  }
   
   /* .user-dropdown-modal {
     position:fixed;
@@ -163,9 +177,16 @@
   
   .delineator {
     width: 90%;
-    height: 20px;
+    /* height: 20px; */
     border-bottom: solid 1px black;
-    /* margin-bottom: 5%; */
+    margin: 20px 0;
+  }
+
+  .delineator-full {
+    width: 100%;
+    /* height: 20px; */
+    border-bottom: solid 1px black;
+    margin: 15px 0;
   }
 
 /* dashboard ************************************************************************************ */

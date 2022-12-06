@@ -12,9 +12,9 @@
 </head>
 <body class="solid light-mode-solid">
 
-<button id="darkModeBtn" class="dark-mode-btn">
+<!-- <button id="darkModeBtn" class="dark-mode-btn">
   <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-</button>
+</button> -->
 
 
 <div class="master-container">
@@ -39,10 +39,39 @@
   </nav>
   <!-- navbar --------------------------------------------------------------------------- -->
 
+  <div class="overlay user-dropdown-overlay">
 
   <div class="modal user-dropdown-modal transparent light-mode-transparent">
-    <div class="overlay user-dropdown-overlay">
-      <button id="logoutButton">logout</button>
+      <div class="udo-master">
+        <span class="udo-account-label">Account</span>
+        <div class="udo-user-card">
+          <div class="user-icon-medium">JJ</div>
+          <div class="user-dropdown-overlay-inside-user-card-right">
+            <span class="udo-name">Jaywon Joo</span>
+            <span class="udo-email">jaywonjoo@gmail.com</span>
+          </div>
+        </div>
+        <span class="delineator-full"></span>
+
+          <span class="udo-link">Account Settings</span>
+          <span class="udo-link">Team Members</span>
+          <span class="udo-link">Help</span>
+
+
+        <span class="delineator-full"></span>
+
+        <div id="darkModeBtn" class="udo-dark-mode">
+          <span class="udo-link">Dark Mode</span>
+          <button class="udo-dark-mode-btn">
+            <!-- <img src="https://img.icons8.com/ios-glyphs/512/toggle-on.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" /> -->
+          </button>
+        </div>
+
+        <span class="delineator-full"></span>
+
+
+        <button id="logoutButton" class="solid light-mode-solid">Log Out</button>
+      </div>
     </div>
   </div>
 
