@@ -223,6 +223,7 @@ addProjectForm.addEventListener("submit", (e) => {
     addDoc(colRef, {
       name: addProjectForm.name.value,
       creator: uid,
+      background: "",
     }).then(() => {
       addProjectForm.reset();
       closeModal();

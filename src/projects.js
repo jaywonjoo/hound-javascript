@@ -1220,12 +1220,31 @@ overlayer.addEventListener("click", () => {
 // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
 
 const body = document.querySelector("#body")
-const setBackgroundForm = document.querySelector("#setBackgroundForm")
 
+loadBackground()
+function loadBackground() {
+    getDoc(ProjectUsersDocRef).then((snapshot) => {
+        let fetchedBackgroundURL = snapshot.data().background;
+        body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"')")
+    })
+}
+
+
+// Write background to firebase
+const setBackgroundForm = document.querySelector("#setBackgroundForm")
 setBackgroundForm.addEventListener("submit", (e) => {
     e.preventDefault()
-    let backgroundImageURL = setBackgroundForm.backgroundURL.value
-    body.setAttribute("style", "background-image: url('"+ backgroundImageURL +"')")
+    updateDoc(ProjectUsersDocRef, {
+        background: setBackgroundForm.inputtedBackgroundURL.value
+    })
+    .then(() => {
+        loadBackground()
+    })
 })
 
+
+
+// let backgroundImageURL = setBackgroundForm.backgroundURL.value
+// body.setAttribute("style", "background-image: url('"+ backgroundImageURL +"')")
 // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+
