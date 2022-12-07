@@ -67,6 +67,7 @@ signupForm.addEventListener("submit", (e) => {
         phoneNumber: "(123)456-7890",
         uid: uid,
         email: userEmail,
+        theme: "light",
       }).then(() => {
         console.log("blah")
         signupForm.reset();

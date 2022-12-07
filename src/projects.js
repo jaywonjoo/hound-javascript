@@ -92,30 +92,27 @@ logoutButton.addEventListener('click', () => {
 
 
 
-// FEATURE: USER ICON
+// // FEATURE: USER ICON
 const ProjectUsersDocRef = doc(db, 'projects', projectID)
-loadBackground()
+// // loadBackground()
 
-getDoc(ProjectUsersDocRef).then((snapshot) => {
-    const userRef = collection(db, 'users')
-    // grab project creator
-    let creator = snapshot.data().creator;
-    // console.log(creator)
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const userRef = collection(db, 'users')
 
-    const userCreatorDocRef = query(userRef, where("uid", "==", creator));
-    onSnapshot(userCreatorDocRef, (snapshot) => {
+      const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+      onSnapshot(userCreatorDocRef, (snapshot) => {
         snapshot.docs.forEach((doc) => {
 
             let userListOne = []
-
             userListOne.push({ ...doc.data(), id: doc.id });
-            // console.log(userListOne[0].firstName)
-            
-            const navUserIcon = document.querySelector(".nav-user-icon")
 
+            const navUserIcon = document.querySelector(".nav-user-icon")
             navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
         })
     })
+    }
 })
 
 
@@ -1222,6 +1219,7 @@ overlayer.addEventListener("click", () => {
 // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
 
 const body = document.querySelector("#body")
+loadBackground()
 
 function loadBackground() {
     getDoc(ProjectUsersDocRef).then((snapshot) => {
@@ -1252,7 +1250,180 @@ setBackgroundForm.addEventListener("submit", (e) => {
     })
 })
 
-
-
 // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+
+
+// FEATURE: DARK MODE ************************************************************************************************************************
+
+const darkModeBtn = document.querySelector("#darkModeBtn")
+const transparent = document.querySelectorAll(".transparent")
+const solid = document.querySelectorAll(".solid")
+const button = document.querySelectorAll(".button")
+const logo = document.querySelectorAll(".logo")
+const themeBtn = document.querySelector("#themeBtn")
+
+// set theme to light/dark on page load
+// setTheme()
+// function setTheme() {
+
+// onAuthStateChanged(auth, (user) => {
+//     // if (user) {
+//       const uid = user.uid;
+
+//       const userRef = collection(db, 'users')
+
+  
+//       const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+//       onSnapshot(userCreatorDocRef, (snapshot) => {
+//         snapshot.docs.forEach((docs) => {
+
+//             let userTheme = []
+
+//             userTheme.push({ ...docs.data(), id: docs.id });
+
+//             if (userTheme[0].theme == "light") {
+//                 setThemeLight()
+//                 themeBtn.innerHTML = "Dark Mode"
+//             } else {
+//                 setThemeDark()
+//                 themeBtn.innerHTML = "Light Mode"
+//             }
+//         })
+//       })
+// //   }
+// })
+// // }
+
+
+// // let user change theme with button press
+// darkModeBtn.addEventListener("click", (e) => {
+//     e.stopPropagation()
+
+//     onAuthStateChanged(auth, (user) => {
+//         // if (user) {
+//           const uid = user.uid;
+    
+//           const userRef = collection(db, 'users')
+    
+      
+//           const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+//           onSnapshot(userCreatorDocRef, (snapshot) => {
+//             snapshot.docs.forEach((docs) => {
+    
+//                 let userTheme = []
+//                 userTheme.push({ ...docs.data(), id: docs.id });
+    
+//                 const userCreatorId = userTheme[0].id
+//                 const userCreatorTheme = userTheme[0].theme
+//                 const userCreatorDocRefReal = doc(db, 'users', userCreatorId)
+
+//                 let lightString = String("light")
+//                 let darkString = String("dark")
+
+//                 // console.log(userCreatorTheme == lightString)
+
+//                 if (userCreatorTheme == darkString) {
+//                     updateDoc(userCreatorDocRefReal, {
+//                         theme: "light"
+//                     })
+//                 } else if (userCreatorTheme == lightString) {
+//                     updateDoc(userCreatorDocRefReal, {
+//                         theme: "dark"
+//                     })
+//                 }
+                    
+
+//                 // } else if (userTheme[0].theme == "dark") {
+//                 //     updateDoc(userCreatorDocRefReal, {
+//                 //         theme: "dark"
+//                 //     })
+//                 // }
+//                 // } else {
+//                 //     updateDoc(userCreatorDocRefReal, {
+//                 //         theme: "dark"
+//                 //     })
+//                 // }
+//             })
+//         })
+//     // }
+//     })
+// })
+
+  
+
+
+
+
+// function to set theme to light on page load
+function setThemeLight() {
+    for (let i = 0; i < transparent.length; i++) {
+        transparent[i].classList.add("light-mode-transparent")
+        transparent[i].classList.remove("dark-mode-transparent")
+    }
+
+    for (let i = 0; i < solid.length; i++) {
+        solid[i].classList.add("light-mode-solid")
+        solid[i].classList.remove("dark-mode-solid")
+    }
+
+    for (let i = 0; i < button.length; i++) {
+        button[i].classList.add("light-mode-button")
+        button[i].classList.remove("dark-mode-button")
+    }
+
+    for (let i = 0; i < logo.length; i++) {
+        logo[i].classList.add("light-mode-logo")
+        logo[i].classList.remove("dark-mode-logo")
+    }
+}
+
+// function to set theme to dark on page load
+function setThemeDark() {
+    for (let i = 0; i < transparent.length; i++) {
+        transparent[i].classList.add("dark-mode-transparent")
+        transparent[i].classList.remove("light-mode-transparent")
+    }
+
+    for (let i = 0; i < solid.length; i++) {
+        solid[i].classList.add("dark-mode-solid")
+        solid[i].classList.remove("light-mode-solid")
+    }
+
+    for (let i = 0; i < button.length; i++) {
+        button[i].classList.add("dark-mode-button")
+        button[i].classList.remove("light-mode-button")
+    }
+
+    for (let i = 0; i < logo.length; i++) {
+        logo[i].classList.add("dark-mode-logo")
+        logo[i].classList.remove("light-mode-logo")
+    }
+}
+
+// // function to set theme to light on page load
+// function toggleTheme() {
+//     for (let i = 0; i < transparent.length; i++) {
+//         transparent[i].classList.toggle("light-mode-transparent")
+//         transparent[i].classList.toggle("dark-mode-transparent")
+//     }
+
+//     for (let i = 0; i < solid.length; i++) {
+//         solid[i].classList.toggle("light-mode-solid")
+//         solid[i].classList.toggle("dark-mode-solid")
+//     }
+
+//     for (let i = 0; i < button.length; i++) {
+//         button[i].classList.toggle("light-mode-button")
+//         button[i].classList.toggle("dark-mode-button")
+//     }
+
+//     for (let i = 0; i < logo.length; i++) {
+//         logo[i].classList.toggle("light-mode-logo")
+//         logo[i].classList.toggle("dark-mode-logo")
+//     }
+// }
+
+
+
+// FEATURE: DARK MODE ************************************************************************************************************************
 

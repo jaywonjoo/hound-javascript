@@ -10,7 +10,7 @@
     <link class="nav-icon" rel="icon" src="../images/hound.svg">
 
 </head>
-<body id="body" class="solid light-mode-solid">
+<body id="body" class="solid">
 
 <!-- <button id="darkModeBtn" class="dark-mode-btn">
   <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
@@ -18,9 +18,9 @@
 
 <div class="master-container">
   <!-- navbar --------------------------------------------------------------------------- -->
-  <nav class="navbar solid light-mode-solid">
+  <nav class="navbar solid">
     <div class='nav-left'>
-      <img loading="lazy" class='nav-logo logo light-mode-logo' src="../images/hound.svg"/>
+      <img loading="lazy" class='nav-logo logo' src="../images/hound.svg"/>
       <h1 class='brand-title'>Hound</h1>
     </div>
     
@@ -40,7 +40,7 @@
 
   <div class="overlay user-dropdown-overlay"></div>
 
-  <div class="modal user-dropdown-modal transparent light-mode-transparent">
+  <div class="modal user-dropdown-modal transparent">
       <div class="udo-master">
         <span class="udo-account-label">Account</span>
         <div class="udo-user-card">
@@ -66,7 +66,7 @@
         <span class="delineator-full"></span>
 
         <div id="darkModeBtn" class="udo-dark-mode">
-          <span class="udo-link">Dark Mode</span>
+          <span class="udo-link" id="themeBtn"></span>
           <button class="udo-dark-mode-btn">
             <!-- <img src="https://img.icons8.com/ios-glyphs/512/toggle-on.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" /> -->
           </button>
@@ -75,7 +75,7 @@
         <span class="delineator-full"></span>
 
 
-        <button id="logoutButton" class="solid light-mode-solid">Log Out</button>
+        <button id="logoutButton" class="solid">Log Out</button>
       </div>
     </div>
 
@@ -86,7 +86,7 @@
 
   <!-- dashboard --------------------------------------------------------------------------- -->
   <!-- <div class="dashboard-and-bar"> -->
-    <div class="dashboard-master transparent light-mode-transparent">
+    <div class="dashboard-master transparent">
 
         <div class="dashboard-links">
           <!-- <h3>Dashboard</h3> 
@@ -182,8 +182,8 @@
     </div>
 
     <div class="sidebar-button">
-      <div class="sidebar-button-circle transparent light-mode-transparent">></div>
-      <div class="sidebar-button-bar transparent light-mode-transparent"></div>
+      <div class="sidebar-button-circle transparent">></div>
+      <div class="sidebar-button-bar transparent"></div>
     </div>
 
     <div class="sidebar-button-bar-spacer"></div>
@@ -198,7 +198,7 @@
 
 
 
-    <div class="modal all-other-modals solid light-mode-solid">
+    <div class="modal all-other-modals solid">
       <form class="add-member-form">
         <h3>Team Members</h3>
         <div id="populatable-member-div" class="populatable-member-div"></div>
@@ -214,10 +214,10 @@
         <h1 class="page-header"></h1>    
         <div class="top-row"> 
           <!-- Team Members Section -->
-          <div class="team-members transparent light-mode-transparent">
-            <div class="top-row-top-section solid light-mode-solid">
+          <div class="team-members transparent">
+            <div class="top-row-top-section solid">
               <h3 class="team-members-header-label">Team Members</h3>
-              <button id="memberModalBtn" class="open-modal-btn button light-mode-button">Add Member</button>
+              <button id="memberModalBtn" class="open-modal-btn button">Add Member</button>
             </div>
             <div class="team-member-header">
               <div class="team-member-line-item-name">Name</div>
@@ -231,7 +231,7 @@
 
 
           <div class="overlay blurred-overlay"></div>
-          <div class="modal all-other-modals solid light-mode-solid">
+          <div class="modal all-other-modals solid">
             <form class="create-ticket-form">
               <label for="author">Author:</label>
               <input type="text" name="author" required>
@@ -269,10 +269,10 @@
           
 
           <!-- ticket section -->
-          <div class="ticket-section transparent light-mode-transparent">
-            <div class="top-row-top-section solid light-mode-solid">
+          <div class="ticket-section transparent">
+            <div class="top-row-top-section solid">
               <h3 class="ticket-section-header-label">Tickets</h3>
-              <button id="ticketModalBtn" class="open-modal-btn button light-mode-button">New Ticket</button>
+              <button id="ticketModalBtn" class="open-modal-btn button">New Ticket</button>
             </div>
             <div class="ticket-header">
               <div class="ticket-header-left">
@@ -299,10 +299,10 @@
         <!-- Selected Ticket Info Section -->
         <div class="bottom-row"> 
 
-        <div class="big-wrap transparent light-mode-transparent">
-        <div class="top-row-top-section solid light-mode-solid">
+        <div class="big-wrap transparent">
+        <div class="top-row-top-section solid">
         <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
-        <button id="ticketModalBtn" class="open-modal-btn button light-mode-button">Edit Ticket</button>
+        <button id="ticketModalBtn" class="open-modal-btn button">Edit Ticket</button>
         </div>
         <div class="ticket-info" id="ticket-info">
           <div class="left-ticket-info-section">
@@ -363,7 +363,7 @@
         
     <div class="overlay blurred-overlay"></div>
 
-    <div class="modal all-other-modals solid light-mode-solid">
+    <div class="modal all-other-modals solid">
       <form class="edit-ticket-form">
         <!-- <h3>Edit Ticket</h3> -->
         <!-- <div id="populatable-member-div" class="populatable-member-div"></div> -->
