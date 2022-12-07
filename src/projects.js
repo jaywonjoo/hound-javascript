@@ -245,94 +245,11 @@ function populateTeamMembers(){
     const ProjectUsersDocRef = doc(db, 'projects', projectID)
     getDoc(ProjectUsersDocRef).then((snapshot) => {
         console.log("testo")
-        const userRef = collection(db, 'users')
+        // const userRef = collection(db, 'users')
 
-        // grab project creator
-        let creator = snapshot.data().creator;
-        // console.log(creator)
+        // // grab project creator
+        // let creator = snapshot.data().creator;
 
-
-
-
-        // const userCreatorDocRef = query(userRef, where("uid", "==", creator));
-        // onSnapshot(userCreatorDocRef, (snapshot) => {
-        //     snapshot.docs.forEach((doc) => {
-
-        //         let userListOne = []
-        //         userListOne.push({ ...doc.data(), id: doc.id });
-
-        //         // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
-        //         const teamMemberBody = document.querySelector(".team-member-body") 
-        //         const teamMemberModals = document.querySelector(".team-member-line-item-modals")
-        //         const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
-
-        //         const teamMemberLineItem = document.createElement("div")
-        //             const teamMemberLineItemName = document.createElement("div")
-        //             const teamMemberLineItemEmail = document.createElement("div")
-        //             const teamMemberLineItemPhone = document.createElement("div")
-                    
-        //             const teamMemberLineItemKebabDiv = document.createElement("div")
-
-        //             const teamMemberLineItemKebab = document.createElement("button")
-        //         const teamMemberLineItemOverlay = document.createElement("div")
-        //         const teamMemberLineItemModal = document.createElement("div")
-        //         const teamMemberLineItemDeleteButton = document.createElement("button")
-
-
-
-        //         teamMemberBody.appendChild(teamMemberLineItem)
-        //             teamMemberLineItem.appendChild(teamMemberLineItemName)
-        //             teamMemberLineItem.appendChild(teamMemberLineItemEmail)
-        //             teamMemberLineItem.appendChild(teamMemberLineItemPhone)
-
-        //             teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
-                    
-        //             teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
-        //         teamMemberOverlays.appendChild(teamMemberLineItemOverlay)
-        //         teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
-        //             teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
-
-
-
-
-        //         let fullName = userListOne[0].firstName + " " + userListOne[0].lastName
-
-        //         teamMemberLineItemName.innerText = fullName;
-        //         teamMemberLineItemEmail.innerText = userListOne[0].email;
-        //         teamMemberLineItemPhone.innerText = userListOne[0].phoneNumber;
-        //         teamMemberLineItemKebab.innerText = "...";
-        //         teamMemberLineItemDeleteButton.innerText = "delete"
-
-
-        //         teamMemberLineItem.classList.add("team-member-line-item");
-        //         teamMemberLineItemName.classList.add("team-member-line-item-name");
-        //         teamMemberLineItemEmail.classList.add("team-member-line-item-email");
-        //         teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
-
-        //         // teamMemberLineItemKebabDiv.setAttribute("style", "position: relative")
-
-        //         teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
-        //         teamMemberLineItemKebab.classList.add("open-modal-btn");
-        //         teamMemberLineItemOverlay.setAttribute("id", "overlay");
-        //         teamMemberLineItemOverlay.setAttribute("style", "backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
-        //         teamMemberLineItemModal.classList.add("modal");
-        //         teamMemberLineItemModal.classList.add("delete-button-modal");
-
-        //         teamMemberLineItemModal.setAttribute("id", "modal");
-        //         // teamMemberLineItemModal.setAttribute("style", "modal");
-
-        //         // teamMemberLineItemModal.setAttribute("style", "display: none; position: absolute; bottom: 0; width: auto; height: auto; box-shadow: 0 0 10px #919191;");
-                
-        //         // teamMemberLineItemModal.setAttribute("style", "padding: 0; width: 0; border-style: none; position: absolute;");
-        //         // teamMemberLineItemModal.classList.add("hidden");
-
-                
-        //         setDataIndex()
-        //         closeOverlays()
-
-        //     })
-
-        // })
 
         // grab project collaborators
         let collaborators = snapshot.data().collaborators
@@ -451,7 +368,7 @@ function populateTeamMembers(){
 
         }
     } else {
-        populateTeamMembers()
+
         setDataIndex()
         closeOverlay()
     }
@@ -544,6 +461,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
             tickets.push({ ...doc.data(), id: doc.id })
         });
 // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+console.log("populateTickets()TEST")
 
             //console.log(tickets[1])
             
@@ -667,6 +585,8 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
                     getDoc(ticketRef).then((snapshot) => {
 // TEST PASS: DOESNT UPDATE EVERY TIME THEME IS CHANGED
+console.log("populateTicketInfoTest()TEST")
+
                         console.log(snapshot.data().title)
 
                         const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
