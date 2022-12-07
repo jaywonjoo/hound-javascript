@@ -92,7 +92,14 @@ logoutButton.addEventListener('click', () => {
 
 
 
-// // FEATURE: USER ICON
+// // FEATURE: USER ICON & THEME ************************************************************************************************************************
+const darkModeBtn = document.querySelector("#darkModeBtn")
+const transparent = document.querySelectorAll(".transparent")
+const solid = document.querySelectorAll(".solid")
+const button = document.querySelectorAll(".button")
+const logo = document.querySelectorAll(".logo")
+const themeBtn = document.querySelector("#themeBtn")
+
 const ProjectUsersDocRef = doc(db, 'projects', projectID)
 // // loadBackground()
 
@@ -103,17 +110,120 @@ onAuthStateChanged(auth, (user) => {
 
       const userCreatorDocRef = query(userRef, where("uid", "==", uid));
       onSnapshot(userCreatorDocRef, (snapshot) => {
-        snapshot.docs.forEach((doc) => {
+        snapshot.docs.forEach((docs) => {
 
             let userListOne = []
-            userListOne.push({ ...doc.data(), id: doc.id });
+            userListOne.push({ ...docs.data(), id: docs.id });
 
             const navUserIcon = document.querySelector(".nav-user-icon")
             navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+            let lightString = String("light")
+            let darkString = String("dark")
+
+            // // SUBFEATURE: SET THEME ********************************************************************************
+            if (userListOne[0].theme == lightString) {
+                setThemeLight()
+                themeBtn.innerHTML = "Dark Mode"
+                    console.log("blah")
+            } else {
+                setThemeDark()
+                themeBtn.innerHTML = "Light Mode"
+            console.log("blee")
+
+            }
+
+            // // SUBFEATURE: SET THEME ********************************************************************************
+            
+            // // SUBFEATURE: CHANGE THEME ********************************************************************************
+
+
+            const currentUid = userListOne[0].id
+            const currentUserDocRef = doc(db, 'users', currentUid)
+
+            darkModeBtn.addEventListener("click", (e) => {
+                e.stopPropagation()
+
+                if (userListOne[0].theme == lightString) {
+                    updateDoc(currentUserDocRef, {
+                        theme: "dark"
+                    })
+                    // setThemeLight()
+                    // themeBtn.innerHTML = "Dark Mode"
+                        // console.log("blah")
+                } else {
+                    updateDoc(currentUserDocRef, {
+                        theme: "light"
+                    })
+                    console.log("bligg")
+                }
+            })
+            
+            // // SUBFEATURE: CHANGE THEME ********************************************************************************
         })
     })
     }
 })
+
+
+
+
+// // let user change theme with button press
+// darkModeBtn.addEventListener("click", (e) => {
+//     e.stopPropagation()
+
+//     onAuthStateChanged(auth, (user) => {
+//         // if (user) {
+//           const uid = user.uid;
+    
+//           const userRef = collection(db, 'users')
+    
+      
+//           const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+//           onSnapshot(userCreatorDocRef, (snapshot) => {
+//             snapshot.docs.forEach((docs) => {
+    
+//                 let userTheme = []
+//                 userTheme.push({ ...docs.data(), id: docs.id });
+    
+//                 const userCreatorId = userTheme[0].id
+//                 const userCreatorTheme = userTheme[0].theme
+//                 const userCreatorDocRefReal = doc(db, 'users', userCreatorId)
+
+//                 let lightString = String("light")
+//                 let darkString = String("dark")
+
+//                 // console.log(userCreatorTheme == lightString)
+
+//                 if (userCreatorTheme == darkString) {
+//                     updateDoc(userCreatorDocRefReal, {
+//                         theme: "light"
+//                     })
+//                 } else if (userCreatorTheme == lightString) {
+//                     updateDoc(userCreatorDocRefReal, {
+//                         theme: "dark"
+//                     })
+//                 }
+                    
+
+//                 // } else if (userTheme[0].theme == "dark") {
+//                 //     updateDoc(userCreatorDocRefReal, {
+//                 //         theme: "dark"
+//                 //     })
+//                 // }
+//                 // } else {
+//                 //     updateDoc(userCreatorDocRefReal, {
+//                 //         theme: "dark"
+//                 //     })
+//                 // }
+//             })
+//         })
+//     // }
+//     })
+// })
+
+
+// // FEATURE: USER ICON & THEME ************************************************************************************************************************
 
 
 
@@ -134,9 +244,8 @@ populateTeamMembers()
 function populateTeamMembers(){
     const ProjectUsersDocRef = doc(db, 'projects', projectID)
     getDoc(ProjectUsersDocRef).then((snapshot) => {
-
+        console.log("testo")
         const userRef = collection(db, 'users')
-
 
         // grab project creator
         let creator = snapshot.data().creator;
@@ -244,6 +353,7 @@ function populateTeamMembers(){
 
             onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
                 snapshot.docs.forEach((doc) => {
+// TEST FAIL: RUNS THREE TIMES AT START AND THEN ONCE EVERY TIME THEME IS CHANGED
     
                     let collaboratorList = []
 
@@ -361,7 +471,7 @@ function populateUserModal() {
 
         onSnapshot(alphabetizedSystemUsers, (snapshot) => {
             let SystemUsersList = []
-
+// TEST FAIL: UPDATES ONCE EVERY TIME THEME IS CHANGED
             snapshot.docs.forEach((doc) => {
                 SystemUsersList.push({ ...doc.data(), id: doc.id })
             })
@@ -423,9 +533,9 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
 // display ticket info in ticket list
 // 1. link tickets to page
     onSnapshot(orderedTicketsRef, (snapshot) => {
+// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
         // create empty array to populate
         let tickets = []
-
         // function to clear tickets array on every refresh
         clearTickets()
 
@@ -433,6 +543,8 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
         snapshot.docs.forEach((doc) => {
             tickets.push({ ...doc.data(), id: doc.id })
         });
+// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+
             //console.log(tickets[1])
             
             let i = 0;
@@ -554,7 +666,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     // 4. populate selected ticket info USING TICKET ID!!
                     const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
                     getDoc(ticketRef).then((snapshot) => {
-
+// TEST PASS: DOESNT UPDATE EVERY TIME THEME IS CHANGED
                         console.log(snapshot.data().title)
 
                         const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
@@ -621,7 +733,7 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                     
                     onSnapshot(orderedCommentsRef, (snapshot) => {
                         let comments = []
-
+// TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
                         // refresh chatbox
                         const chatbox = document.querySelector(".chatbox");
 
@@ -636,6 +748,8 @@ const orderedTicketsRef = query(colRef, orderBy("createdAt"))
                         snapshot.docs.forEach((doc) => {
                             comments.push({ ...doc.data(), id: doc.id })
                         });
+// TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
+
 
                     for (i = 0; i < comments.length; i++) {
                         const newComment = document.createElement("div");
@@ -713,10 +827,11 @@ const userRef = collection(db, "users");
 onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     const currentUser = query(userRef, where("uid", "==", uid));
+// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
     
     onSnapshot(currentUser, (snapshot) => {
         let currentUserList = [];
-        
+// TEST FAIL: FIRES EVERY TIME THEME IS CHANGED
         snapshot.docs.forEach((doc) => {
             currentUserList.push({ ...doc.data(), id: doc.uid });
         });
@@ -974,6 +1089,7 @@ function pieChartStatus() {
 
     onSnapshot(colRef, (snapshot) => {
         let ticketInfoList = []
+// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
 
         while (ticketInfoList[0] != null) {
             ticketInfoList.removeChild(ticketInfoList[0]);
@@ -1223,6 +1339,7 @@ loadBackground()
 
 function loadBackground() {
     getDoc(ProjectUsersDocRef).then((snapshot) => {
+// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
         let fetchedBackgroundURL = snapshot.data().background;
         body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"')")
     })
@@ -1255,99 +1372,8 @@ setBackgroundForm.addEventListener("submit", (e) => {
 
 // FEATURE: DARK MODE ************************************************************************************************************************
 
-const darkModeBtn = document.querySelector("#darkModeBtn")
-const transparent = document.querySelectorAll(".transparent")
-const solid = document.querySelectorAll(".solid")
-const button = document.querySelectorAll(".button")
-const logo = document.querySelectorAll(".logo")
-const themeBtn = document.querySelector("#themeBtn")
-
-// set theme to light/dark on page load
-// setTheme()
-// function setTheme() {
-
-// onAuthStateChanged(auth, (user) => {
-//     // if (user) {
-//       const uid = user.uid;
-
-//       const userRef = collection(db, 'users')
-
-  
-//       const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-//       onSnapshot(userCreatorDocRef, (snapshot) => {
-//         snapshot.docs.forEach((docs) => {
-
-//             let userTheme = []
-
-//             userTheme.push({ ...docs.data(), id: docs.id });
-
-//             if (userTheme[0].theme == "light") {
-//                 setThemeLight()
-//                 themeBtn.innerHTML = "Dark Mode"
-//             } else {
-//                 setThemeDark()
-//                 themeBtn.innerHTML = "Light Mode"
-//             }
-//         })
-//       })
-// //   }
-// })
-// // }
 
 
-// // let user change theme with button press
-// darkModeBtn.addEventListener("click", (e) => {
-//     e.stopPropagation()
-
-//     onAuthStateChanged(auth, (user) => {
-//         // if (user) {
-//           const uid = user.uid;
-    
-//           const userRef = collection(db, 'users')
-    
-      
-//           const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-//           onSnapshot(userCreatorDocRef, (snapshot) => {
-//             snapshot.docs.forEach((docs) => {
-    
-//                 let userTheme = []
-//                 userTheme.push({ ...docs.data(), id: docs.id });
-    
-//                 const userCreatorId = userTheme[0].id
-//                 const userCreatorTheme = userTheme[0].theme
-//                 const userCreatorDocRefReal = doc(db, 'users', userCreatorId)
-
-//                 let lightString = String("light")
-//                 let darkString = String("dark")
-
-//                 // console.log(userCreatorTheme == lightString)
-
-//                 if (userCreatorTheme == darkString) {
-//                     updateDoc(userCreatorDocRefReal, {
-//                         theme: "light"
-//                     })
-//                 } else if (userCreatorTheme == lightString) {
-//                     updateDoc(userCreatorDocRefReal, {
-//                         theme: "dark"
-//                     })
-//                 }
-                    
-
-//                 // } else if (userTheme[0].theme == "dark") {
-//                 //     updateDoc(userCreatorDocRefReal, {
-//                 //         theme: "dark"
-//                 //     })
-//                 // }
-//                 // } else {
-//                 //     updateDoc(userCreatorDocRefReal, {
-//                 //         theme: "dark"
-//                 //     })
-//                 // }
-//             })
-//         })
-//     // }
-//     })
-// })
 
   
 
@@ -1426,4 +1452,3 @@ function setThemeDark() {
 
 
 // FEATURE: DARK MODE ************************************************************************************************************************
-
