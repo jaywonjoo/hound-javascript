@@ -8,18 +8,18 @@
   <script defer src="darkmode.bundle.js"></script>
   
 </head>
-<body class="solid light-mode-solid">
+<body class="solid">
 
-  <button id="darkModeBtn" class="dark-mode-btn">
+  <!-- <button id="darkModeBtn" class="dark-mode-btn">
     <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-  </button>
+  </button> -->
 
 <div class="master-container">
 
 <!-- navbar --------------------------------------------------------------------------- -->
-<nav class="navbar solid light-mode-solid">
+<nav class="navbar solid">
   <div class='nav-left'>
-    <img loading="lazy" class='nav-logo logo light-mode-logo' src="../images/hound.svg"/>
+    <img loading="lazy" class='nav-logo logo' src="../images/hound.svg"/>
     <h1 class='brand-title'>Hound</h1>
   </div>
   
@@ -38,11 +38,47 @@
 <!-- navbar --------------------------------------------------------------------------- -->
 
 
-<div class="modal user-dropdown-modal transparent light-mode-transparent">
-  <div class="overlay user-dropdown-overlay">
-    <button id="logoutButton">logout</button>
+<div class="overlay user-dropdown-overlay"></div>
+
+<div class="modal user-dropdown-modal transparent">
+    <div class="udo-master">
+      <span class="udo-account-label">Account</span>
+      <div class="udo-user-card">
+        <div class="user-icon-medium">JJ</div>
+        <div class="user-dropdown-overlay-inside-user-card-right">
+          <span class="udo-name">Jaywon Joo</span>
+          <span class="udo-email">jaywonjoo@gmail.com</span>
+        </div>
+      </div>
+      <span class="delineator-full"></span>
+
+      <div class="udo-background-form">
+        <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
+        <form id="setBackgroundForm" class="set-background-form">
+          <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+        </form>
+      </div>
+
+        <span class="udo-link">Account Settings</span>
+        <span class="udo-link">Team Members</span>
+
+
+      <span class="delineator-full"></span>
+
+      <div id="darkModeBtn" class="udo-dark-mode">
+        <span class="udo-link" id="themeBtn"></span>
+        <button class="udo-dark-mode-btn">
+          <!-- <img src="https://img.icons8.com/ios-glyphs/512/toggle-on.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" /> -->
+        </button>
+      </div>
+
+      <span class="delineator-full"></span>
+
+
+      <button id="logoutButton" class="solid">Log Out</button>
+    </div>
   </div>
-</div>
+
 
 <div class="lower-half">
   <div class="mobile-spacer"></div>
@@ -50,7 +86,7 @@
   <div class="lower-half-sub-container">
 
     <!-- dashboard --------------------------------------------------------------------------- -->
-    <div class="dashboard-master transparent light-mode-transparent">
+    <div class="dashboard-master transparent">
       <div class="dashboard-links">
         <!-- <h3>Dashboard</h3> 
             <h3>Team Members</h3>
@@ -80,8 +116,8 @@
     </div>
 
     <div class="sidebar-button">
-      <div class="sidebar-button-circle transparent light-mode-transparent">></div>
-      <div class="sidebar-button-bar transparent light-mode-transparent"></div>
+      <div class="sidebar-button-circle transparent">></div>
+      <div class="sidebar-button-bar transparent"></div>
     </div>
 
     <div class="sidebar-button-bar-spacer"></div>
@@ -95,7 +131,7 @@
       <h1 class="page-header" >Projects</h2>
       <div class="project-section">
           <h2 class="project-section-header"> Your Projects 
-            <button id="button" class="open-modal-btn new-project-btn button light-mode-button">New Project</button>
+            <button id="button" class="open-modal-btn new-project-btn button">New Project</button>
           </h2>
           <div id="project-container"></div>
       </div>
@@ -106,7 +142,7 @@
       <!-- merge -->
       <div class="overlay"></div>
 
-      <div class="modal all-other-modals solid light-mode-solid">
+      <div class="modal all-other-modals solid">
 
           <form class="modal-create-project-button">
             <label for="name">Name:</label>

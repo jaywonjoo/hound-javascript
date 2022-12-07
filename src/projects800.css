@@ -38,8 +38,6 @@ body {
 }
 
 #logoutButton {
-    /* width: 100%; */
-    /* height: 10vh; */
     border: none;
     background-color: transparent;
     font-size: .9em;

@@ -1,14 +1,10 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
-  getFirestore,
-  collection,
-  onSnapshot,
-  addDoc,
-  deleteDoc,
-  doc,
-  query,
-  where,
-} from "firebase/firestore";
+    getFirestore, collection, onSnapshot,
+    addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
+  where, getDoc, orderBy, connectFirestoreEmulator, 
+  updateDoc, arrayUnion, arrayRemove,
+} from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./dashboard.css";
 import "./dashboard800.css";
@@ -25,7 +21,7 @@ const firebaseConfig = {
   appId: "1:361705338046:web:f04df4040689f429aa9aef",
 };
 
-const button = document.getElementById("button");
+// const button = document.getElementById("button");
 const projectContainer = document.querySelector("#project-container");
 const sharedProjectContainer = document.querySelector("#shared-project-container");
 
@@ -74,53 +70,80 @@ logoutButton.addEventListener("click", () => {
     });
 });
 
-// // FEATURE: USER ICON
+
+// // FEATURE: USER ICON & THEME ************************************************************************************************************************
+const darkModeBtn = document.querySelector("#darkModeBtn")
+const transparent = document.querySelectorAll(".transparent")
+const solid = document.querySelectorAll(".solid")
+const button = document.querySelectorAll(".button")
+const logo = document.querySelectorAll(".logo")
+const themeBtn = document.querySelector("#themeBtn")
+
 // const ProjectUsersDocRef = doc(db, 'projects', projectID)
-// getDoc(ProjectUsersDocRef).then((snapshot) => {
-//     const userRef = collection(db, 'users')
-//     // grab project creator
-//     let creator = snapshot.data().creator;
-//     // console.log(creator)
-
-//     const userCreatorDocRef = query(userRef, where("uid", "==", creator));
-//     onSnapshot(userCreatorDocRef, (snapshot) => {
-//         snapshot.docs.forEach((doc) => {
-
-//             let userListOne = []
-
-//             userListOne.push({ ...doc.data(), id: doc.id });
-//             // console.log(userListOne[0].firstName)
-            
-//             const navUserIcon = document.querySelector(".nav-user-icon")
-
-//             navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-//         })
-//     })
-// })
+// // loadBackground()
 
 onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
+    if (user) {
+      const uid = user.uid;
+      const userRef = collection(db, 'users')
 
-    const userRef = collection(db, 'users')
-
-    const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-    onSnapshot(userCreatorDocRef, (snapshot) => {
-        snapshot.docs.forEach((doc) => {
+      const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+      onSnapshot(userCreatorDocRef, (snapshot) => {
+        snapshot.docs.forEach((docs) => {
 
             let userListOne = []
+            userListOne.push({ ...docs.data(), id: docs.id });
 
-            userListOne.push({ ...doc.data(), id: doc.id });
-            
             const navUserIcon = document.querySelector(".nav-user-icon")
-
             navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+            let lightString = String("light")
+            let darkString = String("dark")
+
+            // // SUBFEATURE: SET THEME ********************************************************************************
+            if (userListOne[0].theme == lightString) {
+                setThemeLight()
+                themeBtn.innerHTML = "Dark Mode"
+                    console.log("blah")
+            } else {
+                setThemeDark()
+                themeBtn.innerHTML = "Light Mode"
+            console.log("blee")
+
+            }
+
+            // // SUBFEATURE: SET THEME ********************************************************************************
+            
+            // // // SUBFEATURE: CHANGE THEME ********************************************************************************
+
+
+            const currentUid = userListOne[0].id
+            const currentUserDocRef = doc(db, 'users', currentUid)
+
+            darkModeBtn.addEventListener("click", (e) => {
+                e.stopPropagation()
+
+                if (userListOne[0].theme == lightString) {
+                    updateDoc(currentUserDocRef, {
+                        theme: "dark"
+                    })
+                    // setThemeLight()
+                    // themeBtn.innerHTML = "Dark Mode"
+                        // console.log("blah")
+                } else {
+                    updateDoc(currentUserDocRef, {
+                        theme: "light"
+                    })
+                    console.log("bligg")
+                }
+            })
+            
+            // // // SUBFEATURE: CHANGE THEME ********************************************************************************
         })
     })
+    }
+})
 
-}})
 
 
 // your projects queries
@@ -419,3 +442,124 @@ function closeOverlay() {
 
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
 
+
+// // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+
+// const body = document.querySelector("#body")
+// loadBackground()
+
+// function loadBackground() {
+//     getDoc(ProjectUsersDocRef).then((snapshot) => {
+// // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+//         let fetchedBackgroundURL = snapshot.data().background;
+//         body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"')")
+//     })
+// }
+
+
+// // Unhide project background input when clicked
+// const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
+// const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
+// setBackgroundFormBtn.addEventListener("click", () => {
+//     setBackgroundFormBtnInput.classList.toggle("hidden")
+// })
+
+// // Write background to firebase
+// const setBackgroundForm = document.querySelector("#setBackgroundForm")
+// setBackgroundForm.addEventListener("submit", (e) => {
+//     e.preventDefault()
+//     updateDoc(ProjectUsersDocRef, {
+//         background: setBackgroundForm.inputtedBackgroundURL.value
+//     })
+//     .then(() => {
+//         loadBackground()
+//         setBackgroundForm.reset()
+//         setBackgroundFormBtnInput.classList.toggle("hidden")
+//     })
+// })
+
+// // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+
+
+// FEATURE: DARK MODE ************************************************************************************************************************
+
+
+
+
+  
+
+
+
+
+// function to set theme to light on page load
+function setThemeLight() {
+    for (let i = 0; i < transparent.length; i++) {
+        transparent[i].classList.add("light-mode-transparent")
+        transparent[i].classList.remove("dark-mode-transparent")
+    }
+
+    for (let i = 0; i < solid.length; i++) {
+        solid[i].classList.add("light-mode-solid")
+        solid[i].classList.remove("dark-mode-solid")
+    }
+
+    for (let i = 0; i < button.length; i++) {
+        button[i].classList.add("light-mode-button")
+        button[i].classList.remove("dark-mode-button")
+    }
+
+    for (let i = 0; i < logo.length; i++) {
+        logo[i].classList.add("light-mode-logo")
+        logo[i].classList.remove("dark-mode-logo")
+    }
+}
+
+// function to set theme to dark on page load
+function setThemeDark() {
+    for (let i = 0; i < transparent.length; i++) {
+        transparent[i].classList.add("dark-mode-transparent")
+        transparent[i].classList.remove("light-mode-transparent")
+    }
+
+    for (let i = 0; i < solid.length; i++) {
+        solid[i].classList.add("dark-mode-solid")
+        solid[i].classList.remove("light-mode-solid")
+    }
+
+    for (let i = 0; i < button.length; i++) {
+        button[i].classList.add("dark-mode-button")
+        button[i].classList.remove("light-mode-button")
+    }
+
+    for (let i = 0; i < logo.length; i++) {
+        logo[i].classList.add("dark-mode-logo")
+        logo[i].classList.remove("light-mode-logo")
+    }
+}
+
+// // function to set theme to light on page load
+// function toggleTheme() {
+//     for (let i = 0; i < transparent.length; i++) {
+//         transparent[i].classList.toggle("light-mode-transparent")
+//         transparent[i].classList.toggle("dark-mode-transparent")
+//     }
+
+//     for (let i = 0; i < solid.length; i++) {
+//         solid[i].classList.toggle("light-mode-solid")
+//         solid[i].classList.toggle("dark-mode-solid")
+//     }
+
+//     for (let i = 0; i < button.length; i++) {
+//         button[i].classList.toggle("light-mode-button")
+//         button[i].classList.toggle("dark-mode-button")
+//     }
+
+//     for (let i = 0; i < logo.length; i++) {
+//         logo[i].classList.toggle("light-mode-logo")
+//         logo[i].classList.toggle("dark-mode-logo")
+//     }
+// }
+
+
+
+// FEATURE: DARK MODE ************************************************************************************************************************
