@@ -173,6 +173,8 @@ onAuthStateChanged(auth, (user) => {
         projectContainer.appendChild(newProject);
         newProject.innerText = projects[i].name;
         newProject.classList.add("project-card");
+        const fetchedBackgroundURL = projects[i].background;
+        newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover;  background-position: 50%")
         const newProjectId = document.createElement("div");
         newProject.appendChild(newProjectId);
         newProjectId.innerText = projects[i].id;
@@ -328,6 +330,11 @@ onSnapshot(sharedProjects, (snapshot) => {
     sharedProjectContainer.appendChild(newProject);
     newProject.innerText = sharedProjectsArray[i].name;
     newProject.classList.add("project-card");
+
+
+    const fetchedBackgroundURL = sharedProjectsArray[i].background;
+    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
+
     const newProjectId = document.createElement("div");
     newProject.appendChild(newProjectId);
     newProjectId.innerText = sharedProjectsArray[i].id;
