@@ -328,12 +328,40 @@ onSnapshot(sharedProjects, (snapshot) => {
   for (i = 0; i < sharedProjectsArray.length; i++) {
     const newProject = document.createElement("div");
     sharedProjectContainer.appendChild(newProject);
-    newProject.innerText = sharedProjectsArray[i].name;
+    // newProject.innerText = sharedProjectsArray[i].name;
     newProject.classList.add("project-card");
-
-
     const fetchedBackgroundURL = sharedProjectsArray[i].background;
     newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
+
+
+    const cardFadeOverlay = document.createElement("span")
+    newProject.appendChild(cardFadeOverlay);
+    cardFadeOverlay.classList.add("card-fade-overlay");
+
+    const cardContentOverlay = document.createElement("span")
+    newProject.appendChild(cardContentOverlay);
+    cardContentOverlay.classList.add("card-content-overlay");
+
+    const cardContentOverlayProjectTitle = document.createElement("div")
+    cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
+    cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
+    cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
+
+    const cardContentOverlayBottomRow = document.createElement("div")
+    cardContentOverlay.appendChild(cardContentOverlayBottomRow);
+    cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
+    // const favoritebuttonContainer = document.createElement("div");
+
+    const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
+    cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
+    cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
+    // const favoritebuttonContainer = document.createElement("div");
+
+    const cardContentOverlayFavoriteBtnStar = document.createElement("img")
+    cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
+    cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
+    cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
 
     const newProjectId = document.createElement("div");
     newProject.appendChild(newProjectId);

@@ -149,10 +149,10 @@ body {
 
 .project-card {
     background-color: rgb(58, 58, 58);
-    width: 135px; 
-    height: 90px;
+    width: 165px; 
+    height: 110px;
     margin: 10px;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 10px;
     color: white;
     font-family: Graphik-Semibold,sans-serif;
@@ -160,10 +160,9 @@ body {
     font-size: 16px;
 }
 
-.project-card:hover {
+/* .project-card:hover {
   background-color: rgb(40, 40, 40);
-
-}
+} */
 
 .project-id-card {
   display: none;
@@ -223,5 +222,64 @@ body {
 
 
 
+  .card-fade-overlay {
+    width: inherit;
+    height: inherit;
+    background-color: transparent;
+    position: absolute;
+    border-radius: 10px;
+  }
+
+  .project-card:hover .card-fade-overlay {
+    background-color: rgb(0, 0, 0, .15);
+  }
 
 
+  .card-content-overlay {
+    width: 155px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0 10px 10px;
+  }
+
+  .card-content-overlay-project-title {
+    width: inherit;
+    z-index: 3;
+  }
+
+.card-content-overlay-bottom-row {
+  display: flex;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+}
+
+  .card-content-overlay-favorite-btn-container {
+    /* background-color: blue; */
+    width: 10px;
+    height: 20px;
+    opacity: 0;
+    border-radius: 10px;
+    display: block;
+    -webkit-transform: translateZ(0);
+    transition-duration: .15s;
+    /* transition-property: color,background,opacity,transform,width,margin; */
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    /* margin-left: 80%; */
+  }
+
+  .project-card:hover .card-content-overlay-favorite-btn-container {
+    margin-right: 9px;
+    opacity: 1;
+    width: 20px;
+  }
+
+  .card-content-overlay-favorite-btn-star {
+    width: 10px;
+    height: 10px;
+    padding-left: 5px;
+    /* box-shadow: 0 0 20px 0px rgb(238, 255, 81); */
+  }
