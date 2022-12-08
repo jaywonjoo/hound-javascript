@@ -182,6 +182,13 @@
     margin: 20px 0;
   }
 
+  .delineator-med {
+    width: 90%;
+    /* height: 20px; */
+    border-bottom: solid 1px black;
+    margin: 10px 0;
+  }
+
   .delineator-full {
     width: 100%;
     /* height: 20px; */

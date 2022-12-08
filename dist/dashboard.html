@@ -38,6 +38,7 @@
 <!-- navbar --------------------------------------------------------------------------- -->
 
 
+
 <div class="overlay user-dropdown-overlay"></div>
 
 <div class="modal user-dropdown-modal transparent">
@@ -79,6 +80,20 @@
     </div>
   </div>
 
+  <div class="overlay blurred-overlay"></div>
+
+  <div class="modal all-other-modals solid">
+      <form class="modal-create-project-button">
+        <label for="name">Name:</label>
+        <input type="text" name="name" required>
+        
+        <button id="close-modal-btn">Create Project</button>
+      </form>
+  </div>
+
+  <div id="deleteProjectOverlayContainer" class="transparent"></div>
+  <div id="deleteProjectModalContainer" class="transparent"></div>
+
 
 <div class="lower-half">
   <div class="mobile-spacer"></div>
@@ -116,13 +131,13 @@
     </div>
 
     <div class="sidebar-button">
-      <div class="sidebar-button-circle transparent">></div>
-      <div class="sidebar-button-bar transparent"></div>
+      <div class="sidebar-button-circle solid">></div>
+      <div class="sidebar-button-bar solid"></div>
     </div>
 
     <div class="sidebar-button-bar-spacer"></div>
 
-    <div class="overlay blurred-overlay"></div>
+    <!-- <div class="overlay blurred-overlay"></div> -->
     <!-- dashboard --------------------------------------------------------------------------- -->
 
     <div class="content-section">
@@ -140,25 +155,14 @@
       <div id="shared-project-container"></div>
 
       <!-- merge -->
-      <div class="overlay"></div>
 
-      <div class="modal all-other-modals solid">
 
-          <form class="modal-create-project-button">
-            <label for="name">Name:</label>
-            <input type="text" name="name" required>
-            
-            <button id="close-modal-btn">Create Project</button>
-          </form>
-
-      </div>
-
-      <form class="delete">
+      <!-- <form class="delete">
         <label for="id">Document id:</label>
         <input type="text" name="id" required>
 
         <button>delete a Project</button>
-      </form>
+      </form> -->
 
       <!-- <button id="logoutButton">logout</button> -->
 

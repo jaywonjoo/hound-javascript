@@ -80,7 +80,8 @@ const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
 
 // const ProjectUsersDocRef = doc(db, 'projects', projectID)
-// // loadBackground()
+
+
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -145,7 +146,6 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
-
 // your projects queries
 onAuthStateChanged(auth, (user) => {
   if (user) {
@@ -174,7 +174,7 @@ onAuthStateChanged(auth, (user) => {
         newProject.innerText = projects[i].name;
         newProject.classList.add("project-card");
         const fetchedBackgroundURL = projects[i].background;
-        newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover;  background-position: 50%")
+        newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover;  background-position: 50% 40%")
         const newProjectId = document.createElement("div");
         newProject.appendChild(newProjectId);
         newProjectId.innerText = projects[i].id;
@@ -289,20 +289,16 @@ function closeModal() {
 
 // **************************************************************************************** //
 
-// FEATURE: Deleting Documents
-const deleteProjectForm = document.querySelector(".delete");
-deleteProjectForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+// // FEATURE: Deleting Documents
+// const deleteProjectForm = document.querySelector(".delete");
+// deleteProjectForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
 
-  const docRef = doc(db, "projects", deleteProjectForm.id.value);
-  deleteDoc(docRef).then(() => {
-    deleteProjectForm.reset();
-  });
-});
-
-
-
-
+//   const docRef = doc(db, "projects", deleteProjectForm.id.value);
+//   deleteDoc(docRef).then(() => {
+//     deleteProjectForm.reset();
+//   });
+// });
 
 
 
@@ -311,6 +307,7 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
+
     console.log(uid)
     // const userProjects = query(colRef, where("creator", "==", uid));
     const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
@@ -328,12 +325,63 @@ onSnapshot(sharedProjects, (snapshot) => {
   for (i = 0; i < sharedProjectsArray.length; i++) {
     const newProject = document.createElement("div");
     sharedProjectContainer.appendChild(newProject);
-    newProject.innerText = sharedProjectsArray[i].name;
     newProject.classList.add("project-card");
-
-
     const fetchedBackgroundURL = sharedProjectsArray[i].background;
-    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
+    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50% 40%")
+
+    const cardProjectName = document.createElement("div");
+    cardProjectName.classList.add("card-project-name")
+    newProject.appendChild(cardProjectName)
+    cardProjectName.innerText = sharedProjectsArray[i].name;
+
+    const cardRightSection = document.createElement("div");
+    cardRightSection.classList.add("card-right-section")
+    newProject.appendChild(cardRightSection)
+
+
+    const cardDeleteButton = document.createElement("button");
+    cardDeleteButton.setAttribute("id", "cardDeleteButton")
+    cardDeleteButton.classList.add("open-modal-btn")
+    cardDeleteButton.classList.add("card-delete-button")
+    cardRightSection.appendChild(cardDeleteButton)
+
+    const cardDeleteButtonIcon = document.createElement("img");
+    cardDeleteButtonIcon.classList.add("card-favorite-button-icon")
+    cardDeleteButtonIcon.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/5/5f/Red_X.svg")
+    cardDeleteButton.appendChild(cardDeleteButtonIcon)
+
+    const deleteProjectOverlayContainer = document.querySelector("#deleteProjectOverlayContainer")
+    const deleteProjectOverlay = document.createElement("div");
+    deleteProjectOverlay.classList.add("overlay")
+    deleteProjectOverlayContainer.appendChild(deleteProjectOverlay)
+    deleteProjectOverlay.classList.add("blurred-overlay")
+
+    const deleteProjectModalContainer = document.querySelector("#deleteProjectModalContainer")
+    const deleteProjectModal = document.createElement("div");
+    const deleteProjectModalHr = document.createElement("div");
+    const deleteProjectModalCancelBtn = document.createElement("button");
+    const deleteProjectModalDeleteProjectBtn = document.createElement("button");
+    const projectName = sharedProjectsArray[i].name
+    deleteProjectModal.classList.add("modal")
+    deleteProjectModalContainer.appendChild(deleteProjectModal)
+    deleteProjectModal.classList.add("delete-project-modal")
+    // deleteProjectModal.classList.add("solid")
+    deleteProjectModalHr.classList.add("delineator-med")
+    deleteProjectModalCancelBtn.classList.add("delete-project-modal-cancel-btn")
+    deleteProjectModalDeleteProjectBtn.classList.add("delete-project-modal-delete-project-btn")
+    deleteProjectModal.innerText = "Delete " + projectName + "?";
+    deleteProjectModal.appendChild(deleteProjectModalHr)
+    deleteProjectModal.appendChild(deleteProjectModalCancelBtn)
+    deleteProjectModal.appendChild(deleteProjectModalDeleteProjectBtn)
+
+    const cardFavoriteButton = document.createElement("button");
+    cardFavoriteButton.classList.add("card-favorite-button")
+    cardRightSection.appendChild(cardFavoriteButton)
+
+    const cardFavoriteButtonIcon = document.createElement("img");
+    cardFavoriteButtonIcon.classList.add("card-favorite-button-icon")
+    cardFavoriteButtonIcon.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
+    cardFavoriteButton.appendChild(cardFavoriteButtonIcon)
 
     const newProjectId = document.createElement("div");
     newProject.appendChild(newProjectId);
@@ -344,7 +392,9 @@ onSnapshot(sharedProjects, (snapshot) => {
     // newProject.addEventListener("click", (e) => {
     //   window.location.href="project-page.html?project=coyote";
     // })
+
   }
+
 
   // click on div to redirect user to project specific page
   const projectCards = document.querySelectorAll(".project-card");
@@ -358,6 +408,9 @@ onSnapshot(sharedProjects, (snapshot) => {
     });
   });
 
+  setDataIndex()
+  closeOverlay()
+
   console.log(sharedProjectsArray);
 });
     // ...
@@ -366,6 +419,8 @@ onSnapshot(sharedProjects, (snapshot) => {
     // ...
   }
 });
+
+
 
 // Make tickets clear and repopulate after deletion
 function clearSharedProjects() {
@@ -406,48 +461,6 @@ overlayer.addEventListener("click", () => {
 // MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
 
 
-
-// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
-// const modal = document.getElementsByClassName("modal");
-// const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
-// const overlay = document.getElementsByClassName("overlay");
-
-
-// When the user clicks the button, open the modal
-setDataIndex()
-function setDataIndex() {
-  let i = 0
-  for (i = 0; i < modalBtnMulti.length; i++)
-  {
-      modalBtnMulti[i].setAttribute('data-index', i);
-      modal[i].setAttribute('data-index', i);
-      overlay[i].setAttribute('data-index', i);
-  }
-
-  for (i = 0; i < modalBtnMulti.length; i++)
-  {
-      modalBtnMulti[i].onclick = function() {
-          let ElementIndex = this.getAttribute('data-index');
-          modal[ElementIndex].classList.toggle("open")
-          overlay[ElementIndex].classList.toggle("open")
-      };
-  }
-}
-
-closeOverlay()
-function closeOverlay() {
-  for (let i = 0; i < overlay.length; i++)
-  {
-      overlay[i].onclick = function() {
-          let ElementIndex = this.getAttribute('data-index');
-      //   modalparent[ElementIndex].classList.remove("hidden")
-        modal[ElementIndex].classList.remove("open")
-        overlay[ElementIndex].classList.remove("open")
-      };
-  }
-}
-
-// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
 
 
 // // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
@@ -570,3 +583,48 @@ function setThemeDark() {
 
 
 // FEATURE: DARK MODE ************************************************************************************************************************
+
+
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
+// const modal = document.getElementsByClassName("modal");
+// const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+// const overlay = document.getElementsByClassName("overlay");
+
+
+// When the user clicks the button, open the modal
+setDataIndex()
+function setDataIndex() {
+  let i = 0
+  for (i = 0; i < modalBtnMulti.length; i++)
+  {
+      modalBtnMulti[i].setAttribute('data-index', i);
+      modal[i].setAttribute('data-index', i);
+      overlay[i].setAttribute('data-index', i);
+  }
+
+  for (i = 0; i < modalBtnMulti.length; i++)
+  {
+      modalBtnMulti[i].onclick = function(e) {
+          e.stopPropagation()
+          let ElementIndex = this.getAttribute('data-index');
+          modal[ElementIndex].classList.toggle("open")
+          overlay[ElementIndex].classList.toggle("open")
+      };
+  }
+}
+
+closeOverlay()
+function closeOverlay() {
+  for (let i = 0; i < overlay.length; i++)
+  {
+      overlay[i].onclick = function() {
+          let ElementIndex = this.getAttribute('data-index');
+      //   modalparent[ElementIndex].classList.remove("hidden")
+        modal[ElementIndex].classList.remove("open")
+        overlay[ElementIndex].classList.remove("open")
+      };
+  }
+}
+
+// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
+
