@@ -380,7 +380,7 @@ onSnapshot(sharedProjects, (snapshot) => {
     const overlayOne = document.querySelector("#overlayOne")
 
 
-    newProject.addEventListener('mouseover', () => {
+    newProject.addEventListener('mouseenter', () => {
       console.log("blah")
       overlayOne.classList.add("open")
     });
