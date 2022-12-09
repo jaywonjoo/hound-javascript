@@ -375,6 +375,16 @@ onSnapshot(sharedProjects, (snapshot) => {
     // newProject.addEventListener("click", (e) => {
     //   window.location.href="project-page.html?project=coyote";
     // })
+
+
+    const overlayOne = document.querySelector("#overlayOne")
+
+
+    newProject.addEventListener('mouseover', () => {
+      console.log("blah")
+      overlayOne.classList.add("open")
+    });
+
   }
 
   // click on div to redirect user to project specific page
@@ -601,3 +611,26 @@ function setThemeDark() {
 
 
 // FEATURE: DARK MODE ************************************************************************************************************************
+
+// closeOverlayOne()
+// function closeOverlayOne() {
+//   for (let i = 0; i < overlay.length; i++)
+//   {
+//       overlay[i].onclick = function() {
+//           let ElementIndex = this.getAttribute('data-index');
+//       //   modalparent[ElementIndex].classList.remove("hidden")
+//         modal[ElementIndex].classList.remove("open")
+//         overlay[ElementIndex].classList.remove("open")
+//       };
+//   }
+// }
+
+closeOverlayOne()
+function closeOverlayOne() {
+  const overlayOne = document.querySelector("#overlayOne")
+
+  overlayOne.onclick = function() {
+
+    overlayOne.classList.remove("open")
+      };
+  }
