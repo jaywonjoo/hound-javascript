@@ -326,8 +326,11 @@ onSnapshot(sharedProjects, (snapshot) => {
   });
 
   for (i = 0; i < sharedProjectsArray.length; i++) {
-    const newProject = document.createElement("div");
-    sharedProjectContainer.appendChild(newProject);
+    const newProjectUl = document.createElement("ul");
+    sharedProjectContainer.appendChild(newProjectUl);
+    
+    const newProject = document.createElement("li");
+    newProjectUl.appendChild(newProject);
     // newProject.innerText = sharedProjectsArray[i].name;
     newProject.classList.add("project-card");
     const fetchedBackgroundURL = sharedProjectsArray[i].background;
