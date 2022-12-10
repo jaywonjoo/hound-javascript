@@ -388,6 +388,28 @@ onSnapshot(sharedProjects, (snapshot) => {
     //   window.location.href="project-page.html?project=coyote";
     // })
 
+    const idUid = document.querySelector('#idUid').textContent
+    // console.log(idUid)
+    const currentUserDocRef = doc(db, 'users', idUid)
+
+    // setting favorited class on page load
+    const projectId = sharedProjectsArray[i].id;
+    getDoc(currentUserDocRef).then((snapshot) => {
+      let userFavorites = snapshot.data().favorites;
+
+      console.log(projectId)
+      if (userFavorites.includes(projectId)){
+      newProjectUl.classList.add("favorited")
+      cardContentOverlayFavoriteBtnStar.classList.add("favorited")
+      cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
+        console.log("it's favorited!")
+      } else {
+        console.log("it's not favorited!")
+        newProjectUl.classList.add("not-favorited")
+      }
+    })
+    // setting favorited class on page load
+
 
     const overlayOne = document.querySelector("#overlayOne")
 
@@ -723,12 +745,31 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
             .then(() => {
               console.log("good!")
             })
+
+
         };
   }
 }
   
 
+// // const idUid = document.querySelector('#idUid').textContent
+// const currentUserDocRef = doc(db, 'users', "1pShBHrdFaihVTG2t8BM")
 
+// // console.log(idUidd)
+
+
+
+
+// loadBackground()
+// function loadBackground() {
+//   getDoc(currentUserDocRef).then((snapshot) => {
+// // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+//     let userFavorites = snapshot.data().favorites;
+//       if (userFavorites.includes("mNQQINlplBB9LbwDHGUO")){
+//         console.log("it contains it!")
+//       }
+//   })
+// }
 
 
 //   onAuthStateChanged(auth, (user) => {
