@@ -83,6 +83,7 @@ const idUid = document.querySelector('#idUid')
 const currentUserDocRefDiv = document.createElement("div")
 currentUserDocRefDiv.setAttribute("id", "idUid")
 honme.appendChild(currentUserDocRefDiv)
+const starIcon = "../images/icon_star_not_favorited.png"
 
 
 // const ProjectUsersDocRef = doc(db, 'projects', projectID)
@@ -370,8 +371,11 @@ onSnapshot(sharedProjects, (snapshot) => {
 
     const cardContentOverlayFavoriteBtnStar = document.createElement("img")
     cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
-    cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
     // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_favorited.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_not_favorited.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", starIcon)
     cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
 
     const newProjectId = document.createElement("div");
@@ -389,8 +393,13 @@ onSnapshot(sharedProjects, (snapshot) => {
 
     // SAFARI: TURN OFF HOVER EVENT ************************
     newProject.addEventListener('mouseenter', () => {
-      console.log("blah")
+      console.log("enter")
       overlayOne.classList.add("open")
+    });
+
+    newProject.addEventListener('mouseleave', () => {
+      console.log("exit")
+      overlayOne.classList.remove("open")
     });
     // SAFARI: TURN OFF HOVER EVENT ************************
 
@@ -420,7 +429,7 @@ onSnapshot(sharedProjects, (snapshot) => {
                             
                               //   })
                               //   // WRITE ID TO USER'S FAVORITES ************************
-                              setProjectDataIndex()
+      setProjectDataIndex()
   }
 
 
@@ -675,11 +684,9 @@ function closeOverlayOne() {
 
 
 
-
-
-
 const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
 const projectCards = document.getElementsByClassName("project-card");
+const starBtnContainer = document.getElementsByClassName("card-content-overlay-favorite-btn-container")
 
 
   function setProjectDataIndex() {
@@ -688,6 +695,8 @@ const projectCards = document.getElementsByClassName("project-card");
     {
         starBtnMulti[i].setAttribute('data-index', i);
         projectCards[i].setAttribute('data-index', i);
+        starBtnContainer[i].setAttribute('data-index', i);
+
     }
     
     for (let i = 0; i < starBtnMulti.length; i++) {
@@ -697,8 +706,12 @@ const projectCards = document.getElementsByClassName("project-card");
       starBtnMulti[i].onclick = function(e) {
             e.stopPropagation()
             let ElementIndex = this.getAttribute('data-index');
-            // starBtnMulti[ElementIndex].classList.toggle("open")
-            // projectCards[ElementIndex].classList.toggle("open")
+
+
+            starBtnContainer[i].classList.toggle("favorited")
+            starBtnMulti[i].classList.toggle("favorited")
+
+
             const projectId = projectCards[ElementIndex].lastChild.textContent;
             const userRef = collection(db, 'users')
             // const userCreatorDocRef = query(userRef, where("uid", "==", idUid.innerText));

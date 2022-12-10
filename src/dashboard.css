@@ -7,6 +7,10 @@ body {
   margin: 0;
 }
 
+#honme {
+  display: none;
+}
+
 .hidden {
   display: none;
 }
@@ -268,6 +272,7 @@ body {
     display: flex;
     justify-content: left;
     align-items: center;
+    margin-right: 2px;
     /* margin-left: 80%; */
   }
 
@@ -277,12 +282,27 @@ body {
     width: 20px;
   }
 
+  .card-content-overlay-favorite-btn-container.favorited {
+    margin-right: 9px;
+    opacity: 1;
+    width: 20px;
+  }
+  
   .card-content-overlay-favorite-btn-star {
-    width: 10px;
-    height: 10px;
-    padding-left: 5px;
+    content: url(../images/icon_star_not_favorited.png);
+    width: 12px;
+    height: 12px;
+    padding-left: 2px;
+    /* background-image: url("icon_star_favorited.png"); */
     /* box-shadow: 0 0 20px 0px rgb(238, 255, 81); */
   }
+
+  .card-content-overlay-favorite-btn-star.favorited {
+    content: url(../images/icon_star_favorited.png);
+  }
+
+
+
 
   /* .project-card:hover .overlay-one {
     display: block
