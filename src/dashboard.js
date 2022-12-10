@@ -78,6 +78,12 @@ const solid = document.querySelectorAll(".solid")
 const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
+const honme = document.querySelector('#honme')
+const idUid = document.querySelector('#idUid')
+const currentUserDocRefDiv = document.createElement("div")
+currentUserDocRefDiv.setAttribute("id", "idUid")
+honme.appendChild(currentUserDocRefDiv)
+
 
 // const ProjectUsersDocRef = doc(db, 'projects', projectID)
 // // loadBackground()
@@ -116,9 +122,11 @@ onAuthStateChanged(auth, (user) => {
             
             // // // SUBFEATURE: CHANGE THEME ********************************************************************************
 
-
             const currentUid = userListOne[0].id
             const currentUserDocRef = doc(db, 'users', currentUid)
+
+            // Storing user fb id
+            currentUserDocRefDiv.innerText = currentUid
 
             darkModeBtn.addEventListener("click", (e) => {
                 e.stopPropagation()
@@ -146,70 +154,70 @@ onAuthStateChanged(auth, (user) => {
 
 
 
-// your projects queries
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    const userProjects = query(colRef, where("creator", "==", uid));
+                        // // your projects queries
+                        // onAuthStateChanged(auth, (user) => {
+                        //   if (user) {
+                        //     // User is signed in, see docs for a list of available properties
+                        //     // https://firebase.google.com/docs/reference/js/firebase.User
+                        //     const uid = user.uid;
+                        //     const userProjects = query(colRef, where("creator", "==", uid));
 
 
-    const sharedProjects = query(colRef, where("collaborators", "==", uid));
+                        //     const sharedProjects = query(colRef, where("collaborators", "==", uid));
 
 
-    // realtime collection data
-    let i = 0;
-    onSnapshot(userProjects, (snapshot) => {
-      clearProjects();
+                        //     // realtime collection data
+                        //     let i = 0;
+                        //     onSnapshot(userProjects, (snapshot) => {
+                        //       clearProjects();
 
-      let projects = [];
-      snapshot.docs.forEach((doc) => {
-        projects.push({ ...doc.data(), id: doc.id });
-      });
+                        //       let projects = [];
+                        //       snapshot.docs.forEach((doc) => {
+                        //         projects.push({ ...doc.data(), id: doc.id });
+                        //       });
 
-      for (i = 0; i < projects.length; i++) {
-        const newProject = document.createElement("div");
-        projectContainer.appendChild(newProject);
-        newProject.innerText = projects[i].name;
-        newProject.classList.add("project-card");
-        const fetchedBackgroundURL = projects[i].background;
-        newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover;  background-position: 50%")
-        const newProjectId = document.createElement("div");
-        newProject.appendChild(newProjectId);
-        newProjectId.innerText = projects[i].id;
-        newProjectId.classList.add("project-id-card");
+                        //       for (i = 0; i < projects.length; i++) {
+                        //         const newProject = document.createElement("div");
+                        //         projectContainer.appendChild(newProject);
+                        //         newProject.innerText = projects[i].name;
+                        //         newProject.classList.add("project-card");
+                        //         const fetchedBackgroundURL = projects[i].background;
+                        //         newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover;  background-position: 50%")
+                        //         const newProjectId = document.createElement("div");
+                        //         newProject.appendChild(newProjectId);
+                        //         newProjectId.innerText = projects[i].id;
+                        //         newProjectId.classList.add("project-id-card");
 
-        // // click on div to redirect user to another page
-        // newProject.addEventListener("click", (e) => {
-        //   window.location.href="project-page.html?project=coyote";
-        // })
-      }
+                        //         // // click on div to redirect user to another page
+                        //         // newProject.addEventListener("click", (e) => {
+                        //         //   window.location.href="project-page.html?project=coyote";
+                        //         // })
+                        //       }
 
-      // click on div to redirect user to project specific page
-      const projectCards = document.querySelectorAll(".project-card");
-      projectCards.forEach((card) => {
-        card.addEventListener("click", () => {
-          const result = card.lastChild.textContent;
-          const projectPage = ["project-page.html?project=" + result];
-          // console.log(projectPage)
-          // console.log(result);
-          window.location.href = projectPage;
-        });
-        
-      });
+                        //       // click on div to redirect user to project specific page
+                        //       const projectCards = document.querySelectorAll(".project-card");
+                        //       projectCards.forEach((card) => {
+                        //         card.addEventListener("click", () => {
+                        //           const result = card.lastChild.textContent;
+                        //           const projectPage = ["project-page.html?project=" + result];
+                        //           // console.log(projectPage)
+                        //           // console.log(result);
+                        //           window.location.href = projectPage;
+                        //         });
+                                
+                        //       });
 
-      
-      console.log(projects);
-    });
+                              
+                        //       console.log(projects);
+                        //     });
 
-    
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+                            
+                        //     // ...
+                        //   } else {
+                        //     // User is signed out
+                        //     // ...
+                        //   }
+                        // });
 
 
 // Make tickets clear and repopulate after deletion
@@ -314,7 +322,7 @@ onAuthStateChanged(auth, (user) => {
     console.log(uid)
     // const userProjects = query(colRef, where("creator", "==", uid));
     const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
-
+    
     // realtime collection data
     let i = 0;
 onSnapshot(sharedProjects, (snapshot) => {
@@ -379,13 +387,43 @@ onSnapshot(sharedProjects, (snapshot) => {
 
     const overlayOne = document.querySelector("#overlayOne")
 
-
+    // SAFARI: TURN OFF HOVER EVENT ************************
     newProject.addEventListener('mouseenter', () => {
       console.log("blah")
       overlayOne.classList.add("open")
     });
+    // SAFARI: TURN OFF HOVER EVENT ************************
 
+                              //   // WRITE ID TO USER'S FAVORITES ************************
+
+                              //   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
+                              //     e.stopPropagation()
+                              //     const projectId = newProject.lastChild.textContent;
+                              //     const userRef = collection(db, 'users')
+                              //     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+                              //     onSnapshot(userCreatorDocRef, (snapshot) => {
+                              //       snapshot.docs.forEach((docs) => {
+                              //           let userListOne = []
+                              //           userListOne.push({ ...docs.data(), id: docs.id });
+                            
+                              //           const currentUid = userListOne[0].id
+                              //           const currentUserDocRef = doc(db, 'users', currentUid)
+                            
+                              //     updateDoc(currentUserDocRef, {
+                              //       favorites: arrayUnion(projectId)
+                              //     })
+                              //     .then(() => {
+                              //       console.log("good!")
+                              //     })
+                              //   })
+                              // })
+                            
+                              //   })
+                              //   // WRITE ID TO USER'S FAVORITES ************************
+                              setProjectDataIndex()
   }
+
+
 
   // click on div to redirect user to project specific page
   const projectCards = document.querySelectorAll(".project-card");
@@ -634,3 +672,95 @@ function closeOverlayOne() {
     overlayOne.classList.remove("open")
       };
   }
+
+
+
+
+
+
+const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
+const projectCards = document.getElementsByClassName("project-card");
+
+
+  function setProjectDataIndex() {
+    let i = 0
+    for (i = 0; i < starBtnMulti.length; i++)
+    {
+        starBtnMulti[i].setAttribute('data-index', i);
+        projectCards[i].setAttribute('data-index', i);
+    }
+    
+    for (let i = 0; i < starBtnMulti.length; i++) {
+
+      const idUid = document.querySelector('#idUid').textContent
+
+      starBtnMulti[i].onclick = function(e) {
+            e.stopPropagation()
+            let ElementIndex = this.getAttribute('data-index');
+            // starBtnMulti[ElementIndex].classList.toggle("open")
+            // projectCards[ElementIndex].classList.toggle("open")
+            const projectId = projectCards[ElementIndex].lastChild.textContent;
+            const userRef = collection(db, 'users')
+            // const userCreatorDocRef = query(userRef, where("uid", "==", idUid.innerText));
+
+            const currentUserDocRef = doc(db, 'users', idUid)
+            updateDoc(currentUserDocRef, {
+              favorites: arrayUnion(projectId)
+            })
+            .then(() => {
+              console.log("good!")
+            })
+        };
+  }
+}
+  
+
+
+
+
+//   onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//       const uid = user.uid;
+    
+
+
+// }
+// })
+
+  // WRITE ID TO USER'S FAVORITES ************************
+
+
+
+//   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
+//     e.stopPropagation()
+//     const projectId = newProject.lastChild.textContent;
+//     const userRef = collection(db, 'users')
+//     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+//     onSnapshot(userCreatorDocRef, (snapshot) => {
+//       snapshot.docs.forEach((docs) => {
+//           let userListOne = []
+//           userListOne.push({ ...docs.data(), id: docs.id });
+
+//           const currentUid = userListOne[0].id
+//           const currentUserDocRef = doc(db, 'users', currentUid)
+
+//     updateDoc(currentUserDocRef, {
+//       favorites: arrayUnion(projectId)
+//     })
+//     .then(() => {
+//       console.log("good!")
+//     })
+//   })
+// })
+
+//   })
+  // WRITE ID TO USER'S FAVORITES ************************
+
+
+
+
+    // onSnapshot(userCreatorDocRef, (snapshot) => {
+    //   snapshot.docs.forEach((docs) => {
+    //     let userListOne = []
+    //     userListOne.push({ ...docs.data(), id: docs.id });
+    //     const currentUid = userListOne[0].id
