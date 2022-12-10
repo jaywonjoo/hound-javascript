@@ -252,19 +252,19 @@ onAuthStateChanged(auth, (user) => {
                               // setting favorited class on page load
 
 
-                              const overlayOne = document.querySelector("#overlayOne")
+                              // const overlayOne = document.querySelector("#overlayOne")
 
-                              // SAFARI: TURN OFF HOVER EVENT ************************
-                              newProject.addEventListener('mouseenter', () => {
-                                console.log("enter")
-                                overlayOne.classList.add("open")
-                              });
+                              // // SAFARI: TURN OFF HOVER EVENT ************************
+                              // newProject.addEventListener('mouseenter', () => {
+                              //   console.log("enter")
+                              //   overlayOne.classList.add("open")
+                              // });
 
-                              newProject.addEventListener('mouseleave', () => {
-                                console.log("exit")
-                                overlayOne.classList.remove("open")
-                              });
-                              // SAFARI: TURN OFF HOVER EVENT ************************
+                              // newProject.addEventListener('mouseleave', () => {
+                              //   console.log("exit")
+                              //   overlayOne.classList.remove("open")
+                              // });
+                              // // SAFARI: TURN OFF HOVER EVENT ************************
 
                                                         //   // WRITE ID TO USER'S FAVORITES ************************
 
@@ -510,19 +510,19 @@ onSnapshot(sharedProjects, (snapshot) => {
     // setting favorited class on page load
 
 
-    const overlayOne = document.querySelector("#overlayOne")
+    // const overlayOne = document.querySelector("#overlayOne")
 
-    // SAFARI: TURN OFF HOVER EVENT ************************
-    newProject.addEventListener('mouseenter', () => {
-      console.log("enter")
-      overlayOne.classList.add("open")
-    });
+    // // SAFARI: TURN OFF HOVER EVENT ************************
+    // newProject.addEventListener('mouseenter', () => {
+    //   console.log("enter")
+    //   overlayOne.classList.add("open")
+    // });
 
-    newProject.addEventListener('mouseleave', () => {
-      console.log("exit")
-      overlayOne.classList.remove("open")
-    });
-    // SAFARI: TURN OFF HOVER EVENT ************************
+    // newProject.addEventListener('mouseleave', () => {
+    //   console.log("exit")
+    //   overlayOne.classList.remove("open")
+    // });
+    // // SAFARI: TURN OFF HOVER EVENT ************************
 
                               //   // WRITE ID TO USER'S FAVORITES ************************
 
@@ -941,3 +941,39 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
     //     let userListOne = []
     //     userListOne.push({ ...docs.data(), id: docs.id });
     //     const currentUid = userListOne[0].id
+
+    // openCardOverlayOnMobile()
+
+
+// function openCardOverlayOnMobile() {
+
+  // console.log(screen.width)
+  console.log(window.innerWidth)
+
+
+if (window.innerWidth <= 800) {
+  setTimeout(() => {
+    const projectCard = document.querySelectorAll("#projectCardMaster")
+    const overlayOne = document.querySelector("#overlayOne")
+
+    // SAFARI: TURN OFF HOVER EVENT ************************
+    projectCard.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+      console.log("enter")
+      overlayOne.classList.add("open")
+      });
+    });
+
+    projectCard.forEach((card) => {
+      card.addEventListener('mouseleave', () => {
+      console.log("exit")
+      overlayOne.classList.remove("open")
+    });
+  });
+    // SAFARI: TURN OFF HOVER EVENT ************************
+  }, "1000")
+}
+
+
+
+  
