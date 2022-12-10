@@ -336,6 +336,7 @@ onSnapshot(sharedProjects, (snapshot) => {
 
   for (i = 0; i < sharedProjectsArray.length; i++) {
     const newProjectUl = document.createElement("ul");
+    newProjectUl.setAttribute("id", "projectCardMaster")
     sharedProjectContainer.appendChild(newProjectUl);
     
     const newProject = document.createElement("li");
@@ -706,8 +707,9 @@ function closeOverlayOne() {
 
 
 
-const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
+// const projectCardMaster = document.querySelectorAll("#projectCardMaster");
 const projectCards = document.getElementsByClassName("project-card");
+const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
 const starBtnContainer = document.getElementsByClassName("card-content-overlay-favorite-btn-container")
 
 
@@ -718,7 +720,7 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
         starBtnMulti[i].setAttribute('data-index', i);
         projectCards[i].setAttribute('data-index', i);
         starBtnContainer[i].setAttribute('data-index', i);
-
+        projectCards[i].parentElement.setAttribute('data-index', i);
     }
     
     for (let i = 0; i < starBtnMulti.length; i++) {
@@ -729,22 +731,45 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
             e.stopPropagation()
             let ElementIndex = this.getAttribute('data-index');
 
-
-            starBtnContainer[i].classList.toggle("favorited")
-            starBtnMulti[i].classList.toggle("favorited")
-
-
             const projectId = projectCards[ElementIndex].lastChild.textContent;
             const userRef = collection(db, 'users')
             // const userCreatorDocRef = query(userRef, where("uid", "==", idUid.innerText));
 
             const currentUserDocRef = doc(db, 'users', idUid)
-            updateDoc(currentUserDocRef, {
-              favorites: arrayUnion(projectId)
-            })
-            .then(() => {
-              console.log("good!")
-            })
+
+
+            if (projectCards[i].parentElement.classList.contains("favorited")) {
+              starBtnContainer[i].classList.remove("favorited")
+              starBtnMulti[i].classList.remove("favorited")
+              projectCards[i].parentElement.classList.remove("favorited")
+              starBtnContainer[i].classList.add("not-favorited")
+              starBtnMulti[i].classList.add("not-favorited")
+              projectCards[i].parentElement.classList.add("not-favorited")
+
+              updateDoc(currentUserDocRef, {
+                favorites: arrayRemove(projectId)
+              })
+              .then(() => {
+                console.log("unfavorited!")
+              })
+              
+            } else {
+              starBtnContainer[i].classList.add("favorited")
+              starBtnMulti[i].classList.add("favorited")
+              projectCards[i].parentElement.classList.add("favorited")
+              starBtnContainer[i].classList.remove("not-favorited")
+              starBtnMulti[i].classList.remove("not-favorited")
+              projectCards[i].parentElement.classList.remove("not-favorited")
+
+              updateDoc(currentUserDocRef, {
+                favorites: arrayUnion(projectId)
+              })
+              .then(() => {
+                console.log("favorited!")
+              })
+            }
+            // starBtnContainer[i].classList.toggle("favorited")
+            // starBtnMulti[i].classList.toggle("favorited")
 
 
         };
