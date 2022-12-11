@@ -361,18 +361,24 @@
         bottom: 0; */
         /* background-color: rgba(0, 0, 0, .75); */
       }
-
-
+    
+      /* .project-card:hover .overlay-one {
+          display: block;
+          z-index: 0;
+          position: fixed;
+          background-color: red;
+          height: 100vh;
+          width: 100vw;
+          left: 0%;
+      } */
 
       .overlay-one.open {
             display: block;
             z-index: 0;
             position: fixed;
-            /* background-color: red; */
             height: 100vh;
             width: 100vw;
             left: 0%;
-
       }
 
       .starred-project-section-header {

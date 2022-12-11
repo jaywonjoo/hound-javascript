@@ -69,6 +69,9 @@ const dashboardMasterMobile = document.querySelector(".dashboard-master")
 const overlayer = document.querySelector(".blurred-overlay");
 // Logging out
 const logoutButton = document.querySelector("#logoutButton");
+// Close overlay one
+const overlayOne = document.querySelector("#overlayOne")
+
 
 // FEATURES ************************************************************************************************
 
@@ -151,6 +154,9 @@ function populateProjects(projectQuery, projectContainer) {
 
       const idUid = document.querySelector('#idUid').textContent
       const currentUserDocRef = doc(db, 'users', idUid)
+
+      turnOffProjectHoverModal(newProjectUl)
+
 
       const projectId = sharedProjectsArray[i].id;
       getDoc(currentUserDocRef).then((snapshot) => {
@@ -506,27 +512,27 @@ function populateProjectContainers() {
 // MOBILE FUNCTIONS ************************************************************************************************
 
 
-function turnOffProjectHoverModal() {
+function turnOffProjectHoverModal(projectCard) {
   if (window.innerWidth <= 800) {
     // NOTE: Timeout needed to give the cards a chance to populate
-    setTimeout(() => {
-      const projectCard = document.querySelectorAll("#projectCardMaster")
+    // setTimeout(() => {
+      // const projectCard = document.querySelectorAll("#projectCardMaster")
       const overlayOne = document.querySelector("#overlayOne")
 
-      projectCard.forEach((card) => {
-        card.addEventListener('mouseenter', () => {
+      // projectCard.forEach((card) => {
+        projectCard.addEventListener('mouseenter', () => {
         console.log("enter")
         overlayOne.classList.add("open")
         });
-      });
+      // });
 
-      projectCard.forEach((card) => {
-        card.addEventListener('mouseleave', () => {
+      // projectCard.forEach((card) => {
+        projectCard.addEventListener('mouseleave', () => {
         console.log("exit")
         overlayOne.classList.remove("open")
       });
-    });
-    }, "500")
+    // });
+    // }, "1000")
   }
 }
 
@@ -547,12 +553,10 @@ function closeSideBar() {
 
 
 function closeOverlayOne() {
-  const overlayOne = document.querySelector("#overlayOne")
   overlayOne.onclick = function() {
     overlayOne.classList.remove("open")
       };
   }
-  
 
 function closeSidebarWithOverlay() {
   overlayer.addEventListener("click", () => {
