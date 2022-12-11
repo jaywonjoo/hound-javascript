@@ -35,7 +35,7 @@ auth.onAuthStateChanged((user) => {
 });
 
 
-// CONSTANTS
+// CONSTANTS ************************************************************************************************
 const db = getFirestore();
 const colRef = collection(db, "projects");
 // Project populating
@@ -67,203 +67,26 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
 const sidebarButton = document.querySelector(".sidebar-button");
 const dashboardMasterMobile = document.querySelector(".dashboard-master")
 const overlayer = document.querySelector(".blurred-overlay");
-
-
+// Logging out
+const logoutButton = document.querySelector("#logoutButton");
 
 // FEATURES ************************************************************************************************
 
-
-
-
-// FEATURE: LOGOUT BUTTON
-const logoutButton = document.querySelector("#logoutButton");
-logoutButton.addEventListener("click", () => {
-  signOut(auth)
-    .then(() => {
-      console.log("the user signed out");
-      window.location.href = "signin.html";
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-});
-
-
-// // FEATURE: USER ICON & THEME 
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const userRef = collection(db, 'users')
-
-      const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-      onSnapshot(userCreatorDocRef, (snapshot) => {
-        snapshot.docs.forEach((docs) => {
-
-            let userListOne = []
-            userListOne.push({ ...docs.data(), id: docs.id });
-
-            const navUserIcon = document.querySelector(".nav-user-icon")
-            navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-
-            let lightString = String("light")
-            let darkString = String("dark")
-
-            // // SUBFEATURE: SET THEME 
-            if (userListOne[0].theme == lightString) {
-                setThemeLight()
-                themeBtn.innerHTML = "Dark Mode"
-                    console.log("blah")
-            } else {
-                setThemeDark()
-                themeBtn.innerHTML = "Light Mode"
-            console.log("blee")
-
-            }
-
-            // // SUBFEATURE: SET THEME 
-            
-            // // // SUBFEATURE: CHANGE THEME 
-
-            const currentId = userListOne[0].uid
-            currentUserIdDiv.innerText = currentId
-
-            // Storing user fb id
-            const currentUid = userListOne[0].id
-            currentUserDocRefDiv.innerText = currentUid
-            const currentUserDocRef = doc(db, 'users', currentUid)
-
-
-            darkModeBtn.addEventListener("click", (e) => {
-                e.stopPropagation()
-
-                if (userListOne[0].theme == lightString) {
-                    updateDoc(currentUserDocRef, {
-                        theme: "dark"
-                    })
-                    // setThemeLight()
-                    // themeBtn.innerHTML = "Dark Mode"
-                        // console.log("blah")
-                } else {
-                    updateDoc(currentUserDocRef, {
-                        theme: "light"
-                    })
-                    console.log("bligg")
-                }
-            })
-            
-          // SUBFEATURE: CHANGE THEME
-        })
-      })
-    }
-})
-
-
-// FEATURE: CREATE NEW PROJECTS
-addProjectForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const user = auth.currentUser;
-  if (user !== null) {
-    const uid = user.uid;
-    console.log(uid);
-
-    addDoc(colRef, {
-      name: addProjectForm.name.value,
-      creator: uid,
-      background: "",
-    }).then(() => {
-      addProjectForm.reset();
-      closeModal();
-
-    });
-  }
-  createProjectDiv();
-});
-
-
-// FEATURE: Deleting Documents
-deleteProjectForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const docRef = doc(db, "projects", deleteProjectForm.id.value);
-  deleteDoc(docRef).then(() => {
-    deleteProjectForm.reset();
-  });
-});
-
-
-
-// FEATURE: DATA-INDEXING FOR MULTIPLE MODALS
+populateUserIconAndTheme()
+createProject()
+logOut()
+deleteProject()
 setDataIndex()
 closeOverlay()
-
-// FEATURE: POPULATING PROJECT CONTAINERS
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    const uid = user.uid;
-    const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
-    const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
-    const userProjects = query(colRef, where("creator", "==", uid));
-
-    populateProjects (starredProjects, starredProjectContainer)
-    populateProjects (userProjects, userProjectContainer)
-    populateProjects (sharedProjects, sharedProjectContainer)
-  } else {
-    window.location.replace("signin.html");
-  }
-})
-
-
-
+populateProjectContainers()
 
 // MOBILE FEATURES ************************************************************************************************
 
-// MF: TURN OFF HOVER EVENT 
-if (window.innerWidth <= 800) {
-  // NOTE: Timeout needed to give the cards a chance to populate
-  setTimeout(() => {
-    const projectCard = document.querySelectorAll("#projectCardMaster")
-    const overlayOne = document.querySelector("#overlayOne")
-
-    projectCard.forEach((card) => {
-      card.addEventListener('mouseenter', () => {
-      console.log("enter")
-      overlayOne.classList.add("open")
-      });
-    });
-
-    projectCard.forEach((card) => {
-      card.addEventListener('mouseleave', () => {
-      console.log("exit")
-      overlayOne.classList.remove("open")
-    });
-  });
-  }, "500")
-}
-
-// MF: OPEN DASHBOARD 
-
-sidebarButton.addEventListener("click", () => {
-    dashboardMasterMobile.setAttribute("style", "left: 0")
-    overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
-    overlayer.classList.add("open")
-})
-
-// MF: CLOSE DASHBOARD 
-dashboardMasterMobile.addEventListener("click", () => {
-    dashboardMasterMobile.removeAttribute("style", "left")
-    overlayer.classList.remove("open")
-})
-
-// MF: CLOSE DASHBOARD WITH OVERLAY
-overlayer.addEventListener("click", () => {
-    dashboardMasterMobile.removeAttribute("style", "left")
-    overlayer.classList.remove("open")
-})
-
-
-
+// turnOffProjectHoverModal()
+openSidebar()
+closeSideBar()
+closeSidebarWithOverlay()
+closeOverlayOne()
 
 // FUNCTIONS ************************************************************************************************
 
@@ -542,16 +365,198 @@ function setProjectDataIndex() {
 }
 
 
-// TRASH?? ************************************************************************************************
 
 
-// closeOverlayOne()
+function logOut() {
+  logoutButton.addEventListener("click", () => {
+    signOut(auth)
+      .then(() => {
+        console.log("the user signed out");
+        window.location.href = "signin.html";
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+}
 
-// function closeOverlayOne() {
-// const overlayOne = document.querySelector("#overlayOne")
 
-// overlayOne.onclick = function() {
+function deleteProject() {
+  deleteProjectForm.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-//   overlayOne.classList.remove("open")
-//     };
-// }
+    const docRef = doc(db, "projects", deleteProjectForm.id.value);
+    deleteDoc(docRef).then(() => {
+      deleteProjectForm.reset();
+    });
+  });
+}
+
+function createProject() {
+  addProjectForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const user = auth.currentUser;
+    if (user !== null) {
+      const uid = user.uid;
+      console.log(uid);
+
+      addDoc(colRef, {
+        name: addProjectForm.name.value,
+        creator: uid,
+        background: "",
+      }).then(() => {
+        addProjectForm.reset();
+        closeModal();
+      });
+    }
+    createProjectDiv();
+  });
+}
+
+
+function populateUserIconAndTheme() {
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const userRef = collection(db, 'users')
+
+        const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+        onSnapshot(userCreatorDocRef, (snapshot) => {
+          snapshot.docs.forEach((docs) => {
+
+              let userListOne = []
+              userListOne.push({ ...docs.data(), id: docs.id });
+
+              const navUserIcon = document.querySelector(".nav-user-icon")
+              navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+              let lightString = String("light")
+              let darkString = String("dark")
+
+              // // SF: SET THEME 
+              if (userListOne[0].theme == lightString) {
+                  setThemeLight()
+                  themeBtn.innerHTML = "Dark Mode"
+                      console.log("blah")
+              } else {
+                  setThemeDark()
+                  themeBtn.innerHTML = "Light Mode"
+              console.log("blee")
+
+              }
+
+              // // SF: SET THEME 
+              
+              // // // SF: CHANGE THEME 
+
+              const currentId = userListOne[0].uid
+              currentUserIdDiv.innerText = currentId
+
+              // Storing user fb id
+              const currentUid = userListOne[0].id
+              currentUserDocRefDiv.innerText = currentUid
+              const currentUserDocRef = doc(db, 'users', currentUid)
+
+
+              darkModeBtn.addEventListener("click", (e) => {
+                  e.stopPropagation()
+
+                  if (userListOne[0].theme == lightString) {
+                      updateDoc(currentUserDocRef, {
+                          theme: "dark"
+                      })
+                      // setThemeLight()
+                      // themeBtn.innerHTML = "Dark Mode"
+                          // console.log("blah")
+                  } else {
+                      updateDoc(currentUserDocRef, {
+                          theme: "light"
+                      })
+                      console.log("bligg")
+                  }
+              })
+              
+            // SF: CHANGE THEME
+          })
+        })
+      }
+  })
+}
+
+
+function populateProjectContainers() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
+      const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
+      const userProjects = query(colRef, where("creator", "==", uid));
+
+      populateProjects (starredProjects, starredProjectContainer)
+      populateProjects (userProjects, userProjectContainer)
+      populateProjects (sharedProjects, sharedProjectContainer)
+    } else {
+      window.location.replace("signin.html");
+    }
+  })
+}
+
+// MOBILE FUNCTIONS ************************************************************************************************
+
+
+function turnOffProjectHoverModal() {
+  if (window.innerWidth <= 800) {
+    // NOTE: Timeout needed to give the cards a chance to populate
+    setTimeout(() => {
+      const projectCard = document.querySelectorAll("#projectCardMaster")
+      const overlayOne = document.querySelector("#overlayOne")
+
+      projectCard.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+        console.log("enter")
+        overlayOne.classList.add("open")
+        });
+      });
+
+      projectCard.forEach((card) => {
+        card.addEventListener('mouseleave', () => {
+        console.log("exit")
+        overlayOne.classList.remove("open")
+      });
+    });
+    }, "500")
+  }
+}
+
+function openSidebar() {
+  sidebarButton.addEventListener("click", () => {
+      dashboardMasterMobile.setAttribute("style", "left: 0")
+      overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
+      overlayer.classList.add("open")
+  })
+}
+
+function closeSideBar() {
+  dashboardMasterMobile.addEventListener("click", () => {
+      dashboardMasterMobile.removeAttribute("style", "left")
+      overlayer.classList.remove("open")
+  })
+}
+
+
+function closeOverlayOne() {
+  const overlayOne = document.querySelector("#overlayOne")
+  overlayOne.onclick = function() {
+    overlayOne.classList.remove("open")
+      };
+  }
+  
+
+function closeSidebarWithOverlay() {
+  overlayer.addEventListener("click", () => {
+      dashboardMasterMobile.removeAttribute("style", "left")
+      overlayer.classList.remove("open")
+  })
+}
