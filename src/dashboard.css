@@ -321,3 +321,7 @@ body {
     display: flex;
     flex-wrap: wrap;
   }
+
+  .delete {
+    display: none;
+  }
