@@ -374,4 +374,20 @@
             left: 0%;
 
       }
+
+      .starred-project-section-header {
+        height: 3vh;
+        padding-left: 5%;
+        margin: 10px 0 0 0;
+        font-size: large;
+        font-weight: 500;
+      }
+
+
+      #starred-project-container {
+        padding-left: 5%;
+      }
+    
+
+
 }

@@ -22,6 +22,7 @@ const firebaseConfig = {
 };
 
 // const button = document.getElementById("button");
+const starredProjectContainer = document.querySelector("#starred-project-container");
 const projectContainer = document.querySelector("#project-container");
 const sharedProjectContainer = document.querySelector("#shared-project-container");
 
@@ -79,9 +80,15 @@ const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
 const honme = document.querySelector('#honme')
-const idUid = document.querySelector('#idUid')
-const currentUserDocRefDiv = document.createElement("div")
-currentUserDocRefDiv.setAttribute("id", "idUid")
+
+const currentUserIdDiv = document.querySelector('#uid')
+// const currentUserIdDiv = document.createElement("div")
+// currentUserIdDiv.setAttribute("uid", "uid")
+
+const currentUserDocRefDiv = document.querySelector('#idUid')
+// const currentUserDocRefDiv = document.createElement("div")
+// currentUserDocRefDiv.setAttribute("id", "idUid")
+
 honme.appendChild(currentUserDocRefDiv)
 const starIcon = "../images/icon_star_not_favorited.png"
 
@@ -123,11 +130,14 @@ onAuthStateChanged(auth, (user) => {
             
             // // // SUBFEATURE: CHANGE THEME ********************************************************************************
 
-            const currentUid = userListOne[0].id
-            const currentUserDocRef = doc(db, 'users', currentUid)
+            const currentId = userListOne[0].uid
+            currentUserIdDiv.innerText = currentId
 
             // Storing user fb id
+            const currentUid = userListOne[0].id
             currentUserDocRefDiv.innerText = currentUid
+            const currentUserDocRef = doc(db, 'users', currentUid)
+
 
             darkModeBtn.addEventListener("click", (e) => {
                 e.stopPropagation()
@@ -154,6 +164,28 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
+// FEATURE: FAVORITED PROJECTS ********************************************************************************
+
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     const uid = user.uid;
+
+//     const idUid = document.querySelector('#idUid').textContent
+//     // console.log(idUid)
+//     const currentUserDocRef = doc(db, 'users', idUid)
+
+//     // setting favorited class on page load
+//     const projectId = sharedProjectsArray[i].id;
+//     getDoc(currentUserDocRef).then((snapshot) => {
+//       let userFavorites = snapshot.data().favorites;
+//     })
+
+//   }
+// })
+
+
+
+// FEATURE: FAVORITED PROJECTS ********************************************************************************
 
                         // your projects queries
                         onAuthStateChanged(auth, (user) => {
@@ -167,7 +199,7 @@ onAuthStateChanged(auth, (user) => {
                               // realtime collection data
                               let i = 0;
                           onSnapshot(sharedProjects, (snapshot) => {
-                            clearSharedProjects();
+                            clearUserProjects();
 
                             let sharedProjectsArray = [];
                             snapshot.docs.forEach((doc) => {
@@ -583,6 +615,18 @@ function clearSharedProjects() {
   }
 }
 
+function clearStarredProjects() {
+  while (starredProjectContainer.children[0] != null) {
+    starredProjectContainer.removeChild(starredProjectContainer.children[0]);
+  }
+}
+
+function clearUserProjects() {
+  while (projectContainer.children[0] != null) {
+    projectContainer.removeChild(projectContainer.children[0]);
+  }
+}
+
 
 // MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
 
@@ -823,6 +867,7 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
     
     for (let i = 0; i < starBtnMulti.length; i++) {
 
+      const uid = document.querySelector('#uid').textContent
       const idUid = document.querySelector('#idUid').textContent
 
       starBtnMulti[i].onclick = function(e) {
@@ -834,7 +879,7 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
             // const userCreatorDocRef = query(userRef, where("uid", "==", idUid.innerText));
 
             const currentUserDocRef = doc(db, 'users', idUid)
-
+            const selectedProject = doc(db, 'projects', projectId)
 
             if (projectCards[i].parentElement.classList.contains("favorited")) {
               starBtnContainer[i].classList.remove("favorited")
@@ -850,6 +895,14 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
               .then(() => {
                 console.log("unfavorited!")
               })
+
+              updateDoc(selectedProject, {
+                favoritedby: arrayRemove(uid)
+              })
+              .then(() => {
+                console.log("unfavorited!")
+              })
+
               
             } else {
               starBtnContainer[i].classList.add("favorited")
@@ -861,6 +914,13 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
 
               updateDoc(currentUserDocRef, {
                 favorites: arrayUnion(projectId)
+              })
+              .then(() => {
+                console.log("favorited!")
+              })
+
+              updateDoc(selectedProject, {
+                favoritedby: arrayUnion(uid)
               })
               .then(() => {
                 console.log("favorited!")
@@ -977,3 +1037,170 @@ if (window.innerWidth <= 800) {
 
 
   
+
+
+  
+
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    // User is signed in, see docs for a list of available properties
+    // https://firebase.google.com/docs/reference/js/firebase.User
+    const uid = user.uid;
+    console.log(uid)
+    // const userProjects = query(colRef, where("creator", "==", uid));
+    const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
+    
+    // realtime collection data
+    let i = 0;
+onSnapshot(starredProjects, (snapshot) => {
+  clearStarredProjects();
+
+  let sharedProjectsArray = [];
+  snapshot.docs.forEach((doc) => {
+    sharedProjectsArray.push({ ...doc.data(), id: doc.id });
+  });
+
+  for (i = 0; i < sharedProjectsArray.length; i++) {
+    const newProjectUl = document.createElement("ul");
+    newProjectUl.setAttribute("id", "projectCardMaster")
+    starredProjectContainer.appendChild(newProjectUl);
+    
+    const newProject = document.createElement("li");
+    newProjectUl.appendChild(newProject);
+    // newProject.innerText = sharedProjectsArray[i].name;
+    newProject.classList.add("project-card");
+    const fetchedBackgroundURL = sharedProjectsArray[i].background;
+    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
+
+
+    const cardFadeOverlay = document.createElement("span")
+    newProject.appendChild(cardFadeOverlay);
+    cardFadeOverlay.classList.add("card-fade-overlay");
+
+    const cardContentOverlay = document.createElement("span")
+    newProject.appendChild(cardContentOverlay);
+    cardContentOverlay.classList.add("card-content-overlay");
+
+    const cardContentOverlayProjectTitle = document.createElement("div")
+    cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
+    cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
+    cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
+
+    const cardContentOverlayBottomRow = document.createElement("div")
+    cardContentOverlay.appendChild(cardContentOverlayBottomRow);
+    cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
+    // const favoritebuttonContainer = document.createElement("div");
+
+    const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
+    cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
+    cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
+    // const favoritebuttonContainer = document.createElement("div");
+
+    const cardContentOverlayFavoriteBtnStar = document.createElement("img")
+    cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_favorited.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_not_favorited.png")
+    // cardContentOverlayFavoriteBtnStar.setAttribute("src", starIcon)
+    cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
+
+    const newProjectId = document.createElement("div");
+    newProject.appendChild(newProjectId);
+    newProjectId.innerText = sharedProjectsArray[i].id;
+    newProjectId.classList.add("project-id-card");
+
+    // // click on div to redirect user to another page
+    // newProject.addEventListener("click", (e) => {
+    //   window.location.href="project-page.html?project=coyote";
+    // })
+
+    const idUid = document.querySelector('#idUid').textContent
+    // console.log(idUid)
+    const currentUserDocRef = doc(db, 'users', idUid)
+
+    // setting favorited class on page load
+    const projectId = sharedProjectsArray[i].id;
+    getDoc(currentUserDocRef).then((snapshot) => {
+      let userFavorites = snapshot.data().favorites;
+
+      console.log(projectId)
+      if (userFavorites.includes(projectId)){
+      newProjectUl.classList.add("favorited")
+      cardContentOverlayFavoriteBtnStar.classList.add("favorited")
+      cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
+        console.log("it's favorited!")
+      } else {
+        console.log("it's not favorited!")
+        newProjectUl.classList.add("not-favorited")
+      }
+    })
+    // setting favorited class on page load
+
+
+    // const overlayOne = document.querySelector("#overlayOne")
+
+    // // SAFARI: TURN OFF HOVER EVENT ************************
+    // newProject.addEventListener('mouseenter', () => {
+    //   console.log("enter")
+    //   overlayOne.classList.add("open")
+    // });
+
+    // newProject.addEventListener('mouseleave', () => {
+    //   console.log("exit")
+    //   overlayOne.classList.remove("open")
+    // });
+    // // SAFARI: TURN OFF HOVER EVENT ************************
+
+                              //   // WRITE ID TO USER'S FAVORITES ************************
+
+                              //   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
+                              //     e.stopPropagation()
+                              //     const projectId = newProject.lastChild.textContent;
+                              //     const userRef = collection(db, 'users')
+                              //     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+                              //     onSnapshot(userCreatorDocRef, (snapshot) => {
+                              //       snapshot.docs.forEach((docs) => {
+                              //           let userListOne = []
+                              //           userListOne.push({ ...docs.data(), id: docs.id });
+                            
+                              //           const currentUid = userListOne[0].id
+                              //           const currentUserDocRef = doc(db, 'users', currentUid)
+                            
+                              //     updateDoc(currentUserDocRef, {
+                              //       favorites: arrayUnion(projectId)
+                              //     })
+                              //     .then(() => {
+                              //       console.log("good!")
+                              //     })
+                              //   })
+                              // })
+                            
+                              //   })
+                              //   // WRITE ID TO USER'S FAVORITES ************************
+      setProjectDataIndex()
+  }
+
+
+
+  // click on div to redirect user to project specific page
+  const projectCards = document.querySelectorAll(".project-card");
+  projectCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const result = card.lastChild.textContent;
+      const projectPage = ["project-page.html?project=" + result];
+      // console.log(projectPage)
+      // console.log(result);
+      window.location.href = projectPage;
+    });
+  });
+
+  console.log(sharedProjectsArray);
+});
+    // ...
+  } else {
+    // User is signed out
+    // ...
+  }
+});
