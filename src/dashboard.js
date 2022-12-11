@@ -23,7 +23,7 @@ const firebaseConfig = {
 
 // const button = document.getElementById("button");
 const starredProjectContainer = document.querySelector("#starred-project-container");
-const projectContainer = document.querySelector("#project-container");
+const userProjectContainer = document.querySelector("#project-container");
 const sharedProjectContainer = document.querySelector("#shared-project-container");
 
 
@@ -80,10 +80,8 @@ const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
 const honme = document.querySelector('#honme')
-
 const currentUserIdDiv = document.querySelector('#uid')
-// const currentUserIdDiv = document.createElement("div")
-// currentUserIdDiv.setAttribute("uid", "uid")
+
 
 const currentUserDocRefDiv = document.querySelector('#idUid')
 // const currentUserDocRefDiv = document.createElement("div")
@@ -163,200 +161,6 @@ onAuthStateChanged(auth, (user) => {
     }
 })
 
-
-// FEATURE: FAVORITED PROJECTS ********************************************************************************
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user) {
-//     const uid = user.uid;
-
-//     const idUid = document.querySelector('#idUid').textContent
-//     // console.log(idUid)
-//     const currentUserDocRef = doc(db, 'users', idUid)
-
-//     // setting favorited class on page load
-//     const projectId = sharedProjectsArray[i].id;
-//     getDoc(currentUserDocRef).then((snapshot) => {
-//       let userFavorites = snapshot.data().favorites;
-//     })
-
-//   }
-// })
-
-
-
-// FEATURE: FAVORITED PROJECTS ********************************************************************************
-
-                        // your projects queries
-                        onAuthStateChanged(auth, (user) => {
-                          if (user) {
-                            // User is signed in, see docs for a list of available properties
-                            // https://firebase.google.com/docs/reference/js/firebase.User
-                            const uid = user.uid;
-                            const sharedProjects = query(colRef, where("creator", "==", uid));
-
-                              
-                              // realtime collection data
-                              let i = 0;
-                          onSnapshot(sharedProjects, (snapshot) => {
-                            clearUserProjects();
-
-                            let sharedProjectsArray = [];
-                            snapshot.docs.forEach((doc) => {
-                              sharedProjectsArray.push({ ...doc.data(), id: doc.id });
-                            });
-
-                            for (i = 0; i < sharedProjectsArray.length; i++) {
-                              const newProjectUl = document.createElement("ul");
-                              newProjectUl.setAttribute("id", "projectCardMaster")
-                              projectContainer.appendChild(newProjectUl);
-                              
-                              const newProject = document.createElement("li");
-                              newProjectUl.appendChild(newProject);
-                              // newProject.innerText = sharedProjectsArray[i].name;
-                              newProject.classList.add("project-card");
-                              const fetchedBackgroundURL = sharedProjectsArray[i].background;
-                              newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
-
-
-                              const cardFadeOverlay = document.createElement("span")
-                              newProject.appendChild(cardFadeOverlay);
-                              cardFadeOverlay.classList.add("card-fade-overlay");
-
-                              const cardContentOverlay = document.createElement("span")
-                              newProject.appendChild(cardContentOverlay);
-                              cardContentOverlay.classList.add("card-content-overlay");
-
-                              const cardContentOverlayProjectTitle = document.createElement("div")
-                              cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
-                              cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
-                              cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
-
-                              const cardContentOverlayBottomRow = document.createElement("div")
-                              cardContentOverlay.appendChild(cardContentOverlayBottomRow);
-                              cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
-                              // const favoritebuttonContainer = document.createElement("div");
-
-                              const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
-                              cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
-                              cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
-                              // const favoritebuttonContainer = document.createElement("div");
-
-                              const cardContentOverlayFavoriteBtnStar = document.createElement("img")
-                              cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
-                              // cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
-                              // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
-                              // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_favorited.png")
-                              // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_not_favorited.png")
-                              // cardContentOverlayFavoriteBtnStar.setAttribute("src", starIcon)
-                              cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
-
-                              const newProjectId = document.createElement("div");
-                              newProject.appendChild(newProjectId);
-                              newProjectId.innerText = sharedProjectsArray[i].id;
-                              newProjectId.classList.add("project-id-card");
-
-                              // // click on div to redirect user to another page
-                              // newProject.addEventListener("click", (e) => {
-                              //   window.location.href="project-page.html?project=coyote";
-                              // })
-
-                              const idUid = document.querySelector('#idUid').textContent
-                              // console.log(idUid)
-                              const currentUserDocRef = doc(db, 'users', idUid)
-
-                              // setting favorited class on page load
-                              const projectId = sharedProjectsArray[i].id;
-                              getDoc(currentUserDocRef).then((snapshot) => {
-                                let userFavorites = snapshot.data().favorites;
-
-                                console.log(projectId)
-                                if (userFavorites.includes(projectId)){
-                                newProjectUl.classList.add("favorited")
-                                cardContentOverlayFavoriteBtnStar.classList.add("favorited")
-                                cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
-                                  console.log("it's favorited!")
-                                } else {
-                                  console.log("it's not favorited!")
-                                  newProjectUl.classList.add("not-favorited")
-                                }
-                              })
-                              // setting favorited class on page load
-
-
-                              // const overlayOne = document.querySelector("#overlayOne")
-
-                              // // SAFARI: TURN OFF HOVER EVENT ************************
-                              // newProject.addEventListener('mouseenter', () => {
-                              //   console.log("enter")
-                              //   overlayOne.classList.add("open")
-                              // });
-
-                              // newProject.addEventListener('mouseleave', () => {
-                              //   console.log("exit")
-                              //   overlayOne.classList.remove("open")
-                              // });
-                              // // SAFARI: TURN OFF HOVER EVENT ************************
-
-                                                        //   // WRITE ID TO USER'S FAVORITES ************************
-
-                                                        //   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
-                                                        //     e.stopPropagation()
-                                                        //     const projectId = newProject.lastChild.textContent;
-                                                        //     const userRef = collection(db, 'users')
-                                                        //     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-                                                        //     onSnapshot(userCreatorDocRef, (snapshot) => {
-                                                        //       snapshot.docs.forEach((docs) => {
-                                                        //           let userListOne = []
-                                                        //           userListOne.push({ ...docs.data(), id: docs.id });
-                                                      
-                                                        //           const currentUid = userListOne[0].id
-                                                        //           const currentUserDocRef = doc(db, 'users', currentUid)
-                                                      
-                                                        //     updateDoc(currentUserDocRef, {
-                                                        //       favorites: arrayUnion(projectId)
-                                                        //     })
-                                                        //     .then(() => {
-                                                        //       console.log("good!")
-                                                        //     })
-                                                        //   })
-                                                        // })
-                                                      
-                                                        //   })
-                                                        //   // WRITE ID TO USER'S FAVORITES ************************
-                                setProjectDataIndex()
-                            }
-
-
-
-                            // click on div to redirect user to project specific page
-                            const projectCards = document.querySelectorAll(".project-card");
-                            projectCards.forEach((card) => {
-                              card.addEventListener("click", () => {
-                                const result = card.lastChild.textContent;
-                                const projectPage = ["project-page.html?project=" + result];
-                                // console.log(projectPage)
-                                // console.log(result);
-                                window.location.href = projectPage;
-                              });
-                            });
-
-                            console.log(sharedProjectsArray);
-                          });
-                              // ...
-                            } else {
-                              // User is signed out
-                              // ...
-                            }
-                          });
-
-
-// Make tickets clear and repopulate after deletion
-function clearProjects() {
-  while (projectContainer.children[0] != null) {
-    projectContainer.removeChild(projectContainer.children[0]);
-  }
-}
 
 // **************************************************************************************** //
 
@@ -444,170 +248,6 @@ deleteProjectForm.addEventListener("submit", (e) => {
 
 
 
-
-onAuthStateChanged(auth, (user) => {
-  if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
-    const uid = user.uid;
-    console.log(uid)
-    // const userProjects = query(colRef, where("creator", "==", uid));
-    const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
-    
-    // realtime collection data
-    let i = 0;
-onSnapshot(sharedProjects, (snapshot) => {
-  clearSharedProjects();
-
-  let sharedProjectsArray = [];
-  snapshot.docs.forEach((doc) => {
-    sharedProjectsArray.push({ ...doc.data(), id: doc.id });
-  });
-
-  for (i = 0; i < sharedProjectsArray.length; i++) {
-    const newProjectUl = document.createElement("ul");
-    newProjectUl.setAttribute("id", "projectCardMaster")
-    sharedProjectContainer.appendChild(newProjectUl);
-    
-    const newProject = document.createElement("li");
-    newProjectUl.appendChild(newProject);
-    // newProject.innerText = sharedProjectsArray[i].name;
-    newProject.classList.add("project-card");
-    const fetchedBackgroundURL = sharedProjectsArray[i].background;
-    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
-
-
-    const cardFadeOverlay = document.createElement("span")
-    newProject.appendChild(cardFadeOverlay);
-    cardFadeOverlay.classList.add("card-fade-overlay");
-
-    const cardContentOverlay = document.createElement("span")
-    newProject.appendChild(cardContentOverlay);
-    cardContentOverlay.classList.add("card-content-overlay");
-
-    const cardContentOverlayProjectTitle = document.createElement("div")
-    cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
-    cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
-    cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
-
-    const cardContentOverlayBottomRow = document.createElement("div")
-    cardContentOverlay.appendChild(cardContentOverlayBottomRow);
-    cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
-    // const favoritebuttonContainer = document.createElement("div");
-
-    const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
-    cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
-    cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
-    // const favoritebuttonContainer = document.createElement("div");
-
-    const cardContentOverlayFavoriteBtnStar = document.createElement("img")
-    cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_favorited.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_not_favorited.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", starIcon)
-    cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
-
-    const newProjectId = document.createElement("div");
-    newProject.appendChild(newProjectId);
-    newProjectId.innerText = sharedProjectsArray[i].id;
-    newProjectId.classList.add("project-id-card");
-
-    // // click on div to redirect user to another page
-    // newProject.addEventListener("click", (e) => {
-    //   window.location.href="project-page.html?project=coyote";
-    // })
-
-    const idUid = document.querySelector('#idUid').textContent
-    // console.log(idUid)
-    const currentUserDocRef = doc(db, 'users', idUid)
-
-    // setting favorited class on page load
-    const projectId = sharedProjectsArray[i].id;
-    getDoc(currentUserDocRef).then((snapshot) => {
-      let userFavorites = snapshot.data().favorites;
-
-      console.log(projectId)
-      if (userFavorites.includes(projectId)){
-      newProjectUl.classList.add("favorited")
-      cardContentOverlayFavoriteBtnStar.classList.add("favorited")
-      cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
-        console.log("it's favorited!")
-      } else {
-        console.log("it's not favorited!")
-        newProjectUl.classList.add("not-favorited")
-      }
-    })
-    // setting favorited class on page load
-
-
-    // const overlayOne = document.querySelector("#overlayOne")
-
-    // // SAFARI: TURN OFF HOVER EVENT ************************
-    // newProject.addEventListener('mouseenter', () => {
-    //   console.log("enter")
-    //   overlayOne.classList.add("open")
-    // });
-
-    // newProject.addEventListener('mouseleave', () => {
-    //   console.log("exit")
-    //   overlayOne.classList.remove("open")
-    // });
-    // // SAFARI: TURN OFF HOVER EVENT ************************
-
-                              //   // WRITE ID TO USER'S FAVORITES ************************
-
-                              //   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
-                              //     e.stopPropagation()
-                              //     const projectId = newProject.lastChild.textContent;
-                              //     const userRef = collection(db, 'users')
-                              //     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-                              //     onSnapshot(userCreatorDocRef, (snapshot) => {
-                              //       snapshot.docs.forEach((docs) => {
-                              //           let userListOne = []
-                              //           userListOne.push({ ...docs.data(), id: docs.id });
-                            
-                              //           const currentUid = userListOne[0].id
-                              //           const currentUserDocRef = doc(db, 'users', currentUid)
-                            
-                              //     updateDoc(currentUserDocRef, {
-                              //       favorites: arrayUnion(projectId)
-                              //     })
-                              //     .then(() => {
-                              //       console.log("good!")
-                              //     })
-                              //   })
-                              // })
-                            
-                              //   })
-                              //   // WRITE ID TO USER'S FAVORITES ************************
-      setProjectDataIndex()
-  }
-
-
-
-  // click on div to redirect user to project specific page
-  const projectCards = document.querySelectorAll(".project-card");
-  projectCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const result = card.lastChild.textContent;
-      const projectPage = ["project-page.html?project=" + result];
-      // console.log(projectPage)
-      // console.log(result);
-      window.location.href = projectPage;
-    });
-  });
-
-  console.log(sharedProjectsArray);
-});
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
-
 // Make tickets clear and repopulate after deletion
 function clearSharedProjects() {
   while (sharedProjectContainer.children[0] != null) {
@@ -615,15 +255,15 @@ function clearSharedProjects() {
   }
 }
 
-function clearStarredProjects() {
-  while (starredProjectContainer.children[0] != null) {
-    starredProjectContainer.removeChild(starredProjectContainer.children[0]);
-  }
-}
-
 function clearUserProjects() {
   while (projectContainer.children[0] != null) {
     projectContainer.removeChild(projectContainer.children[0]);
+  }
+}
+
+function clearProjects(parentContainer) {
+  while (parentContainer.children[0] != null) {
+    parentContainer.removeChild(parentContainer.children[0]);
   }
 }
 
@@ -703,49 +343,6 @@ function closeOverlay() {
 // FEATURE: MULTIPLE MODALS ************************************************************************************************************************
 
 
-// // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
-
-// const body = document.querySelector("#body")
-// loadBackground()
-
-// function loadBackground() {
-//     getDoc(ProjectUsersDocRef).then((snapshot) => {
-// // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-//         let fetchedBackgroundURL = snapshot.data().background;
-//         body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"')")
-//     })
-// }
-
-
-// // Unhide project background input when clicked
-// const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
-// const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
-// setBackgroundFormBtn.addEventListener("click", () => {
-//     setBackgroundFormBtnInput.classList.toggle("hidden")
-// })
-
-// // Write background to firebase
-// const setBackgroundForm = document.querySelector("#setBackgroundForm")
-// setBackgroundForm.addEventListener("submit", (e) => {
-//     e.preventDefault()
-//     updateDoc(ProjectUsersDocRef, {
-//         background: setBackgroundForm.inputtedBackgroundURL.value
-//     })
-//     .then(() => {
-//         loadBackground()
-//         setBackgroundForm.reset()
-//         setBackgroundFormBtnInput.classList.toggle("hidden")
-//     })
-// })
-
-// // FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
-
-
-// FEATURE: DARK MODE ************************************************************************************************************************
-
-
-
-
   
 
 
@@ -797,45 +394,7 @@ function setThemeDark() {
     }
 }
 
-// // function to set theme to light on page load
-// function toggleTheme() {
-//     for (let i = 0; i < transparent.length; i++) {
-//         transparent[i].classList.toggle("light-mode-transparent")
-//         transparent[i].classList.toggle("dark-mode-transparent")
-//     }
 
-//     for (let i = 0; i < solid.length; i++) {
-//         solid[i].classList.toggle("light-mode-solid")
-//         solid[i].classList.toggle("dark-mode-solid")
-//     }
-
-//     for (let i = 0; i < button.length; i++) {
-//         button[i].classList.toggle("light-mode-button")
-//         button[i].classList.toggle("dark-mode-button")
-//     }
-
-//     for (let i = 0; i < logo.length; i++) {
-//         logo[i].classList.toggle("light-mode-logo")
-//         logo[i].classList.toggle("dark-mode-logo")
-//     }
-// }
-
-
-
-// FEATURE: DARK MODE ************************************************************************************************************************
-
-// closeOverlayOne()
-// function closeOverlayOne() {
-//   for (let i = 0; i < overlay.length; i++)
-//   {
-//       overlay[i].onclick = function() {
-//           let ElementIndex = this.getAttribute('data-index');
-//       //   modalparent[ElementIndex].classList.remove("hidden")
-//         modal[ElementIndex].classList.remove("open")
-//         overlay[ElementIndex].classList.remove("open")
-//       };
-//   }
-// }
 
 closeOverlayOne()
 function closeOverlayOne() {
@@ -934,77 +493,6 @@ const starBtnContainer = document.getElementsByClassName("card-content-overlay-f
   }
 }
   
-
-// // const idUid = document.querySelector('#idUid').textContent
-// const currentUserDocRef = doc(db, 'users', "1pShBHrdFaihVTG2t8BM")
-
-// // console.log(idUidd)
-
-
-
-
-// loadBackground()
-// function loadBackground() {
-//   getDoc(currentUserDocRef).then((snapshot) => {
-// // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-//     let userFavorites = snapshot.data().favorites;
-//       if (userFavorites.includes("mNQQINlplBB9LbwDHGUO")){
-//         console.log("it contains it!")
-//       }
-//   })
-// }
-
-
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       const uid = user.uid;
-    
-
-
-// }
-// })
-
-  // WRITE ID TO USER'S FAVORITES ************************
-
-
-
-//   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
-//     e.stopPropagation()
-//     const projectId = newProject.lastChild.textContent;
-//     const userRef = collection(db, 'users')
-//     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-//     onSnapshot(userCreatorDocRef, (snapshot) => {
-//       snapshot.docs.forEach((docs) => {
-//           let userListOne = []
-//           userListOne.push({ ...docs.data(), id: docs.id });
-
-//           const currentUid = userListOne[0].id
-//           const currentUserDocRef = doc(db, 'users', currentUid)
-
-//     updateDoc(currentUserDocRef, {
-//       favorites: arrayUnion(projectId)
-//     })
-//     .then(() => {
-//       console.log("good!")
-//     })
-//   })
-// })
-
-//   })
-  // WRITE ID TO USER'S FAVORITES ************************
-
-
-
-
-    // onSnapshot(userCreatorDocRef, (snapshot) => {
-    //   snapshot.docs.forEach((docs) => {
-    //     let userListOne = []
-    //     userListOne.push({ ...docs.data(), id: docs.id });
-    //     const currentUid = userListOne[0].id
-
-    // openCardOverlayOnMobile()
-
-
 // function openCardOverlayOnMobile() {
 
   // console.log(screen.width)
@@ -1035,172 +523,108 @@ if (window.innerWidth <= 800) {
 }
 
 
-
-  
-
-
-  
-
-
+// FEATURE: POPULATING PROJECT CONTAINERS
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
-    console.log(uid)
-    // const userProjects = query(colRef, where("creator", "==", uid));
-    const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
-    
-    // realtime collection data
-    let i = 0;
-onSnapshot(starredProjects, (snapshot) => {
-  clearStarredProjects();
+// Populate user's starred projects
+const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
+populateProjects (starredProjects, starredProjectContainer)
 
-  let sharedProjectsArray = [];
-  snapshot.docs.forEach((doc) => {
-    sharedProjectsArray.push({ ...doc.data(), id: doc.id });
-  });
+// Populate user's projects
+const userProjects = query(colRef, where("creator", "==", uid));
+populateProjects (userProjects, userProjectContainer)
 
-  for (i = 0; i < sharedProjectsArray.length; i++) {
-    const newProjectUl = document.createElement("ul");
-    newProjectUl.setAttribute("id", "projectCardMaster")
-    starredProjectContainer.appendChild(newProjectUl);
-    
-    const newProject = document.createElement("li");
-    newProjectUl.appendChild(newProject);
-    // newProject.innerText = sharedProjectsArray[i].name;
-    newProject.classList.add("project-card");
-    const fetchedBackgroundURL = sharedProjectsArray[i].background;
-    newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
-
-
-    const cardFadeOverlay = document.createElement("span")
-    newProject.appendChild(cardFadeOverlay);
-    cardFadeOverlay.classList.add("card-fade-overlay");
-
-    const cardContentOverlay = document.createElement("span")
-    newProject.appendChild(cardContentOverlay);
-    cardContentOverlay.classList.add("card-content-overlay");
-
-    const cardContentOverlayProjectTitle = document.createElement("div")
-    cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
-    cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
-    cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
-
-    const cardContentOverlayBottomRow = document.createElement("div")
-    cardContentOverlay.appendChild(cardContentOverlayBottomRow);
-    cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
-    // const favoritebuttonContainer = document.createElement("div");
-
-    const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
-    cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
-    cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
-    // const favoritebuttonContainer = document.createElement("div");
-
-    const cardContentOverlayFavoriteBtnStar = document.createElement("img")
-    cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "https://www.clipartmax.com/png/full/281-2811663_gold-star-icon-png-transparent.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_outline.svg")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_favorited.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", "../images/icon_star_not_favorited.png")
-    // cardContentOverlayFavoriteBtnStar.setAttribute("src", starIcon)
-    cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
-
-    const newProjectId = document.createElement("div");
-    newProject.appendChild(newProjectId);
-    newProjectId.innerText = sharedProjectsArray[i].id;
-    newProjectId.classList.add("project-id-card");
-
-    // // click on div to redirect user to another page
-    // newProject.addEventListener("click", (e) => {
-    //   window.location.href="project-page.html?project=coyote";
-    // })
-
-    const idUid = document.querySelector('#idUid').textContent
-    // console.log(idUid)
-    const currentUserDocRef = doc(db, 'users', idUid)
-
-    // setting favorited class on page load
-    const projectId = sharedProjectsArray[i].id;
-    getDoc(currentUserDocRef).then((snapshot) => {
-      let userFavorites = snapshot.data().favorites;
-
-      console.log(projectId)
-      if (userFavorites.includes(projectId)){
-      newProjectUl.classList.add("favorited")
-      cardContentOverlayFavoriteBtnStar.classList.add("favorited")
-      cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
-        console.log("it's favorited!")
-      } else {
-        console.log("it's not favorited!")
-        newProjectUl.classList.add("not-favorited")
-      }
-    })
-    // setting favorited class on page load
-
-
-    // const overlayOne = document.querySelector("#overlayOne")
-
-    // // SAFARI: TURN OFF HOVER EVENT ************************
-    // newProject.addEventListener('mouseenter', () => {
-    //   console.log("enter")
-    //   overlayOne.classList.add("open")
-    // });
-
-    // newProject.addEventListener('mouseleave', () => {
-    //   console.log("exit")
-    //   overlayOne.classList.remove("open")
-    // });
-    // // SAFARI: TURN OFF HOVER EVENT ************************
-
-                              //   // WRITE ID TO USER'S FAVORITES ************************
-
-                              //   cardContentOverlayFavoriteBtnStar.addEventListener("click", (e) => {
-                              //     e.stopPropagation()
-                              //     const projectId = newProject.lastChild.textContent;
-                              //     const userRef = collection(db, 'users')
-                              //     const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-                              //     onSnapshot(userCreatorDocRef, (snapshot) => {
-                              //       snapshot.docs.forEach((docs) => {
-                              //           let userListOne = []
-                              //           userListOne.push({ ...docs.data(), id: docs.id });
-                            
-                              //           const currentUid = userListOne[0].id
-                              //           const currentUserDocRef = doc(db, 'users', currentUid)
-                            
-                              //     updateDoc(currentUserDocRef, {
-                              //       favorites: arrayUnion(projectId)
-                              //     })
-                              //     .then(() => {
-                              //       console.log("good!")
-                              //     })
-                              //   })
-                              // })
-                            
-                              //   })
-                              //   // WRITE ID TO USER'S FAVORITES ************************
-      setProjectDataIndex()
+// Populate projects shared with user
+const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
+populateProjects (sharedProjects, sharedProjectContainer)
+  } else {
+    window.location.replace("signin.html");
   }
+})
 
 
+function populateProjects(projectQuery, projectContainer) {
+      // Create project cards
+      let i = 0;
+  onSnapshot(projectQuery, (snapshot) => {
+    clearProjects(projectContainer);
+    let sharedProjectsArray = [];
+    snapshot.docs.forEach((doc) => {
+      sharedProjectsArray.push({ ...doc.data(), id: doc.id });
+    });
 
-  // click on div to redirect user to project specific page
-  const projectCards = document.querySelectorAll(".project-card");
-  projectCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const result = card.lastChild.textContent;
-      const projectPage = ["project-page.html?project=" + result];
-      // console.log(projectPage)
-      // console.log(result);
-      window.location.href = projectPage;
+    for (i = 0; i < sharedProjectsArray.length; i++) {
+      const newProjectUl = document.createElement("ul");
+      newProjectUl.setAttribute("id", "projectCardMaster")
+      projectContainer.appendChild(newProjectUl);
+      
+      const newProject = document.createElement("li");
+      newProjectUl.appendChild(newProject);
+      newProject.classList.add("project-card");
+      const fetchedBackgroundURL = sharedProjectsArray[i].background;
+      newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
+
+
+      const cardFadeOverlay = document.createElement("span")
+      newProject.appendChild(cardFadeOverlay);
+      cardFadeOverlay.classList.add("card-fade-overlay");
+
+      const cardContentOverlay = document.createElement("span")
+      newProject.appendChild(cardContentOverlay);
+      cardContentOverlay.classList.add("card-content-overlay");
+
+      const cardContentOverlayProjectTitle = document.createElement("div")
+      cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
+      cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
+      cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
+
+      const cardContentOverlayBottomRow = document.createElement("div")
+      cardContentOverlay.appendChild(cardContentOverlayBottomRow);
+      cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
+
+      const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
+      cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
+      cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
+
+      const cardContentOverlayFavoriteBtnStar = document.createElement("img")
+      cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
+      cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
+
+      const newProjectId = document.createElement("div");
+      newProject.appendChild(newProjectId);
+      newProjectId.innerText = sharedProjectsArray[i].id;
+      newProjectId.classList.add("project-id-card");
+
+      const idUid = document.querySelector('#idUid').textContent
+      const currentUserDocRef = doc(db, 'users', idUid)
+
+      const projectId = sharedProjectsArray[i].id;
+      getDoc(currentUserDocRef).then((snapshot) => {
+        let userFavorites = snapshot.data().favorites;
+
+        console.log(projectId)
+        if (userFavorites.includes(projectId)){
+        newProjectUl.classList.add("favorited")
+        cardContentOverlayFavoriteBtnStar.classList.add("favorited")
+        cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
+          console.log("it's favorited!")
+        } else {
+          console.log("it's not favorited!")
+          newProjectUl.classList.add("not-favorited")
+        }
+      })
+        setProjectDataIndex()
+    }
+
+    // click on div to redirect user to project specific page
+    const projectCards = document.querySelectorAll(".project-card");
+    projectCards.forEach((card) => {
+      card.addEventListener("click", () => {
+        const result = card.lastChild.textContent;
+        const projectPage = ["project-page.html?project=" + result];
+        window.location.href = projectPage;
+      });
     });
   });
-
-  console.log(sharedProjectsArray);
-});
-    // ...
-  } else {
-    // User is signed out
-    // ...
-  }
-});
+}
