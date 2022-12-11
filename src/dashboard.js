@@ -82,7 +82,7 @@ populateProjectContainers()
 
 // MOBILE FEATURES ************************************************************************************************
 
-// turnOffProjectHoverModal()
+turnOffProjectHoverModal()
 openSidebar()
 closeSideBar()
 closeSidebarWithOverlay()
