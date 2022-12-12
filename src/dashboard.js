@@ -87,7 +87,7 @@ populateProjectContainers()
 
 openSidebar()
 closeSideBar()
-// closeOverlayOne()
+closeOverlayOne()
 closeSidebarWithOverlay()
 // turnOffProjectHoverModal()
 
@@ -519,10 +519,10 @@ function turnOffProjectHoverModal(projectCard) {
         overlayOne.classList.add("open")
         });
 
-        projectCard.addEventListener('mouseleave', () => {
-        console.log("exit")
-        overlayOne.classList.remove("open")
-      });
+      //   projectCard.addEventListener('mouseleave', () => {
+      //   console.log("exit")
+      //   overlayOne.classList.remove("open")
+      // });
   }
 }
 
@@ -541,11 +541,11 @@ function closeSideBar() {
   })
 }
 
-// function closeOverlayOne() {
-//   overlayOne.addEventListener("click", (blah) => {
-//     overlayOne.classList.remove("open")
-//   })
-//   }
+function closeOverlayOne() {
+  overlayOne.addEventListener("click", (blah) => {
+    overlayOne.classList.remove("open")
+  })
+  }
 
 function closeSidebarWithOverlay() {
   overlayer.addEventListener("click", () => {
