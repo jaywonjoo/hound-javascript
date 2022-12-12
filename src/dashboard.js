@@ -85,11 +85,11 @@ populateProjectContainers()
 
 // MOBILE FEATURES ************************************************************************************************
 
-turnOffProjectHoverModal()
 openSidebar()
 closeSideBar()
+// closeOverlayOne()
 closeSidebarWithOverlay()
-closeOverlayOne()
+turnOffProjectHoverModal()
 
 // FUNCTIONS ************************************************************************************************
 
@@ -514,25 +514,15 @@ function populateProjectContainers() {
 
 function turnOffProjectHoverModal(projectCard) {
   if (window.innerWidth <= 800) {
-    // NOTE: Timeout needed to give the cards a chance to populate
-    // setTimeout(() => {
-      // const projectCard = document.querySelectorAll("#projectCardMaster")
-      const overlayOne = document.querySelector("#overlayOne")
-
-      // projectCard.forEach((card) => {
         projectCard.addEventListener('mouseenter', () => {
         console.log("enter")
         overlayOne.classList.add("open")
         });
-      // });
 
-      // projectCard.forEach((card) => {
         projectCard.addEventListener('mouseleave', () => {
         console.log("exit")
         overlayOne.classList.remove("open")
       });
-    // });
-    // }, "1000")
   }
 }
 
@@ -551,12 +541,11 @@ function closeSideBar() {
   })
 }
 
-
-function closeOverlayOne() {
-  overlayOne.onclick = function() {
-    overlayOne.classList.remove("open")
-      };
-  }
+// function closeOverlayOne() {
+//   overlayOne.addEventListener("click", (blah) => {
+//     overlayOne.classList.remove("open")
+//   })
+//   }
 
 function closeSidebarWithOverlay() {
   overlayer.addEventListener("click", () => {

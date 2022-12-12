@@ -326,3 +326,6 @@ body {
     display: none;
   }
 
+#projectCardMaster {
+  z-index: 5;
+}
