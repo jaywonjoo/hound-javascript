@@ -21,30 +21,8 @@ const firebaseConfig = {
     appId: "1:361705338046:web:f04df4040689f429aa9aef"
   };
 
-// 2. append tickets to tickets list
-    // a. create and append <li><ul><li></li></ul></li> to ticketContainer
-    const ticketContainer = document.querySelector("#tickets")
-    const ticketLi = document.createElement("li")
-    const ticketUl = document.createElement("ul")
-    const TicketTitle = document.createElement("li");
-    const TicketDescription = document.createElement("li");
-    const TicketAuthor = document.createElement("li");
-
-    // b. need function that does (2)
-        // function was place inside the snapshot!
-
-
 // init firebase app
 initializeApp(firebaseConfig)
-
-const modal = document.getElementsByClassName("modal");
-const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
-const overlay = document.getElementsByClassName("overlay");
-
-
-
-// init services
-const db = getFirestore()
 
 // FEATURE: SECURITY WALL
 const auth = getAuth()
@@ -56,191 +34,185 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// DASHBOARD LINKS
+// CONSTANTS ************************************************************************************************
+
+
+const params = new Proxy(new URLSearchParams(window.location.search), {
+    get: (searchParams, prop) => searchParams.get(prop),
+});
+const projectID = params.project;
+const db = getFirestore()
+const colRef = collection(db, 'projects', projectID, 'tickets')
+
+const modal = document.getElementsByClassName("modal");
+const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+const overlay = document.getElementsByClassName("overlay");
 const dashboardButton = document.querySelector('#dashboardButton')
-dashboardButton.addEventListener('click', () => {
-    window.location.href = "dashboard.html";
-})
-
-
-// FEATURE: LOGOUT BUTTON
 const logoutButton = document.querySelector('#logoutButton')
-logoutButton.addEventListener('click', () => {
-  signOut(auth)
-    .then(() => {
-      console.log('the user signed out')
-      window.location.href = "signin.html";
-    })
-    .catch((err) => {
-      console.log(err.message)
-    })
-})
-
-
-
-// *relevant* collection ref
-  // need variable that changes based on project selected
-    // using query parameter to pass data from one page to another!
-    const params = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-      });
-      // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-      let projectID = params.project; // "some_value"
-      console.log(projectID)
-  // setting colRef to selected project!
-  const colRef = collection(db, 'projects', projectID, 'tickets')
-
-
-
-// // FEATURE: USER ICON & THEME ************************************************************************************************************************
+// Dashboard button
 const darkModeBtn = document.querySelector("#darkModeBtn")
 const transparent = document.querySelectorAll(".transparent")
 const solid = document.querySelectorAll(".solid")
 const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
-
 const ProjectUsersDocRef = doc(db, 'projects', projectID)
-// // loadBackground()
-
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const userRef = collection(db, 'users')
-
-      const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-      onSnapshot(userCreatorDocRef, (snapshot) => {
-        snapshot.docs.forEach((docs) => {
-
-            let userListOne = []
-            userListOne.push({ ...docs.data(), id: docs.id });
-
-            const navUserIcon = document.querySelector(".nav-user-icon")
-            navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-
-            let lightString = String("light")
-            let darkString = String("dark")
-
-            // // SUBFEATURE: SET THEME ********************************************************************************
-            if (userListOne[0].theme == lightString) {
-                setThemeLight()
-                themeBtn.innerHTML = "Dark Mode"
-                    console.log("blah")
-            } else {
-                setThemeDark()
-                themeBtn.innerHTML = "Light Mode"
-            console.log("blee")
-
-            }
-
-            // // SUBFEATURE: SET THEME ********************************************************************************
-            
-            // // SUBFEATURE: CHANGE THEME ********************************************************************************
-
-
-            const currentUid = userListOne[0].id
-            const currentUserDocRef = doc(db, 'users', currentUid)
-
-            darkModeBtn.addEventListener("click", (e) => {
-                e.stopPropagation()
-
-                if (userListOne[0].theme == lightString) {
-                    updateDoc(currentUserDocRef, {
-                        theme: "dark"
-                    })
-                    // setThemeLight()
-                    // themeBtn.innerHTML = "Dark Mode"
-                        // console.log("blah")
-                } else {
-                    updateDoc(currentUserDocRef, {
-                        theme: "light"
-                    })
-                    console.log("bligg")
-                }
-            })
-            
-            // // SUBFEATURE: CHANGE THEME ********************************************************************************
-        })
-    })
-    }
-})
-
-
-
-
-// // let user change theme with button press
-// darkModeBtn.addEventListener("click", (e) => {
-//     e.stopPropagation()
-
-//     onAuthStateChanged(auth, (user) => {
-//         // if (user) {
-//           const uid = user.uid;
-    
-//           const userRef = collection(db, 'users')
-    
-      
-//           const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-//           onSnapshot(userCreatorDocRef, (snapshot) => {
-//             snapshot.docs.forEach((docs) => {
-    
-//                 let userTheme = []
-//                 userTheme.push({ ...docs.data(), id: docs.id });
-    
-//                 const userCreatorId = userTheme[0].id
-//                 const userCreatorTheme = userTheme[0].theme
-//                 const userCreatorDocRefReal = doc(db, 'users', userCreatorId)
-
-//                 let lightString = String("light")
-//                 let darkString = String("dark")
-
-//                 // console.log(userCreatorTheme == lightString)
-
-//                 if (userCreatorTheme == darkString) {
-//                     updateDoc(userCreatorDocRefReal, {
-//                         theme: "light"
-//                     })
-//                 } else if (userCreatorTheme == lightString) {
-//                     updateDoc(userCreatorDocRefReal, {
-//                         theme: "dark"
-//                     })
-//                 }
-                    
-
-//                 // } else if (userTheme[0].theme == "dark") {
-//                 //     updateDoc(userCreatorDocRefReal, {
-//                 //         theme: "dark"
-//                 //     })
-//                 // }
-//                 // } else {
-//                 //     updateDoc(userCreatorDocRefReal, {
-//                 //         theme: "dark"
-//                 //     })
-//                 // }
-//             })
-//         })
-//     // }
-//     })
-// })
-
-
-// // FEATURE: USER ICON & THEME ************************************************************************************************************************
-
-
-
-// FEATURE: AUTO POPULATE PROJECT HEADER ************************************************************************************************************************
+// Populate project header
 const projectHeader = document.querySelector(".page-header")
 const projectHeaderRef = doc(db, 'projects', projectID)
+// Comment Creation
+const userRef = collection(db, "users");
+// Add Member Form
+const modalAddMemberForm = document.querySelector(".add-member-form")
+// Create Ticket
+const projectRef = collection(db, 'projects')
+const createTicketForm = document.querySelector('.create-ticket-form')
+// Pie Chart Status
+const dashboardMaster = document.querySelector(".dashboard-master")
+const pieContainerOne = document.querySelector("#pie-container-one")
+const pieUnresolved = document.createElement("div")
+const pieInProgress = document.createElement("div")
+const pieResolved = document.createElement("div")
 
-getDoc(ProjectUsersDocRef).then((snapshot) => {
-    projectHeader.innerHTML = snapshot.data().name
-})
+const pieContainerTwo = document.querySelector("#pie-container-two")
+const pieIssue = document.createElement("div")
+const pieBug = document.createElement("div")
+const pieFeatureRequest = document.createElement("div")
+
+const pieContainerThree = document.querySelector("#pie-container-three")
+const pieLow = document.createElement("div")
+const pieMedium = document.createElement("div")
+const pieHigh = document.createElement("div")
+// Edit Ticket Form
+const editTicketForm = document.querySelector(".edit-ticket-form")
+// Mobile: Open Sidebar
+const sidebarButton = document.querySelector(".sidebar-button");
+const dashboardMasterMobile = document.querySelector(".dashboard-master")
+const overlayer = document.querySelector(".blurred-overlay");
+// Custom Background
+const body = document.querySelector("#body")
+// Hide background input on submit
+const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
+const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
+// Write inputted background to firebase
+const setBackgroundForm = document.querySelector("#setBackgroundForm")
 
 
+// FEATURES ************************************************************************************************
 
-
-
-// FEATURE: TEAM MEMBER SECTION ************************************************************************************************************************
+redirectToDashboard()
+logoutUser()
+populateUserIconAndTheme()
+populateProjectName()
 populateTeamMembers()
+populateAddUserModal()
+populateTickets()
+commentCreation()
+addMemberButton()
+createTicketButton()
+pieChartStatus()
+editTicketSubmitButton()
+hideBackgroundInputOnSubmit()
+writeInputtedBackgroundToFirebase()
+
+// MOBILE FEATURES ************************************************************************************************
+
+openSidebar()
+closeSidebarOnClick()
+closeSidebarWithOverlay()
+loadBackground()
+
+// FUNCTIONS ************************************************************************************************
+
+function redirectToDashboard() {
+    dashboardButton.addEventListener('click', () => {
+        window.location.href = "dashboard.html";
+    })    
+}
+
+function logoutUser() {
+    logoutButton.addEventListener('click', () => {
+    signOut(auth)
+        .then(() => {
+        console.log('the user signed out')
+        window.location.href = "signin.html";
+        })
+        .catch((err) => {
+        console.log(err.message)
+        })
+    })
+}
+
+function populateUserIconAndTheme() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+        const uid = user.uid;
+        const userRef = collection(db, 'users')
+
+        const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+        onSnapshot(userCreatorDocRef, (snapshot) => {
+            snapshot.docs.forEach((docs) => {
+
+                let userListOne = []
+                userListOne.push({ ...docs.data(), id: docs.id });
+
+                const navUserIcon = document.querySelector(".nav-user-icon")
+                navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+                let lightString = String("light")
+                let darkString = String("dark")
+
+                // // SUBFEATURE: SET THEME ********************************************************************************
+                if (userListOne[0].theme == lightString) {
+                    setThemeLight()
+                    themeBtn.innerHTML = "Dark Mode"
+                        console.log("blah")
+                } else {
+                    setThemeDark()
+                    themeBtn.innerHTML = "Light Mode"
+                console.log("blee")
+
+                }
+
+                // // SUBFEATURE: SET THEME ********************************************************************************
+                
+                // // SUBFEATURE: CHANGE THEME ********************************************************************************
+
+
+                const currentUid = userListOne[0].id
+                const currentUserDocRef = doc(db, 'users', currentUid)
+
+                darkModeBtn.addEventListener("click", (e) => {
+                    e.stopPropagation()
+
+                    if (userListOne[0].theme == lightString) {
+                        updateDoc(currentUserDocRef, {
+                            theme: "dark"
+                        })
+                        // setThemeLight()
+                        // themeBtn.innerHTML = "Dark Mode"
+                            // console.log("blah")
+                    } else {
+                        updateDoc(currentUserDocRef, {
+                            theme: "light"
+                        })
+                        console.log("bligg")
+                    }
+                })
+                
+                // // SUBFEATURE: CHANGE THEME ********************************************************************************
+            })
+        })
+        }
+    })
+}
+
+function populateProjectName() {
+    getDoc(ProjectUsersDocRef).then((snapshot) => {
+        projectHeader.innerHTML = snapshot.data().name
+    })
+}
+
 function populateTeamMembers(){
     const ProjectUsersDocRef = doc(db, 'projects', projectID)
     getDoc(ProjectUsersDocRef).then((snapshot) => {
@@ -354,9 +326,6 @@ function populateTeamMembers(){
                     })
 
                 })
-
-
-                
                 
                 setDataIndex()
                 closeOverlay()
@@ -364,25 +333,15 @@ function populateTeamMembers(){
                 })
             })
         }
-
-
         }
     } else {
-
         setDataIndex()
         closeOverlay()
     }
-
-
     })
 }
 
-// FEATURE: ADD TEAM MEMBERS ************************************************************************
-
-populateUserModal()
-function populateUserModal() {
-
-
+function populateAddUserModal() {
         const systemUsers = collection(db, 'users')
         const alphabetizedSystemUsers = query(systemUsers, orderBy("firstName"))
 
@@ -433,114 +392,152 @@ function populateUserModal() {
             }
         })
 
-    }
-
-
-// FEATURE: ADD TEAM MEMBERS ************************************************************************
-    
-    
-// FEATURE: POPULATE TICKETS *****************************************************************************************************************************************************
-
-
-populateTickets()
+}
 
 function populateTickets() {
 
-const orderedTicketsRef = query(colRef, orderBy("createdAt"))
-// display ticket info in ticket list
-// 1. link tickets to page
-    onSnapshot(orderedTicketsRef, (snapshot) => {
-// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-        // create empty array to populate
-        let tickets = []
-        // function to clear tickets array on every refresh
-        clearTickets()
+    const orderedTicketsRef = query(colRef, orderBy("createdAt"))
+    // display ticket info in ticket list
+    // 1. link tickets to page
+        onSnapshot(orderedTicketsRef, (snapshot) => {
+    // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+            // create empty array to populate
+            let tickets = []
+            // function to clear tickets array on every refresh
+            clearTickets()
 
-        // then populate it with whatever is in the tickets section
-        snapshot.docs.forEach((doc) => {
-            tickets.push({ ...doc.data(), id: doc.id })
-        });
-// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-console.log("populateTickets()TEST")
+            // then populate it with whatever is in the tickets section
+            snapshot.docs.forEach((doc) => {
+                tickets.push({ ...doc.data(), id: doc.id })
+            });
+    // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
+    console.log("populateTickets()TEST")
 
-            //console.log(tickets[1])
-            
-            let i = 0;
-            //(2b)
-            for (i = 0; i < tickets.length; i++) {
-                populateTicket()
+                //console.log(tickets[1])
+                
+                let i = 0;
+                //(2b)
+                for (i = 0; i < tickets.length; i++) {
+                    populateTicket()
 
-                function populateTicket() {
-                    const ticketContainer = document.querySelector("#tickets")
-                    // const ticketLi = document.createElement("li")
-                    const ticketUl = document.createElement("div")
-                    const populateTicketInfoSection = document.createElement("div")
-                    const TicketTitle = document.createElement("div");
-                    const TicketDescription = document.createElement("div");
-                    const TicketAuthor = document.createElement("div");
-                    const ticketId = document.createElement("div")
-                    const ticketKebabDiv = document.createElement("div")
-                    const ticketKebabButton = document.createElement("button")
-                    const ticketKebabButtonText = document.createElement("span")
-                    const ticketOverlay = document.createElement("div")
-                    const ticketModal = document.createElement("div")
-                    const ticketDeleteButton = document.createElement("button")
+                    function populateTicket() {
+                        const ticketContainer = document.querySelector("#tickets")
+                        // const ticketLi = document.createElement("li")
+                        const ticketUl = document.createElement("div")
+                        const populateTicketInfoSection = document.createElement("div")
+                        const TicketTitle = document.createElement("div");
+                        const TicketDescription = document.createElement("div");
+                        const TicketAuthor = document.createElement("div");
+                        const ticketId = document.createElement("div")
+                        const ticketKebabDiv = document.createElement("div")
+                        const ticketKebabButton = document.createElement("button")
+                        const ticketKebabButtonText = document.createElement("span")
+                        const ticketOverlay = document.createElement("div")
+                        const ticketModal = document.createElement("div")
+                        const ticketDeleteButton = document.createElement("button")
 
-                    ticketContainer.appendChild(ticketUl)
-                        ticketUl.appendChild(populateTicketInfoSection)
+                        ticketContainer.appendChild(ticketUl)
+                            ticketUl.appendChild(populateTicketInfoSection)
 
-                    // ticketLi.appendChild(ticketUl)
-                        populateTicketInfoSection.appendChild(TicketTitle)
-                        populateTicketInfoSection.appendChild(TicketDescription)
-                        populateTicketInfoSection.appendChild(TicketAuthor)
-                        populateTicketInfoSection.appendChild(ticketId)
-                            ticketUl.appendChild(ticketKebabDiv)
-                                ticketKebabDiv.appendChild(ticketKebabButton)
-                                    ticketKebabButton.appendChild(ticketKebabButtonText)
-                                ticketKebabDiv.appendChild(ticketOverlay)
-                                ticketKebabDiv.appendChild(ticketModal)
-                                    ticketModal.appendChild(ticketDeleteButton)
-                        
-                    TicketTitle.innerText = tickets[i].title;
-                    TicketDescription.innerText = tickets[i].description;
-                    TicketAuthor.innerText = tickets[i].author;   
-                    ticketKebabButtonText.innerText = "..."          
-                    ticketDeleteButton.innerText = "delete"         
-                    ticketId.innerText = tickets[i].id;
+                        // ticketLi.appendChild(ticketUl)
+                            populateTicketInfoSection.appendChild(TicketTitle)
+                            populateTicketInfoSection.appendChild(TicketDescription)
+                            populateTicketInfoSection.appendChild(TicketAuthor)
+                            populateTicketInfoSection.appendChild(ticketId)
+                                ticketUl.appendChild(ticketKebabDiv)
+                                    ticketKebabDiv.appendChild(ticketKebabButton)
+                                        ticketKebabButton.appendChild(ticketKebabButtonText)
+                                    ticketKebabDiv.appendChild(ticketOverlay)
+                                    ticketKebabDiv.appendChild(ticketModal)
+                                        ticketModal.appendChild(ticketDeleteButton)
+                            
+                        TicketTitle.innerText = tickets[i].title;
+                        TicketDescription.innerText = tickets[i].description;
+                        TicketAuthor.innerText = tickets[i].author;   
+                        ticketKebabButtonText.innerText = "..."          
+                        ticketDeleteButton.innerText = "delete"         
+                        ticketId.innerText = tickets[i].id;
 
 
-                    ticketUl.classList.add("ticket-ul");
-                    populateTicketInfoSection.classList.add("populate-ticket-info-section")
-                    populateTicketInfoSection.setAttribute("style", "width: 100%; display: flex; flex-direction: row")
-                    ticketId.classList.add("hidden")
-                    TicketTitle.classList.add("ticket-title")
-                    TicketDescription.classList.add("ticket-description")
-                    TicketAuthor.classList.add("ticket-author")
-                    // ticketKebabDiv.setAttribute("style", "width: 5%")
-                    ticketKebabDiv.classList.add("ticket-kebab-div")
-                    ticketKebabButton.classList.add("ticket-kebab-button")
-                    ticketKebabButton.classList.add("open-modal-btn")
-                    ticketKebabButtonText.classList.add("ticket-kebab-button-text")
-                    // ticketOverlay.setAttribute("id", "overlay")
-                    ticketOverlay.classList.add("overlay")
+                        ticketUl.classList.add("ticket-ul");
+                        populateTicketInfoSection.classList.add("populate-ticket-info-section")
+                        populateTicketInfoSection.setAttribute("style", "width: 100%; display: flex; flex-direction: row")
+                        ticketId.classList.add("hidden")
+                        TicketTitle.classList.add("ticket-title")
+                        TicketDescription.classList.add("ticket-description")
+                        TicketAuthor.classList.add("ticket-author")
+                        // ticketKebabDiv.setAttribute("style", "width: 5%")
+                        ticketKebabDiv.classList.add("ticket-kebab-div")
+                        ticketKebabButton.classList.add("ticket-kebab-button")
+                        ticketKebabButton.classList.add("open-modal-btn")
+                        ticketKebabButtonText.classList.add("ticket-kebab-button-text")
+                        // ticketOverlay.setAttribute("id", "overlay")
+                        ticketOverlay.classList.add("overlay")
 
-                    ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
-                    ticketModal.classList.add("modal")
-                    ticketModal.classList.add("delete-button-modal")
-                    // ticketModal.setAttribute("id", "modal")
-                    ticketModal.setAttribute("style", "position: sticky")
-                    ticketDeleteButton.classList.add("ticket-delete-button")
+                        ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+                        ticketModal.classList.add("modal")
+                        ticketModal.classList.add("delete-button-modal")
+                        // ticketModal.setAttribute("id", "modal")
+                        ticketModal.setAttribute("style", "position: sticky")
+                        ticketDeleteButton.classList.add("ticket-delete-button")
 
-                    setDataIndex()
-                    closeOverlay()
+                        setDataIndex()
+                        closeOverlay()
 
-                    ticketDeleteButton.addEventListener("click", () => {
-                        const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
-                        console.log(selectedTicketId)
-                        const docRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId)
-                        deleteDoc(docRef)
-                        .then(() => {
+                        ticketDeleteButton.addEventListener("click", () => {
+                            const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
+                            console.log(selectedTicketId)
+                            const docRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId)
+                            deleteDoc(docRef)
+                            .then(() => {
 
+
+                                const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                                const populatedAuthorSection = document.querySelector("#populated-author-section")
+                                const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                                const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                                const populatedTicketSection = document.querySelector("#populated-priority-section")
+                                const populatedTypeSection = document.querySelector("#populated-type-section")
+                    
+                                // populatedTicketTitleSection.innerHTML = "";
+                                // populatedAuthorSection.innerHTML = "";
+                                // populatedDescriptionSection.innerHTML = "";
+                                // populatedTicketInfoSection.innerHTML = "";
+                                // populatedTicketSection.innerHTML = "";
+                                // populatedTypeSection.innerHTML = "";
+                    
+                                const chatbox = document.querySelector(".chatbox");
+                                chatbox.innerHTML = "";
+
+                                setDataIndex()
+                                closeOverlay()
+                            })
+        
+                        })
+                    }
+                }
+
+                // // click on ticket to redirect user to project specific page
+                populateTicketInfoSection()
+                function populateTicketInfoSection() {
+                const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
+                selectedTicketUl.forEach((ticket) => {
+                    ticket.addEventListener("click", () => {
+                        const selectedTicketId = ticket.lastChild.textContent;
+                        // console.log(selectedTicketId)
+
+                        //paste selectedTicketId into webpage
+                        const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
+                        window.history.pushState( {} , '', projectPage );
+
+
+                        // 4. populate selected ticket info USING TICKET ID!!
+                        const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+                        getDoc(ticketRef).then((snapshot) => {
+    // TEST PASS: DOESNT UPDATE EVERY TIME THEME IS CHANGED
+    console.log("populateTicketInfoTest()TEST")
+
+                            console.log(snapshot.data().title)
 
                             const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
                             const populatedAuthorSection = document.querySelector("#populated-author-section")
@@ -548,178 +545,128 @@ console.log("populateTickets()TEST")
                             const populatedTicketInfoSection = document.querySelector("#populated-status-section")
                             const populatedTicketSection = document.querySelector("#populated-priority-section")
                             const populatedTypeSection = document.querySelector("#populated-type-section")
-                
-                            // populatedTicketTitleSection.innerHTML = "";
-                            // populatedAuthorSection.innerHTML = "";
-                            // populatedDescriptionSection.innerHTML = "";
-                            // populatedTicketInfoSection.innerHTML = "";
-                            // populatedTicketSection.innerHTML = "";
-                            // populatedTypeSection.innerHTML = "";
-                
-                            const chatbox = document.querySelector(".chatbox");
-                            chatbox.innerHTML = "";
+            
+                            populatedTicketTitleSection.innerHTML = snapshot.data().title;
+                            populatedAuthorSection.innerHTML = snapshot.data().author;
+                            populatedDescriptionSection.innerHTML = snapshot.data().description;
+                            populatedTicketInfoSection.innerHTML = snapshot.data().status;
+                            populatedTicketSection.innerHTML = snapshot.data().priority;
+                            populatedTypeSection.innerHTML = snapshot.data().type;
 
-                            setDataIndex()
-                            closeOverlay()
+                            populatedTicketInfoSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                            populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                            populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+
+                            // FEATURE: EDIT TICKET INFO ************************************************************************************
+                            const editTicketAuthor = document.querySelector(".edit-ticket-author")
+                            const editTicketDescription = document.querySelector(".edit-ticket-description")
+                            const editTicketTitle = document.querySelector(".edit-ticket-title")
+                            const statusList = document.querySelector(".edit-ticket-status")
+                            const typeList = document.querySelector(".edit-ticket-type")
+                            const priorityList = document.querySelector(".edit-ticket-priority")
+
+
+                            editTicketAuthor.setAttribute("value", snapshot.data().author)
+                            editTicketDescription.setAttribute("value", snapshot.data().description)
+                            editTicketTitle.setAttribute("value", snapshot.data().title)
+
+                            let statusListOptions = statusList.options.length;
+                            for (let i = 0; i < statusListOptions; i++) {
+                                if (statusList.options[i].value == snapshot.data().status) {
+                                    statusList.options[i].selected = true;
+                                    break;
+                                }
+                            }
+
+                            let ticketListOptions = typeList.options.length;
+                            for (let i = 0; i < ticketListOptions; i++) {
+                                if (typeList.options[i].value == snapshot.data().type) {
+                                    typeList.options[i].selected = true;
+                                    break;
+                                }
+                            }
+
+                            let priorityListOptions = priorityList.options.length;
+                            for (let i = 0; i < priorityListOptions; i++) {
+                                if (priorityList.options[i].value == snapshot.data().priority) {
+                                    priorityList.options[i].selected = true;
+                                    break;
+                                }
+                            }
+                        // FEATURE: EDIT TICKET INFO ************************************************************************************
+                            
                         })
+            
+                        // comments should also load here ***************************************************
+                        const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                        const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
+                        
+                        onSnapshot(orderedCommentsRef, (snapshot) => {
+                            let comments = []
+    // TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
+                            // refresh chatbox
+                            const chatbox = document.querySelector(".chatbox");
+
+
+                            clearChatbox();
+                            
+                            function clearChatbox() {
+                                while (chatbox.children[0] != null) {
+                                    chatbox.removeChild(chatbox.children[0]);
+                                }
+                            }
+                            snapshot.docs.forEach((doc) => {
+                                comments.push({ ...doc.data(), id: doc.id })
+                            });
+    // TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
+
+
+                        for (i = 0; i < comments.length; i++) {
+                            const newComment = document.createElement("div");
+                                const userIcon = document.createElement("div");
+                                const commentRight = document.createElement("div");
+                                    const nameAndTimestamp = document.createElement("div");
+                                        const userName = document.createElement("div");
+                                        const timeStamp = document.createElement("div");
+                                    const messageContent = document.createElement("div");
+
+                                    newComment.classList.add("entire-message");
+                                    userIcon.classList.add("user-icon");
+                                    commentRight.classList.add("comment-right");
+                                    nameAndTimestamp.classList.add("name-and-timestamp-section");
+                                    userName.classList.add("user-name");
+                                    timeStamp.classList.add("message-timestamp");
+                                    messageContent.classList.add("message-content");
+            
+                                    userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
+                                    userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
+                                    timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
+                                    messageContent.innerText = comments[i].message;
+
+                            chatbox.appendChild(newComment);
+                                newComment.appendChild(userIcon);
+                                newComment.appendChild(commentRight);
+                                    commentRight.appendChild(nameAndTimestamp);
+                                        nameAndTimestamp.appendChild(userName);
+                                        nameAndTimestamp.appendChild(timeStamp);
+                                    commentRight.appendChild(messageContent);
+
+
+                        }
+                        
+                        // chatbox load bottom
+                        chatbox.scrollTop = chatbox.scrollHeight;
+                        
+                    })
     
                     })
-                }
+                })
             }
-
-            // // click on ticket to redirect user to project specific page
-            populateTicketInfoSection()
-            function populateTicketInfoSection() {
-            const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
-            selectedTicketUl.forEach((ticket) => {
-                ticket.addEventListener("click", () => {
-                    const selectedTicketId = ticket.lastChild.textContent;
-                    // console.log(selectedTicketId)
-
-                       //paste selectedTicketId into webpage
-                       const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
-                       window.history.pushState( {} , '', projectPage );
-
-
-                    // 4. populate selected ticket info USING TICKET ID!!
-                    const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
-                    getDoc(ticketRef).then((snapshot) => {
-// TEST PASS: DOESNT UPDATE EVERY TIME THEME IS CHANGED
-console.log("populateTicketInfoTest()TEST")
-
-                        console.log(snapshot.data().title)
-
-                        const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                        const populatedAuthorSection = document.querySelector("#populated-author-section")
-                        const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                        const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                        const populatedTicketSection = document.querySelector("#populated-priority-section")
-                        const populatedTypeSection = document.querySelector("#populated-type-section")
-        
-                        populatedTicketTitleSection.innerHTML = snapshot.data().title;
-                        populatedAuthorSection.innerHTML = snapshot.data().author;
-                        populatedDescriptionSection.innerHTML = snapshot.data().description;
-                        populatedTicketInfoSection.innerHTML = snapshot.data().status;
-                        populatedTicketSection.innerHTML = snapshot.data().priority;
-                        populatedTypeSection.innerHTML = snapshot.data().type;
-
-                        populatedTicketInfoSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-                        populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-                        populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-
-                        // FEATURE: EDIT TICKET INFO ************************************************************************************
-                        const editTicketAuthor = document.querySelector(".edit-ticket-author")
-                        const editTicketDescription = document.querySelector(".edit-ticket-description")
-                        const editTicketTitle = document.querySelector(".edit-ticket-title")
-                        const statusList = document.querySelector(".edit-ticket-status")
-                        const typeList = document.querySelector(".edit-ticket-type")
-                        const priorityList = document.querySelector(".edit-ticket-priority")
-
-
-                        editTicketAuthor.setAttribute("value", snapshot.data().author)
-                        editTicketDescription.setAttribute("value", snapshot.data().description)
-                        editTicketTitle.setAttribute("value", snapshot.data().title)
-
-                        let statusListOptions = statusList.options.length;
-                        for (let i = 0; i < statusListOptions; i++) {
-                            if (statusList.options[i].value == snapshot.data().status) {
-                                statusList.options[i].selected = true;
-                                break;
-                            }
-                        }
-
-                        let ticketListOptions = typeList.options.length;
-                        for (let i = 0; i < ticketListOptions; i++) {
-                            if (typeList.options[i].value == snapshot.data().type) {
-                                typeList.options[i].selected = true;
-                                break;
-                            }
-                        }
-
-                        let priorityListOptions = priorityList.options.length;
-                        for (let i = 0; i < priorityListOptions; i++) {
-                            if (priorityList.options[i].value == snapshot.data().priority) {
-                                priorityList.options[i].selected = true;
-                                break;
-                            }
-                        }
-                    // FEATURE: EDIT TICKET INFO ************************************************************************************
-                        
-                    })
-           
-                    // comments should also load here ***************************************************
-                    const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                    const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
-                    
-                    onSnapshot(orderedCommentsRef, (snapshot) => {
-                        let comments = []
-// TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
-                        // refresh chatbox
-                        const chatbox = document.querySelector(".chatbox");
-
-
-                        clearChatbox();
-                        
-                        function clearChatbox() {
-                            while (chatbox.children[0] != null) {
-                                chatbox.removeChild(chatbox.children[0]);
-                            }
-                        }
-                        snapshot.docs.forEach((doc) => {
-                            comments.push({ ...doc.data(), id: doc.id })
-                        });
-// TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
-
-
-                    for (i = 0; i < comments.length; i++) {
-                        const newComment = document.createElement("div");
-                            const userIcon = document.createElement("div");
-                            const commentRight = document.createElement("div");
-                                const nameAndTimestamp = document.createElement("div");
-                                    const userName = document.createElement("div");
-                                    const timeStamp = document.createElement("div");
-                                const messageContent = document.createElement("div");
-
-                                newComment.classList.add("entire-message");
-                                userIcon.classList.add("user-icon");
-                                commentRight.classList.add("comment-right");
-                                nameAndTimestamp.classList.add("name-and-timestamp-section");
-                                userName.classList.add("user-name");
-                                timeStamp.classList.add("message-timestamp");
-                                messageContent.classList.add("message-content");
-        
-                                userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
-                                userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
-                                timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
-                                messageContent.innerText = comments[i].message;
-
-                        chatbox.appendChild(newComment);
-                            newComment.appendChild(userIcon);
-                            newComment.appendChild(commentRight);
-                                commentRight.appendChild(nameAndTimestamp);
-                                    nameAndTimestamp.appendChild(userName);
-                                    nameAndTimestamp.appendChild(timeStamp);
-                                commentRight.appendChild(messageContent);
-
-
-                    }
-                    
-                    // chatbox load bottom
-                    chatbox.scrollTop = chatbox.scrollHeight;
-                    
-                })
-  
-                })
-            })
-        }
-        console.log(tickets)
-    })
+            console.log(tickets)
+        })
 
 }
 
-
-
-// Make tickets clear and repopulate after deletion
 function clearTickets() {
     while (tickets.children[0] != null) {
         tickets.removeChild(tickets.children[0]);
@@ -732,18 +679,8 @@ function clearUsers() {
     }
 }
 
-// ***************************************************************************************************
-
-
-
-// 5. clear selected ticket info when deleted
-
-
-
-
-
-
-const userRef = collection(db, "users");
+function commentCreation() {
+    
 onAuthStateChanged(auth, (user) => {
     const uid = user.uid;
     const currentUser = query(userRef, where("uid", "==", uid));
@@ -791,122 +728,50 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
                     commentInputForm.reset()
                 })
             })
-// **************************************************************************************************
-
-    
     })
 })
-// **************************************************************************************************
 
+}
 
+function addMemberButton() {
+    modalAddMemberForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // console.log("blah")
 
+        const newMemberMainDiv = document.querySelector(".new-member-main-div")
+        const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
+        // const checkedCheckbox = newMemberCheckboxDiv.parentElement.lastElementChild.innerText
 
+        newMemberCheckboxDiv.forEach((checkbox) => {
+            // let newMemberList = [];
 
+            if(checkbox.checked) {
+                // console.log("blah")
+                const selectedUserId = checkbox.parentElement.lastElementChild.innerText
+                // console.log(selectedUserId)
+                // newMemberList.push(selectedUserId)
 
+                const projectCollaborators = doc(db, 'projects', projectID)
+                updateDoc(projectCollaborators, {
+                    collaborators: arrayUnion(selectedUserId)
+                })
+                .then(() => {
+                    checkbox.checked = false;
+                    setDataIndex()
+                    closeOverlay()
+                })
+            }
 
+        
+        })
 
-
-
-
-
- 
-
-
-
-// // 4. Delete Ticket Form
-// const deleteTicketForm = document.querySelector('.delete-ticket-form')
-// deleteTicketForm.addEventListener('submit', (e) => {
-//     e.preventDefault()
-
-//     const docRef = doc(db, 'projects', projectID, 'tickets', deleteTicketForm.id.value)
-//     deleteDoc(docRef)
-//         .then(() => {
-//             deleteTicketForm.reset()
-
-//             const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-//             const populatedAuthorSection = document.querySelector("#populated-author-section")
-//             const populatedDescriptionSection = document.querySelector("#populated-description-section")
-//             const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-//             const populatedTicketSection = document.querySelector("#populated-priority-section")
-//             const populatedTypeSection = document.querySelector("#populated-type-section")
-
-//             populatedTicketTitleSection.innerHTML = "";
-//             populatedAuthorSection.innerHTML = "";
-//             populatedDescriptionSection.innerHTML = "";
-//             populatedTicketInfoSection.innerHTML = "";
-//             populatedTicketSection.innerHTML = "";
-//             populatedTypeSection.innerHTML = "";
-
-//             const chatbox = document.querySelector(".chatbox");
-//             chatbox.innerHTML = "";
-
-//         })
-
-
-
-// })
-
-
-
-
-// FEATURE: ADD MEMBER BUTTON ****************************************************************************************************************
-
-const modalAddMemberForm = document.querySelector(".add-member-form")
-modalAddMemberForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    // console.log("blah")
-
-    const newMemberMainDiv = document.querySelector(".new-member-main-div")
-    const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
-    // const checkedCheckbox = newMemberCheckboxDiv.parentElement.lastElementChild.innerText
-
-    newMemberCheckboxDiv.forEach((checkbox) => {
-        // let newMemberList = [];
-
-        if(checkbox.checked) {
-            // console.log("blah")
-            const selectedUserId = checkbox.parentElement.lastElementChild.innerText
-            // console.log(selectedUserId)
-            // newMemberList.push(selectedUserId)
-
-            const projectCollaborators = doc(db, 'projects', projectID)
-            updateDoc(projectCollaborators, {
-                collaborators: arrayUnion(selectedUserId)
-            })
-            .then(() => {
-                checkbox.checked = false;
-                setDataIndex()
-                closeOverlay()
-              })
-        }
-
-    
+        const teamMemberBody = document.querySelector(".team-member-body") 
+        teamMemberBody.innerHTML = ""
+        populateTeamMembers()
+        closeModal();
     })
+}
 
-    const teamMemberBody = document.querySelector(".team-member-body") 
-    teamMemberBody.innerHTML = ""
-    populateTeamMembers()
-    closeModal();
-})
-
-
-// ************************************************************************************************************************************************
-
-// FEATURE: MULTIPLE MODALS ************************************************************************************************************************
-// const modal = document.getElementsByClassName("modal");
-// // modalparent.setAttribute("style", "top: 40%; left: 50%; transform: translate(-50%, -50%); border: 1px solid black; padding: 1rem; border-radius: .75rem; background-color: white;width: 30%; height: auto; box-shadow: 0 0 10px #919191;");
-
-
-// // Get the button that opens the modal
-
-// const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
-// const overlay = document.getElementsByClassName("overlay");
-
-
-
-// setTimeout(() => {
-
-// When the user clicks the button, open the modal
 function setDataIndex() {
     let i = 0
     for (i = 0; i < modalBtnMulti.length; i++)
@@ -926,7 +791,6 @@ function setDataIndex() {
         
     }
 }
-
 
 function closeOverlay() {
     for (let i = 0; i < overlay.length; i++)
@@ -952,55 +816,27 @@ function closeModal() {
         })
 }
 
-
-// linking firestore project collection
-const projectRef = collection(db, 'projects')
-// submit form after clicking
-const createTicketForm = document.querySelector('.create-ticket-form')
-createTicketForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    
-    addDoc(colRef, {
-        author: createTicketForm.author.value,
-        description: createTicketForm.description.value,
-        title: createTicketForm.title.value,
-        status: createTicketForm.status.value,
-        priority: createTicketForm.priority.value,
-        type: createTicketForm.type.value,
-        createdAt: serverTimestamp(),
-    })
-    .then(() => {
-        createTicketForm.reset()
-        setDataIndex()
-        closeOverlay()
-        closeModal();
-    })
-})    
-
-
-
-// FEATURE: PIE CHARTS ******************************************************************************************
-
-
-pieChartStatus()
-
-const dashboardMaster = document.querySelector(".dashboard-master")
-
-const pieContainerOne = document.querySelector("#pie-container-one")
-const pieUnresolved = document.createElement("div")
-const pieInProgress = document.createElement("div")
-const pieResolved = document.createElement("div")
-
-const pieContainerTwo = document.querySelector("#pie-container-two")
-const pieIssue = document.createElement("div")
-const pieBug = document.createElement("div")
-const pieFeatureRequest = document.createElement("div")
-
-const pieContainerThree = document.querySelector("#pie-container-three")
-const pieLow = document.createElement("div")
-const pieMedium = document.createElement("div")
-const pieHigh = document.createElement("div")
-
+function createTicketButton() {
+    createTicketForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        
+        addDoc(colRef, {
+            author: createTicketForm.author.value,
+            description: createTicketForm.description.value,
+            title: createTicketForm.title.value,
+            status: createTicketForm.status.value,
+            priority: createTicketForm.priority.value,
+            type: createTicketForm.type.value,
+            createdAt: serverTimestamp(),
+        })
+        .then(() => {
+            createTicketForm.reset()
+            setDataIndex()
+            closeOverlay()
+            closeModal();
+        })
+    })    
+}
 
 function pieChartStatus() {
 
@@ -1123,139 +959,116 @@ function clearTicketInfoList(){
         ticketInfoList.removeChild(ticketInfoList.children[0]);
     }
 }
-   
 
-// FEATURE: PIE CHARTS ******************************************************************************************
+function editTicketSubmitButton() {
 
+    editTicketForm.addEventListener("submit", (e) => {
 
-
-// FEATURE: EDIT TICKET INFO SUBMIT BUTTON ************************************************************************************
-
-
-const editTicketForm = document.querySelector(".edit-ticket-form")
-
-editTicketForm.addEventListener("submit", (e) => {
-
-    const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-    });
-    
-    let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
-    
-    const selectedTicket = doc(db, 'projects', projectID, 'tickets', globalSelectedticketId)
-
-    e.preventDefault()
-    
-    updateDoc(selectedTicket, {
-        author: editTicketForm.author.value,
-        description: editTicketForm.description.value,
-        title: editTicketForm.title.value,
-        status: editTicketForm.status.value,
-        priority: editTicketForm.priority.value,
-        type: editTicketForm.type.value,
-    })
-    .then(() => {
-        editTicketForm.reset()
-
-        console.log("the ticket has been updated!")
-
-        getDoc(selectedTicket).then((snapshot) => {
-            console.log(snapshot.data().title)
-            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-            const populatedAuthorSection = document.querySelector("#populated-author-section")
-            const populatedDescriptionSection = document.querySelector("#populated-description-section")
-            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-            const populatedTicketSection = document.querySelector("#populated-priority-section")
-            const populatedTypeSection = document.querySelector("#populated-type-section")
-
-            populatedTicketTitleSection.innerHTML = snapshot.data().title;
-            populatedAuthorSection.innerHTML = snapshot.data().author;
-            populatedDescriptionSection.innerHTML = snapshot.data().description;
-            populatedTicketInfoSection.innerHTML = snapshot.data().status;
-            populatedTicketSection.innerHTML = snapshot.data().priority;
-            populatedTypeSection.innerHTML = snapshot.data().type;
-            // FEATURE: EDIT TICKET INFO ************************************************************************************
-            const editTicketAuthor = document.querySelector(".edit-ticket-author")
-            const editTicketDescription = document.querySelector(".edit-ticket-description")
-            const editTicketTitle = document.querySelector(".edit-ticket-title")
-            const statusList = document.querySelector(".edit-ticket-status")
-            const typeList = document.querySelector(".edit-ticket-type")
-            const priorityList = document.querySelector(".edit-ticket-priority")
-
-            editTicketAuthor.setAttribute("value", snapshot.data().author)
-            editTicketDescription.setAttribute("value", snapshot.data().description)
-            editTicketTitle.setAttribute("value", snapshot.data().title)
-
-            let statusListOptions = statusList.options.length;
-            for (let i = 0; i < statusListOptions; i++) {
-                if (statusList.options[i].value == snapshot.data().status) {
-                    statusList.options[i].selected = true;
-                    break;
-                }
-            }
-            let ticketListOptions = typeList.options.length;
-            for (let i = 0; i < ticketListOptions; i++) {
-                if (typeList.options[i].value == snapshot.data().type) {
-                    typeList.options[i].selected = true;
-                    break;
-                }
-            }
-            let priorityListOptions = priorityList.options.length;
-            for (let i = 0; i < priorityListOptions; i++) {
-                if (priorityList.options[i].value == snapshot.data().priority) {
-                    priorityList.options[i].selected = true;
-                    break;
-                }
-            }
-        // FEATURE: EDIT TICKET INFO ************************************************************************************
-            
-        })
-
-        setDataIndex()
-        closeOverlay()
-        closeModal();
-    })
+        const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
         
-})
+        let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
+        
+        const selectedTicket = doc(db, 'projects', projectID, 'tickets', globalSelectedticketId)
 
-// FEATURE: EDIT TICKET INFO SUBMIT BUTTON ************************************************************************************
+        e.preventDefault()
+        
+        updateDoc(selectedTicket, {
+            author: editTicketForm.author.value,
+            description: editTicketForm.description.value,
+            title: editTicketForm.title.value,
+            status: editTicketForm.status.value,
+            priority: editTicketForm.priority.value,
+            type: editTicketForm.type.value,
+        })
+        .then(() => {
+            editTicketForm.reset()
 
+            console.log("the ticket has been updated!")
 
-// MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
+            getDoc(selectedTicket).then((snapshot) => {
+                console.log(snapshot.data().title)
+                const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                const populatedAuthorSection = document.querySelector("#populated-author-section")
+                const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                const populatedTicketSection = document.querySelector("#populated-priority-section")
+                const populatedTypeSection = document.querySelector("#populated-type-section")
 
-const sidebarButton = document.querySelector(".sidebar-button");
-const dashboardMasterMobile = document.querySelector(".dashboard-master")
-const overlayer = document.querySelector(".blurred-overlay");
+                populatedTicketTitleSection.innerHTML = snapshot.data().title;
+                populatedAuthorSection.innerHTML = snapshot.data().author;
+                populatedDescriptionSection.innerHTML = snapshot.data().description;
+                populatedTicketInfoSection.innerHTML = snapshot.data().status;
+                populatedTicketSection.innerHTML = snapshot.data().priority;
+                populatedTypeSection.innerHTML = snapshot.data().type;
+                // FEATURE: EDIT TICKET INFO ************************************************************************************
+                const editTicketAuthor = document.querySelector(".edit-ticket-author")
+                const editTicketDescription = document.querySelector(".edit-ticket-description")
+                const editTicketTitle = document.querySelector(".edit-ticket-title")
+                const statusList = document.querySelector(".edit-ticket-status")
+                const typeList = document.querySelector(".edit-ticket-type")
+                const priorityList = document.querySelector(".edit-ticket-priority")
 
+                editTicketAuthor.setAttribute("value", snapshot.data().author)
+                editTicketDescription.setAttribute("value", snapshot.data().description)
+                editTicketTitle.setAttribute("value", snapshot.data().title)
 
-sidebarButton.addEventListener("click", () => {
-    dashboardMasterMobile.setAttribute("style", "left: 0")
-    overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
-    overlayer.classList.add("open")
+                let statusListOptions = statusList.options.length;
+                for (let i = 0; i < statusListOptions; i++) {
+                    if (statusList.options[i].value == snapshot.data().status) {
+                        statusList.options[i].selected = true;
+                        break;
+                    }
+                }
+                let ticketListOptions = typeList.options.length;
+                for (let i = 0; i < ticketListOptions; i++) {
+                    if (typeList.options[i].value == snapshot.data().type) {
+                        typeList.options[i].selected = true;
+                        break;
+                    }
+                }
+                let priorityListOptions = priorityList.options.length;
+                for (let i = 0; i < priorityListOptions; i++) {
+                    if (priorityList.options[i].value == snapshot.data().priority) {
+                        priorityList.options[i].selected = true;
+                        break;
+                    }
+                }
+            // FEATURE: EDIT TICKET INFO ************************************************************************************
+                
+            })
 
-})
+            setDataIndex()
+            closeOverlay()
+            closeModal();
+        })
+            
+    })
+}
 
-// MOBILE FEATURE: OPEN DASHBOARD ************************************************************************************************************************
+function openSidebar() {
+    sidebarButton.addEventListener("click", () => {
+        dashboardMasterMobile.setAttribute("style", "left: 0")
+        overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
+        overlayer.classList.add("open")
 
-// MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
+    })
+}
 
-dashboardMasterMobile.addEventListener("click", () => {
-    dashboardMasterMobile.removeAttribute("style", "left")
-    overlayer.classList.remove("open")
-})
+function closeSidebarOnClick() {
+    dashboardMasterMobile.addEventListener("click", () => {
+        dashboardMasterMobile.removeAttribute("style", "left")
+        overlayer.classList.remove("open")
+    })
+}
 
-overlayer.addEventListener("click", () => {
-    dashboardMasterMobile.removeAttribute("style", "left")
-    overlayer.classList.remove("open")
-})
-
-// MOBILE FEATURE: CLOSE DASHBOARD ************************************************************************************************************************
-
-
-// FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
-
-const body = document.querySelector("#body")
-loadBackground()
+function closeSidebarWithOverlay() {
+    overlayer.addEventListener("click", () => {
+        dashboardMasterMobile.removeAttribute("style", "left")
+        overlayer.classList.remove("open")
+    })
+}
 
 function loadBackground() {
     getDoc(ProjectUsersDocRef).then((snapshot) => {
@@ -1265,42 +1078,26 @@ function loadBackground() {
     })
 }
 
-
-// Unhide project background input when clicked
-const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
-const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
-setBackgroundFormBtn.addEventListener("click", () => {
-    setBackgroundFormBtnInput.classList.toggle("hidden")
-})
-
-// Write background to firebase
-const setBackgroundForm = document.querySelector("#setBackgroundForm")
-setBackgroundForm.addEventListener("submit", (e) => {
-    e.preventDefault()
-    updateDoc(ProjectUsersDocRef, {
-        background: setBackgroundForm.inputtedBackgroundURL.value
-    })
-    .then(() => {
-        loadBackground()
-        setBackgroundForm.reset()
+function hideBackgroundInputOnSubmit() {
+    setBackgroundFormBtn.addEventListener("click", () => {
         setBackgroundFormBtnInput.classList.toggle("hidden")
     })
-})
+}
 
-// FEATURE: CUSTOM PROJECT BACKGROUND ************************************************************************************************************************
+function writeInputtedBackgroundToFirebase() {
+    setBackgroundForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        updateDoc(ProjectUsersDocRef, {
+            background: setBackgroundForm.inputtedBackgroundURL.value
+        })
+        .then(() => {
+            loadBackground()
+            setBackgroundForm.reset()
+            setBackgroundFormBtnInput.classList.toggle("hidden")
+        })
+    })
+}
 
-
-// FEATURE: DARK MODE ************************************************************************************************************************
-
-
-
-
-  
-
-
-
-
-// function to set theme to light on page load
 function setThemeLight() {
     for (let i = 0; i < transparent.length; i++) {
         transparent[i].classList.add("light-mode-transparent")
@@ -1323,7 +1120,6 @@ function setThemeLight() {
     }
 }
 
-// function to set theme to dark on page load
 function setThemeDark() {
     for (let i = 0; i < transparent.length; i++) {
         transparent[i].classList.add("dark-mode-transparent")
@@ -1345,30 +1141,3 @@ function setThemeDark() {
         logo[i].classList.remove("light-mode-logo")
     }
 }
-
-// // function to set theme to light on page load
-// function toggleTheme() {
-//     for (let i = 0; i < transparent.length; i++) {
-//         transparent[i].classList.toggle("light-mode-transparent")
-//         transparent[i].classList.toggle("dark-mode-transparent")
-//     }
-
-//     for (let i = 0; i < solid.length; i++) {
-//         solid[i].classList.toggle("light-mode-solid")
-//         solid[i].classList.toggle("dark-mode-solid")
-//     }
-
-//     for (let i = 0; i < button.length; i++) {
-//         button[i].classList.toggle("light-mode-button")
-//         button[i].classList.toggle("dark-mode-button")
-//     }
-
-//     for (let i = 0; i < logo.length; i++) {
-//         logo[i].classList.toggle("light-mode-logo")
-//         logo[i].classList.toggle("dark-mode-logo")
-//     }
-// }
-
-
-
-// FEATURE: DARK MODE ************************************************************************************************************************
