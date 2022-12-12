@@ -89,7 +89,7 @@ openSidebar()
 closeSideBar()
 // closeOverlayOne()
 closeSidebarWithOverlay()
-turnOffProjectHoverModal()
+// turnOffProjectHoverModal()
 
 // FUNCTIONS ************************************************************************************************
 
