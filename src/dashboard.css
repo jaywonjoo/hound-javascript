@@ -201,6 +201,7 @@ body {
   }
 
   .blurred-overlay {
+    display: none;
     background-color: transparent;
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);

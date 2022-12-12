@@ -72,16 +72,16 @@ const logoutButton = document.querySelector("#logoutButton");
 // Close overlay one
 const overlayOne = document.querySelector("#overlayOne")
 
-
 // FEATURES ************************************************************************************************
 
 populateUserIconAndTheme()
+populateProjectContainers()
+closeOverlay()
 createProject()
-logOut()
 deleteProject()
 setDataIndex()
-closeOverlay()
-populateProjectContainers()
+logOut()
+
 
 // MOBILE FEATURES ************************************************************************************************
 
@@ -89,7 +89,6 @@ openSidebar()
 closeSideBar()
 closeOverlayOne()
 closeSidebarWithOverlay()
-// turnOffProjectHoverModal()
 
 // FUNCTIONS ************************************************************************************************
 
@@ -154,37 +153,13 @@ function populateProjects(projectQuery, projectContainer) {
 
       const idUid = document.querySelector('#idUid').textContent
       const currentUserDocRef = doc(db, 'users', idUid)
+      const projectId = sharedProjectsArray[i].id;
 
       turnOffProjectHoverModal(newProjectUl)
-
-
-      const projectId = sharedProjectsArray[i].id;
-      getDoc(currentUserDocRef).then((snapshot) => {
-        let userFavorites = snapshot.data().favorites;
-
-        console.log(projectId)
-        if (userFavorites.includes(projectId)){
-        newProjectUl.classList.add("favorited")
-        cardContentOverlayFavoriteBtnStar.classList.add("favorited")
-        cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
-          console.log("it's favorited!")
-        } else {
-          console.log("it's not favorited!")
-          newProjectUl.classList.add("not-favorited")
-        }
-      })
-        setProjectDataIndex()
+      assignStarredStatus(currentUserDocRef, projectId, cardContentOverlayFavoriteBtnStar, cardContentOverlayFavoriteBtnContainer, newProjectUl)
     }
-
-    // click on div to redirect user to project specific page
-    const projectCards = document.querySelectorAll(".project-card");
-    projectCards.forEach((card) => {
-      card.addEventListener("click", () => {
-        const result = card.lastChild.textContent;
-        const projectPage = ["project-page.html?project=" + result];
-        window.location.href = projectPage;
-      });
-    });
+    setProjectDataIndex()
+    projectRedirectLink()
   });
 }
 
@@ -198,10 +173,11 @@ function createProjectDiv() {
   closeModal();
 }
 
+// closes modal after submitting form for new project
 function closeModal() {
   const overlays = document.querySelectorAll(".overlay");
   overlays.forEach((overlay) => {
-      overlay.classList.remove("open")
+    overlay.classList.remove("open")
   })
 
   const modals = document.querySelectorAll(".modal");
@@ -542,7 +518,7 @@ function closeSideBar() {
 }
 
 function closeOverlayOne() {
-  overlayOne.addEventListener("click", (blah) => {
+  overlayOne.addEventListener("click", () => {
     overlayOne.classList.remove("open")
   })
   }
@@ -551,5 +527,35 @@ function closeSidebarWithOverlay() {
   overlayer.addEventListener("click", () => {
       dashboardMasterMobile.removeAttribute("style", "left")
       overlayer.classList.remove("open")
+  })
+}
+
+
+// click on div to redirect user to project specific page
+function projectRedirectLink() {
+  const projectCards = document.querySelectorAll(".project-card");
+  projectCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const result = card.lastChild.textContent;
+      const projectPage = ["project-page.html?project=" + result];
+      window.location.href = projectPage;
+    });
+  });
+}
+
+function assignStarredStatus(currentUserDocRef, projectId, cardContentOverlayFavoriteBtnStar, cardContentOverlayFavoriteBtnContainer, newProjectUl) {
+  getDoc(currentUserDocRef).then((snapshot) => {
+    let userFavorites = snapshot.data().favorites;
+
+    console.log(projectId)
+    if (userFavorites.includes(projectId)){
+    newProjectUl.classList.add("favorited")
+    cardContentOverlayFavoriteBtnStar.classList.add("favorited")
+    cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
+      console.log("it's favorited!")
+    } else {
+      console.log("it's not favorited!")
+      newProjectUl.classList.add("not-favorited")
+    }
   })
 }
