@@ -94,6 +94,10 @@ const setBackgroundFormBtn = document.querySelector("#setBackgroundFormBtn")
 const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnInput")
 // Write inputted background to firebase
 const setBackgroundForm = document.querySelector("#setBackgroundForm")
+// Populate collaborators
+const teamMemberBody = document.querySelector(".team-member-body") 
+// Delete collaborators
+
 
 
 // FEATURES ************************************************************************************************
@@ -112,6 +116,7 @@ pieChartStatus()
 editTicketSubmitButton()
 hideBackgroundInputOnSubmit()
 writeInputtedBackgroundToFirebase()
+// teamMemberLineItemDeleteButtonFn()
 
 // MOBILE FEATURES ************************************************************************************************
 
@@ -144,6 +149,7 @@ function logoutUser() {
 function populateUserIconAndTheme() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
+            clearUsers()
         const uid = user.uid;
         const userRef = collection(db, 'users')
 
@@ -211,37 +217,67 @@ function populateProjectName() {
     })
 }
 
+// function populateTeamMemberss(){
+
+//     getDoc(ProjectUsersDocRef).then((snapshot) => {
+//         console.log("testo")
+
+//         let collaborators = snapshot.data().collaborators
+
+//         if (collaborators) {
+//             let i = 0
+//             for (i = 0; i < collaborators.length; i++) {
+                
+//                 const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
+//                 const projectCollaborators = doc(db, 'projects', projectID)
+//                 populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
+//             }
+//         } else {
+//             setDataIndex()
+//             closeOverlay()
+//         }
+//     })
+// }
+
 function populateTeamMembers(){
 
-    getDoc(ProjectUsersDocRef).then((snapshot) => {
-        console.log("testo")
+        // const ProjectUsersDocRef = doc(db, 'projects', projectID)
+        onSnapshot(ProjectUsersDocRef, (snapshot) => {
+        clearUsers()
+            
+            // console.log(snapshot.data().collaborators)
+            let collaborators = snapshot.data().collaborators
 
-        let collaborators = snapshot.data().collaborators
+            if (collaborators) {
+                let i = 0
+                for (i = 0; i < collaborators.length; i++) {
+                    const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
 
-        if (collaborators) {
-            let i = 0
-            for (i = 0; i < collaborators.length; i++) {
-                
-                const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
-                const projectCollaborators = doc(db, 'projects', projectID)
-                populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
+                    onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
+                        snapshot.docs.forEach((docs) => {
+                            // console.log(docs.data())
+                            // collaboratorsList.push({ ...docs.data(), id: docs.id });
+                            const collaboratorList = docs.data()
+                            populateMemberList(collaboratorList)
+                        })
+                    })
+                }
+
+            } else {
+                setDataIndex()
+                closeOverlay()
             }
-        } else {
-            setDataIndex()
-            closeOverlay()
-        }
-    })
+        })
 }
 
-function populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators) {
-    onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
-        snapshot.docs.forEach((doc) => {
-    
-        let collaboratorList = []
+function clearUsers() {
+    while (teamMemberBody.children[0] != null) {
+        teamMemberBody.removeChild(teamMemberBody.children[0]);
+    }
+}
 
-        collaboratorList.push({ ...doc.data(), id: doc.id });
+function populateMemberList(collaboratorList) {
 
-        const teamMemberBody = document.querySelector(".team-member-body") 
         const teamMemberModals = document.querySelector(".team-member-line-item-modals")
         const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
 
@@ -269,13 +305,13 @@ function populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
         teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
         teamMemberLineItemModal.appendChild(teamMemberLineItemId)
 
-        let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
+        let fullName = collaboratorList.firstName + " " + collaboratorList.lastName
         teamMemberLineItemName.innerText = fullName;
-        teamMemberLineItemEmail.innerText = collaboratorList[0].email;
-        teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
+        teamMemberLineItemEmail.innerText = collaboratorList.email;
+        teamMemberLineItemPhone.innerText = collaboratorList.phoneNumber;
         teamMemberLineItemKebabText.innerText = "...";
         teamMemberLineItemDeleteButton.innerText = "delete"
-        teamMemberLineItemId.innerText = collaboratorList[0].uid;
+        teamMemberLineItemId.innerText = collaboratorList.uid;
 
         teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
         teamMemberLineItem.classList.add("team-member-line-item");
@@ -295,25 +331,48 @@ function populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
         teamMemberLineItemModal.setAttribute("style", "position: sticky");
         teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
                 
-        teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, projectCollaborators, teamMemberBody)
 
+        teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
         setDataIndex()
         closeOverlay()  
-        })
-    })
 }
 
-function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, projectCollaborators, teamMemberBody) {
+// function teamMemberLineItemDeleteButtonFn() {
+// //     teamMemberDeleteButton.addEventListener("click", () => {
+
+// //     for (let i = 0; i < modalBtnMulti.length; i++) {
+// //         teamMemberDeleteButton[i].setAttribute('data-index', i);
+// //     }
+// // })
+    
+
+//     // teamMemberLineItemDeleteButton.addEventListener("click", () => {
+//     //     const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
+
+//     //     updateDoc(ProjectUsersDocRef, {
+//     //         collaborators: arrayRemove(selectedUserId)
+//     //     })
+//     //     .then(() => {
+//     //         console.log("user has been removed")
+//     //         teamMemberBody.innerHTML = ""
+//     //         // populateTeamMembers()
+//     //         setDataIndex()
+//     //         closeOverlay()
+//     //     })
+//     // })
+// }
+
+function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody) {
     teamMemberLineItemDeleteButton.addEventListener("click", () => {
         const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
 
-        updateDoc(projectCollaborators, {
+        updateDoc(ProjectUsersDocRef, {
             collaborators: arrayRemove(selectedUserId)
         })
         .then(() => {
             console.log("user has been removed")
-            teamMemberBody.innerHTML = ""
-            populateTeamMembers()
+            // teamMemberBody.innerHTML = ""
+            // populateTeamMembers()
             setDataIndex()
             closeOverlay()
         })
@@ -652,12 +711,6 @@ function clearTickets() {
     }
 }
 
-function clearUsers() {
-    while (collaboratorList.children[0] != null) {
-        collaboratorList.removeChild(collaboratorList.children[0]);
-    }
-}
-
 function commentCreation() {
     
 onAuthStateChanged(auth, (user) => {
@@ -715,20 +768,13 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
 function addMemberButton() {
     modalAddMemberForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        // console.log("blah")
 
         const newMemberMainDiv = document.querySelector(".new-member-main-div")
         const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
-        // const checkedCheckbox = newMemberCheckboxDiv.parentElement.lastElementChild.innerText
 
         newMemberCheckboxDiv.forEach((checkbox) => {
-            // let newMemberList = [];
-
             if(checkbox.checked) {
-                // console.log("blah")
                 const selectedUserId = checkbox.parentElement.lastElementChild.innerText
-                // console.log(selectedUserId)
-                // newMemberList.push(selectedUserId)
 
                 const projectCollaborators = doc(db, 'projects', projectID)
                 updateDoc(projectCollaborators, {
@@ -740,13 +786,7 @@ function addMemberButton() {
                     closeOverlay()
                 })
             }
-
-        
         })
-
-        const teamMemberBody = document.querySelector(".team-member-body") 
-        teamMemberBody.innerHTML = ""
-        populateTeamMembers()
         closeModal();
     })
 }
@@ -1120,3 +1160,13 @@ function setThemeDark() {
         logo[i].classList.remove("light-mode-logo")
     }
 }
+
+
+
+
+// setTimeout(() => {
+//     const teamMemberDeleteButton = document.getElementsByClassName(".team-member-delete-button")
+// for (let i = 0; i < teamMemberDeleteButton.length; i++) {
+//     teamMemberDeleteButton[i].setAttribute('dota-index', i);
+// }
+// }, 5000);
