@@ -73,12 +73,10 @@ const pieContainerOne = document.querySelector("#pie-container-one")
 const pieUnresolved = document.createElement("div")
 const pieInProgress = document.createElement("div")
 const pieResolved = document.createElement("div")
-
 const pieContainerTwo = document.querySelector("#pie-container-two")
 const pieIssue = document.createElement("div")
 const pieBug = document.createElement("div")
 const pieFeatureRequest = document.createElement("div")
-
 const pieContainerThree = document.querySelector("#pie-container-three")
 const pieLow = document.createElement("div")
 const pieMedium = document.createElement("div")
@@ -214,130 +212,111 @@ function populateProjectName() {
 }
 
 function populateTeamMembers(){
-    const ProjectUsersDocRef = doc(db, 'projects', projectID)
+
     getDoc(ProjectUsersDocRef).then((snapshot) => {
         console.log("testo")
-        // const userRef = collection(db, 'users')
 
-        // // grab project creator
-        // let creator = snapshot.data().creator;
-
-
-        // grab project collaborators
         let collaborators = snapshot.data().collaborators
-        // console.log(collaborators)
 
         if (collaborators) {
+            let i = 0
+            for (i = 0; i < collaborators.length; i++) {
+                
+                const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
+                const projectCollaborators = doc(db, 'projects', projectID)
+                populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
+            }
+        } else {
+            setDataIndex()
+            closeOverlay()
+        }
+    })
+}
 
-        let i = 0
-        for (i = 0; i < collaborators.length; i++) {
-            // console.log(collaborators[i])
-            
-            const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
-            // console.log(userCurrentCollaboratorDocRef)
-
-            const projectCollaborators = doc(db, 'projects', projectID)
-            populateMemberList()
-            function populateMemberList() {
-
-            onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
-                snapshot.docs.forEach((doc) => {
-// TEST FAIL: RUNS THREE TIMES AT START AND THEN ONCE EVERY TIME THEME IS CHANGED
+function populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators) {
+    onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
+        snapshot.docs.forEach((doc) => {
     
-                    let collaboratorList = []
+        let collaboratorList = []
 
-                    collaboratorList.push({ ...doc.data(), id: doc.id });
+        collaboratorList.push({ ...doc.data(), id: doc.id });
 
-                    // console.log("hi " + userListOne[0].firstName + userListOne[0].lastName)
-                const teamMemberBody = document.querySelector(".team-member-body") 
-                const teamMemberModals = document.querySelector(".team-member-line-item-modals")
-                const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
+        const teamMemberBody = document.querySelector(".team-member-body") 
+        const teamMemberModals = document.querySelector(".team-member-line-item-modals")
+        const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
 
-                const teamMemberLineItem = document.createElement("div")
-                    const teamMemberLineItemName = document.createElement("div")
-                    const teamMemberLineItemEmail = document.createElement("div")
-                    const teamMemberLineItemPhone = document.createElement("div")
-                    const teamMemberLineItemKebabDiv = document.createElement("div")
-                    const teamMemberLineItemKebab = document.createElement("button")
-                    const teamMemberLineItemKebabText = document.createElement("span")
-                    const teamMemberLineItemId = document.createElement("div")
-                const teamMemberLineItemOverlay = document.createElement("div")
-                const teamMemberLineItemModal = document.createElement("div")
-                const teamMemberLineItemDeleteButton = document.createElement("button")
+        const teamMemberLineItem = document.createElement("div")
+        const teamMemberLineItemName = document.createElement("div")
+        const teamMemberLineItemEmail = document.createElement("div")
+        const teamMemberLineItemPhone = document.createElement("div")
+        const teamMemberLineItemKebabDiv = document.createElement("div")
+        const teamMemberLineItemKebab = document.createElement("button")
+        const teamMemberLineItemKebabText = document.createElement("span")
+        const teamMemberLineItemId = document.createElement("div")
+        const teamMemberLineItemOverlay = document.createElement("div")
+        const teamMemberLineItemModal = document.createElement("div")
+        const teamMemberLineItemDeleteButton = document.createElement("button")
 
+        teamMemberBody.appendChild(teamMemberLineItem)
+        teamMemberLineItem.appendChild(teamMemberLineItemName)
+        teamMemberLineItem.appendChild(teamMemberLineItemEmail)
+        teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+        teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
+        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
+        teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
+        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemOverlay)
+        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
+        teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
+        teamMemberLineItemModal.appendChild(teamMemberLineItemId)
 
-                teamMemberBody.appendChild(teamMemberLineItem)
-                    teamMemberLineItem.appendChild(teamMemberLineItemName)
-                    teamMemberLineItem.appendChild(teamMemberLineItemEmail)
-                    teamMemberLineItem.appendChild(teamMemberLineItemPhone)
-                    teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
-                        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
-                            teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
-                        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemOverlay)
-                        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
-                            teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
-                            teamMemberLineItemModal.appendChild(teamMemberLineItemId)
+        let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
+        teamMemberLineItemName.innerText = fullName;
+        teamMemberLineItemEmail.innerText = collaboratorList[0].email;
+        teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
+        teamMemberLineItemKebabText.innerText = "...";
+        teamMemberLineItemDeleteButton.innerText = "delete"
+        teamMemberLineItemId.innerText = collaboratorList[0].uid;
 
-
-
-                let fullName = collaboratorList[0].firstName + " " + collaboratorList[0].lastName
-                teamMemberLineItemName.innerText = fullName;
-                teamMemberLineItemEmail.innerText = collaboratorList[0].email;
-                teamMemberLineItemPhone.innerText = collaboratorList[0].phoneNumber;
-                teamMemberLineItemKebabText.innerText = "...";
-                teamMemberLineItemDeleteButton.innerText = "delete"
-                teamMemberLineItemId.innerText = collaboratorList[0].uid;
-
-                teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
-                // teamMemberLineItemKebabDiv.setAttribute("style", "width: 5%");
-                teamMemberLineItem.classList.add("team-member-line-item");
-                teamMemberLineItemName.classList.add("team-member-line-item-name");
-                teamMemberLineItemEmail.classList.add("team-member-line-item-email");
-                teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
-                teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
-                teamMemberLineItemKebab.classList.add("open-modal-btn");
-                teamMemberLineItemId.setAttribute("style", "display: none");
-                // teamMemberLineItemOverlay.setAttribute("id", "overlay");
-                teamMemberLineItemOverlay.classList.add("overlay");
-                teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
+        teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
+        teamMemberLineItem.classList.add("team-member-line-item");
+        teamMemberLineItemName.classList.add("team-member-line-item-name");
+        teamMemberLineItemEmail.classList.add("team-member-line-item-email");
+        teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+        teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
+        teamMemberLineItemKebab.classList.add("open-modal-btn");
+        teamMemberLineItemId.setAttribute("style", "display: none");
+        teamMemberLineItemOverlay.classList.add("overlay");
+        teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
             
-                teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
-                teamMemberLineItemModal.classList.add("modal");
-                teamMemberLineItemModal.classList.add("delete-button-modal");
-                // teamMemberLineItemModal.setAttribute("id", "modal");
-                teamMemberLineItemModal.setAttribute("style", "position: sticky");
-                teamMemberLineItemModal.setAttribute("style", "position: sticky");
-                teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
+        teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+        teamMemberLineItemModal.classList.add("modal");
+        teamMemberLineItemModal.classList.add("delete-button-modal");
+        teamMemberLineItemModal.setAttribute("style", "position: sticky");
+        teamMemberLineItemModal.setAttribute("style", "position: sticky");
+        teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
                 
+        teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, projectCollaborators, teamMemberBody)
 
-                teamMemberLineItemDeleteButton.addEventListener("click", () => {
-                    const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
-                    // console.log(selectedUserId)
-
-                    updateDoc(projectCollaborators, {
-                        collaborators: arrayRemove(selectedUserId)
-                    })
-                    .then(() => {
-                        console.log("user has been removed")
-                        teamMemberBody.innerHTML = ""
-                        populateTeamMembers()
-                        setDataIndex()
-                        closeOverlay()
-                    })
-
-                })
-                
-                setDataIndex()
-                closeOverlay()
-                    
-                })
-            })
-        }
-        }
-    } else {
         setDataIndex()
-        closeOverlay()
-    }
+        closeOverlay()  
+        })
+    })
+}
+
+function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, projectCollaborators, teamMemberBody) {
+    teamMemberLineItemDeleteButton.addEventListener("click", () => {
+        const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
+
+        updateDoc(projectCollaborators, {
+            collaborators: arrayRemove(selectedUserId)
+        })
+        .then(() => {
+            console.log("user has been removed")
+            teamMemberBody.innerHTML = ""
+            populateTeamMembers()
+            setDataIndex()
+            closeOverlay()
+        })
     })
 }
 
