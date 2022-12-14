@@ -149,7 +149,7 @@ function logoutUser() {
 function populateUserIconAndTheme() {
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            clearUsers()
+            // clearUsers()
         const uid = user.uid;
         const userRef = collection(db, 'users')
 
@@ -243,30 +243,44 @@ function populateTeamMembers(){
 
         // const ProjectUsersDocRef = doc(db, 'projects', projectID)
         onSnapshot(ProjectUsersDocRef, (snapshot) => {
-        clearUsers()
+
             
             // console.log(snapshot.data().collaborators)
             let collaborators = snapshot.data().collaborators
+            // if (collaborators) {
+                let collaboratorList = []
+                // clearUsers()
+                // let i = 0
+                // try {
+                    clearUsers()
 
-            if (collaborators) {
-                let i = 0
-                for (i = 0; i < collaborators.length; i++) {
-                    const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
+                for (let i = 0; i < collaborators.length; i++) {
+                        const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
 
-                    onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
-                        snapshot.docs.forEach((docs) => {
-                            // console.log(docs.data())
-                            // collaboratorsList.push({ ...docs.data(), id: docs.id });
-                            const collaboratorList = docs.data()
-                            populateMemberList(collaboratorList)
+                        onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
+                            snapshot.docs.forEach((docs) => {
+
+                                collaboratorList.push({ ...docs.data(), id: docs.id });
+                                clearUsers()
+
+                                if (i == collaborators.length - 1) {
+                                    // teamMemberBody.innerHTML = ""
+                                    for (let j = 0; j < collaboratorList.length; j++) {
+                                        populateMemberList(collaboratorList, j)
+                                    }
+                                }
+
+                            })
                         })
-                    })
-                }
-
-            } else {
+                    }
                 setDataIndex()
                 closeOverlay()
-            }
+
+                    
+            // } else {
+            //     setDataIndex()
+            //     closeOverlay()
+            // }
         })
 }
 
@@ -276,7 +290,8 @@ function clearUsers() {
     }
 }
 
-function populateMemberList(collaboratorList) {
+
+function populateMemberList(collaboratorList, j) {
 
         const teamMemberModals = document.querySelector(".team-member-line-item-modals")
         const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
@@ -305,13 +320,13 @@ function populateMemberList(collaboratorList) {
         teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
         teamMemberLineItemModal.appendChild(teamMemberLineItemId)
 
-        let fullName = collaboratorList.firstName + " " + collaboratorList.lastName
+        let fullName = collaboratorList[j].firstName + " " + collaboratorList[j].lastName
         teamMemberLineItemName.innerText = fullName;
-        teamMemberLineItemEmail.innerText = collaboratorList.email;
-        teamMemberLineItemPhone.innerText = collaboratorList.phoneNumber;
+        teamMemberLineItemEmail.innerText = collaboratorList[j].email;
+        teamMemberLineItemPhone.innerText = collaboratorList[j].phoneNumber;
         teamMemberLineItemKebabText.innerText = "...";
         teamMemberLineItemDeleteButton.innerText = "delete"
-        teamMemberLineItemId.innerText = collaboratorList.uid;
+        teamMemberLineItemId.innerText = collaboratorList[j].uid;
 
         teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
         teamMemberLineItem.classList.add("team-member-line-item");
@@ -335,6 +350,33 @@ function populateMemberList(collaboratorList) {
         teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
         setDataIndex()
         closeOverlay()  
+}
+
+function addMemberButton() {
+    modalAddMemberForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // clearUsers();
+        const newMemberMainDiv = document.querySelector(".new-member-main-div")
+        const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
+
+        newMemberCheckboxDiv.forEach((checkbox) => {
+            if(checkbox.checked) {
+                const selectedUserId = checkbox.parentElement.lastElementChild.innerText
+
+                const projectCollaborators = doc(db, 'projects', projectID)
+                updateDoc(projectCollaborators, {
+                    collaborators: arrayUnion(selectedUserId)
+                })
+                .then(() => {
+                    checkbox.checked = false;
+                    setDataIndex()
+                    closeOverlay()
+                })
+            }
+        })
+        closeModal();
+    })
 }
 
 // function teamMemberLineItemDeleteButtonFn() {
@@ -763,32 +805,6 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
     })
 })
 
-}
-
-function addMemberButton() {
-    modalAddMemberForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-
-        const newMemberMainDiv = document.querySelector(".new-member-main-div")
-        const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
-
-        newMemberCheckboxDiv.forEach((checkbox) => {
-            if(checkbox.checked) {
-                const selectedUserId = checkbox.parentElement.lastElementChild.innerText
-
-                const projectCollaborators = doc(db, 'projects', projectID)
-                updateDoc(projectCollaborators, {
-                    collaborators: arrayUnion(selectedUserId)
-                })
-                .then(() => {
-                    checkbox.checked = false;
-                    setDataIndex()
-                    closeOverlay()
-                })
-            }
-        })
-        closeModal();
-    })
 }
 
 function setDataIndex() {
