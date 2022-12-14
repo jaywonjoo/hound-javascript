@@ -96,7 +96,8 @@ const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnI
 const setBackgroundForm = document.querySelector("#setBackgroundForm")
 // Populate collaborators
 const teamMemberBody = document.querySelector(".team-member-body") 
-// Delete collaborators
+// clearsystemuserlist
+const populatableMemberDiv = document.querySelector("#populatable-member-div")
 
 
 
@@ -421,12 +422,23 @@ function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMe
     })
 }
 
+
+function clearSystemUsersList() {
+    while (populatableMemberDiv.children[0] != null) {
+        populatableMemberDiv.removeChild(populatableMemberDiv.children[0]);
+    }
+}
+
 function populateAddUserModal() {
+
         const systemUsers = collection(db, 'users')
         const alphabetizedSystemUsers = query(systemUsers, orderBy("firstName"))
 
         onSnapshot(alphabetizedSystemUsers, (snapshot) => {
             let SystemUsersList = []
+            clearSystemUsersList()
+            
+            // populatableMemberDiv.innerHTML = ""
 // TEST FAIL: UPDATES ONCE EVERY TIME THEME IS CHANGED
             snapshot.docs.forEach((doc) => {
                 SystemUsersList.push({ ...doc.data(), id: doc.id })
