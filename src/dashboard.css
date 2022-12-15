@@ -330,3 +330,51 @@ body {
 #projectCardMaster {
   z-index: 5;
 }
+
+/* toggle button */
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 3.5em;
+	height: 2em;
+	/* background: orange; */
+	background: #d3d3d361;
+	/* background: grey; */
+	display: block;
+	border-radius: 2em;
+	position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+label:after {
+	content: '';
+	position: absolute;
+	top: .15em;
+	left: .15em;
+	width: 1.7em;
+	height: 1.7em;
+	background: #fff;
+	border-radius: 2em;
+	transition: 0.3s;
+}
+
+input:checked + label {
+	background: grey;
+	/* background: orange; */
+}
+
+input:checked + label:after {
+	left: calc(100% - .15em);
+	transform: translateX(-100%);
+}
+
+/* label:active:after {
+width: 130px;
+} */
+

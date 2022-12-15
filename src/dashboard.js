@@ -71,6 +71,9 @@ const overlayer = document.querySelector(".blurred-overlay");
 const logoutButton = document.querySelector("#logoutButton");
 // Close overlay one
 const overlayOne = document.querySelector("#overlayOne")
+// Darkmode button
+const darkModeSwitch = document.querySelector("#switch")
+
 
 // FEATURES ************************************************************************************************
 
@@ -421,11 +424,13 @@ function populateUserIconAndTheme() {
               if (userListOne[0].theme == lightString) {
                   setThemeLight()
                   themeBtn.innerHTML = "Dark Mode"
-                      console.log("blah")
+                  darkModeSwitch.checked = true;
+                      // console.log("blah")
               } else {
                   setThemeDark()
                   themeBtn.innerHTML = "Light Mode"
-              console.log("blee")
+                  darkModeSwitch.checked = false;
+              // console.log("blee")
 
               }
 
@@ -442,7 +447,7 @@ function populateUserIconAndTheme() {
               const currentUserDocRef = doc(db, 'users', currentUid)
 
 
-              darkModeBtn.addEventListener("click", (e) => {
+              darkModeSwitch.addEventListener("click", (e) => {
                   e.stopPropagation()
 
                   if (userListOne[0].theme == lightString) {
