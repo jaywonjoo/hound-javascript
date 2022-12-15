@@ -78,13 +78,13 @@ const darkModeSwitch = document.querySelector("#switch")
 // FEATURES ************************************************************************************************
 
 populateUserIconAndTheme()
+// setThemeButton()
 populateProjectContainers()
 closeOverlay()
 createProject()
 deleteProject()
 setDataIndex()
 logOut()
-// setThemeButton()
 
 
 // MOBILE FEATURES ************************************************************************************************
@@ -96,16 +96,82 @@ closeSidebarWithOverlay()
 
 // FUNCTIONS ************************************************************************************************
 
-function clearProjects(parentContainer) {
-  while (parentContainer.children[0] != null) {
-    parentContainer.removeChild(parentContainer.children[0]);
-  }
+function populateUserIconAndTheme() {
+
+  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        const userRef = collection(db, 'users')
+
+        const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+        onSnapshot(userCreatorDocRef, (snapshot) => {
+          snapshot.docs.forEach((docs) => {
+
+              let userListOne = []
+              userListOne.push({ ...docs.data(), id: docs.id });
+
+              const navUserIcon = document.querySelector(".nav-user-icon")
+              navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+              let lightString = String("light")
+              let darkString = String("dark")
+
+              // // SF: SET THEME 
+              if (userListOne[0].theme == lightString) {
+                darkModeSwitch.checked = true;
+                themeBtn.innerHTML = "Dark Mode"
+                setThemeLight()
+                      // console.log("blah")
+              } else {
+                darkModeSwitch.checked = false;
+                themeBtn.innerHTML = "Light Mode"
+                setThemeDark()
+              // console.log("blee")
+
+              }
+
+              // // SF: SET THEME 
+              
+              // // // SF: CHANGE THEME 
+
+              const currentId = userListOne[0].uid
+              currentUserIdDiv.innerText = currentId
+
+              // Storing user fb id
+              const currentUid = userListOne[0].id
+              currentUserDocRefDiv.innerText = currentUid
+              const currentUserDocRef = doc(db, 'users', currentUid)
+              // setThemeButton(currentUid)
+
+              darkModeSwitch.addEventListener("click", (e) => {
+                  e.stopPropagation()
+
+                  if (userListOne[0].theme == lightString) {
+                      updateDoc(currentUserDocRef, {
+                          theme: "dark"
+                      })
+                      // setThemeLight()
+                      // themeBtn.innerHTML = "Dark Mode"
+                          // console.log("blah")
+                  } else {
+                      updateDoc(currentUserDocRef, {
+                          theme: "light"
+                      })
+                      console.log("bligg")
+                  }
+              })
+              
+            // SF: CHANGE THEME
+          })
+        })
+      }
+  })
 }
 
-function setThemeButton() {
-  const asdf = doc(db, 'users', 'mLOfFcldWVEHH31I7LFY')
+function setThemeButton(currentUid) {
+  const asdf = doc(db, 'users', currentUid)
   getDoc(asdf).then((snapshot) => {
-
+    console.log("jumpasdjfaslkj")
     let lightString = String("light")
     let darkString = String("dark")
 
@@ -117,6 +183,12 @@ function setThemeButton() {
 
   })
 
+}
+
+function clearProjects(parentContainer) {
+  while (parentContainer.children[0] != null) {
+    parentContainer.removeChild(parentContainer.children[0]);
+  }
 }
 
 function populateProjects(projectQuery, projectContainer) {
@@ -417,77 +489,6 @@ function createProject() {
 }
 
 
-function populateUserIconAndTheme() {
-
-  onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        const userRef = collection(db, 'users')
-
-        const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-        onSnapshot(userCreatorDocRef, (snapshot) => {
-          snapshot.docs.forEach((docs) => {
-
-              let userListOne = []
-              userListOne.push({ ...docs.data(), id: docs.id });
-
-              const navUserIcon = document.querySelector(".nav-user-icon")
-              navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-
-              let lightString = String("light")
-              let darkString = String("dark")
-
-              // // SF: SET THEME 
-              if (userListOne[0].theme == lightString) {
-                darkModeSwitch.checked = true;
-                themeBtn.innerHTML = "Dark Mode"
-                setThemeLight()
-                      // console.log("blah")
-              } else {
-                darkModeSwitch.checked = false;
-                themeBtn.innerHTML = "Light Mode"
-                setThemeDark()
-              // console.log("blee")
-
-              }
-
-              // // SF: SET THEME 
-              
-              // // // SF: CHANGE THEME 
-
-              const currentId = userListOne[0].uid
-              currentUserIdDiv.innerText = currentId
-
-              // Storing user fb id
-              const currentUid = userListOne[0].id
-              currentUserDocRefDiv.innerText = currentUid
-              const currentUserDocRef = doc(db, 'users', currentUid)
-
-
-              darkModeSwitch.addEventListener("click", (e) => {
-                  e.stopPropagation()
-
-                  if (userListOne[0].theme == lightString) {
-                      updateDoc(currentUserDocRef, {
-                          theme: "dark"
-                      })
-                      // setThemeLight()
-                      // themeBtn.innerHTML = "Dark Mode"
-                          // console.log("blah")
-                  } else {
-                      updateDoc(currentUserDocRef, {
-                          theme: "light"
-                      })
-                      console.log("bligg")
-                  }
-              })
-              
-            // SF: CHANGE THEME
-          })
-        })
-      }
-  })
-}
 
 
 function populateProjectContainers() {
