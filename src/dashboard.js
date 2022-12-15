@@ -84,7 +84,7 @@ createProject()
 deleteProject()
 setDataIndex()
 logOut()
-setThemeButton()
+// setThemeButton()
 
 
 // MOBILE FEATURES ************************************************************************************************
@@ -439,12 +439,12 @@ function populateUserIconAndTheme() {
 
               // // SF: SET THEME 
               if (userListOne[0].theme == lightString) {
-                // darkModeSwitch.checked = true;
+                darkModeSwitch.checked = true;
                 themeBtn.innerHTML = "Dark Mode"
                 setThemeLight()
                       // console.log("blah")
               } else {
-                // darkModeSwitch.checked = false;
+                darkModeSwitch.checked = false;
                 themeBtn.innerHTML = "Light Mode"
                 setThemeDark()
               // console.log("blee")
