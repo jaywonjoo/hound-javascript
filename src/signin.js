@@ -18,7 +18,7 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 
 const loginErrorMessage = document.querySelector(".error-message")
-const loginInputs = document.getElementsByClassName("input")
+const authInputs = document.querySelectorAll(".auth-input")
 
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector(".logo-home-button-container");
@@ -46,10 +46,21 @@ signinForm.addEventListener("submit", (e) => {
     .then((userCredential) => {
       console.log("user logged in", userCredential.user)
       window.location.href = "dashboard.html";
+
     })
     .catch((error) => {
-      // console.log(err.message)
       loginErrorMessage.setAttribute("style", "display: block")
+      authInputs.forEach((input) => {
+        input.blur()
+        input.classList.add("is-focused")
+      });
+      // setTimeout(() => {
+      //   loginErrorMessage.removeAttribute("style", "display: block")
+      //   authInputs.forEach((input) => {
+      //     input.classList.remove("is-focused")
+      //   });
+      // }, 1000);
+
     });
 })
 
