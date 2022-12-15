@@ -422,14 +422,14 @@ function populateUserIconAndTheme() {
 
               // // SF: SET THEME 
               if (userListOne[0].theme == lightString) {
-                  setThemeLight()
-                  themeBtn.innerHTML = "Dark Mode"
-                  darkModeSwitch.checked = true;
+                darkModeSwitch.checked = true;
+                themeBtn.innerHTML = "Dark Mode"
+                setThemeLight()
                       // console.log("blah")
               } else {
-                  setThemeDark()
-                  themeBtn.innerHTML = "Light Mode"
-                  darkModeSwitch.checked = false;
+                darkModeSwitch.checked = false;
+                themeBtn.innerHTML = "Light Mode"
+                setThemeDark()
               // console.log("blee")
 
               }
