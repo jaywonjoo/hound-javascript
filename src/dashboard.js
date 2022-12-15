@@ -73,12 +73,17 @@ const logoutButton = document.querySelector("#logoutButton");
 const overlayOne = document.querySelector("#overlayOne")
 // Darkmode button
 const darkModeSwitch = document.querySelector("#switch")
+// Populate user info modal
+const userIconMedium = document.querySelector(".user-icon-medium")
+const udoName = document.querySelector(".udo-name")
+const udoemail = document.querySelector(".udo-email")
 
 
 // FEATURES ************************************************************************************************
 
 populateUserIconAndTheme()
 // setThemeButton()
+// populateUserInfoModal()
 populateProjectContainers()
 closeOverlay()
 createProject()
@@ -137,11 +142,14 @@ function populateUserIconAndTheme() {
               const currentId = userListOne[0].uid
               currentUserIdDiv.innerText = currentId
 
+              
               // Storing user fb id
               const currentUid = userListOne[0].id
               currentUserDocRefDiv.innerText = currentUid
               const currentUserDocRef = doc(db, 'users', currentUid)
               // setThemeButton(currentUid)
+
+
 
               darkModeSwitch.addEventListener("click", (e) => {
                   e.stopPropagation()
@@ -160,6 +168,8 @@ function populateUserIconAndTheme() {
                       console.log("bligg")
                   }
               })
+              populateUserInfoModal(currentUid)
+
               
             // SF: CHANGE THEME
           })
@@ -180,6 +190,23 @@ function setThemeButton(currentUid) {
   } else {
     darkModeSwitch.checked = false;
   }
+
+  })
+
+}
+
+function populateUserInfoModal(currentUid) {
+
+  const asdf = doc(db, 'users', currentUid)
+  getDoc(asdf).then((snapshot) => {
+
+    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
+    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
+    const userEmail = snapshot.data().email
+
+    userIconMedium.innerText = userIcon
+    udoName.innerText = fullName
+    udoemail.innerText = userEmail
 
   })
 
