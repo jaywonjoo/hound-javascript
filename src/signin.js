@@ -17,6 +17,9 @@ initializeApp(firebaseConfig);
 // link authentication features
 const auth = getAuth();
 
+const loginErrorMessage = document.querySelector(".error-message")
+const loginInputs = document.getElementsByClassName("input")
+
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector(".logo-home-button-container");
 logoHomeButton.addEventListener("click", () => {
@@ -45,6 +48,8 @@ signinForm.addEventListener("submit", (e) => {
       window.location.href = "dashboard.html";
     })
     .catch((error) => {
-      console.log(err.message)
+      // console.log(err.message)
+      loginErrorMessage.setAttribute("style", "display: block")
     });
 })
+

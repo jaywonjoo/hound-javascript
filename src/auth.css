@@ -182,3 +182,19 @@ body {
 #signInLink{
     color: #5384f5
 }
+
+/* Sign-up page */
+
+.error-message-container {
+    width: 78%;
+    display: flex;
+    justify-content: left;
+}
+
+.error-message {
+    display: none;
+    margin: -1.2em 0 0 0;
+    color: rgb(255, 0, 0);
+    font-size: .75em;
+}
+
