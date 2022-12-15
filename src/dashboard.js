@@ -84,6 +84,7 @@ createProject()
 deleteProject()
 setDataIndex()
 logOut()
+setThemeButton()
 
 
 // MOBILE FEATURES ************************************************************************************************
@@ -101,6 +102,22 @@ function clearProjects(parentContainer) {
   }
 }
 
+function setThemeButton() {
+  const asdf = doc(db, 'users', 'mLOfFcldWVEHH31I7LFY')
+  getDoc(asdf).then((snapshot) => {
+
+    let lightString = String("light")
+    let darkString = String("dark")
+
+  if (snapshot.data().theme == lightString) {
+    darkModeSwitch.checked = true;
+  } else {
+    darkModeSwitch.checked = false;
+  }
+
+  })
+
+}
 
 function populateProjects(projectQuery, projectContainer) {
       // Create project cards
@@ -422,12 +439,12 @@ function populateUserIconAndTheme() {
 
               // // SF: SET THEME 
               if (userListOne[0].theme == lightString) {
-                darkModeSwitch.checked = true;
+                // darkModeSwitch.checked = true;
                 themeBtn.innerHTML = "Dark Mode"
                 setThemeLight()
                       // console.log("blah")
               } else {
-                darkModeSwitch.checked = false;
+                // darkModeSwitch.checked = false;
                 themeBtn.innerHTML = "Light Mode"
                 setThemeDark()
               // console.log("blee")
