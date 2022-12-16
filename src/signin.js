@@ -16,12 +16,19 @@ initializeApp(firebaseConfig);
 
 // link authentication features
 const auth = getAuth();
-
 const loginErrorMessage = document.querySelector(".error-message")
 const authInputs = document.querySelectorAll(".auth-input")
-
+// Sign in Demo User
+const demoUserLink = document.querySelector("#demoUserLink")
+const emailAuthInput = document.querySelector("#emailAuthInput")
+const passwordAuthInput = document.querySelector("#passwordAuthInput")
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector(".logo-home-button-container");
+
+
+signInDemoUser()
+
+
 logoHomeButton.addEventListener("click", () => {
   window.location.href = "index.html";
 });
@@ -37,6 +44,24 @@ signUpLink.addEventListener("click", () => {
 const signinForm = document.querySelector("#signinForm")
 signinForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  signInSequence()
+
+})
+
+
+
+function signInDemoUser() {
+  demoUserLink.addEventListener("click", () => {
+    emailAuthInput.value = "test@test.com"
+    passwordAuthInput.value = "123123"
+    signInSequence()
+  })
+}
+
+
+
+function signInSequence() {
 
   const email = signinForm.email.value;
   const password = signinForm.password.value
@@ -62,5 +87,4 @@ signinForm.addEventListener("submit", (e) => {
       // }, 1000);
 
     });
-})
-
+  }

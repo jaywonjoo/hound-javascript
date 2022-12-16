@@ -65,11 +65,16 @@
 
         <div class="alt-link-container">
             <p class="sign-in-link">Already have an account? <a id="signInLink">sign-in!</a></p>
-            <p class="sign-up-link">sign in as a <a id="signUpLink">demo-user</a></p>
+            <p class="sign-up-link">sign in as a <a id="demoUserLink">demo-user</a></p>
         </div>
 
 
     </div>
 
+    <form id="signinForm" class="hidden-sign-in-form">
+        <input id="emailAuthInput" type="email" name="email" required>
+        <input id="passwordAuthInput" type="password" name="password" required>
+        <button class="sign-in-button">Sign in</button>
+    </form>
 </body>
 </html>

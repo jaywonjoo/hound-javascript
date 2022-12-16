@@ -9,7 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import "./auth.css";
 
 
@@ -27,12 +27,24 @@ initializeApp(firebaseConfig);
 
 // init services
 const db = getFirestore();
-
+// link authentication features
+const auth = getAuth();
 // collection ref
 const colRef = collection(db, "users");
+// Sign in Demo User
+const demoUserLink = document.querySelector("#demoUserLink")
+const emailAuthInput = document.querySelector("#emailAuthInput")
+const passwordAuthInput = document.querySelector("#passwordAuthInput")
+const signinForm = document.querySelector("#signinForm")
 
 // button to take you back to the homepage
 const logoHomeButton = document.querySelector(".logo-home-button-container");
+
+
+signInDemoUser()
+
+
+
 logoHomeButton.addEventListener("click", () => {
   window.location.href = "index.html";
 });
@@ -83,3 +95,42 @@ signupForm.addEventListener("submit", (e) => {
     // });
 });
 
+
+function signInDemoUser() {
+  demoUserLink.addEventListener("click", () => {
+    emailAuthInput.value = "test@test.com"
+    passwordAuthInput.value = "123123"
+    signInSequence()
+  })
+}
+
+
+
+function signInSequence() {
+
+
+  const email = signinForm.email.value;
+  const password = signinForm.password.value
+
+  // const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("user logged in", userCredential.user)
+      window.location.href = "dashboard.html";
+
+    })
+    .catch((error) => {
+      loginErrorMessage.setAttribute("style", "display: block")
+      authInputs.forEach((input) => {
+        input.blur()
+        input.classList.add("is-focused")
+      });
+      // setTimeout(() => {
+      //   loginErrorMessage.removeAttribute("style", "display: block")
+      //   authInputs.forEach((input) => {
+      //     input.classList.remove("is-focused")
+      //   });
+      // }, 1000);
+
+    });
+  }

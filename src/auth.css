@@ -183,6 +183,10 @@ body {
     color: #5384f5
 }
 
+#demoUserLink {
+    color: #5384f5
+}
+
 /* Sign-up page */
 
 .error-message-container {
@@ -202,4 +206,8 @@ body {
     border-color: red;
     border-style: solid;
     background-color: white;
+}
+
+.hidden-sign-in-form {
+    display: none;
 }

@@ -968,8 +968,14 @@ function createTicketButton() {
     createTicketForm.addEventListener('submit', (e) => {
         e.preventDefault()
         
+        const idUid = document.querySelector('#idUid').textContent
+        const currentUserDocRef = doc(db, 'users', idUid)
+        getDoc(currentUserDocRef).then((snapshot) => {
+            let ticketAuthor = snapshot.data().firstName + " " + snapshot.data().lastName;
+
+
         addDoc(colRef, {
-            author: createTicketForm.author.value,
+            author: ticketAuthor,
             description: createTicketForm.description.value,
             title: createTicketForm.title.value,
             status: createTicketForm.status.value,
@@ -983,6 +989,9 @@ function createTicketButton() {
             closeOverlay()
             closeModal();
         })
+        })
+
+        
     })    
 }
 
@@ -1289,13 +1298,3 @@ function setThemeDark() {
         logo[i].classList.remove("light-mode-logo")
     }
 }
-
-
-
-
-// setTimeout(() => {
-//     const teamMemberDeleteButton = document.getElementsByClassName(".team-member-delete-button")
-// for (let i = 0; i < teamMemberDeleteButton.length; i++) {
-//     teamMemberDeleteButton[i].setAttribute('dota-index', i);
-// }
-// }, 5000);
