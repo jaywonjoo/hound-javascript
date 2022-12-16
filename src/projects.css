@@ -48,6 +48,10 @@ body {
   /* overflow-y: hidden; 113022*/
 }
 
+#honme {
+  display: none;
+}
+
 .hidden {
   display: none;
 }
@@ -900,3 +904,54 @@ height: 100%;
         /* Edit Ticket Form **************************************************************** */
 
 /* Selected Ticket Info Section **************************************************************** */
+
+
+
+/* toggle button */
+.sliding-input {
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+.sliding-input-label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 3.5em;
+	height: 2em;
+	/* background: orange; */
+	background: #d3d3d361;
+	/* background: grey; */
+	display: block;
+	border-radius: 2em;
+	position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sliding-input-label:after {
+	content: '';
+	position: absolute;
+	top: .15em;
+	left: .15em;
+	width: 1.7em;
+	height: 1.7em;
+	background: #fff;
+	border-radius: 2em;
+	transition: 0.3s;
+
+}
+
+.sliding-input:checked + .sliding-input-label {
+	background: grey;
+	/* background: orange; */
+}
+
+.sliding-input:checked + .sliding-input-label:after {
+	/* left: calc(100% - .15em); */
+	transform: translateX(calc(100% - .2em));
+  /* right: .85em; */
+}
+
+/* label:active:after {
+width: 2em;
+} */

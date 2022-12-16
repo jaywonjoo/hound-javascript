@@ -57,6 +57,8 @@ const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 const themeBtn = document.querySelector("#themeBtn")
 const ProjectUsersDocRef = doc(db, 'projects', projectID)
+const currentUserIdDiv = document.querySelector('#uid')
+const currentUserDocRefDiv = document.querySelector('#idUid')
 // Populate project header
 const projectHeader = document.querySelector(".page-header")
 const projectHeaderRef = doc(db, 'projects', projectID)
@@ -98,7 +100,12 @@ const setBackgroundForm = document.querySelector("#setBackgroundForm")
 const teamMemberBody = document.querySelector(".team-member-body") 
 // clearsystemuserlist
 const populatableMemberDiv = document.querySelector("#populatable-member-div")
-
+// Darkmode button
+const darkModeSwitch = document.querySelector("#switch")
+// Populate user info modal
+const userIconMedium = document.querySelector(".user-icon-medium")
+const udoName = document.querySelector(".udo-name")
+const udoemail = document.querySelector(".udo-email")
 
 
 // FEATURES ************************************************************************************************
@@ -147,49 +154,124 @@ function logoutUser() {
     })
 }
 
+// function populateUserIconAndTheme() {
+//     onAuthStateChanged(auth, (user) => {
+//         if (user) {
+//             // clearUsers()
+//         const uid = user.uid;
+//         const userRef = collection(db, 'users')
+
+//         const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+//         onSnapshot(userCreatorDocRef, (snapshot) => {
+//             snapshot.docs.forEach((docs) => {
+
+//                 let userListOne = []
+//                 userListOne.push({ ...docs.data(), id: docs.id });
+
+//                 const navUserIcon = document.querySelector(".nav-user-icon")
+//                 navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
+
+//                 let lightString = String("light")
+//                 let darkString = String("dark")
+
+//                 // // SUBFEATURE: SET THEME ********************************************************************************
+//                 if (userListOne[0].theme == lightString) {
+//                     setThemeLight()
+//                     themeBtn.innerHTML = "Dark Mode"
+//                         console.log("blah")
+//                 } else {
+//                     setThemeDark()
+//                     themeBtn.innerHTML = "Light Mode"
+//                 console.log("blee")
+
+//                 }
+
+//                 // // SUBFEATURE: SET THEME ********************************************************************************
+                
+//                 // // SUBFEATURE: CHANGE THEME ********************************************************************************
+
+
+//                 const currentUid = userListOne[0].id
+//                 const currentUserDocRef = doc(db, 'users', currentUid)
+
+//                 darkModeBtn.addEventListener("click", (e) => {
+//                     e.stopPropagation()
+
+//                     if (userListOne[0].theme == lightString) {
+//                         updateDoc(currentUserDocRef, {
+//                             theme: "dark"
+//                         })
+//                         // setThemeLight()
+//                         // themeBtn.innerHTML = "Dark Mode"
+//                             // console.log("blah")
+//                     } else {
+//                         updateDoc(currentUserDocRef, {
+//                             theme: "light"
+//                         })
+//                         console.log("bligg")
+//                     }
+//                 })
+                
+//                 // // SUBFEATURE: CHANGE THEME ********************************************************************************
+//             })
+//         })
+//         }
+//     })
+// }
+
 function populateUserIconAndTheme() {
+
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            // clearUsers()
-        const uid = user.uid;
-        const userRef = collection(db, 'users')
-
-        const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-        onSnapshot(userCreatorDocRef, (snapshot) => {
+          const uid = user.uid;
+          const userRef = collection(db, 'users')
+  
+          const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+          onSnapshot(userCreatorDocRef, (snapshot) => {
             snapshot.docs.forEach((docs) => {
-
+  
                 let userListOne = []
                 userListOne.push({ ...docs.data(), id: docs.id });
-
+  
                 const navUserIcon = document.querySelector(".nav-user-icon")
                 navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-
+  
                 let lightString = String("light")
                 let darkString = String("dark")
-
-                // // SUBFEATURE: SET THEME ********************************************************************************
+  
+                // // SF: SET THEME 
                 if (userListOne[0].theme == lightString) {
-                    setThemeLight()
-                    themeBtn.innerHTML = "Dark Mode"
-                        console.log("blah")
+                  darkModeSwitch.checked = true;
+                  themeBtn.innerHTML = "Dark Mode"
+                  setThemeLight()
+                        // console.log("blah")
                 } else {
-                    setThemeDark()
-                    themeBtn.innerHTML = "Light Mode"
-                console.log("blee")
-
+                  darkModeSwitch.checked = false;
+                  themeBtn.innerHTML = "Light Mode"
+                  setThemeDark()
+                // console.log("blee")
+  
                 }
-
-                // // SUBFEATURE: SET THEME ********************************************************************************
+  
+                // // SF: SET THEME 
                 
-                // // SUBFEATURE: CHANGE THEME ********************************************************************************
-
-
+                // // // SF: CHANGE THEME 
+  
+                const currentId = userListOne[0].uid
+                currentUserIdDiv.innerText = currentId
+  
+                
+                // Storing user fb id
                 const currentUid = userListOne[0].id
+                currentUserDocRefDiv.innerText = currentUid
                 const currentUserDocRef = doc(db, 'users', currentUid)
-
-                darkModeBtn.addEventListener("click", (e) => {
+                // setThemeButton(currentUid)
+  
+  
+  
+                darkModeSwitch.addEventListener("click", (e) => {
                     e.stopPropagation()
-
+  
                     if (userListOne[0].theme == lightString) {
                         updateDoc(currentUserDocRef, {
                             theme: "dark"
@@ -204,12 +286,31 @@ function populateUserIconAndTheme() {
                         console.log("bligg")
                     }
                 })
+                populateUserInfoModal(currentUid)
+  
                 
-                // // SUBFEATURE: CHANGE THEME ********************************************************************************
+              // SF: CHANGE THEME
             })
-        })
+          })
         }
     })
+  }
+
+function populateUserInfoModal(currentUid) {
+
+const asdf = doc(db, 'users', currentUid)
+getDoc(asdf).then((snapshot) => {
+
+    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
+    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
+    const userEmail = snapshot.data().email
+
+    userIconMedium.innerText = userIcon
+    udoName.innerText = fullName
+    udoemail.innerText = userEmail
+
+})
+
 }
 
 function populateProjectName() {
@@ -248,13 +349,13 @@ function populateTeamMembers(){
             
             // console.log(snapshot.data().collaborators)
             let collaborators = snapshot.data().collaborators
-            // if (collaborators) {
+            if (collaborators) {
                 let collaboratorList = []
                 // clearUsers()
                 // let i = 0
                 // try {
                     clearUsers()
-
+            
                 for (let i = 0; i < collaborators.length; i++) {
                         const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
 
@@ -278,10 +379,10 @@ function populateTeamMembers(){
                 closeOverlay()
 
                     
-            // } else {
-            //     setDataIndex()
-            //     closeOverlay()
-            // }
+            } else {
+                setDataIndex()
+                closeOverlay()
+            }
         })
 }
 

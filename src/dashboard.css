@@ -332,13 +332,13 @@ body {
 }
 
 /* toggle button */
-input[type=checkbox]{
+.sliding-input {
 	height: 0;
 	width: 0;
 	visibility: hidden;
 }
 
-label {
+.sliding-input-label {
 	cursor: pointer;
 	text-indent: -9999px;
 	width: 3.5em;
@@ -352,7 +352,7 @@ label {
   -webkit-tap-highlight-color: transparent;
 }
 
-label:after {
+.sliding-input-label:after {
 	content: '';
 	position: absolute;
 	top: .15em;
@@ -365,12 +365,12 @@ label:after {
 
 }
 
-input:checked + label {
+.sliding-input:checked + .sliding-input-label {
 	background: grey;
 	/* background: orange; */
 }
 
-input:checked + label:after {
+.sliding-input:checked + .sliding-input-label:after {
 	/* left: calc(100% - .15em); */
 	transform: translateX(calc(100% - .2em));
   /* right: .85em; */
@@ -379,4 +379,3 @@ input:checked + label:after {
 /* label:active:after {
 width: 2em;
 } */
-
