@@ -1,0 +1,59 @@
+
+.dark-mode-btn {
+    position: fixed;
+    top: 75vh;
+    right: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.38);
+    border: none;
+    border-radius: 15px 0 0 15px;
+    width: 75px;
+  }
+  
+  .light-mode-logo {
+    filter: invert(7%) sepia(83%) saturate(11%) hue-rotate(334deg) brightness(99%) contrast(95%);
+    -webkit-filter: invert(7%) sepia(83%) saturate(11%) hue-rotate(334deg) brightness(99%) contrast(95%);
+  }
+  
+  .dark-mode-logo {
+    /* filter: invert(91%) sepia(8%) saturate(138%) hue-rotate(2deg) brightness(106%) contrast(86%); */
+    filter: invert(97%) sepia(8%) saturate(201%) hue-rotate(302deg) brightness(129%) contrast(90%);
+    -webkit-filter: invert(97%) sepia(8%) saturate(201%) hue-rotate(302deg) brightness(129%) contrast(90%);
+  }
+  
+  .light-mode-solid {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* border-bottom: solid 1px rgb(0, 0, 0, .25); */
+    border-color: rgb(0, 0, 0, .5);
+    color: rgb(44, 43, 43);
+  }
+  
+  .dark-mode-solid {
+    background-color: rgb(24, 26, 27, 0.9);
+    border-color: rgb(24, 26, 27, 0.9);
+    color: #ece9e3;
+  }
+  
+  .light-mode-transparent {
+    background-color: rgb(255, 255, 255, .3);
+    border-color: rgb(0, 0, 0, .5);
+    color: rgb(44, 43, 43);
+  }
+  
+  .dark-mode-transparent {
+    background-color: rgba(24, 26, 27, 0.3);
+    border-color: rgb(24, 26, 27, 0.9);
+    color: #ece9e3;
+  }
+  
+  .light-mode-button {
+    background-color: rgba(24, 26, 27, 0.15);
+    border-color: rgb(0, 0, 0, .25);
+    /* color: #ffffff; */
+  }
+  
+  .dark-mode-button {
+    background-color: #414445e6;
+    border-color: rgb(24, 26, 27, 0.9);
+    color: #ece9e3;
+  }

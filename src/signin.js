@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import "./auth.css";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",
@@ -15,9 +16,19 @@ initializeApp(firebaseConfig);
 
 // link authentication features
 const auth = getAuth();
-
+const loginErrorMessage = document.querySelector(".error-message")
+const authInputs = document.querySelectorAll(".auth-input")
+// Sign in Demo User
+const demoUserLink = document.querySelector("#demoUserLink")
+const emailAuthInput = document.querySelector("#emailAuthInput")
+const passwordAuthInput = document.querySelector("#passwordAuthInput")
 // button to take you back to the homepage
-const logoHomeButton = document.querySelector("#logoHomeButton");
+const logoHomeButton = document.querySelector(".logo-home-button-container");
+
+
+signInDemoUser()
+
+
 logoHomeButton.addEventListener("click", () => {
   window.location.href = "index.html";
 });
@@ -34,6 +45,24 @@ const signinForm = document.querySelector("#signinForm")
 signinForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  signInSequence()
+
+})
+
+
+
+function signInDemoUser() {
+  demoUserLink.addEventListener("click", () => {
+    emailAuthInput.value = "test@test.com"
+    passwordAuthInput.value = "123123"
+    signInSequence()
+  })
+}
+
+
+
+function signInSequence() {
+
   const email = signinForm.email.value;
   const password = signinForm.password.value
 
@@ -42,8 +71,20 @@ signinForm.addEventListener("submit", (e) => {
     .then((userCredential) => {
       console.log("user logged in", userCredential.user)
       window.location.href = "dashboard.html";
+
     })
     .catch((error) => {
-      console.log(err.message)
+      loginErrorMessage.setAttribute("style", "display: block")
+      authInputs.forEach((input) => {
+        input.blur()
+        input.classList.add("is-focused")
+      });
+      // setTimeout(() => {
+      //   loginErrorMessage.removeAttribute("style", "display: block")
+      //   authInputs.forEach((input) => {
+      //     input.classList.remove("is-focused")
+      //   });
+      // }, 1000);
+
     });
-})
+  }
