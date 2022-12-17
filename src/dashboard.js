@@ -480,7 +480,8 @@ function setDataIndex() {
 function closeOverlay() {
   for (let i = 0; i < overlay.length; i++)
   {
-      overlay[i].onclick = function() {
+      overlay[i].onclick = function(e) {
+        e.stopPropagation()
           let ElementIndex = this.getAttribute('data-index');
       //   modalparent[ElementIndex].classList.remove("hidden")
         modal[ElementIndex].classList.remove("open")
