@@ -77,7 +77,8 @@ const darkModeSwitch = document.querySelector("#switch")
 const userIconMedium = document.querySelector(".user-icon-medium")
 const udoName = document.querySelector(".udo-name")
 const udoemail = document.querySelector(".udo-email")
-
+// Manage projects
+const manageProjectsMaster = document.querySelector("#manageProjectsMaster")
 
 // FEATURES ************************************************************************************************
 
@@ -121,7 +122,7 @@ function populateUserIconAndTheme() {
               let lightString = String("light")
               let darkString = String("dark")
 
-              // // SF: SET THEME 
+              // // SF: SET THEME
               if (userListOne[0].theme == lightString) {
                 darkModeSwitch.checked = true;
                 themeBtn.innerHTML = "Dark Mode"
@@ -178,44 +179,22 @@ function populateUserIconAndTheme() {
   })
 }
 
-function setThemeButton(currentUid) {
-  const asdf = doc(db, 'users', currentUid)
-  getDoc(asdf).then((snapshot) => {
-    console.log("jumpasdjfaslkj")
-    let lightString = String("light")
-    let darkString = String("dark")
+function populateProjectContainers() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
+      const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
+      const userProjects = query(colRef, where("creator", "==", uid));
 
-  if (snapshot.data().theme == lightString) {
-    darkModeSwitch.checked = true;
-  } else {
-    darkModeSwitch.checked = false;
-  }
-
+      populateProjects (starredProjects, starredProjectContainer)
+      populateProjects (userProjects, userProjectContainer)
+      populateProjects (sharedProjects, sharedProjectContainer)
+      populateProjectManager(userProjects, manageProjectsMaster)
+    } else {
+      window.location.replace("signin.html");
+    }
   })
-
-}
-
-function populateUserInfoModal(currentUid) {
-
-  const asdf = doc(db, 'users', currentUid)
-  getDoc(asdf).then((snapshot) => {
-
-    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
-    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
-    const userEmail = snapshot.data().email
-
-    userIconMedium.innerText = userIcon
-    udoName.innerText = fullName
-    udoemail.innerText = userEmail
-
-  })
-
-}
-
-function clearProjects(parentContainer) {
-  while (parentContainer.children[0] != null) {
-    parentContainer.removeChild(parentContainer.children[0]);
-  }
 }
 
 function populateProjects(projectQuery, projectContainer) {
@@ -282,6 +261,117 @@ function populateProjects(projectQuery, projectContainer) {
   });
 }
 
+function populateProjectManager(projectQuery, projectContainer) {
+
+  let i = 0;
+  onSnapshot(projectQuery, (snapshot) => {
+    clearProjects(projectContainer);
+
+    let projectsArray = [];
+
+    snapshot.docs.forEach((doc) => {
+      projectsArray.push({ ...doc.data(), id: doc.id });
+    });
+
+
+    for (i = 0; i < projectsArray.length; i++) {
+      // Project Line Item
+      const projectLiMaster = document.createElement("li");
+      const projectLiSubMaster = document.createElement("div");
+      const projectLiLeft = document.createElement("div")
+      const projectIcon = document.createElement("div")
+      const fetchedBackgroundURL = projectsArray[i].background;
+      const projectLiName = document.createElement("p");
+      const projectLiKebabButton = document.createElement("button");
+      projectContainer.appendChild(projectLiMaster);
+      projectLiMaster.appendChild(projectLiSubMaster);
+      projectLiSubMaster.appendChild(projectLiLeft);
+      projectLiLeft.appendChild(projectIcon);
+      projectLiLeft.appendChild(projectLiName);
+      projectLiSubMaster.appendChild(projectLiKebabButton);
+      projectLiMaster.setAttribute("id", "projectLiMaster")
+      projectLiSubMaster.classList.add("project-li-sub-master")
+      projectLiMaster.classList.add("project-li-master")
+      projectLiLeft.classList.add("project-li-left")
+      projectIcon.classList.add("project-li-icon")
+      projectLiKebabButton.classList.add("project-li-kebab-button")
+      projectLiKebabButton.classList.add("open-modal-btn")
+      projectIcon.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
+      projectLiName.innerText = projectsArray[i].name;
+      projectLiKebabButton.innerText = "..."
+
+      // Project modal
+      const projectLiModalMaster = document.createElement("div")
+      const projectLiModalDeleteButton = document.createElement("button")
+      projectLiModalMaster.classList.add("modal")
+      projectLiModalMaster.classList.add("solid")
+      projectLiModalMaster.classList.add("edit-project-modal")
+      projectLiModalDeleteButton.classList.add("project-li-modal-delete-btn")
+      projectLiMaster.appendChild(projectLiModalMaster);
+      projectLiModalMaster.appendChild(projectLiModalDeleteButton);
+      projectLiModalDeleteButton.innerText = "Delete?"
+
+      // Project overlay
+      const projectLiOverlayMaster = document.createElement("div")
+      projectLiOverlayMaster.classList.add("overlay")
+      projectLiOverlayMaster.classList.add("edit-project-overlay")
+      projectLiMaster.appendChild(projectLiOverlayMaster);
+
+
+      // editProjectModal(projectsArray, i, projectLiKebabButton)
+    }
+    setDataIndex()
+    closeOverlay()
+  })
+
+}
+
+// function editProjectModal(projectsArray, i, projectLiKebabButton) {
+//   projectLiKebabButton.addEventListener("click", (e) => {
+//     e.stopPropagation()
+//     console.log(projectsArray[i].id)
+//   })
+// }
+
+function setThemeButton(currentUid) {
+  const asdf = doc(db, 'users', currentUid)
+  getDoc(asdf).then((snapshot) => {
+    console.log("jumpasdjfaslkj")
+    let lightString = String("light")
+    let darkString = String("dark")
+
+  if (snapshot.data().theme == lightString) {
+    darkModeSwitch.checked = true;
+  } else {
+    darkModeSwitch.checked = false;
+  }
+
+  })
+
+}
+
+function populateUserInfoModal(currentUid) {
+
+  const asdf = doc(db, 'users', currentUid)
+  getDoc(asdf).then((snapshot) => {
+
+    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
+    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
+    const userEmail = snapshot.data().email
+
+    userIconMedium.innerText = userIcon
+    udoName.innerText = fullName
+    udoemail.innerText = userEmail
+
+  })
+
+}
+
+function clearProjects(parentContainer) {
+  while (parentContainer.children[0] != null) {
+    parentContainer.removeChild(parentContainer.children[0]);
+  }
+}
 
 function createProjectDiv() {
   const newProject = document.createElement("div");
@@ -366,7 +456,8 @@ function setDataIndex() {
 
   for (i = 0; i < modalBtnMulti.length; i++)
   {
-      modalBtnMulti[i].onclick = function() {
+      modalBtnMulti[i].onclick = function(e) {
+        e.stopPropagation()
           let ElementIndex = this.getAttribute('data-index');
           modal[ElementIndex].classList.toggle("open")
           overlay[ElementIndex].classList.toggle("open")
@@ -518,22 +609,7 @@ function createProject() {
 
 
 
-function populateProjectContainers() {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
-      const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
-      const userProjects = query(colRef, where("creator", "==", uid));
 
-      populateProjects (starredProjects, starredProjectContainer)
-      populateProjects (userProjects, userProjectContainer)
-      populateProjects (sharedProjects, sharedProjectContainer)
-    } else {
-      window.location.replace("signin.html");
-    }
-  })
-}
 
 // MOBILE FUNCTIONS ************************************************************************************************
 
