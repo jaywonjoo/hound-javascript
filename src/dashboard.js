@@ -88,7 +88,7 @@ populateUserIconAndTheme()
 populateProjectContainers()
 closeOverlay()
 createProject()
-deleteProject()
+// deleteProject()
 setDataIndex()
 logOut()
 
@@ -318,7 +318,7 @@ function populateProjectManager(projectQuery, projectContainer) {
       projectLiMaster.appendChild(projectLiOverlayMaster);
 
 
-      // editProjectModal(projectsArray, i, projectLiKebabButton)
+      deleteProject(projectsArray, i, projectLiModalDeleteButton)
     }
     setDataIndex()
     closeOverlay()
@@ -326,12 +326,18 @@ function populateProjectManager(projectQuery, projectContainer) {
 
 }
 
-// function editProjectModal(projectsArray, i, projectLiKebabButton) {
-//   projectLiKebabButton.addEventListener("click", (e) => {
-//     e.stopPropagation()
-//     console.log(projectsArray[i].id)
-//   })
-// }
+function deleteProject(projectsArray, i, projectLiModalDeleteButton) {
+  projectLiModalDeleteButton.addEventListener("click", (e) => {
+    e.stopPropagation()
+    console.log(projectsArray[i].id)
+    const docRef = doc(db, "projects", projectsArray[i].id);
+    deleteDoc(docRef).then(() => {
+      console.log("project was deleted!")
+      setDataIndex()
+      closeOverlay()
+    });
+  })
+}
 
 function setThemeButton(currentUid) {
   const asdf = doc(db, 'users', currentUid)
@@ -573,16 +579,7 @@ function logOut() {
 }
 
 
-function deleteProject() {
-  deleteProjectForm.addEventListener("submit", (e) => {
-    e.preventDefault();
 
-    const docRef = doc(db, "projects", deleteProjectForm.id.value);
-    deleteDoc(docRef).then(() => {
-      deleteProjectForm.reset();
-    });
-  });
-}
 
 function createProject() {
   addProjectForm.addEventListener("submit", (e) => {

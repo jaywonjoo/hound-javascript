@@ -385,6 +385,14 @@
         padding-left: 5%;
       }
     
+    /* populateProjectManager() */
 
+    .project-li-master:hover {
+    background-color: transparent;
+    }
+
+    .project-li-kebab-button:hover {
+    background-color: transparent;
+    }
 
 }
