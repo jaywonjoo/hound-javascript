@@ -530,5 +530,6 @@ width: 2em;
 .project-name-changer-input {
   position: fixed;
   width: 50%;
-  transform: translateY(-2px);
+  font-size: 16px;
+  transform: translateY(-4px);
 }

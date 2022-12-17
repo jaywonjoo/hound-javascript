@@ -384,6 +384,10 @@ function renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm
     projectLiOverlayMaster.classList.remove("open")
   })
 
+  projectLiNameChangerInput.addEventListener("click", (e) => {
+    e.stopPropagation()
+  })
+
   projectLiOverlayMaster.addEventListener("click", () => {
     projectLiNameChangerForm.classList.add("hidden")
     projectLiName.classList.remove("hidden")
