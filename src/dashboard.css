@@ -527,3 +527,8 @@ width: 2em;
   padding-right: 100vw;
 }
 
+.project-name-changer-input {
+  position: fixed;
+  width: 50%;
+  transform: translateY(-2px);
+}

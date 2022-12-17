@@ -302,6 +302,7 @@ function populateProjectManager(projectQuery, projectContainer) {
       projectLiNameChangerForm.classList.add("hidden")
       projectLiKebabButton.classList.add("project-li-kebab-button")
       projectLiKebabButton.classList.add("open-modal-btn")
+      projectLiNameChangerInput.classList.add("project-name-changer-input")
       projectIcon.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
       projectLiName.innerText = projectsArray[i].name;
       projectLiNameChangerInput.value = projectsArray[i].name;
@@ -355,6 +356,7 @@ function deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOv
 
 function renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm, projectLiNameChangerInput, projectLiOverlayMaster) {
   projectLiName.addEventListener("click", (e) => {
+    e.stopPropagation()
     projectLiNameChangerForm.classList.remove("hidden")
     projectLiName.classList.add("hidden")
     projectLiOverlayMaster.classList.add("open")
