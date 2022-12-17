@@ -282,22 +282,29 @@ function populateProjectManager(projectQuery, projectContainer) {
       const projectIcon = document.createElement("div")
       const fetchedBackgroundURL = projectsArray[i].background;
       const projectLiName = document.createElement("p");
+      const projectLiNameChangerForm = document.createElement("form");
+      const projectLiNameChangerInput = document.createElement("input");
       const projectLiKebabButton = document.createElement("button");
       projectContainer.appendChild(projectLiMaster);
       projectLiMaster.appendChild(projectLiSubMaster);
       projectLiSubMaster.appendChild(projectLiLeft);
       projectLiLeft.appendChild(projectIcon);
       projectLiLeft.appendChild(projectLiName);
+      projectLiLeft.appendChild(projectLiNameChangerForm);
+      projectLiNameChangerForm.appendChild(projectLiNameChangerInput);
       projectLiSubMaster.appendChild(projectLiKebabButton);
       projectLiMaster.setAttribute("id", "projectLiMaster")
+      projectLiNameChangerForm.setAttribute("style","z-index: 9999")
       projectLiSubMaster.classList.add("project-li-sub-master")
       projectLiMaster.classList.add("project-li-master")
       projectLiLeft.classList.add("project-li-left")
       projectIcon.classList.add("project-li-icon")
+      projectLiNameChangerForm.classList.add("hidden")
       projectLiKebabButton.classList.add("project-li-kebab-button")
       projectLiKebabButton.classList.add("open-modal-btn")
       projectIcon.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
       projectLiName.innerText = projectsArray[i].name;
+      projectLiNameChangerInput.value = projectsArray[i].name;
       projectLiKebabButton.innerText = "..."
 
       // Project modal
@@ -319,6 +326,7 @@ function populateProjectManager(projectQuery, projectContainer) {
 
 
       deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster)
+      renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm, projectLiNameChangerInput, projectLiOverlayMaster)
     }
     setDataIndex()
     closeOverlay()
@@ -342,6 +350,32 @@ function deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOv
       console.log("operation was canceled!")
     }
 
+  })
+}
+
+function renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm, projectLiNameChangerInput, projectLiOverlayMaster) {
+  projectLiName.addEventListener("click", (e) => {
+    projectLiNameChangerForm.classList.remove("hidden")
+    projectLiName.classList.add("hidden")
+    projectLiOverlayMaster.classList.add("open")
+  })
+
+  projectLiNameChangerForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+    const docRef = doc(db, "projects", projectsArray[i].id);
+    updateDoc(docRef, {
+      name: projectLiNameChangerInput.value
+    })
+
+    projectLiNameChangerForm.classList.add("hidden")
+    projectLiName.classList.remove("hidden")
+    projectLiOverlayMaster.classList.remove("open")
+  })
+
+  projectLiOverlayMaster.addEventListener("click", () => {
+    projectLiNameChangerForm.classList.add("hidden")
+    projectLiName.classList.remove("hidden")
+    projectLiOverlayMaster.classList.remove("open")
   })
 }
 
