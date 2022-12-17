@@ -79,6 +79,8 @@ const udoName = document.querySelector(".udo-name")
 const udoemail = document.querySelector(".udo-email")
 // Manage projects
 const manageProjectsMaster = document.querySelector("#manageProjectsMaster")
+const projectManagerBtn = document.querySelector("#projectManagerBtn")
+
 
 // FEATURES ************************************************************************************************
 
@@ -89,6 +91,7 @@ populateProjectContainers()
 closeOverlay()
 createProject()
 // deleteProject()
+openProjectManager()
 setDataIndex()
 logOut()
 
@@ -259,6 +262,13 @@ function populateProjects(projectQuery, projectContainer) {
     setProjectDataIndex()
     projectRedirectLink()
   });
+}
+
+function openProjectManager() {
+  projectManagerBtn.addEventListener("click", (e) => {
+    e.stopPropagation()
+    manageProjectsMaster.classList.toggle("hidden")
+  })
 }
 
 function populateProjectManager(projectQuery, projectContainer) {
