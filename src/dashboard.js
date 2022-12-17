@@ -318,7 +318,7 @@ function populateProjectManager(projectQuery, projectContainer) {
       projectLiMaster.appendChild(projectLiOverlayMaster);
 
 
-      deleteProject(projectsArray, i, projectLiModalDeleteButton)
+      deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster)
     }
     setDataIndex()
     closeOverlay()
@@ -326,16 +326,22 @@ function populateProjectManager(projectQuery, projectContainer) {
 
 }
 
-function deleteProject(projectsArray, i, projectLiModalDeleteButton) {
+function deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster) {
   projectLiModalDeleteButton.addEventListener("click", (e) => {
     e.stopPropagation()
-    console.log(projectsArray[i].id)
-    const docRef = doc(db, "projects", projectsArray[i].id);
-    deleteDoc(docRef).then(() => {
-      console.log("project was deleted!")
-      setDataIndex()
-      closeOverlay()
-    });
+    if (confirm("are you sure you want to delete " + projectsArray[i].name + "?") == true) {
+      const docRef = doc(db, "projects", projectsArray[i].id);
+      deleteDoc(docRef).then(() => {
+        console.log("project was deleted!")
+        setDataIndex()
+        closeOverlay()
+      });
+    } else {
+      projectLiOverlayMaster.classList.remove("open")
+      projectLiModalMaster.classList.remove("open")
+      console.log("operation was canceled!")
+    }
+
   })
 }
 
