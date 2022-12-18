@@ -1,62 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hound</title>
-    <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
-    <script defer src="index.bundle.js"></script>
-</head>
-<body>
-    <!-- <button id="loginButton">login</button>
-    <button id="signUpButton">signup</button> -->
-  
-    <!-- Nav Bar --> 
-    <nav class='navbar'>
-      <div class='nav-left'>
-        <img loading="lazy" class='nav-logo' src="../images/hound.svg"/>
-        <div class='brand-title'>Hound</div>
-      </div>
-      
-      <a href="#" class='toggle-button'>
-        <span class='bar'></span>
-        <span class='bar'></span>
-        <span class='bar'></span>
-      </a>
-      <div class='navbar-links'>
-        <div class="navbar-links-left">
-          <button class="navbar-link-button">Features</button>
-          <button class="navbar-link-button">Solutions</button>
-          <button class="navbar-link-button">Plans</button>
-          <button class="navbar-link-button">Pricing</button>
-          <button class="navbar-link-button">Resources</button>
-        </div>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hound</title>
+      <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
+      <script defer src="index.bundle.js"></script>
+  </head>
 
-        <ul>
+  <body>
+    <header>
+      <div class='header-left'>
+        <img loading="lazy" class='title-logo' src="../images/hound.svg"/>
+        <h1 class='brand-title'>Hound</h1>
+      </div>
+
+        <a href="#" class='toggle-button'>
+          <span class='bar'></span>
+          <span class='bar'></span>
+          <span class='bar'></span>
+        </a>
+
+      <nav class='navbar-links'>
+        <ul class="navbar-links-left"></ul>
+
+        <ul class="navbar-links-right">
           <li><a class='nav-login' href="#">Log In</a></li>
-          <div class='nav-register-bubble'><li><a href="#">Register</a></li></div> 
-          <div class='dropdown-fill'></div>
+          <li><a class='nav-register-bubble' href="#">Register</a></li>
         </ul>
+      </nav>
+    </header>
+
+    <section class='hero-section'>
+      <div class='hero-text-master'>
+        <h2 class="hero-text-main">Bring all your tasks, teammates, and tools together</h1>
+        <p class='hero-text-body'>Keep everything in the same place—even if your team isn’t.</p>
       </div>
-      
-    </nav>
-
-    <!-- Hero Section -->
-    <div class='hero-section'>
-      <div class='hero-text'>
-        <h1>Bring all your tasks, teammates, and tools together</h1>
-        <p class='HPparagraph'>Keep everything in the same place—even if your team isn’t.</p>
-      
-          <input type="text" class='hero-email-input' placeholder="Email"/>
-
-          <button class='hero-register-button'>Register</button>
+      <div class='hero-image-master'>
+        <img class='hero-image' src=../images/hound_hero_image.png>
       </div>
-
-      <img class='hero-image' src=../images/hound_hero_image.png>
-    </div>
-
-
-
-</body>
+    </section>
+  </body>
 </html>

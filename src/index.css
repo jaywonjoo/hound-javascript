@@ -8,22 +8,21 @@
       color: #ffffff;
     }
   }
-  @media (prefers-color-scheme: dark) {
+
+@media (prefers-color-scheme: dark) {
     body {
         background-color: rgb(24, 26, 27, 0.9);
         color: rgb(24, 26, 27, 0.9);
     }
     button {
-      background-color: rgb(24, 26, 27, 0.9);
-      color: rgba(44, 42, 44, 0.9);
+        background-color: rgb(24, 26, 27, 0.9);
+        color: rgba(44, 42, 44, 0.9);
     }
-  }
+}
 
 * {
     box-sizing: border-box;
 }
-
-/* The Nav Bar */
 
 html {
     height: 100%;
@@ -34,24 +33,15 @@ body {
     padding: 0;
     font-family: Graphik-Regular,sans-serif;
     color: rgb(59, 59, 70);
-
-    /*
-    background: rgb(192,213,255);
-    background: linear-gradient(180deg, rgba(192,213,255,1) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0) 100%);
-    */
-
-    background: rgb(178,198,233);
     background: linear-gradient(180deg, rgba(178,198,233,1) 0%, rgba(209,229,254,1) 15%, rgba(255,255,255,1) 30%);
-
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
-
-
-.navbar {
+/* The Nav Bar */
+header {
     display: flex;
     position: relative;
     justify-content: space-between;
@@ -60,23 +50,20 @@ body {
     backdrop-filter: blur(6px);
     padding: 0px 25px;
     height: 40px;
-    /*z-index: 2;*/
     transition: box-shadow .25s;
 }
 
-.navbar:hover {
+.header:hover {
     box-shadow: 0 0 30px rgba(76, 116, 138, 0.5);
 }
 
-.nav-left {
+.header-left {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-.nav-logo {
-    /* width: 30px;
-    height: 30px;*/
+.title-logo {
     width: 27px;
     height: 27px;
     margin-bottom: -2px;
@@ -89,16 +76,7 @@ body {
     font-family: Graphik-Semibold,sans-serif;
     font-weight: 550;
     color: rgb(63, 63, 63);
-    /*
-    margin-left: 25px;
-    */
 }
-
-/*
-.navbar-links {
-    height: 100%;
-}
-*/
 
 .navbar-links {
     display: flex;
@@ -106,7 +84,6 @@ body {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
 }
 
 .navbar-links-left {
@@ -123,10 +100,6 @@ body {
     font-size: .8em;
 }
 
-/* .navbar-link-link {
-    font-size: .8em;
-} */
-
 .navbar-links ul {
     display: flex;
     align-items: center;
@@ -141,16 +114,15 @@ body {
 .navbar-links li a {
     display: block;
     text-decoration: none;
-    padding: 1rem;
+    /* padding: 1rem; */
 }
-
 
 .nav-login {
     cursor: pointer;
+    padding: 1rem;
 }
 
-
-.nav-register-bubble li a {
+.nav-register-bubble {
     background-color: rgb(59, 59, 70);
     color: white;
     padding: 3px 17px;
@@ -161,12 +133,6 @@ body {
 a {
     all: unset;
 }
-
-/* 
-.navbar-links li:hover {
-    background-color: #555;
-}
-*/
 
 .toggle-button {
     position: absolute;
@@ -186,116 +152,54 @@ a {
     border-radius: 10px;
 }
 
-
-
-
-
-
-/* The hero image */
+/* HERO SECTION */
 .hero-section {
-    /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-    /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("photographer.jpg"); */
-  
-    /* Set a specific height 
-    height: 75%;*/
-    
-    /* Position and center the image to scale nicely on all screens */
-    /*
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    */
     display: flex; 
     align-items: center;
     justify-content: center;
-
-  }
+    height: 80vh;
+    width: 100vw;
+    padding: 10% 15%;
+}
   
-  /* Place text in the middle of the image */
-.hero-text {
-    /* text-align: center;
-    
-    position: absolute;
-    
-    transform: translate(-75%, -50%);
-    color: white; 
-    top: 50%;
-    left: 50%;
-    background-color: red;
-    height: 500px;*/
-    margin: 7% 2% 7% 15%;
-    max-width: 800px;
-    width: 30%;
+.hero-text-master {
+    width: 40%;
     text-align: left;
-  }
+}
 
-h1, .h1 {
+.hero-text-main {
     font-size: min(4.5vw, 100px);
     line-height: 1;
     font-family: Graphik-Semibold,sans-serif;
     margin-bottom: 0px;
 }
 
-.HPparagraph {
+.hero-text-body {
     font-family: Graphik-Semibold,sans-serif;
     display: block;
-    font-size: min(2vw,25px);
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+    font-size: min(2vw, 25px);
 }
 
-
-
-.hero-email-input {
-    border-radius: 28px;
-    /* font-size: 16px; */
-    font-size: min(1.5vw, 16px);
-    border-radius: 28px;
-    border-style: solid;
-    border-color: rgb(59, 59, 70);
-    /* padding: 5px 150px 5px 20px; */
-    padding: 0px 5px; 
-    width: 65%;
-}
-
-
-.hero-register-button {
-    background-color: rgb(59, 59, 70);
-    /* font-size: 16px; */
-    font-size: min(1.5vw, 16px);
-    border-radius: 28px;
-    color: white; 
-    border-style: solid;
-    border-color: rgb(59, 59, 70);
-    /* padding: 0px; */
-    width: 30%;
-    cursor: pointer;
+.hero-image-master {
+    width: 60%;
 }
 
 .hero-image {
-    width: 40%;
-    height: 40%;
-    max-width: 800px;
-    /* background-color: rgb(112, 112, 112); */
-    margin: 10% 15% 10% 0%;
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 1em;
 }
 
-
-
-
 /* Dynamic Features */
-
 @media (max-width: 800px) {
-    .navbar {
+    /* NAVBAR */
+    header {
         flex-direction: column;
         align-items: flex-start;
         padding: 0;
     }
 
-    .nav-left {
+    .header-left {
         margin-top: -3.5px;
         padding-left: 3%;
     }
@@ -308,10 +212,11 @@ h1, .h1 {
 
     .navbar-links {
         display: none;
-        width: 100%;
-        margin-top: -3.5px; /* this is what I used to close the gap */
-        background-color: rgba(255, 255, 255, .9);
-        
+    }
+
+    .navbar-links-right {
+        height: 100vh;
+        background-color: #e9e9e9;
     }
 
     .dropdown-fill {
@@ -362,50 +267,42 @@ h1, .h1 {
         background-color: rgba(0, 0, 0, 0.5);
     }
 
+    .nav-register-bubble {
+        background-color: rgb(59, 59, 70);
+        color: white;
+        padding: 3px 17px;
+        border-radius: 25px;
+        cursor: pointer;
+    }
+
+    /* HERO SECTION */
     .hero-section {
         flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
+        height: 100vh;
+        padding: 10% 12%;
+        justify-content: right;
     }
 
-
-    .hero-image {
-        width: 75%;
-        height: 75%;
-        /*background-color: rgb(112, 112, 112); */
-        margin: 10% 0% 0% 0%;
+    .hero-image-master {
+        width: 100%;
     }
 
-    .hero-text {
+    .hero-text-master {
         text-align: center;
-        /* 
-        position: absolute;
-        
-        transform: translate(-75%, -50%);
-        color: white; 
-        top: 50%;
-        left: 50%;
-        background-color: red;
-        height: 500px;*/
-        margin: 7% 0% 7% 0%;
-        width: 75%;  
-      }
+        width: 100%
+    }
 
-    h1, .h1 {
+    .hero-text-main {
         font-size: 8vw;
         line-height: 1;
         font-family: Graphik-Semibold,sans-serif;
-        margin-bottom: 0px;
+        margin: 0;
     }
-    
-    p {
+
+    .hero-text-body {
         font-family: Graphik,sans-serif;
         display: block;
-        font-size: 3vw;
-        margin-block-start: 1em;
-        margin-block-end: 1em;
-        margin-inline-start: 0px;
-        margin-inline-end: 0px;
+        font-size: min(2vw, 25px);
     }
 }
 
