@@ -1,10 +1,12 @@
 import "./index.css";
 
+// loginRedirectButton()
 const loginButton = document.querySelector(".nav-login");
+// signUpRedirectButton()
 const signUpButton = document.querySelector(".nav-register-bubble");
+// toggleHamburgerMenu()
 const toggleButton = document.getElementsByClassName('toggle-button')[0]
 const navbarLinks = document.getElementsByClassName('navbar-links')[0]
-const navbarDropdown = document.getElementsByClassName('nav-dropdown')[0]
 
 loginRedirectButton()
 signUpRedirectButton()
