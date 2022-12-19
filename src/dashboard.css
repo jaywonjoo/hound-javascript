@@ -106,6 +106,7 @@ header {
   border-width: 1.5px;
   border-bottom-style: solid;
   z-index: 1;
+  box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
 }
 
 .nav-logo {
@@ -527,10 +528,6 @@ header {
   z-index: 9999;
   transform: translate(0px, -2em);
   font-size: inherit;
-}
-
-.dashboard-master {
-  z-index: 9999;
 }
 
 .project-li-modal-delete-btn {

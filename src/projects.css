@@ -102,6 +102,7 @@ header {
   border-width: 1.5px;
   border-bottom-style: solid;
   z-index: 1;
+  box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
 }
 
 .nav-logo {
