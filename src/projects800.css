@@ -220,6 +220,10 @@
         border-radius: 10px;
     }
 
+    .user-icon-medium {
+        margin-right: 1em;
+    }
+
     /* NONUNIVERSAL */
     .udo-account-label {
         font-size: 1em;

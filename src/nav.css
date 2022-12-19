@@ -56,20 +56,6 @@ ul, li {
   font-size: 1em;
 }
 
-.user-icon-medium {
-  border-radius: 50%;
-  background-color: rgba(131, 127, 127, 0.99);
-  padding: .25em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  width: 2em;
-  height: 2em;
-  margin-right: 1em;
-  font-size: 1.5em;
-}
-
 .project-header {
   font-size: 5vh;
   font-weight: 200;
