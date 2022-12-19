@@ -580,41 +580,41 @@ function populateTickets() {
                             comments.push({ ...doc.data(), id: doc.id })
                         });
 
-                    for (i = 0; i < comments.length; i++) {
-                        const newComment = document.createElement("div");
-                        const userIcon = document.createElement("div");
-                        const commentRight = document.createElement("div");
-                        const nameAndTimestamp = document.createElement("div");
-                        const userName = document.createElement("div");
-                        const timeStamp = document.createElement("div");
-                        const messageContent = document.createElement("div");
+                        for (i = 0; i < comments.length; i++) {
+                            const newComment = document.createElement("div");
+                            const userIcon = document.createElement("div");
+                            const commentRight = document.createElement("div");
+                            const nameAndTimestamp = document.createElement("div");
+                            const userName = document.createElement("div");
+                            const timeStamp = document.createElement("div");
+                            const messageContent = document.createElement("div");
 
-                        newComment.classList.add("entire-message");
-                        userIcon.classList.add("user-icon");
-                        commentRight.classList.add("comment-right");
-                        nameAndTimestamp.classList.add("name-and-timestamp-section");
-                        userName.classList.add("user-name");
-                        timeStamp.classList.add("message-timestamp");
-                        messageContent.classList.add("message-content");
+                            newComment.classList.add("entire-message");
+                            userIcon.classList.add("user-icon");
+                            commentRight.classList.add("comment-right");
+                            nameAndTimestamp.classList.add("name-and-timestamp-section");
+                            userName.classList.add("user-name");
+                            timeStamp.classList.add("message-timestamp");
+                            messageContent.classList.add("message-content");
 
-                        userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
-                        userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
-                        timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
-                        messageContent.innerText = comments[i].message;
+                            userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
+                            userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
+                            timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
+                            messageContent.innerText = comments[i].message;
 
-                        chatbox.appendChild(newComment);
-                        newComment.appendChild(userIcon);
-                        newComment.appendChild(commentRight);
-                        commentRight.appendChild(nameAndTimestamp);
-                        nameAndTimestamp.appendChild(userName);
-                        nameAndTimestamp.appendChild(timeStamp);
-                        commentRight.appendChild(messageContent);
-                    }
-                    chatbox.scrollTop = chatbox.scrollHeight;
+                            chatbox.appendChild(newComment);
+                            newComment.appendChild(userIcon);
+                            newComment.appendChild(commentRight);
+                            commentRight.appendChild(nameAndTimestamp);
+                            nameAndTimestamp.appendChild(userName);
+                            nameAndTimestamp.appendChild(timeStamp);
+                            commentRight.appendChild(messageContent);
+                        }
+                        chatbox.scrollTop = chatbox.scrollHeight;
+                    })
                 })
             })
-        })
-    }
+        }
     })
 }
 
