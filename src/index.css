@@ -182,6 +182,8 @@ a {
 
 .hero-image-master {
     width: 60%;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-image {
