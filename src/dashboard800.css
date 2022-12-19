@@ -306,7 +306,10 @@
     }
 
     .project-card {
-        margin: 10px 10px 0 0;
+        margin: 3vw 3vw 0 0;
+        width: 41vw;
+        max-width: 165px;
+        max-height: 110px;
     }
 
     .project-section-header {

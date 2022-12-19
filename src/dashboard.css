@@ -360,7 +360,8 @@ header {
 }
 
 .card-content-overlay {
-  width: 155px;
+  width: 38vw;
+  max-width: 150px;
   height: 90px;
   display: flex;
   flex-direction: column;
