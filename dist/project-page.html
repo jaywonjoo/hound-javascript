@@ -1,413 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Page</title>
-    <script defer src="projects.bundle.js"></script>
-    <script defer src="darkmode.bundle.js"></script>
-    <link class="nav-icon" rel="icon" src="../images/hound.svg">
-    <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Project Page</title>
+      <script defer src="projects.bundle.js"></script>
+      <script defer src="darkmode.bundle.js"></script>
+      <link class="nav-icon" rel="icon" src="../images/hound.svg">
+      <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
+  </head>
 
-</head>
-<body id="body" class="solid">
-  <div id="honme">
-    <div id="uid"></div>
-    <div id="idUid"></div>
-  </div>
-<!-- <button id="darkModeBtn" class="dark-mode-btn">
-  <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-</button> -->
-
-<div class="master-container">
-  <!-- navbar --------------------------------------------------------------------------- -->
-  <nav class="navbar solid">
-    <div class='nav-left'>
-      <img loading="lazy" class='nav-logo logo' src="../images/hound.svg"/>
-      <h1 class='brand-title'>Hound</h1>
+  <body id="body" class="solid">
+    <div id="honme">
+      <div id="uid"></div>
+      <div id="idUid"></div>
     </div>
-    
-    <!-- <a href="#" class='toggle-button'>
-      <span class='bar'></span>
-      <span class='bar'></span>
-      <span class='bar'></span>
-    </a> -->
-    <div class='nav-right'>
-      <div class="nav-user-icon-container">
-        <div class="nav-user-icon open-modal-btn"></div>
-      
-      </div>
-    </div>
-  </nav>
-  <!-- navbar --------------------------------------------------------------------------- -->
 
-  <div class="overlay user-dropdown-overlay"></div>
-
-  <div class="modal user-dropdown-modal transparent">
-      <div class="udo-master">
-        <span class="udo-account-label">Account</span>
-        <div class="udo-user-card">
-          <div class="user-icon-medium">ASDF</div>
-          <div class="user-dropdown-overlay-inside-user-card-right">
-            <span class="udo-name">ASDF</span>
-            <span class="udo-email">ASDF</span>
+    <section class="master-container">
+      <header class="solid">
+        <a class='header-left'>
+          <img loading="lazy" class='nav-logo logo' style="width:1.8em;height:1.8em" src="../images/hound.svg"/>
+          <h1 class='brand-title'>Hound</h1>
+        </a>
+        
+        <div class='header-right'>
+          <div class="nav-user-icon-container">
+            <button class="nav-user-icon open-modal-btn"></button>
           </div>
         </div>
-        <span class="delineator-full"></span>
+      </header>
 
-        <div class="udo-background-form">
-          <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
-          <form id="setBackgroundForm" class="set-background-form">
-            <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
-          </form>
-        </div>
+      <div class="overlay user-dropdown-overlay"></div>
+
+      <details-menu class="modal user-dropdown-modal transparent">
+        <div class="udo-master">
+          <h2 class="udo-account-label">Account</h2>
+            <section class="udo-user-card">
+              <span class="user-icon-medium"></span>
+              <div class="user-dropdown-overlay-inside-user-card-right">
+                <span class="udo-name"></span>
+                <span class="udo-email"></span>
+              </div>
+            </section>
+
+          <span class="delineator-full"></span>
+
+          <section class="udo-background-form">
+            <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
+            <form id="setBackgroundForm" class="set-background-form">
+              <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+            </form>
+          </section>
 
           <span class="udo-link">Account Settings</span>
           <span class="udo-link">Team Members</span>
 
+          <span class="delineator-full"></span>
 
-        <span class="delineator-full"></span>
-
-        <div id="darkModeBtn" class="udo-dark-mode">
-          <span class="udo-link" id="themeBtn"></span>
-          <!-- <button class="udo-dark-mode-btn">
-            <img src="https://img.icons8.com/ios-glyphs/512/toggle-on.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-          </button> -->
-          <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
-        </div>
-
-        <span class="delineator-full"></span>
-
-
-        <button id="logoutButton" class="solid">Log Out</button>
-      </div>
-    </div>
-
-  <div class="lower-half">
-    <div class="mobile-spacer"></div>
-
-    <div class="lower-half-sub-container">
-
-  <!-- dashboard --------------------------------------------------------------------------- -->
-  <!-- <div class="dashboard-and-bar"> -->
-    <div class="dashboard-master transparent">
-
-        <div class="dashboard-links">
-          <!-- <h3>Dashboard</h3> 
-              <h3>Team Members</h3>
-              <h3>Account Settings</h3>
-              <h3>Admin</h3>-->
-          <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-home-sharp.svg">
-          Dashboard
-        </div>
-        <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-user-male.svg">
-          <!-- <span role="img" aria-label="OrganizationIcon" class="dashboard-button-icon" style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;"><svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5048 5.67168C11.9099 5.32669 11.2374 5.10082 10.5198 5.0267C11.2076 3.81639 12.5085 3 14 3C16.2092 3 18 4.79086 18 7C18 7.99184 17.639 8.89936 17.0413 9.59835C19.9512 10.7953 22 13.6584 22 17C22 17.5523 21.5523 18 21 18H18.777C18.6179 17.2987 18.3768 16.6285 18.0645 16H19.917C19.4892 13.4497 17.4525 11.445 14.8863 11.065C14.9608 10.7218 15 10.3655 15 10C15 9.58908 14.9504 9.18974 14.857 8.80763C15.5328 8.48668 16 7.79791 16 7C16 5.89543 15.1046 5 14 5C13.4053 5 12.8711 5.25961 12.5048 5.67168ZM10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12ZM14 10C14 10.9918 13.639 11.8994 13.0412 12.5984C15.9512 13.7953 18 16.6584 18 20C18 20.5523 17.5523 21 17 21H3C2.44772 21 2 20.5523 2 20C2 16.6584 4.04879 13.7953 6.95875 12.5984C6.36099 11.8994 6 10.9918 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10ZM9.99999 14C12.973 14 15.441 16.1623 15.917 19H4.08295C4.55902 16.1623 7.02699 14 9.99999 14Z" fill="currentColor"></path></svg></span> -->
-          <!-- <img class="dashboard-button-icon" src="../images/icon_user.svg"> -->
-          Team Members
-        </div>
-        <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-settings.svg">
-          <!-- <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg> -->
-          <!-- <img class="dashboard-button-icon" src="../images/insta_settings.svg"> -->
-          Account Settings
-        </div>
-        <!-- <div id="dashboardButton" class="dashboard-button">
-        <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-          Admin
-        </div> -->
-      </div>
-      <span class="delineator"></span>
-
-      <div class="pie-box">
-        <div class="pie-header">
-          <span class="pie-title">Tickets by Status</span>
-          <div class="legend">
-            <div class="text">
-              <div class="white-dot"></div>
-              Resolved
-            </div>
-            <div class="text">
-              <div class="gray-dot"></div>
-              In-Progress
-            </div>
-
-            <div class="text">
-              <div class="black-dot"></div>
-              Unresolved
-            </div>
+          <div id="darkModeBtn" class="udo-dark-mode">
+            <span class="udo-link" id="themeBtn"></span>
+            <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
           </div>
+
+          <span class="delineator-full"></span>
+
+          <button id="logoutButton" class="solid">Log Out</button>
         </div>
-        
-        <div id="pie-container-one"></div>
+      </details-menu>
 
-      <div class="pie-header">
-      <span class="pie-title">Tickets by Type</span>
+      <section class="lower-half">
+        <div class="mobile-spacer"></div>
 
-      <div class="legend">
-        <div class="text">
-          <div class="white-dot"></div>
-          Issue
-        </div>
-        <div class="text">
-          <div class="gray-dot"></div>
-          Bug
-        </div>
+        <div class="lower-half-sub-container">
+          <section class="dashboard-master transparent">
+            <section class="dashboard-links">
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-home-sharp.svg">
+                Dashboard
+              </a>
 
-        <div class="text">
-          <div class="black-dot"></div>
-          Feature Request
-        </div>
-      </div>
-      </div>
-      <div id="pie-container-two"></div>
-      
-      <div class="pie-header">
-      <span class="pie-title">Tickets by Priority</span>
-      <div class="legend">
-        <div class="text">
-          <div class="white-dot"></div>
-          Low
-        </div>
-        <div class="text">
-          <div class="gray-dot"></div>
-          Medium
-        </div>
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-user-male.svg">
+                Team Members
+              </a>
 
-        <div class="text">
-          <div class="black-dot"></div>
-          High
-        </div>
-      </div>
-      </div>
-      <div id="pie-container-three"></div>
-      </div>
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-settings.svg">
+                Account Settings
+              </a>
+            </section>
 
-    </div>
+            <span class="delineator"></span>
 
-    <div class="sidebar-button">
-      <div class="sidebar-button-circle transparent">></div>
-      <div class="sidebar-button-bar transparent"></div>
-    </div>
+            <section class="pie-box">
+              <section class="pie-header">
+                <span class="pie-title">Tickets by Status</span>
+                  <section class="legend">
+                    <span class="text">
+                      <span class="white-dot"></span>
+                      Resolved
+                    </span>
 
-    <div class="sidebar-button-bar-spacer"></div>
+                    <span class="text">
+                      <span class="gray-dot"></span>
+                      In-Progress
+                    </span>
 
+                    <span class="text">
+                      <span class="black-dot"></span>
+                      Unresolved
+                    </span>
+                  </section>
+              </section>
+              
+              <span id="pie-container-one"></span>
 
-    <!-- </div> -->
-    <!-- dashboard --------------------------------------------------------------------------- -->
-    <!-- content --------------------------------------------------------------------------- -->
+              <section class="pie-header">
+                <span class="pie-title">Tickets by Type</span>
 
-    <div class="overlay blurred-overlay"></div>
+                <section class="legend">
+                  <span class="text">
+                    <span class="white-dot"></span>
+                    Issue
+                  </span>
 
+                  <span class="text">
+                    <span class="gray-dot"></span>
+                    Bug
+                  </span>
 
+                  <span class="text">
+                    <span class="black-dot"></span>
+                    Feature Request
+                  </span>
+                </section>
+              </section>
 
+              <span id="pie-container-two"></span>
+            
+              <section class="pie-header">
+                <span class="pie-title">Tickets by Priority</span>
+                <section class="legend">
+                  <span class="text">
+                    <span class="white-dot"></span>
+                    Low
+                  </span>
 
-    <div class="modal all-other-modals solid">
-      <form class="add-member-form">
-        <h3>Team Members</h3>
-        <div id="populatable-member-div" class="populatable-member-div"></div>
-        <button id="modal-add-member-btn">Add Members</button>
-      </form>
-    </div>
+                  <span class="text">
+                    <span class="gray-dot"></span>
+                    Medium
+                  </span>
 
-    <div class="team-member-line-item-overlays"></div>
-    <div class="team-member-line-item-modals"></div>
+                  <span class="text">
+                    <span class="black-dot"></span>
+                    High
+                  </span>
+                </section>
+              </section>
+            
+              <span id="pie-container-three"></span>
+            </section>
+          </section>
 
+          <button class="sidebar-button">
+            <span class="sidebar-button-circle transparent">></span>
+            <span class="sidebar-button-bar transparent"></span>
+          </button>
 
-    <div class="content-section">
-        <h1 class="page-header"></h1>    
-        <div class="top-row"> 
-          <!-- Team Members Section -->
-          <div class="team-members transparent">
-            <div class="top-row-top-section solid">
-              <h3 class="team-members-header-label">Team Members</h3>
-              <button id="memberModalBtn" class="open-modal-btn button">Add Member</button>
-            </div>
-            <div class="team-member-header">
-              <div class="team-member-line-item-name">Name</div>
-              <div class="team-member-line-item-email">Email</div>
-              <div class="team-member-line-item-phone">Phone</div>
-            </div>
-            <div class="team-member-body"></div>
-            <!-- <ul  id="team-members">Team Members</ul> -->
-          </div>
-        
-
+          <!-- <div class="sidebar-button-bar-spacer"></div> -->
 
           <div class="overlay blurred-overlay"></div>
+
           <div class="modal all-other-modals solid">
-            <form class="create-ticket-form">
-              <!-- <label for="author">Author:</label>
-              <input type="text" name="author" required> -->
+            <form class="add-member-form">
+              <h3>Team Members</h3>
+              <div id="populatable-member-div" class="populatable-member-div"></div>
+              <button id="modal-add-member-btn">Add Members</button>
+            </form>
+          </div>
+
+          <div class="team-member-line-item-overlays"></div>
+          <div class="team-member-line-item-modals"></div>
+
+
+          <section class="content-section">
+            <h1 class="page-header"></h1>    
+
+            <div class="top-row"> 
+              <section class="team-members transparent">
+                <div class="top-row-top-section solid">
+                  <h3 class="team-members-header-label">Team Members</h3>
+                  <button id="memberModalBtn" class="open-modal-btn button">Add Member</button>
+                </div>
+
+                <div class="team-member-header">
+                  <div class="team-member-line-item-name">Name</div>
+                  <div class="team-member-line-item-email">Email</div>
+                  <div class="team-member-line-item-phone">Phone</div>
+                </div>
+                <div class="team-member-body"></div>
+              </section>
+
+              <div class="overlay blurred-overlay"></div>
+
+              <div class="modal all-other-modals solid">
+                <form class="create-ticket-form">
+                  <label for="title">Title:</label>
+                  <input type="text" name="title" required>
+
+                  <label for="description">Description:</label>
+                  <input type="text" name="description" required>
+                  
+                  <label for="status">Status:</label>
+                  <select type="selection" name="status" required>
+                    <option value="unresolved">Unresolved</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="resolved">Resolved</option>
+                  </select>
+
+                  <label for="type">Type:</label>
+                  <select type="selection" name="type" required>
+                    <option value="issue">Issue</option>
+                    <option value="bug">Bug</option>
+                    <option value="feature request">Feature Request</option>
+                  </select>
+              
+                  <label for="priority">Priority:</label>
+                  <select type="selection" name="priority" required>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                  
+                  <button id="modal-create-ticket-btn">Add New Ticket</button>
+                </form>
+              </div>
+              
+              <section class="ticket-section transparent">
+                <div class="top-row-top-section solid">
+                  <h3 class="ticket-section-header-label">Tickets</h3>
+                  <button id="ticketModalBtn" class="open-modal-btn button">New Ticket</button>
+                </div>
+
+                <div class="ticket-header">
+                  <div class="ticket-header-left">
+                    <div class="ticket-title">Ticket Title</div>
+                    <div class="ticket-description">Description</div>
+                    <div class="ticket-author">Ticket Author</div>
+                  </div>
+
+                  <div class="header-kebab-spacer"></div>
+                </div>
+
+                <div id="tickets"></div>
+              </section>
+            </div>
+              
+            <section class="bottom-row"> 
+              <div class="big-wrap transparent">
+                <div class="top-row-top-section solid">
+                  <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
+                  <button id="ticketModalBtn" class="open-modal-btn button">Edit Ticket</button>
+                </div>
+
+                <div class="ticket-info" id="ticket-info">
+                  <div class="left-ticket-info-section">
+                    <div class="ticket-info-row-top">
+                      <div class="mobile-top">
+                        <div class="ticket-info-section">
+                          <div>Ticket Title:</div>
+                          <div id="populated-ticket-title-section" class="ticket-properties"></div>
+                        </div>
+                        
+                        <div class="ticket-info-section">
+                          <div>Author:</div>
+                          <div id="populated-author-section" class="ticket-properties"></div>
+                        </div>
+                      </div>
+
+                      <div class="ticket-info-section">
+                        <div>Description:</div>
+                        <div id="populated-description-section" class="ticket-properties"></div>
+                      </div>
+                    </div>
+
+                    <div class="ticket-info-row-bottom">
+                      <div class="ticket-info-section">
+                        <div>Status:</div>
+                        <div id="populated-status-section" class="ticket-characteristics"></div>
+                      </div>
+                      
+                      <div class="ticket-info-section">
+                        <div>Type:</div>
+                        <div id="populated-type-section" class="ticket-characteristics"></div>
+                      </div>
+                    
+                      <div class="ticket-info-section">
+                        <div>Priority:</div>
+                        <div id="populated-priority-section" class="ticket-characteristics"></div>
+                      </div>
+                    </div>
+                  </div>
+                      <!-- chat section -->
+                  <div class="right-chat-section">
+                    <div class="chatbox"></div>
+
+                    <form class="comment-input-form">
+                      <label for="comment"></label>
+                      <input type="text" name="comment" class="comment-input-form-input" required>
+                      <button class="comment-input-form-button">submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </section>
+              
+          <div class="overlay blurred-overlay"></div>
+
+          <div class="modal all-other-modals solid">
+            <form class="edit-ticket-form">
+              <label for="author">Author:</label>
+              <input class="edit-ticket-author" type="text" name="author" required>
+          
+              <label for="description">Description:</label>
+              <input class="edit-ticket-description" type="text" name="description" required>
           
               <label for="title">Title:</label>
-              <input type="text" name="title" required>
-
-              <label for="description">Description:</label>
-              <input type="text" name="description" required>
+              <input class="edit-ticket-title" type="text" name="title" required>
               
               <label for="status">Status:</label>
-              <select type="selection" name="status" required>
+              <select class="edit-ticket-status" type="selection" name="status" required>
                 <option value="unresolved">Unresolved</option>
                 <option value="in progress">In Progress</option>
                 <option value="resolved">Resolved</option>
               </select>
 
               <label for="type">Type:</label>
-              <select type="selection" name="type" required>
+              <select class="edit-ticket-type" type="selection" name="type" required>
                 <option value="issue">Issue</option>
                 <option value="bug">Bug</option>
                 <option value="feature request">Feature Request</option>
               </select>
           
               <label for="priority">Priority:</label>
-              <select type="selection" name="priority" required>
+              <select class="edit-ticket-priority" type="selection" name="priority" required>
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
               </select>
               
-              <button id="modal-create-ticket-btn">Add New Ticket</button>
+              <button id="edit-ticket-btn">Edit Ticket</button>
             </form>
           </div>
-          
-
-          <!-- ticket section -->
-          <div class="ticket-section transparent">
-            <div class="top-row-top-section solid">
-              <h3 class="ticket-section-header-label">Tickets</h3>
-              <button id="ticketModalBtn" class="open-modal-btn button">New Ticket</button>
-            </div>
-            <div class="ticket-header">
-              <div class="ticket-header-left">
-              <div class="ticket-title">Ticket Title</div>
-              <div class="ticket-description">Description</div>
-              <div class="ticket-author">Ticket Author</div>
-            </div>
-              <div class="header-kebab-spacer"></div>
-
-            </div>
-
-            <div id="tickets"></div>
-
-            <!-- <form class="delete-ticket-form">
-              <label for="id">Ticket id:</label>
-              <input type="text" name="id" required>
-              <button>delete a Ticket</button>
-            </form> -->
         </div>
-
-
-        </div>
-        
-        <!-- Selected Ticket Info Section -->
-        <div class="bottom-row"> 
-
-        <div class="big-wrap transparent">
-        <div class="top-row-top-section solid">
-        <h3 class="selected-ticket-info-header">Selected Ticket Info</h2>
-        <button id="ticketModalBtn" class="open-modal-btn button">Edit Ticket</button>
-        </div>
-        <div class="ticket-info" id="ticket-info">
-          <div class="left-ticket-info-section">
-            <div class="ticket-info-row-top">
-              <div class="mobile-top">
-              <div class="ticket-info-section">
-                <div>Ticket Title:</div>
-                <div id="populated-ticket-title-section" class="ticket-properties"></div>
-              </div>
-              
-              <div class="ticket-info-section">
-                <div>Author:</div>
-                <div id="populated-author-section" class="ticket-properties"></div>
-              </div>
-            </div>
-              <div class="ticket-info-section">
-                <div>Description:</div>
-                <div id="populated-description-section" class="ticket-properties"></div>
-              </div>
-            </div>
-            <div class="ticket-info-row-bottom">
-              <div class="ticket-info-section">
-                <div>Status:</div>
-                <div id="populated-status-section" class="ticket-characteristics"></div>
-              </div>
-              
-              <div class="ticket-info-section">
-                <div>Type:</div>
-                <div id="populated-type-section" class="ticket-characteristics"></div>
-              </div>
-            
-              <div class="ticket-info-section">
-                <div>Priority:</div>
-                <div id="populated-priority-section" class="ticket-characteristics"></div>
-              </div>
-
-            </div>
-          </div>
-              <!-- chat section -->
-        <div class="right-chat-section">
-
-          <div class="chatbox"></div>
-
-          <form class="comment-input-form">
-            <label for="comment"></label>
-            <input type="text" name="comment" class="comment-input-form-input" required>
-            <button class="comment-input-form-button">submit</button>
-          </form>
-        </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- content --------------------------------------------------------------------------- -->
-
-
-    </div>
-        
-    <div class="overlay blurred-overlay"></div>
-
-    <div class="modal all-other-modals solid">
-      <form class="edit-ticket-form">
-        <!-- <h3>Edit Ticket</h3> -->
-        <!-- <div id="populatable-member-div" class="populatable-member-div"></div> -->
-          <label for="author">Author:</label>
-          <input class="edit-ticket-author" type="text" name="author" required>
-      
-          <label for="description">Description:</label>
-          <input class="edit-ticket-description" type="text" name="description" required>
-      
-          <label for="title">Title:</label>
-          <input class="edit-ticket-title" type="text" name="title" required>
-          
-          <label for="status">Status:</label>
-          <select class="edit-ticket-status" type="selection" name="status" required>
-            <option value="unresolved">Unresolved</option>
-            <option value="in progress">In Progress</option>
-            <option value="resolved">Resolved</option>
-          </select>
-
-          <label for="type">Type:</label>
-          <select class="edit-ticket-type" type="selection" name="type" required>
-            <option value="issue">Issue</option>
-            <option value="bug">Bug</option>
-            <option value="feature request">Feature Request</option>
-          </select>
-      
-          <label for="priority">Priority:</label>
-          <select class="edit-ticket-priority" type="selection" name="priority" required>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        <button id="edit-ticket-btn">Edit Ticket</button>
-      </form>
-    </div>
-
-    </div>
-  </div>
-</div>
-</body>
+      </section>
+    </section>
+  </body>
 </html>

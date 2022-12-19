@@ -1,200 +1,152 @@
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
-
-  <script defer src="dashboard.bundle.js"></script>
-  <script defer src="darkmode.bundle.js"></script>
-
-</head>
-<body class="solid">
-  <div id="honme">
-    <div id="uid"></div>
-    <div id="idUid"></div>
-  </div>
-
-  <!-- <button id="darkModeBtn" class="dark-mode-btn">
-    <img src="https://cdn-icons-png.flaticon.com/512/4265/4265568.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-  </button> -->
-
-<div class="master-container">
-
-<!-- navbar --------------------------------------------------------------------------- -->
-<nav class="navbar solid">
-  <div class='nav-left'>
-    <img loading="lazy" class='nav-logo logo' src="../images/hound.svg"/>
-    <h1 class='brand-title'>Hound</h1>
-  </div>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
+    <script defer src="dashboard.bundle.js"></script>
+    <script defer src="darkmode.bundle.js"></script>
+  </head>
   
-  <!-- <a href="#" class='toggle-button'>
-    <span class='bar'></span>
-    <span class='bar'></span>
-    <span class='bar'></span>
-  </a> -->
-  <div class='nav-right'>
-    <div class="nav-user-icon-container">
-      <div class="nav-user-icon open-modal-btn"></div>
-    
-    </div>
-  </div>
-</nav>
-<!-- navbar --------------------------------------------------------------------------- -->
-
-<div id="overlayOne" class="overlay-one"></div>
-
-<div class="overlay user-dropdown-overlay"></div>
-
-<div class="modal user-dropdown-modal transparent">
-    <div class="udo-master">
-      <span class="udo-account-label">Account</span>
-      <div class="udo-user-card">
-        <div class="user-icon-medium"></div>
-        <div class="user-dropdown-overlay-inside-user-card-right">
-          <span class="udo-name"></span>
-          <span class="udo-email"></span>
+  <body class="solid">
+    <section class="master-container">
+      <header class="solid">
+        <a class='header-left'>
+          <img loading="lazy" class='nav-logo logo' style="width:1.8em;height:1.8em" src="../images/hound.svg"/>
+          <h1 class='brand-title'>Hound</h1>
+        </a>
+        <div class='header-right'>
+          <div class="nav-user-icon-container">
+            <button class="nav-user-icon open-modal-btn"></button>
+          </div>
         </div>
-      </div>
-      <span class="delineator-full"></span>
+      </header>
 
-      <div class="udo-background-form">
-        <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
-        <form id="setBackgroundForm" class="set-background-form">
-          <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
-        </form>
+      <div id="honme">
+        <div id="uid"></div>
+        <div id="idUid"></div>
       </div>
 
-        <span class="udo-link">Account Settings</span>
-        <span class="udo-link">Team Members</span>
+      <div id="overlayOne" class="overlay-one"></div>
+      <div class="overlay user-dropdown-overlay"></div>
 
+      <details-menu class="modal user-dropdown-modal transparent">
+        <div class="udo-master">
+          <h2 class="udo-account-label">Account</h2>
+          <section class="udo-user-card">
+            <span class="user-icon-medium"></span>
+            <div class="user-dropdown-overlay-inside-user-card-right">
+              <span class="udo-name"></span>
+              <span class="udo-email"></span>
+            </div>
+          </section>
 
-      <span class="delineator-full"></span>
+          <span class="delineator-full"></span>
 
-      <div id="darkModeBtn" class="udo-dark-mode">
-        <span class="udo-link" id="themeBtn"></span>
-        <!-- <button class="udo-dark-mode-btn">
-          <img src="https://img.icons8.com/ios-glyphs/512/toggle-on.png" border-radius="15px 0 0 15px" width="45px" height="45px" alt="dark mode button" />
-        </button> -->
-        <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
-      </div>
+          <section class="udo-background-form">
+            <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
+            <form id="setBackgroundForm" class="set-background-form">
+              <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+            </form>
+          </section>
 
-      <span class="delineator-full"></span>
+          <span class="udo-link">Account Settings</span>
+          <span class="udo-link">Team Members</span>
 
+          <span class="delineator-full"></span>
 
-      <button id="logoutButton" class="solid">Log Out</button>
-    </div>
-  </div>
+          <div id="darkModeBtn" class="udo-dark-mode">
+            <span class="udo-link" id="themeBtn"></span>
+            <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
+          </div>
 
+          <span class="delineator-full"></span>
 
-<div class="lower-half">
-  <div class="mobile-spacer"></div>
-
-  <div class="lower-half-sub-container">
-
-    <!-- dashboard --------------------------------------------------------------------------- -->
-    <div class="dashboard-master transparent">
-      <div class="dashboard-links">
-        <!-- <h3>Dashboard</h3> 
-            <h3>Team Members</h3>
-            <h3>Account Settings</h3>
-            <h3>Admin</h3>-->
-        <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-home-sharp.svg">
-          Dashboard
+          <button id="logoutButton" class="solid">Log Out</button>
         </div>
-        <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-user-male.svg">
-          <!-- <span role="img" aria-label="OrganizationIcon" class="dashboard-button-icon" style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;"><svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5048 5.67168C11.9099 5.32669 11.2374 5.10082 10.5198 5.0267C11.2076 3.81639 12.5085 3 14 3C16.2092 3 18 4.79086 18 7C18 7.99184 17.639 8.89936 17.0413 9.59835C19.9512 10.7953 22 13.6584 22 17C22 17.5523 21.5523 18 21 18H18.777C18.6179 17.2987 18.3768 16.6285 18.0645 16H19.917C19.4892 13.4497 17.4525 11.445 14.8863 11.065C14.9608 10.7218 15 10.3655 15 10C15 9.58908 14.9504 9.18974 14.857 8.80763C15.5328 8.48668 16 7.79791 16 7C16 5.89543 15.1046 5 14 5C13.4053 5 12.8711 5.25961 12.5048 5.67168ZM10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12ZM14 10C14 10.9918 13.639 11.8994 13.0412 12.5984C15.9512 13.7953 18 16.6584 18 20C18 20.5523 17.5523 21 17 21H3C2.44772 21 2 20.5523 2 20C2 16.6584 4.04879 13.7953 6.95875 12.5984C6.36099 11.8994 6 10.9918 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10ZM9.99999 14C12.973 14 15.441 16.1623 15.917 19H4.08295C4.55902 16.1623 7.02699 14 9.99999 14Z" fill="currentColor"></path></svg></span> -->
-          <!-- <img class="dashboard-button-icon" src="../images/icon_user.svg"> -->
-          Team Members
+      </details-menu>
+
+      <section class="lower-half">
+        <div class="mobile-spacer"></div>
+
+        <div class="lower-half-sub-container">
+          <section class="dashboard-master transparent">
+            <section class="dashboard-links">
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-home-sharp.svg">
+                Dashboard
+              </a>
+
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-user-male.svg">
+                Team Members
+              </a>
+
+              <a id="dashboardButton" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-settings.svg">
+                Account Settings
+              </a>
+            </section>
+
+            <span class="delineator"></span>
+
+            <section class="dashboard-links">
+              <a id="projectManagerBtn" class="dashboard-button">
+                <img class="dashboard-button-icon logo" src="icons8-for-you.svg">
+                Manage Projects
+              </a>
+
+              <ul id="manageProjectsMaster" class="manage-projects-master hidden"></ul>
+            </section>
+          </section>
+
+          <button class="sidebar-button">
+            <span class="sidebar-button-circle transparent">></span>
+            <span class="sidebar-button-bar transparent"></span>
+          </button>
+
+          <!-- <div class="sidebar-button-bar-spacer"></div> -->
+
+          <div class="overlay blurred-overlay"></div>
+
+          <section class="content-section">
+            <h1 class="page-header" >Projects</h2>
+              
+            <section class="starred-project-section">
+                <h2 class="starred-project-section-header"> Starred Projects</h2>
+                <div id="starred-project-container"></div>
+            </section>
+
+            <section class="project-section">
+                <h2 class="project-section-header"> Your Projects 
+                  <button id="button" class="open-modal-btn new-project-btn button" style="z-index: 3;">New Project</button>
+                </h2>
+                <div id="project-container"></div>
+            </section>
+
+            <h2 class="project-section-header">Shared Projects</h2>   
+            <div id="shared-project-container"></div>
+
+            <div class="overlay"></div>
+
+            <div class="modal all-other-modals solid">
+                <form class="modal-create-project-button">
+                  <label for="name">Name:</label>
+                  <input type="text" name="name" required>
+                  <button id="close-modal-btn">Create Project</button>
+                </form>
+            </div>
+
+            <form class="delete">
+              <label for="id">Document id:</label>
+              <input type="text" name="id" required>
+              <button>delete a Project</button>
+            </form>
+
+          </section>
         </div>
-        <div id="dashboardButton" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-settings.svg">
-          <!-- <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg> -->
-          <!-- <img class="dashboard-button-icon" src="../images/insta_settings.svg"> -->
-          Account Settings
-        </div>
-        <!-- <div id="dashboardButton" class="dashboard-button">
-        <svg aria-label="Settings" class="dashboard-button-icon" color="#262626" fill="#262626" height="24" role="img" viewBox="0 0 24 24" width="24"><circle cx="12" cy="12" fill="none" r="8.635" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle><path d="M14.232 3.656a1.269 1.269 0 0 1-.796-.66L12.93 2h-1.86l-.505.996a1.269 1.269 0 0 1-.796.66m-.001 16.688a1.269 1.269 0 0 1 .796.66l.505.996h1.862l.505-.996a1.269 1.269 0 0 1 .796-.66M3.656 9.768a1.269 1.269 0 0 1-.66.796L2 11.07v1.862l.996.505a1.269 1.269 0 0 1 .66.796m16.688-.001a1.269 1.269 0 0 1 .66-.796L22 12.93v-1.86l-.996-.505a1.269 1.269 0 0 1-.66-.796M7.678 4.522a1.269 1.269 0 0 1-1.03.096l-1.06-.348L4.27 5.587l.348 1.062a1.269 1.269 0 0 1-.096 1.03m11.8 11.799a1.269 1.269 0 0 1 1.03-.096l1.06.348 1.318-1.317-.348-1.062a1.269 1.269 0 0 1 .096-1.03m-14.956.001a1.269 1.269 0 0 1 .096 1.03l-.348 1.06 1.317 1.318 1.062-.348a1.269 1.269 0 0 1 1.03.096m11.799-11.8a1.269 1.269 0 0 1-.096-1.03l.348-1.06-1.317-1.318-1.062.348a1.269 1.269 0 0 1-1.03-.096" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"></path></svg>
-          Admin
-        </div> -->
-      </div>
-      <span class="delineator"></span>
-
-      <div class="dashboard-links">
-        <div id="projectManagerBtn" class="dashboard-button">
-          <img class="dashboard-button-icon logo" src="icons8-for-you.svg">
-          <!-- <span role="img" aria-label="OrganizationIcon" class="dashboard-button-icon" style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;"><svg width="24" height="24" role="presentation" focusable="false" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.5048 5.67168C11.9099 5.32669 11.2374 5.10082 10.5198 5.0267C11.2076 3.81639 12.5085 3 14 3C16.2092 3 18 4.79086 18 7C18 7.99184 17.639 8.89936 17.0413 9.59835C19.9512 10.7953 22 13.6584 22 17C22 17.5523 21.5523 18 21 18H18.777C18.6179 17.2987 18.3768 16.6285 18.0645 16H19.917C19.4892 13.4497 17.4525 11.445 14.8863 11.065C14.9608 10.7218 15 10.3655 15 10C15 9.58908 14.9504 9.18974 14.857 8.80763C15.5328 8.48668 16 7.79791 16 7C16 5.89543 15.1046 5 14 5C13.4053 5 12.8711 5.25961 12.5048 5.67168ZM10 12C11.1046 12 12 11.1046 12 10C12 8.89543 11.1046 8 10 8C8.89543 8 8 8.89543 8 10C8 11.1046 8.89543 12 10 12ZM14 10C14 10.9918 13.639 11.8994 13.0412 12.5984C15.9512 13.7953 18 16.6584 18 20C18 20.5523 17.5523 21 17 21H3C2.44772 21 2 20.5523 2 20C2 16.6584 4.04879 13.7953 6.95875 12.5984C6.36099 11.8994 6 10.9918 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10ZM9.99999 14C12.973 14 15.441 16.1623 15.917 19H4.08295C4.55902 16.1623 7.02699 14 9.99999 14Z" fill="currentColor"></path></svg></span> -->
-          <!-- <img class="dashboard-button-icon" src="../images/insta_settings.svg"> -->
-          Manage Projects
-        </div>
-        <ul id="manageProjectsMaster" class="manage-projects-master hidden">
-        </ul>
-      </div>
-    </div>
-
-    <div class="sidebar-button">
-      <div class="sidebar-button-circle transparent">></div>
-      <div class="sidebar-button-bar transparent"></div>
-    </div>
-
-    <div class="sidebar-button-bar-spacer"></div>
-
-    <div class="overlay blurred-overlay"></div>
-    <!-- dashboard --------------------------------------------------------------------------- -->
-
-    <div class="content-section">
-
-
-      <h1 class="page-header" >Projects</h2>
-        
-      <div class="starred-project-section">
-          <h2 class="starred-project-section-header"> Starred Projects 
-            <!-- <button id="button" class="open-modal-btn new-project-btn button" style="z-index: 3;">New Project</button> -->
-          </h2>
-          <div id="starred-project-container"></div>
-      </div>
-
-      <div class="project-section">
-          <h2 class="project-section-header"> Your Projects 
-            <button id="button" class="open-modal-btn new-project-btn button" style="z-index: 3;">New Project</button>
-          </h2>
-          <div id="project-container"></div>
-      </div>
-
-      <h2 class="project-section-header">Shared Projects</h2>      
-      <div id="shared-project-container"></div>
-
-      <!-- merge -->
-      <div class="overlay"></div>
-
-      <div class="modal all-other-modals solid">
-
-          <form class="modal-create-project-button">
-            <label for="name">Name:</label>
-            <input type="text" name="name" required>
-            
-            <button id="close-modal-btn">Create Project</button>
-          </form>
-
-      </div>
-
-      <form class="delete">
-        <label for="id">Document id:</label>
-        <input type="text" name="id" required>
-
-        <button>delete a Project</button>
-      </form>
-
-      <!-- <button id="logoutButton">logout</button> -->
-
-
-    </div>
-  </div>
-</div>
-
-</div>
-</body>
+      </section>
+    </section>
+  </body>
 </html>
