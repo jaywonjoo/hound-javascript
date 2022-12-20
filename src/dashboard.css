@@ -565,7 +565,7 @@ header {
 }
 
 .project-li-name {
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 .project-li-name-changer-form {
