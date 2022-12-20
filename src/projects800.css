@@ -20,8 +20,16 @@
         z-index: 1003;
     }
 
+    .header-left {
+        margin: 0;
+    }
+
     .nav-logo {
         margin-bottom: 0;
+    }
+    
+    .nav-user-icon-container {
+        margin: 0;
     }
 
     .nav-user-icon {
@@ -63,7 +71,7 @@
         -webkit-backdrop-filter: blur(40px);
         position: fixed;
         left: 0;
-        top: 9vh;
+        top: 4.5rem;
         z-index: 3;
         display: flex;
         justify-content: center;

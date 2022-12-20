@@ -110,6 +110,11 @@ header {
   box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
 }
 
+.page-header {
+  margin: .5% 0 1% 0;
+  font-size: 2.5rem;
+}
+
 .nav-logo {
   margin-bottom: -2px;
 }
@@ -825,7 +830,7 @@ display: none;
 .right-chat-section {
   width: 40%;
   height: 100%;
-  border-left: solid black;
+  border-left: solid black 1.5px;
   border-radius: 0 0 15px 0;
 
 }
@@ -957,6 +962,10 @@ display: none;
     height: auto;
   }
 
+  .page-header {
+    margin: 2% 0 1% 0;
+  }
+
   .lower-half-sub-container {
       display: flex;
       flex-direction: row;
@@ -982,7 +991,7 @@ display: none;
       -webkit-backdrop-filter: blur(40px);
       position: fixed;
       left: 0;
-      top: 10vh;
+      top: 10.75vh;
       z-index: 3;
       display: flex;
       justify-content: center;
@@ -1028,10 +1037,6 @@ display: none;
       margin: 0 25px;
   }
 
-  .page-header {
-      margin: 4% 0 2% 0;
-  }
-
   header {
     position: fixed;
     z-index: 1000;
@@ -1049,7 +1054,7 @@ display: none;
   .team-member-line-item-phone {
     display: none;
   }
-
+  
   .team-members {
     width: 35%;
   }
