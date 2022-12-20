@@ -71,7 +71,7 @@
         -webkit-backdrop-filter: blur(40px);
         position: fixed;
         left: 0;
-        top: 4.5rem;
+        top: 4.3rem;
         z-index: 3;
         display: flex;
         justify-content: center;
@@ -139,7 +139,7 @@
 
     .page-header {
         padding-left: 5%;
-        margin: 4% 0 2% 0;
+        margin: .75rem 0 2% 0;
     }
 
     .top-row {
