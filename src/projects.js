@@ -305,7 +305,7 @@ function populateMemberList(collaboratorList, j) {
     teamMemberLineItemOverlay.classList.add("overlay");
     teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
         
-    teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+    teamMemberLineItemOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
     teamMemberLineItemModal.classList.add("modal");
     teamMemberLineItemModal.classList.add("delete-button-modal");
     teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
@@ -465,7 +465,7 @@ function populateTickets() {
                 ticketKebabButton.classList.add("open-modal-btn")
                 ticketKebabButtonText.classList.add("ticket-kebab-button-text")
                 ticketOverlay.classList.add("overlay")
-                ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+                ticketOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 ticketModal.classList.add("modal")
                 ticketModal.classList.add("delete-button-modal")
                 ticketDeleteButton.classList.add("ticket-delete-button")
