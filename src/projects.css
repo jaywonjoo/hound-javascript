@@ -305,25 +305,22 @@ header {
   width: auto;
 }
 
-.white-dot {
+.bottom-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgb(255, 255, 255, .8);
 }
 
-.gray-dot {
+.middle-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgb(130, 130, 130);
 }
 
-.black-dot {
+.top-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: rgba(20, 20, 20);
 }
 
 .pie {

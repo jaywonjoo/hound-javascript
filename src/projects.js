@@ -102,7 +102,10 @@ const darkModeSwitch = document.querySelector("#switch")
 const userIconMedium = document.querySelector(".user-icon-medium")
 const udoName = document.querySelector(".udo-name")
 const udoemail = document.querySelector(".udo-email")
-
+// 
+const bottomDot = document.getElementsByClassName("bottom-dot")
+const middleDot = document.getElementsByClassName("middle-dot")
+const topDot = document.getElementsByClassName("top-dot")
 
 redirectToDashboard()
 logoutUser()
@@ -114,7 +117,6 @@ populateTickets()
 commentCreation()
 addMemberButton()
 createTicketButton()
-pieChartStatus()
 editTicketSubmitButton()
 hideBackgroundInputOnSubmit()
 writeInputtedBackgroundToFirebase()
@@ -168,10 +170,21 @@ function populateUserIconAndTheme() {
                   darkModeSwitch.checked = true;
                   themeBtn.innerHTML = "Dark Mode"
                   setThemeLight()
+
+                  let bottom = "rgba(0, 0, 0, .3)"
+                  let middle = "rgba(0, 0, 0, .5)"
+                  let top = "rgba(0, 0, 0, .9)"
+                  pieChartStatus(bottom, middle, top)
+
                 } else {
                   darkModeSwitch.checked = false;
                   themeBtn.innerHTML = "Light Mode"
                   setThemeDark()
+
+                  let bottom = "rgba(255, 255, 255, .3)"
+                  let middle = "rgba(255, 255, 255, .5)"
+                  let top = "rgba(255, 255, 255, .9)"
+                  pieChartStatus(bottom, middle, top)
                 }
                 
                 // Storing user firebase id
@@ -730,7 +743,7 @@ function createTicketButton() {
     })    
 }
 
-function pieChartStatus() {
+function pieChartStatus(bottom, middle, top) {
     onSnapshot(colRef, (snapshot) => {
         let ticketInfoList = []
 
@@ -782,21 +795,17 @@ function pieChartStatus() {
         pieContainerThree.appendChild(pieMedium)
         pieContainerThree.appendChild(pieHigh)
 
-        let light = "rgba(0, 0, 0, .3)"
-        let medium = "rgba(0, 0, 0, .5)"
-        let dark = "rgba(0, 0, 0, 1)"
+        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
 
-        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
+        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
 
-        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
-
-        pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
+        pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
     })
 }
 
@@ -957,6 +966,12 @@ function setThemeLight() {
         logo[i].classList.add("light-mode-logo")
         logo[i].classList.remove("dark-mode-logo")
     }
+
+    for (let i = 0; i < bottomDot.length; i++ ) {
+        bottomDot[i].setAttribute("style", "background-color: rgb(0,0,0,.3);")
+        middleDot[i].setAttribute("style", "background-color: rgb(0,0,0,.6);")
+        topDot[i].setAttribute("style", "background-color: rgb(0,0,0);")
+    }
 }
 
 function setThemeDark() {
@@ -978,5 +993,11 @@ function setThemeDark() {
     for (let i = 0; i < logo.length; i++) {
         logo[i].classList.add("dark-mode-logo")
         logo[i].classList.remove("light-mode-logo")
+    }
+
+    for (let i = 0; i < bottomDot.length; i++ ) {
+        bottomDot[i].setAttribute("style", "background-color: rgb(255, 255, 255, .3);")
+        middleDot[i].setAttribute("style", "background-color: rgb(255, 255, 255, .6);")
+        topDot[i].setAttribute("style", "background-color: rgb(255, 255, 255);")
     }
 }
