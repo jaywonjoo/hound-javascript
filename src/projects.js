@@ -281,8 +281,8 @@ function populateMemberList(collaboratorList, j) {
     teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
     teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
     teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
-    teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemOverlay)
-    teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
+    teamMemberLineItem.appendChild(teamMemberLineItemOverlay)
+    teamMemberLineItem.appendChild(teamMemberLineItemModal)
     teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
     teamMemberLineItemModal.appendChild(teamMemberLineItemId)
 
@@ -308,8 +308,6 @@ function populateMemberList(collaboratorList, j) {
     teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
     teamMemberLineItemModal.classList.add("modal");
     teamMemberLineItemModal.classList.add("delete-button-modal");
-    teamMemberLineItemModal.setAttribute("style", "position: sticky");
-    teamMemberLineItemModal.setAttribute("style", "position: sticky");
     teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
             
     teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
@@ -444,8 +442,8 @@ function populateTickets() {
                 ticketUl.appendChild(ticketKebabDiv)
                 ticketKebabDiv.appendChild(ticketKebabButton)
                 ticketKebabButton.appendChild(ticketKebabButtonText)
-                ticketKebabDiv.appendChild(ticketOverlay)
-                ticketKebabDiv.appendChild(ticketModal)
+                ticketUl.appendChild(ticketOverlay)
+                ticketUl.appendChild(ticketModal)
                 ticketModal.appendChild(ticketDeleteButton)
                     
                 TicketTitle.innerText = tickets[i].title;
@@ -470,7 +468,6 @@ function populateTickets() {
                 ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 ticketModal.classList.add("modal")
                 ticketModal.classList.add("delete-button-modal")
-                ticketModal.setAttribute("style", "position: sticky")
                 ticketDeleteButton.classList.add("ticket-delete-button")
 
                 setDataIndex()

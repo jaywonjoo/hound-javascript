@@ -1,4 +1,4 @@
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     /* top row */
     body {
         background-attachment: fixed;
@@ -49,6 +49,7 @@
     .lower-half-sub-container {
         display: flex;
         flex-direction: row;
+        height: unset;
     }
 
     .sidebar-button-circle {
@@ -301,19 +302,7 @@
         height: 2em;
         border-radius: 15em;
     }
-
-    .team-member-delete-button {
-        height: 2.5vh;
-        width: 87.5vw;
-        top: -2.28vh;
-    }
-
-    .ticket-delete-button {
-        height: 2.5vh;
-        width: 87.5vw;
-        top: -2.28vh;
-    }
-
+    
     .team-member-line-item-name {
         margin-left: 3%;
     }
