@@ -352,6 +352,7 @@ header {
 
 .card-fade-overlay {
   width: inherit;
+  max-width: 165px;
   height: inherit;
   background-color: transparent;
   position: absolute;
