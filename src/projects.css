@@ -785,11 +785,20 @@ display: none;
 
 .left-ticket-info-section {
   height: 100%;
+  width: 60%;
+  padding: 1rem .75rem;
 }
 
 .mobile-top {
   display: flex;
   flex-direction: row;
+  width: 66%;
+}
+
+.mobile-top-ticket-info-section {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
 }
 
 .ticket-info {
@@ -802,7 +811,7 @@ display: none;
 .ticket-info-section {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 33%;
 }
 
 .ticket-info-row-top {
