@@ -190,12 +190,17 @@
         overflow-y: scroll;
         overflow-x: hidden;
         padding: .5em .5em .5em 3%;
+        box-sizing: border-box;
         width: 100%;
     }
 
     .mobile-top {
         display: flex;
         min-height: 3em;
+        width: 100%;
+    }
+
+    .mobile-bottom-ticket-info-section {
         width: 100%;
     }
 
@@ -358,6 +363,7 @@
     .ticket-title {
         margin-left: 3%;
         width: 45%;
+        white-space: unset;
     }
 
     .ticket-author {
