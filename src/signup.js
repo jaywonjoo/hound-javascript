@@ -63,7 +63,7 @@ function signUpForm() {
         addDoc(colRef, {
           firstName: firstName.value,
           lastName: lastName.value,
-          phoneNumber: "(123)456-7890",
+          phoneNumber: "(000) 000-0000",
           uid: uid,
           email: userEmail,
           theme: "light",
