@@ -267,7 +267,7 @@ function populateProjectManager(projectQuery, projectContainer) {
       projectLiNameChangerForm.appendChild(projectLiNameChangerInput);
       projectLiSubMaster.appendChild(projectLiKebabButton);
       projectLiMaster.setAttribute("id", "projectLiMaster")
-      projectLiNameChangerForm.setAttribute("style","z-index: 9999")
+      projectLiNameChangerForm.classList.add("project-li-name-changer-form")
       projectLiSubMaster.classList.add("project-li-sub-master")
       projectLiMaster.classList.add("project-li-master")
       projectLiLeft.classList.add("project-li-left")

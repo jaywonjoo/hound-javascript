@@ -245,6 +245,7 @@ header {
 
 .dashboard-master {
   width: 20em;
+  min-width: 10em;
   height: 95vh;
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
@@ -500,13 +501,16 @@ header {
   flex-direction: row;
   align-items: center;
   gap: 1em;
+  max-width: 85%
 }
 
 .project-li-icon {
   background-size: cover;
   background-position: 50%;
-  width: 1em;
-  height: 1em;
+  min-width: 1em;
+  min-height: 1em;  
+  max-width: 1em;
+  max-height: 1em;
   margin-left: .1em;
   border-radius: .1em;
 }
@@ -515,6 +519,10 @@ header {
   background-color: transparent;
   border: none;
   color: inherit;
+  min-width: 2em;
+  min-height: 2em;  
+  max-width: 2em;
+  max-height: 2em;
 }
 
 .project-li-kebab-button:hover {
@@ -551,9 +559,13 @@ header {
   padding-right: 100vw;
 }
 
+.project-li-name-changer-form {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
 .project-name-changer-input {
-  position: fixed;
-  width: 50%;
   font-size: 16px;
-  transform: translateY(-4px);
+  width: 100%;
 }
