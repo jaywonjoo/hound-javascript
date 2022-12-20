@@ -517,6 +517,10 @@ display: none;
   margin-left: .75rem;
 }
 
+.ticket-header-kebab-spacer {
+  width: 5%;
+}
+
 .team-member-line-item-name {
   width: 35%;
   overflow: hidden;
@@ -830,7 +834,7 @@ display: none;
 .right-chat-section {
   width: 40%;
   height: 100%;
-  border-left: solid black 1.5px;
+  border-left: solid black 1px;
   border-radius: 0 0 15px 0;
 
 }
