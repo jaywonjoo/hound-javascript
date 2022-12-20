@@ -564,10 +564,15 @@ header {
   padding-right: 100vw;
 }
 
+.project-li-name {
+  overflow: scroll;
+}
+
 .project-li-name-changer-form {
   margin: 0;
   display: flex;
   align-items: center;
+  z-index: 1000;
 }
 
 .project-name-changer-input {
