@@ -492,7 +492,8 @@ display: none;
   font-weight: 100;
   font-size: .75em;
   align-items: center;
-  white-space: nowrap
+  white-space: nowrap;
+  position: relative;
 }
 
 .team-member-line-item:hover {
@@ -686,6 +687,7 @@ display: none;
   font-size: .75em;
   max-height: 5vh;
   align-items: center;
+  position: relative;
 }
 
 .ticket-ul:hover {
