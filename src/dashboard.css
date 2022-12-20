@@ -375,6 +375,8 @@ header {
 
 .card-content-overlay-project-title {
   width: inherit;
+  max-width: 145px;
+  flex-wrap: wrap;
   z-index: 3;
 }
 
