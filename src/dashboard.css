@@ -102,6 +102,7 @@ header {
   padding: 0px 25px;
   min-height: 40px;
   height: 5vh;
+  max-height: 50px;
   transition: box-shadow .25s;
   border-width: 1.5px;
   border-bottom-style: solid;
