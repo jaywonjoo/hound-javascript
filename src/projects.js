@@ -536,14 +536,12 @@ function populateTickets() {
                         populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
                         populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
 
-                        const editTicketAuthor = document.querySelector(".edit-ticket-author")
                         const editTicketDescription = document.querySelector(".edit-ticket-description")
                         const editTicketTitle = document.querySelector(".edit-ticket-title")
                         const statusList = document.querySelector(".edit-ticket-status")
                         const typeList = document.querySelector(".edit-ticket-type")
                         const priorityList = document.querySelector(".edit-ticket-priority")
 
-                        editTicketAuthor.setAttribute("value", snapshot.data().author)
                         editTicketDescription.setAttribute("value", snapshot.data().description)
                         editTicketTitle.setAttribute("value", snapshot.data().title)
 
@@ -832,7 +830,6 @@ function editTicketSubmitButton() {
         e.preventDefault()
         
         updateDoc(selectedTicket, {
-            author: editTicketForm.author.value,
             description: editTicketForm.description.value,
             title: editTicketForm.title.value,
             status: editTicketForm.status.value,
@@ -844,27 +841,23 @@ function editTicketSubmitButton() {
 
             getDoc(selectedTicket).then((snapshot) => {
                 const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                const populatedAuthorSection = document.querySelector("#populated-author-section")
                 const populatedDescriptionSection = document.querySelector("#populated-description-section")
                 const populatedTicketInfoSection = document.querySelector("#populated-status-section")
                 const populatedTicketSection = document.querySelector("#populated-priority-section")
                 const populatedTypeSection = document.querySelector("#populated-type-section")
 
                 populatedTicketTitleSection.innerHTML = snapshot.data().title;
-                populatedAuthorSection.innerHTML = snapshot.data().author;
                 populatedDescriptionSection.innerHTML = snapshot.data().description;
                 populatedTicketInfoSection.innerHTML = snapshot.data().status;
                 populatedTicketSection.innerHTML = snapshot.data().priority;
                 populatedTypeSection.innerHTML = snapshot.data().type;
 
-                const editTicketAuthor = document.querySelector(".edit-ticket-author")
                 const editTicketDescription = document.querySelector(".edit-ticket-description")
                 const editTicketTitle = document.querySelector(".edit-ticket-title")
                 const statusList = document.querySelector(".edit-ticket-status")
                 const typeList = document.querySelector(".edit-ticket-type")
                 const priorityList = document.querySelector(".edit-ticket-priority")
 
-                editTicketAuthor.setAttribute("value", snapshot.data().author)
                 editTicketDescription.setAttribute("value", snapshot.data().description)
                 editTicketTitle.setAttribute("value", snapshot.data().title)
 
