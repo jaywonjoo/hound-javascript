@@ -542,8 +542,10 @@ function populateTickets() {
                         const typeList = document.querySelector(".edit-ticket-type")
                         const priorityList = document.querySelector(".edit-ticket-priority")
 
-                        editTicketDescription.setAttribute("value", snapshot.data().description)
                         editTicketTitle.setAttribute("value", snapshot.data().title)
+                        // editTicketDescription.setAttribute("value", snapshot.data().description)
+                        editTicketDescription.innerText = snapshot.data().description
+
 
                         let statusListOptions = statusList.options.length;
                         for (let i = 0; i < statusListOptions; i++) {
@@ -858,8 +860,8 @@ function editTicketSubmitButton() {
                 const typeList = document.querySelector(".edit-ticket-type")
                 const priorityList = document.querySelector(".edit-ticket-priority")
 
-                editTicketDescription.setAttribute("value", snapshot.data().description)
                 editTicketTitle.setAttribute("value", snapshot.data().title)
+                editTicketDescription.setAttribute("value", snapshot.data().description)
 
                 let statusListOptions = statusList.options.length;
                 for (let i = 0; i < statusListOptions; i++) {

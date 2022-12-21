@@ -1041,7 +1041,9 @@ font-size: .75rem;
 }
 
 .edit-ticket-description {
-  height: 4rem;
+  max-height: 8rem;
+  min-height: 5rem;
+  resize: vertical;
 }
 
 .edit-ticket-btn {
@@ -1082,7 +1084,9 @@ font-size: .75rem;
 }
 
 .create-ticket-description {
-  height: 4rem;
+  max-height: 8rem;
+  min-height: 5rem;
+  resize: vertical;
 }
 
 .create-ticket-btn {
