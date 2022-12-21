@@ -373,4 +373,25 @@
     .ticket-kebab-div {
         width: 20px;
     }
+
+    .populatable-member-modal {
+        z-index: 500;
+        position: fixed;
+        height: 80vh;
+        width: 80vw;
+        top: 53vh;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .add-member-form {
+        height: 100%;
+    }
+    
+    .populatable-member-div {
+        height: 100%;
+    }
+
+    .new-member-email-div {
+        display: none;
+    }
 }

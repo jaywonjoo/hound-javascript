@@ -584,7 +584,7 @@ display: none;
   width: auto;
   gap: 10%;
   padding: 3%;
-  border-bottom: solid black;
+  border-bottom: solid 1px;
 }
 
 .new-member-checkbox-div {
@@ -608,6 +608,7 @@ display: none;
 .new-member-name-div {
   width: 40%;
   height: auto;
+  min-width: fit-content;
 }
 
 .new-member-email-div {
@@ -969,6 +970,47 @@ display: none;
 	transform: translateX(calc(100% - .2em));
 }
 
+.populatable-member-modal {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem;
+  border-radius: .75rem;
+  background-color: white;
+  width: 25rem;
+  height: auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.add-member-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-member-form-header {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+}
+
+.populatable-member-div {
+  overflow-y: scroll;
+  height: 15rem;
+  border: solid 1px;
+  border-radius: .5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.add-member-btn {
+  border: none;
+  border-radius: 1rem;
+  padding: 7px 10px;
+  width: 100%;
+}
 
 @media (max-width: 1300px) {
   .lower-half {
