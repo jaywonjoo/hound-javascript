@@ -207,11 +207,13 @@
 
               <div class="modal all-other-modals solid">
                 <form class="create-ticket-form">
+                  <h2 class="create-ticket-form-header">New Ticket</h2>
+
                   <label for="title">Title:</label>
                   <input type="text" name="title" required>
 
                   <label for="description">Description:</label>
-                  <input type="text" name="description" required>
+                  <input type="text" name="description" class="create-ticket-description" required>
                   
                   <label for="status">Status:</label>
                   <select type="selection" name="status" required>
@@ -228,13 +230,13 @@
                   </select>
               
                   <label for="priority">Priority:</label>
-                  <select type="selection" name="priority" required>
+                  <select type="selection" name="priority" class="create-ticket-priority" required>
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
                   </select>
                   
-                  <button id="modal-create-ticket-btn">Add New Ticket</button>
+                  <button id="modal-create-ticket-btn" class="create-ticket-btn button">Add New Ticket</button>
                 </form>
               </div>
               
@@ -322,7 +324,8 @@
 
           <div class="modal all-other-modals solid">
             <form class="edit-ticket-form">
-             
+             <h2 class="edit-ticket-form-header">Edit Ticket</h2>
+
               <label for="title">Title:</label>
               <input class="edit-ticket-title" type="text" name="title" required>
               
@@ -350,7 +353,7 @@
                 <option value="high">High</option>
               </select>
               
-              <button id="edit-ticket-btn">Edit Ticket</button>
+              <button id="edit-ticket-btn" class="edit-ticket-btn button">Edit Ticket</button>
             </form>
           </div>
         </div>

@@ -403,4 +403,20 @@
         font-size: .75rem;
         overflow-x: hidden;
     }
+
+    .create-ticket-form {
+        height: 100%;
+    }
+
+    .create-ticket-description {
+        height: 100%;
+    }
+
+    .edit-ticket-form {
+        height: 100%;
+    }
+
+    .edit-ticket-description {
+        height: 100%;
+    }
 }

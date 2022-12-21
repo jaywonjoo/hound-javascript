@@ -122,6 +122,7 @@ header {
 /* user dropdown modal */
 .user-dropdown-modal {
   position:fixed;
+  z-index: 9999;
   right: .2em;
   top: calc( 5vh + .2em );
   border-radius: 5px;
@@ -1012,6 +1013,88 @@ display: none;
   padding: 7px 10px;
   width: 100%;
   cursor: pointer;
+}
+
+.edit-ticket-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.edit-ticket-form label {
+margin-bottom: -.5rem;
+font-size: .75rem;
+}
+
+.edit-ticket-form input {
+  width: auto;
+}
+
+.edit-ticket-form select {
+  width: 100%;
+}
+
+.edit-ticket-form-header {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.edit-ticket-description {
+  height: 4rem;
+}
+
+.edit-ticket-btn {
+  border: none;
+  border-radius: 1rem;
+  padding: 7px 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.edit-ticket-priority {
+  margin-bottom: .75em;
+}
+
+.create-ticket-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+.create-ticket-form label {
+margin-bottom: -.5rem;
+font-size: .75rem;
+}
+
+.create-ticket-form input {
+  width: auto;
+}
+
+.create-ticket-form select {
+  width: 100%;
+}
+
+.create-ticket-form-header {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.create-ticket-description {
+  height: 4rem;
+}
+
+.create-ticket-btn {
+  border: none;
+  border-radius: 1rem;
+  padding: 7px 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.create-ticket-priority {
+  margin-bottom: .75em;
 }
 
 @media (max-width: 1300px) {
