@@ -1044,6 +1044,7 @@ font-size: .75rem;
   max-height: 8rem;
   min-height: 5rem;
   resize: vertical;
+  font-family: inherit;
 }
 
 .edit-ticket-btn {
@@ -1087,6 +1088,7 @@ font-size: .75rem;
   max-height: 8rem;
   min-height: 5rem;
   resize: vertical;
+  font-family: inherit;
 }
 
 .create-ticket-btn {
