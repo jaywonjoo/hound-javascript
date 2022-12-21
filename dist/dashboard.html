@@ -130,12 +130,16 @@
 
             <div class="overlay"></div>
 
-            <div class="modal all-other-modals solid">
-                <form class="modal-create-project-button">
-                  <label for="name">Name:</label>
-                  <input type="text" name="name" required>
-                  <button id="close-modal-btn">Create Project</button>
+            <div class="modal new-project-modal solid">
+              <div class="new-project-modal-master">
+                <h3 class="new-project-modal-header">New Project</h3>
+                <span class="modal-delineator"></span>
+                <form id="modal-create-project-form" class="create-project-form">
+                  <!-- <label for="name">Name:</label> -->
+                  <input type="text" name="name" class="create-project-input" placeholder="Project Name" required>
+                  <button id="close-modal-btn" class="create-project-btn button">Create</button>
                 </form>
+              </div>
             </div>
 
             <form class="delete">

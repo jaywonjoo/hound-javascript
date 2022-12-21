@@ -52,7 +52,7 @@ const themeBtn = document.querySelector("#themeBtn")
 const currentUserIdDiv = document.querySelector('#uid')
 const currentUserDocRefDiv = document.querySelector('#idUid')
 // createProject() & createProjectDiv()
-const addProjectForm = document.querySelector(".modal-create-project-button");
+const addProjectForm = document.querySelector("#modal-create-project-form");
 // projectRedirectLink()
 const projectCards = document.getElementsByClassName("project-card");
 // setProjectDataIndex()
