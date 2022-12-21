@@ -155,11 +155,11 @@ a {
 /* HERO SECTION */
 .hero-section {
     display: flex; 
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: 80vh;
     width: 100vw;
-    padding: 10% 15%;
+    padding: 5% 15% 0 15%;
 }
   
 .hero-text-master {
