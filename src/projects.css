@@ -613,7 +613,8 @@ display: none;
 
 .new-member-email-div {
   height: auto;
-  width: 50%
+  width: 50%;
+  font-size: .75em;
 }
 
 /* ticket section */
