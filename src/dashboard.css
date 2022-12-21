@@ -622,13 +622,13 @@ header {
   height: 1.5rem;
   border-radius: 2rem;
   border: solid;
-  width: 60%;
+  width: 72%;
   min-width: 150px;
   padding-left: .5rem;
 }
 
 .create-project-btn {
-  width: 35%;
+  width: 25%;
   min-width: fit-content;
   border: none;
   border-radius: 2rem;
