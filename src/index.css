@@ -33,7 +33,7 @@ body {
     padding: 0;
     font-family: Graphik-Regular,sans-serif;
     color: rgb(59, 59, 70);
-    background: linear-gradient(180deg, rgba(178,198,233,1) 0%, rgba(209,229,254,1) 15%, rgba(255,255,255,1) 30%);
+    background: linear-gradient(180deg, rgb(161, 195, 255) 0%, rgba(209,229,254,1) 15%, rgba(255,255,255,1) 30%);
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
