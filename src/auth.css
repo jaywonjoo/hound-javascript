@@ -28,7 +28,7 @@ body {
     height: fit-content;
     width: 25em;
     border: 10px;
-    padding: 10px 10px 90px 10px;
+    padding: 10px 10px 50px 10px;
     background-color: white;
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
@@ -43,7 +43,7 @@ body {
 .logo-home-button-container {
     display: flex;
     align-items: center;
-    margin: 28px 0px 25px 0px;
+    margin: 28px 0px 0px 0px;
     cursor: pointer;
 }
 
@@ -86,6 +86,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: .5em;
 }
 
 .sign-up-form {
@@ -113,7 +114,7 @@ body {
     width: 81%;
     padding: .65em 0;
     /* font-size: 1em; */
-    margin: 1em 0 1em 0;
+    margin: 0 0 1em 0;
 }
 
 .sign-up-button {
@@ -124,7 +125,7 @@ body {
     width: 81%;
     padding: .65em 0;
     /* font-size: 1em; */
-    margin: 1em 0 1em 0;
+    margin: 0 0 1em 0;
 }
 
 .or-space {
@@ -168,7 +169,6 @@ body {
 
 .alt-link-container {
     width: 80%;
-    margin-top: 1.5em;
 }
 
 .alt-link-text {
