@@ -15,8 +15,7 @@ body {
     justify-content: center;
     /* font-family: Graphik, Helvetica, sans-serif; */
     font-family: Helvetica;
-    background: rgb(178,198,233); 
-    background: linear-gradient(180deg, rgba(178,198,233,1) 0%, rgba(209,229,254,1) 15%, rgba(255,255,255,1) 30%);
+    background: rgb(255, 255, 255); 
     height: 100%;
     margin: 0;
     background-repeat: no-repeat;
@@ -24,7 +23,6 @@ body {
 }
 
 .parent-card {
-    /* border-style: solid #000; */
     height: fit-content;
     width: 25em;
     border: 10px;
@@ -33,10 +31,12 @@ body {
     border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
     z-index: 1;
-    margin: 5% 0px;
+    transform: translate(-50%, -50%);
+    top: 45%;
+    left: 50%;
+    position: absolute;
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 }
 
@@ -219,4 +219,11 @@ body {
 
 .hidden-sign-in-form {
     display: none;
+}
+
+@media (max-width: 800px) {
+    .parent-card {
+        box-shadow: none;
+        padding: 0
+    }
 }
