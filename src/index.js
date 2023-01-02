@@ -1,4 +1,4 @@
-import "./index.css";
+import "./index.scss";
 
 // loginRedirectButton()
 const loginButton = document.querySelector(".nav-login");

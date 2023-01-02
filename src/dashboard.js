@@ -1,10 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, query, where, getDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import "./dashboard.css";
-import "./dashboard800.css";
-import "./nav.css";
-import "./darkmode.css";
+import "./dashboard.scss";
+import "./dashboard800.scss";
+import "./nav.scss";
+import "./darkmode.scss";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",

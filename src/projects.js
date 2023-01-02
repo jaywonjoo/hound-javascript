@@ -6,10 +6,10 @@ import {
   updateDoc, arrayUnion, arrayRemove,
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import "./projects.css";
-import "./projects800.css";
-import "./nav.css";
-import "./darkmode.css";
+import "./projects.scss";
+import "./projects800.scss";
+import "./nav.scss";
+import "./darkmode.scss";
 
 
 const firebaseConfig = {
