@@ -419,14 +419,14 @@ header {
 }
 
 .card-content-overlay-favorite-btn-star {
-  content: url(../images/icon_star_not_favorited.png);
+  content: url(../dist/images/icon_star_not_favorited.png);
   width: 12px;
   height: 12px;
   padding-left: 2px;
 }
 
 .card-content-overlay-favorite-btn-star.favorited {
-  content: url(../images/icon_star_favorited.png);
+  content: url(../dist/images/icon_star_favorited.png);
 }
 
 .starred-project-section-header {
