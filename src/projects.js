@@ -84,7 +84,7 @@ const editTicketForm = document.querySelector(".edit-ticket-form")
 // Mobile: Open Sidebar
 const sidebarButton = document.querySelector(".sidebar-btn-master");
 const dashboardMasterMobile = document.querySelector(".sidebar-master")
-const overlayer = document.querySelector(".blurred-overlay");
+const overlayer = document.querySelector(".overlay-blurred");
 // Custom Background
 const body = document.querySelector("#body")
 // Hide background input on submit

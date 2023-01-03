@@ -225,6 +225,24 @@ button {
       border-radius: 10px;
     }
   }
+
+  &-blurred {
+    background-color: transparent;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    @include mq(small) {
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      left: 0%;
+    }
+  }
 }
 
 .modal {
@@ -799,16 +817,16 @@ button {
 
 
 
-.blurred-overlay {
-  background-color: transparent;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
+// .blurred-overlay {
+//   background-color: transparent;
+//   backdrop-filter: blur(5px);
+//   -webkit-backdrop-filter: blur(5px);
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   bottom: 0;
+// }
 
 .clear-overlay {
   position: absolute;
