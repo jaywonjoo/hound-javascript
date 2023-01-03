@@ -47,21 +47,21 @@ const solid = document.querySelectorAll(".solid")
 const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
 // populateUserIconAndTheme()
-const navUserIcon = document.querySelector(".nav-user-icon")
+const navUserIcon = document.querySelector(".header-right-user-icon")
 const themeBtn = document.querySelector("#themeBtn")
 const currentUserIdDiv = document.querySelector('#uid')
 const currentUserDocRefDiv = document.querySelector('#idUid')
 // createProject() & createProjectDiv()
 const addProjectForm = document.querySelector("#modal-create-project-form");
 // projectRedirectLink()
-const projectCards = document.getElementsByClassName("project-card");
+const projectCards = document.getElementsByClassName("project-section-card");
 // setProjectDataIndex()
-const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
-const starBtnContainer = document.getElementsByClassName("card-content-overlay-favorite-btn-container")
+const starBtnMulti = document.getElementsByClassName("project-section-card-favorite-btn-star");
+const starBtnContainer = document.getElementsByClassName("project-section-card-favorite-btn")
 // openSidebar()
-const sidebarButton = document.querySelector(".sidebar-button");
-const dashboardMasterMobile = document.querySelector(".dashboard-master")
-const overlayer = document.querySelector(".blurred-overlay");
+const sidebarButton = document.querySelector(".sidebar-btn-master");
+const dashboardMasterMobile = document.querySelector(".sidebar-master")
+const overlayer = document.querySelector(".overlay-blurred");
 // logOut()
 const logoutButton = document.querySelector("#logoutButton");
 // closeOverlayOne() & turnOffProjectHoverModal(projectCard)
@@ -69,9 +69,9 @@ const overlayOne = document.querySelector("#overlayOne")
 // populateUserIconAndTheme() & setThemeButton(currentUid)
 const darkModeSwitch = document.querySelector("#switch")
 // populateUserInfoModal(currentUid)
-const userIconMedium = document.querySelector(".user-icon-medium")
-const udoName = document.querySelector(".udo-name")
-const udoemail = document.querySelector(".udo-email")
+const userIconMedium = document.querySelector(".modal-user-dropdown-card-icon-medium")
+const udoName = document.querySelector(".modal-user-dropdown-card-right-name")
+const udoemail = document.querySelector(".modal-user-dropdown-card-right-email")
 // openProjectManager()
 const manageProjectsMaster = document.querySelector("#manageProjectsMaster")
 const projectManagerBtn = document.querySelector("#projectManagerBtn")
@@ -178,44 +178,44 @@ function populateProjects(projectQuery, projectContainer) {
     for (i = 0; i < sharedProjectsArray.length; i++) {
       const newProjectUl = document.createElement("ul");
       newProjectUl.setAttribute("id", "projectCardMaster")
+      newProjectUl.classList.add("project-section-card-master");
       projectContainer.appendChild(newProjectUl);
       
       const newProject = document.createElement("li");
       newProjectUl.appendChild(newProject);
-      newProject.classList.add("project-card");
+      newProject.classList.add("project-section-card");
       const fetchedBackgroundURL = sharedProjectsArray[i].background;
       newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
 
-
       const cardFadeOverlay = document.createElement("span")
       newProject.appendChild(cardFadeOverlay);
-      cardFadeOverlay.classList.add("card-fade-overlay");
+      cardFadeOverlay.classList.add("project-section-card-fade-overlay");
 
       const cardContentOverlay = document.createElement("span")
       newProject.appendChild(cardContentOverlay);
-      cardContentOverlay.classList.add("card-content-overlay");
+      cardContentOverlay.classList.add("project-section-card-content");
 
       const cardContentOverlayProjectTitle = document.createElement("div")
       cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
       cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
-      cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
+      cardContentOverlayProjectTitle.classList.add("project-section-card-title");
 
       const cardContentOverlayBottomRow = document.createElement("div")
       cardContentOverlay.appendChild(cardContentOverlayBottomRow);
-      cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
+      cardContentOverlayBottomRow.classList.add("project-section-card-bottom");
 
       const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
       cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
-      cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
+      cardContentOverlayFavoriteBtnContainer.classList.add("project-section-card-favorite-btn");
 
       const cardContentOverlayFavoriteBtnStar = document.createElement("img")
-      cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
+      cardContentOverlayFavoriteBtnStar.classList.add("project-section-card-favorite-btn-star")
       cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
 
       const newProjectId = document.createElement("div");
       newProject.appendChild(newProjectId);
       newProjectId.innerText = sharedProjectsArray[i].id;
-      newProjectId.classList.add("project-id-card");
+      newProjectId.classList.add("project-section-card-id");
 
       const idUid = document.querySelector('#idUid').textContent
       const currentUserDocRef = doc(db, 'users', idUid)
@@ -267,16 +267,16 @@ function populateProjectManager(projectQuery, projectContainer) {
       projectLiNameChangerForm.appendChild(projectLiNameChangerInput);
       projectLiSubMaster.appendChild(projectLiKebabButton);
       projectLiMaster.setAttribute("id", "projectLiMaster")
-      projectLiName.classList.add("project-li-name")
-      projectLiNameChangerForm.classList.add("project-li-name-changer-form")
-      projectLiSubMaster.classList.add("project-li-sub-master")
-      projectLiMaster.classList.add("project-li-master")
-      projectLiLeft.classList.add("project-li-left")
-      projectIcon.classList.add("project-li-icon")
+      projectLiName.classList.add("sidebar-manage-projects-li-left-name")
+      projectLiNameChangerForm.classList.add("sidebar-manage-projects-li-left-name-changer-form")
+      projectLiSubMaster.classList.add("sidebar-manage-projects-li-sub-master")
+      projectLiMaster.classList.add("sidebar-manage-projects-li-master")
+      projectLiLeft.classList.add("sidebar-manage-projects-li-left")
+      projectIcon.classList.add("sidebar-manage-projects-li-left-icon")
       projectLiNameChangerForm.classList.add("hidden")
-      projectLiKebabButton.classList.add("project-li-kebab-button")
+      projectLiKebabButton.classList.add("sidebar-manage-projects-li-kebab-btn")
       projectLiKebabButton.classList.add("open-modal-btn")
-      projectLiNameChangerInput.classList.add("project-name-changer-input")
+      projectLiNameChangerInput.classList.add("sidebar-manage-projects-li-left-name-changer-form-input")
       projectIcon.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
       projectLiName.innerText = projectsArray[i].name;
       projectLiNameChangerInput.value = projectsArray[i].name;
@@ -287,8 +287,8 @@ function populateProjectManager(projectQuery, projectContainer) {
       const projectLiModalDeleteButton = document.createElement("button")
       projectLiModalMaster.classList.add("modal")
       projectLiModalMaster.classList.add("solid")
-      projectLiModalMaster.classList.add("edit-project-modal")
-      projectLiModalDeleteButton.classList.add("project-li-modal-delete-btn")
+      projectLiModalMaster.classList.add("sidebar-manage-projects-li-delete-btn-modal")
+      projectLiModalDeleteButton.classList.add("sidebar-manage-projects-li-delete-btn")
       projectLiMaster.appendChild(projectLiModalMaster);
       projectLiModalMaster.appendChild(projectLiModalDeleteButton);
       projectLiModalDeleteButton.innerText = "Delete?"
@@ -296,7 +296,7 @@ function populateProjectManager(projectQuery, projectContainer) {
       // Project overlay
       const projectLiOverlayMaster = document.createElement("div")
       projectLiOverlayMaster.classList.add("overlay")
-      projectLiOverlayMaster.classList.add("edit-project-overlay")
+      projectLiOverlayMaster.classList.add("sidebar-manage-projects-overlay")
       projectLiMaster.appendChild(projectLiOverlayMaster);
 
       deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster)
@@ -622,7 +622,7 @@ function closeSidebarWithOverlay() {
 
 // click on div to redirect user to project specific page
 function projectRedirectLink() {
-  const projectCards = document.querySelectorAll(".project-card");
+  const projectCards = document.querySelectorAll(".project-section-card");
   
   projectCards.forEach((card) => {
     card.addEventListener("click", () => {

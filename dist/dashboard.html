@@ -11,14 +11,14 @@
   
   <body class="solid">
     <section class="master-container">
-      <header class="solid">
+      <header class="header solid">
         <a class='header-left'>
-          <img loading="lazy" class='nav-logo logo' style="width:1.8em;height:1.8em" src="images/hound.svg"/>
-          <h1 class='brand-title'>Hound</h1>
+          <img loading="lazy" class='header-logo logo' style="width:1.8em;height:1.8em" src="images/hound.svg"/>
+          <h1 class='header-title'>Hound</h1>
         </a>
         <div class='header-right'>
-          <div class="nav-user-icon-container">
-            <button class="nav-user-icon open-modal-btn"></button>
+          <div class="header-right-user-icon-container">
+            <button class="header-right-user-icon open-modal-btn"></button>
           </div>
         </div>
       </header>
@@ -29,124 +29,121 @@
       </div>
 
       <div id="overlayOne" class="overlay-one"></div>
-      <div class="overlay user-dropdown-overlay"></div>
+      <div class="overlay overlay-user-dropdown"></div>
 
-      <details-menu class="modal user-dropdown-modal transparent">
-        <div class="udo-master">
-          <h2 class="udo-account-label">Account</h2>
-          <section class="udo-user-card">
-            <span class="user-icon-medium"></span>
-            <div class="user-dropdown-overlay-inside-user-card-right">
-              <span class="udo-name"></span>
-              <span class="udo-email"></span>
+      <details-menu class="modal modal-user-dropdown transparent">
+        <div class="modal-user-dropdown-master">
+          <h2 class="modal-user-dropdown-label">Account</h2>
+          <section class="modal-user-dropdown-card">
+            <span class="modal-user-dropdown-card-icon-medium"></span>
+            <div class="modal-user-dropdown-card-right">
+              <span class="modal-user-dropdown-card-right-name"></span>
+              <span class="modal-user-dropdown-card-right-email"></span>
             </div>
           </section>
 
           <span class="delineator-full"></span>
 
-          <section class="udo-background-form">
-            <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
-            <form id="setBackgroundForm" class="set-background-form">
-              <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+          <section class="modal-user-dropdown-background-form-container">
+            <button id="setBackgroundFormBtn" class="modal-user-dropdown-link modal-user-dropdown-background-form-btn">Project Background</button>
+            <form id="setBackgroundForm" class="modal-user-dropdown-background-form">
+              <input type="text" id="setBackgroundFormBtnInput" class="modal-user-dropdown-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
             </form>
           </section>
 
-          <span class="udo-link">Account Settings</span>
-          <span class="udo-link">Team Members</span>
+          <span class="modal-user-dropdown-link">Account Settings</span>
+          <span class="modal-user-dropdown-link">Team Members</span>
 
           <span class="delineator-full"></span>
 
-          <div id="darkModeBtn" class="udo-dark-mode">
-            <span class="udo-link" id="themeBtn"></span>
-            <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
+          <div id="darkModeBtn" class="modal-user-dropdown-dark-mode">
+            <span class="modal-user-dropdown-link" id="themeBtn"></span>
+            <input class="modal-user-dropdown-dark-mode-sliding-input" type="checkbox" id="switch" /><label class="modal-user-dropdown-dark-mode-sliding-input-label" for="switch">Toggle</label>
           </div>
 
           <span class="delineator-full"></span>
 
-          <button id="logoutButton" class="solid">Log Out</button>
+          <button id="logoutButton" class="modal-user-dropdown-logout-btn solid">Log Out</button>
         </div>
       </details-menu>
 
-      <section class="lower-half">
+      <section class="lower-half-master-container">
         <div class="mobile-spacer"></div>
 
         <div class="lower-half-sub-container">
-          <section class="dashboard-master transparent">
-            <section class="dashboard-links">
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-home-sharp.svg">
+          <section class="sidebar-master transparent">
+            <section class="sidebar-links">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-home-sharp.svg">
                 Dashboard
               </a>
 
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-user-male.svg">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-user-male.svg">
                 Team Members
               </a>
 
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-settings.svg">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-settings.svg">
                 Account Settings
               </a>
             </section>
 
             <span class="delineator"></span>
 
-            <section class="dashboard-links">
-              <a id="projectManagerBtn" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-for-you.svg">
+            <section class="sidebar-links">
+              <a id="projectManagerBtn" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-for-you.svg">
                 Manage Projects
               </a>
 
-              <ul id="manageProjectsMaster" class="manage-projects-master hidden"></ul>
+              <ul id="manageProjectsMaster" class="sidebar-manage-projects-master hidden"></ul>
             </section>
           </section>
 
-          <button class="sidebar-button">
-            <span class="sidebar-button-circle transparent">></span>
-            <span class="sidebar-button-bar transparent"></span>
+          <button class="sidebar-btn-master">
+            <span class="sidebar-btn-circle transparent">></span>
+            <span class="sidebar-btn-bar transparent"></span>
           </button>
 
           <!-- <div class="sidebar-button-bar-spacer"></div> -->
 
-          <div class="overlay blurred-overlay"></div>
+          <div class="overlay overlay-blurred"></div>
 
-          <section class="content-section">
-            <h2 class="page-header">Projects</h2>
+          <section class="project-section-master">
+            <h2 class="project-section-main-header">Projects</h2>
               
-            <section class="starred-project-section">
-                <h2 class="starred-project-section-header"> Starred Projects</h2>
-                <div id="starred-project-container"></div>
+            <section>
+                <h2 class="project-section-sub-header"> Starred Projects</h2>
+                <div id="starred-project-container" class="project-section-container"></div>
             </section>
 
-            <section class="project-section">
-                <h2 class="project-section-header"> Your Projects 
-                  <button id="button" class="open-modal-btn new-project-btn button" style="z-index: 3;">New Project</button>
+            <section>
+                <h2 class="project-section-sub-header"> Your Projects 
+                  <button id="button" class="open-modal-btn modal-btn-new-project button" style="z-index: 3;">New Project</button>
                 </h2>
-                <div id="project-container"></div>
+                <div id="project-container" class="project-section-container"></div>
             </section>
 
-            <h2 class="project-section-header">Shared Projects</h2>   
-            <div id="shared-project-container"></div>
+            <section>
+              <h2 class="project-section-sub-header">Shared Projects</h2>   
+              <div id="shared-project-container" class="project-section-container"></div>
+            </section>
+
 
             <div class="overlay"></div>
 
-            <div class="modal new-project-modal solid">
-              <div class="new-project-modal-master">
-                <h3 class="new-project-modal-header">New Project</h3>
+            <div class="modal modal-new-project solid">
+              <div class="modal-new-project-master">
+                <h3 class="modal-new-project-header">New Project</h3>
                 <span class="modal-delineator"></span>
-                <form id="modal-create-project-form" class="create-project-form">
+                <form id="modal-create-project-form" class="modal-new-project-form">
                   <!-- <label for="name">Name:</label> -->
-                  <input type="text" name="name" class="create-project-input" placeholder="Project Name" required>
-                  <button id="close-modal-btn" class="create-project-btn button">Create</button>
+                  <input type="text" name="name" class="modal-new-project-input" placeholder="Project Name" required>
+                  <button id="close-modal-btn" class="modal-new-project-btn button">Create</button>
                 </form>
               </div>
             </div>
-
-            <form class="delete">
-              <label for="id">Document id:</label>
-              <input type="text" name="id" required>
-              <button>delete a Project</button>
-            </form>
 
           </section>
         </div>
