@@ -212,6 +212,19 @@ button {
       left: 0%;
     }
   }
+
+  &-one {
+    display: none;
+
+    &.open {
+      display: block;
+      z-index: 0;
+      position: fixed;
+      height: 100vh;
+      width: 100vw;
+      left: 0%;
+    }
+  }
 }
 
 .modal {
@@ -847,7 +860,7 @@ button {
       flex-direction: column;
       justify-content: space-between;
       padding: 10px 0 10px 10px;
-      border-radius: 10px
+      border-radius: 10px;
     }
 
     &-title {
