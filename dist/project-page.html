@@ -12,81 +12,81 @@
   </head>
 
   <body id="body" class="solid">
-    <div id="honme">
-      <div id="uid"></div>
-      <div id="idUid"></div>
-    </div>
-
     <section class="master-container">
-      <header class="solid">
+      <header class="header solid">
         <a class='header-left'>
-          <img loading="lazy" class='nav-logo logo' style="width:1.8em;height:1.8em" src="images/hound.svg"/>
-          <h1 class='brand-title'>Hound</h1>
+          <img loading="lazy" class='header-left-logo logo' style="width:1.8em;height:1.8em" src="images/hound.svg"/>
+          <h1 class='header-left-title'>Hound</h1>
         </a>
         
         <div class='header-right'>
-          <div class="nav-user-icon-container">
-            <button class="nav-user-icon open-modal-btn"></button>
+          <div class="header-right-user-icon-container">
+            <button class="header-right-user-icon open-modal-btn"></button>
           </div>
         </div>
       </header>
 
-      <div class="overlay user-dropdown-overlay"></div>
+        <div id="honme">
+        <div id="uid"></div>
+        <div id="idUid"></div>
+      </div>
 
-      <details-menu class="modal user-dropdown-modal transparent">
-        <div class="udo-master">
-          <h2 class="udo-account-label">Account</h2>
-            <section class="udo-user-card">
-              <span class="user-icon-medium"></span>
-              <div class="user-dropdown-overlay-inside-user-card-right">
-                <span class="udo-name"></span>
-                <span class="udo-email"></span>
+      <div class="overlay overlay-user-dropdown"></div>
+
+      <details-menu class="modal modal-user-dropdown transparent">
+        <div class="modal-user-dropdown-master">
+          <h2 class="modal-user-dropdown-label">Account</h2>
+            <section class="modal-user-dropdown-user-card">
+              <span class="modal-user-dropdown-user-card-icon-medium"></span>
+              <div class="modal-user-dropdown-user-card-right">
+                <span class="modal-user-dropdown-user-card-right-name"></span>
+                <span class="modal-user-dropdown-user-card-right-email"></span>
               </div>
             </section>
 
           <span class="delineator-full"></span>
 
-          <section class="udo-background-form">
-            <button id="setBackgroundFormBtn" class="udo-link set-background-form-btn">Project Background</button>
-            <form id="setBackgroundForm" class="set-background-form">
-              <input type="text" id="setBackgroundFormBtnInput" class="set-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
+          <section class="modal-user-dropdown-background-form-container">
+            <button id="setBackgroundFormBtn" class="modal-user-dropdown-link modal-user-dropdown-background-form-btn">Project Background</button>
+            <form id="setBackgroundForm" class="modal-user-dropdown-background-form">
+              <input type="text" id="setBackgroundFormBtnInput" class="modal-user-dropdown-background-form-input hidden" name="inputtedBackgroundURL" placeholder="Enter image url" required>
             </form>
           </section>
 
-          <span class="udo-link">Account Settings</span>
-          <span class="udo-link">Team Members</span>
+          <span class="modal-user-dropdown-link">Account Settings</span>
+          <span class="modal-user-dropdown-link">Team Members</span>
 
           <span class="delineator-full"></span>
 
-          <div id="darkModeBtn" class="udo-dark-mode">
-            <span class="udo-link" id="themeBtn"></span>
-            <input class="sliding-input" type="checkbox" id="switch" /><label class="sliding-input-label" for="switch">Toggle</label>
+          <div id="darkModeBtn" class="modal-user-dropdown-dark-mode">
+            <span class="modal-user-dropdown-link" id="themeBtn"></span>
+            <input class="modal-user-dropdown-dark-mode-sliding-input" type="checkbox" id="switch" /><label class="modal-user-dropdown-dark-mode-sliding-input-label" for="switch">Toggle</label>
           </div>
 
           <span class="delineator-full"></span>
 
-          <button id="logoutButton" class="solid">Log Out</button>
+          <button id="logoutButton" class="modal-user-dropdown-logout-btn solid">Log Out</button>
         </div>
       </details-menu>
 
-      <section class="lower-half">
+      <section class="lower-half-master-container">
         <div class="mobile-spacer"></div>
 
         <div class="lower-half-sub-container">
-          <section class="dashboard-master transparent">
-            <section class="dashboard-links">
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-home-sharp.svg">
+          <section class="sidebar-master transparent">
+            <section class="sidebar-links">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-home-sharp.svg">
                 Dashboard
               </a>
 
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-user-male.svg">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-user-male.svg">
                 Team Members
               </a>
 
-              <a id="dashboardButton" class="dashboard-button">
-                <img class="dashboard-button-icon logo" src="images/icons8-settings.svg">
+              <a id="dashboardButton" class="sidebar-links-btn">
+                <img class="sidebar-links-btn-icon logo" src="images/icons8-settings.svg">
                 Account Settings
               </a>
             </section>
@@ -96,19 +96,19 @@
             <section class="pie-box">
               <section class="pie-header">
                 <span class="pie-title">Tickets by Status</span>
-                  <section class="legend">
-                    <span class="text">
-                      <span class="bottom-dot"></span>
+                  <section class="pie-legend">
+                    <span class="pie-legend-text">
+                      <span class="pie-legend-bottom-dot"></span>
                       Resolved
                     </span>
 
-                    <span class="text">
-                      <span class="middle-dot"></span>
+                    <span class="pie-legend-text">
+                      <span class="pie-legend-middle-dot"></span>
                       In-Progress
                     </span>
 
-                    <span class="text">
-                      <span class="top-dot"></span>
+                    <span class="pie-legend-text">
+                      <span class="pie-legend-top-dot"></span>
                       Unresolved
                     </span>
                   </section>
@@ -119,19 +119,19 @@
               <section class="pie-header">
                 <span class="pie-title">Tickets by Type</span>
 
-                <section class="legend">
-                  <span class="text">
-                    <span class="bottom-dot"></span>
+                <section class="pie-legend">
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-bottom-dot"></span>
                     Issue
                   </span>
 
-                  <span class="text">
-                    <span class="middle-dot"></span>
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-middle-dot"></span>
                     Bug
                   </span>
 
-                  <span class="text">
-                    <span class="top-dot"></span>
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-top-dot"></span>
                     Feature Request
                   </span>
                 </section>
@@ -141,19 +141,19 @@
             
               <section class="pie-header">
                 <span class="pie-title">Tickets by Priority</span>
-                <section class="legend">
-                  <span class="text">
-                    <span class="bottom-dot"></span>
+                <section class="pie-legend">
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-bottom-dot"></span>
                     Low
                   </span>
 
-                  <span class="text">
-                    <span class="middle-dot"></span>
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-middle-dot"></span>
                     Medium
                   </span>
 
-                  <span class="text">
-                    <span class="top-dot"></span>
+                  <span class="pie-legend-text">
+                    <span class="pie-legend-top-dot"></span>
                     High
                   </span>
                 </section>

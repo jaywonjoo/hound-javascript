@@ -83,7 +83,7 @@ const pieHigh = document.createElement("div")
 const editTicketForm = document.querySelector(".edit-ticket-form")
 // Mobile: Open Sidebar
 const sidebarButton = document.querySelector(".sidebar-button");
-const dashboardMasterMobile = document.querySelector(".dashboard-master")
+const dashboardMasterMobile = document.querySelector(".sidebar-master")
 const overlayer = document.querySelector(".blurred-overlay");
 // Custom Background
 const body = document.querySelector("#body")
@@ -99,13 +99,13 @@ const populatableMemberDiv = document.querySelector("#populatable-member-div")
 // Darkmode button
 const darkModeSwitch = document.querySelector("#switch")
 // Populate user info modal
-const userIconMedium = document.querySelector(".user-icon-medium")
-const udoName = document.querySelector(".udo-name")
-const udoemail = document.querySelector(".udo-email")
+const userIconMedium = document.querySelector(".modal-user-dropdown-user-card-icon-medium")
+const udoName = document.querySelector(".modal-user-dropdown-user-card-right-name")
+const udoemail = document.querySelector(".modal-user-dropdown-user-card-right-email")
 // 
-const bottomDot = document.getElementsByClassName("bottom-dot")
-const middleDot = document.getElementsByClassName("middle-dot")
-const topDot = document.getElementsByClassName("top-dot")
+const bottomDot = document.getElementsByClassName("pie-legend-bottom-dot")
+const middleDot = document.getElementsByClassName("pie-legend-middle-dot")
+const topDot = document.getElementsByClassName("pie-legend-top-dot")
 
 redirectToDashboard()
 logoutUser()
@@ -159,7 +159,7 @@ function populateUserIconAndTheme() {
                 let userListOne = []
                 userListOne.push({ ...docs.data(), id: docs.id });
   
-                const navUserIcon = document.querySelector(".nav-user-icon")
+                const navUserIcon = document.querySelector(".header-right-user-icon")
                 navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
   
                 let lightString = String("light")

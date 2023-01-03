@@ -1,40 +1,11 @@
+
+
+
+
 @media (max-width: 900px) {
     /* top row */
-    body {
-        background-attachment: fixed;
-    }
 
-    .master-container {
-        width: 100vw;
-        overflow: hidden;
-    }
 
-    header {
-        height: 3em;
-        position: fixed;
-        z-index: 1000;
-        width: 100vw;
-        overflow-x: hidden;
-        padding: 0 4px 0 4px;
-        margin: 0;
-        z-index: 1003;
-    }
-
-    .header-left {
-        margin: 0;
-    }
-
-    .nav-logo {
-        margin-bottom: 0;
-    }
-    
-    .nav-user-icon-container {
-        margin: 0;
-    }
-
-    .nav-user-icon {
-        margin: 0 9px 0 0;
-    }
 
     #logoutButton {
         border: none;
@@ -43,22 +14,7 @@
         margin-bottom: .5em;
     }
 
-    .lower-half {
-        width: 100vw;
-        display: flex;
-        flex-direction: column;
-        height: auto;
-    }
 
-    .mobile-spacer {
-        height: 3em;
-    }
-
-    .lower-half-sub-container {
-        display: flex;
-        flex-direction: row;
-        height: unset;
-    }
 
     .sidebar-button-circle {
         border-radius: 50px;
@@ -104,20 +60,20 @@
         width: 18px;
     }
 
-    .dashboard-master {
-        z-index: 1002;
-        width: 75vw;
-        top: 9.5%;
-        position: fixed;
-        height: 95vh;
-        overflow: scroll;
-        left: calc(-75vw - 1px);
-        top: 3em;
-    }
+    // .dashboard-master {
+    //     z-index: 1002;
+    //     width: 75vw;
+    //     top: 9.5%;
+    //     position: fixed;
+    //     height: 95vh;
+    //     overflow: scroll;
+    //     left: calc(-75vw - 1px);
+    //     top: 3em;
+    // }
 
-    .dashboard-links {
-        margin: 0 50px;
-    }
+    // .dashboard-links {
+    //     margin: 0 50px;
+    // }
 
     .pie-container {
         height: unset;
@@ -230,25 +186,7 @@
         height: 49vh;
     }
 
-    .user-dropdown-modal {
-        position: fixed;
-        width: 80vw;
-        height: fit-content;
-        right: .2em;
-        top: 3.3em;
-        border-radius: 10px;
-    }
-
-    .user-icon-medium {
-        margin-right: 1em;
-    }
-
     /* NONUNIVERSAL */
-    .udo-account-label {
-        font-size: 1em;
-        margin-bottom: .5em;
-        margin-top: 0;
-    }
 
     .all-other-modals {
         z-index: 500;
@@ -265,58 +203,27 @@
         left: 0%;
     }
 
-    .user-dropdown-overlay {
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        border-radius: 10px;
-    }
+    // .user-dropdown-overlay {
+    //     position: fixed;
+    //     width: 100vw;
+    //     height: 100vh;
+    //     border-radius: 10px;
+    // }
 
-    .udo-master {
-        display: flex;
-        flex-direction: column;
-        padding: 1.25em .9em;
-    }
-
-    .udo-user-card {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .user-dropdown-overlay-inside-user-card-right {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: .5em 0;
-    }
-
-    .udo-name {
-        font-weight: 600;
-    }
-
-    .udo-email {
-        font-size: .9em;
-    }
 
     .udo-link {
         padding: .5em 0;
         font-size: .9em;
     }
 
-    .udo-dark-mode {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
 
-    .udo-dark-mode-btn {
-        background-color: black;
-        border: none;
-        width: 4.5em;
-        height: 2em;
-        border-radius: 15em;
-    }
+    // .udo-dark-mode-btn {
+    //     background-color: black;
+    //     border: none;
+    //     width: 4.5em;
+    //     height: 2em;
+    //     border-radius: 15em;
+    // }
     
     .team-member-line-item-name {
         margin-left: 3%;
