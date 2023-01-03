@@ -1,13 +1,13 @@
 import "./index.scss";
 
 // loginRedirectButton()
-const loginButton = document.querySelector(".nav-login");
+const loginButton = document.querySelector(".header-nav-links-login");
 // signUpRedirectButton()
-const signUpButton = document.querySelector(".nav-register-bubble");
+const signUpButton = document.querySelector(".header-nav-links-register");
 const startDoingButton = document.querySelector("#registerBtn");
 // toggleHamburgerMenu()
-const toggleButton = document.getElementsByClassName('toggle-button')[0]
-const navbarLinks = document.getElementsByClassName('navbar-links')[0]
+const toggleButton = document.getElementsByClassName('header-toggle-btn')[0]
+const navbarLinks = document.getElementsByClassName('header-nav-links')[0]
 
 loginRedirectButton()
 signUpRedirectButton()
