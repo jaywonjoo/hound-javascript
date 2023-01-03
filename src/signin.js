@@ -15,7 +15,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 // homePageLink()
-const logoHomeButton = document.querySelector(".logo-home-button-container");
+const logoHomeButton = document.querySelector(".home-btn");
 // signInForm()
 const signinForm = document.querySelector("#signinForm")
 // signInSequence()

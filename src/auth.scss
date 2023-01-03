@@ -1,14 +1,16 @@
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: #f5f5f5;
-    }
-}
+@use 'sass:map';
 
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #222;
-    }
-}
+$breakpoints: (
+    small: 800px,
+);
+
+@mixin mq($key) {
+	$size: map.get($breakpoints, $key);
+	
+	@media (max-width: $size) {
+		@content;
+	}
+};
 
 body {
     display: flex;
@@ -38,177 +40,107 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @include mq(small) {
+        box-shadow: none;
+        padding: 0
+    }    
 }
 
-.logo-home-button-container {
+.home-btn {
     display: flex;
     align-items: center;
     margin: 28px 0px 0px 0px;
     cursor: pointer;
+
+    &-logo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: -3px;
+        opacity: 0.9;
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: row;
+        font-size: 4rem;
+        margin: .5rem;
+        font-family: Graphik-Semibold,sans-serif;
+        font-weight: 600;
+        color: rgb(63, 63, 63);
+    }
 }
 
-.logo-home-button {
-    display: flex;
-    flex-direction: row;
-    font-size: 4rem;
-    margin: .5rem;
-    font-family: Graphik-Semibold,sans-serif;
-    font-weight: 600;
-    color: rgb(63, 63, 63);
-}
-
-.main-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: -3px;
-    opacity: 0.9;
-}
-
-.sign-in-message {
+.auth-message {
     margin-bottom: .5em;
     font-size: 1.5em;
     font-weight: 600;
     color: rgb(63, 63, 63);
-
 }
 
-.sign-up-message {
-    margin-bottom: .5em;
-    font-size: 1.5em;
-    font-weight: 600;
-    color: rgb(63, 63, 63);
+.auth {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: .5em;
+    }
 
-}
+    &-input {
+        border-style: solid rgb(0, 0, 0, .25);
+        border-radius: .75em;
+        width: 74%;
+        padding: .5em 1em;
+        /* font-size: 1em; */
+        margin: 0 0 1em 0;
+    }
 
-.sign-in-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: .5em;
-}
-
-.sign-up-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.input {
-    border-style: solid rgb(0, 0, 0, .25);
-    border-radius: .75em;
-    width: 74%;
-    padding: .5em 1em;
-    /* font-size: 1em; */
-    margin: 0 0 1em 0;
-}
-
-.sign-in-button {
-    border-style: none;
-    background-color: rgb(63, 63, 63);
-    color: white;
-    border-radius: .75em;
-    width: 81%;
-    padding: .65em 0;
-    /* font-size: 1em; */
-    margin: 0 0 1em 0;
-}
-
-.sign-up-button {
-    border-style: none;
-    background-color: rgb(63, 63, 63);
-    color: white;
-    border-radius: .75em;
-    width: 81%;
-    padding: .65em 0;
-    /* font-size: 1em; */
-    margin: 0 0 1em 0;
+    &-btn {
+        border-style: none;
+        background-color: rgb(63, 63, 63);
+        color: white;
+        border-radius: .75em;
+        width: 81%;
+        padding: .65em 0;
+        /* font-size: 1em; */
+        margin: 0 0 1em 0;
+    }
 }
 
 .or-space {
     color: rgba(0, 0, 0, 0.25);
 }
 
-.provider-container {
-    display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    /* flex-direction: ; */
-    border-style: none;
-    box-shadow: 0 0 10px 0 rgb(0, 0, 0, .25);
-    width: 80%;
-    border-radius: .5em;
-    font-size: 1em;
-    padding: .5em 0;
-    margin: 1em 0 0 0;
+.alt-link {
+    &-container {
+        width: 80%;
+    }
+
+    &-text {
+        font-size: .75em;
+        width: 80%;
+        color: rgba(0, 0, 0, 0.5);
+        margin: 0;
+    }
 }
 
-.provider-container:hover {
-    background-color: rgba(0, 0, 0, 0.025);
-}
-
-.provider-logo {
-    height: 1em;
-    position: absolute;
-    margin-left: .5em;
-    width: 30;
-}
-
-.provider-message {
-    height: 1em;
-    position: relative;
-    width: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.alt-link-container {
-    width: 80%;
-}
-
-.alt-link-text {
-    font-size: .75em;
-    width: 80%;
-    color: rgba(0, 0, 0, 0.5);
-    margin: 0;
-}
-
-.sign-in-link {
-    font-size: .75em;
-    width: 80%;
-    color: rgba(0, 0, 0, 0.5);
-    margin: 0;
-}
-
-#signUpLink {
+a {
     color: #5384f5
-}
-
-#signInLink{
-    color: #5384f5
-}
-
-#demoUserLink {
-    color: #5384f5
-}
-
-/* Sign-up page */
-.error-message-container {
-    width: 78%;
-    display: flex;
-    justify-content: left;
 }
 
 .error-message {
     display: none;
-    /* margin: -1em 0 0 0; */
+    margin: -1em 0 0 0;
     color: rgb(255, 0, 0);
     font-size: .75em;
+
+    &-container {
+        width: 78%;
+        display: flex;
+        justify-content: left;
+    }
 }
 
 .is-focused {
@@ -219,11 +151,4 @@ body {
 
 .hidden-sign-in-form {
     display: none;
-}
-
-@media (max-width: 800px) {
-    .parent-card {
-        box-shadow: none;
-        padding: 0
-    }
 }

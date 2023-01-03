@@ -24,7 +24,7 @@ const emailAuthInput = document.querySelector("#emailAuthInput")
 const passwordAuthInput = document.querySelector("#passwordAuthInput")
 const signinForm = document.querySelector("#signinForm")
 // homePageLink()
-const logoHomeButton = document.querySelector(".logo-home-button-container");
+const logoHomeButton = document.querySelector(".home-btn");
 // signInPageLink()
 const signInLink = document.querySelector("#signInLink");
 // signUpForm()
