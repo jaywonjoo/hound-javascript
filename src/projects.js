@@ -82,7 +82,7 @@ const pieHigh = document.createElement("div")
 // Edit Ticket Form
 const editTicketForm = document.querySelector(".edit-ticket-form")
 // Mobile: Open Sidebar
-const sidebarButton = document.querySelector(".sidebar-button");
+const sidebarButton = document.querySelector(".sidebar-btn-master");
 const dashboardMasterMobile = document.querySelector(".sidebar-master")
 const overlayer = document.querySelector(".blurred-overlay");
 // Custom Background
