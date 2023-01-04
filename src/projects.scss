@@ -510,6 +510,27 @@ button {
       cursor: pointer;
     }
   }
+
+  &-generic {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border-radius: .75rem;
+    background-color: white;
+    width: 30%;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  
+    @include mq(small) {
+      z-index: 500;
+      position: fixed;
+      height: fit-content;
+      width: 80vw;
+      top: 53vh;
+    }
+  }
 }
 
 .delineator {
@@ -978,26 +999,6 @@ button {
 
 }
 
-.all-other-modals {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem;
-  border-radius: .75rem;
-  background-color: white;
-  width: 30%;
-  height: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-  @include mq(small) {
-    z-index: 500;
-    position: fixed;
-    height: fit-content;
-    width: 80vw;
-    top: 53vh;
-  }
-}
 
 .create-ticket {
   &-form {
@@ -1337,6 +1338,74 @@ button {
   }
 }
 
+.edit-ticket {
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: left;
+
+    @include mq(small) {
+      height: 100%;
+    }
+
+    &label {
+      margin-bottom: -.5rem;
+      font-size: .75rem;
+    }
+
+    &input {
+      width: auto;
+    }
+
+    &select {
+      width: 100%;
+    }
+
+    &-header {
+      margin: 0;
+      font-size: 2rem;
+    }
+  }
+
+  &-title {
+
+  }
+
+  &-description {
+    max-height: 8rem;
+    min-height: 5rem;
+    resize: vertical;
+    font-family: inherit;
+
+    @include mq(small) {
+      height: 100%;
+    }
+  }
+
+  &-status {
+
+  }
+
+  &-type {
+
+  }
+
+  &-priority {
+    margin-bottom: .75em;
+  }
+
+  &-btn {
+    border: none;
+    border-radius: 1rem;
+    padding: 7px 10px;
+    width: 100%;
+    cursor: pointer;
+  }
+}
+
+
 
 
 
@@ -1599,59 +1668,6 @@ button {
   font-size: .75em;
 }
 
-/* Edit Ticket Form */
-.edit-ticket-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-
-
-.edit-ticket-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-}
-
-.edit-ticket-form label {
-margin-bottom: -.5rem;
-font-size: .75rem;
-}
-
-.edit-ticket-form input {
-  width: auto;
-}
-
-.edit-ticket-form select {
-  width: 100%;
-}
-
-.edit-ticket-form-header {
-  margin: 0;
-  font-size: 2rem;
-}
-
-.edit-ticket-description {
-  max-height: 8rem;
-  min-height: 5rem;
-  resize: vertical;
-  font-family: inherit;
-}
-
-.edit-ticket-btn {
-  border: none;
-  border-radius: 1rem;
-  padding: 7px 10px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.edit-ticket-priority {
-  margin-bottom: .75em;
-}
-
 @media (max-width: 1300px) {
   .lower-half {
 
@@ -1680,10 +1696,6 @@ font-size: .75rem;
     display: none;
   }
 
-  // .team-members {
-  //   width: 35%;
-  // }
-
   .team-member-line-item-name {
     width: 37%;
   }
@@ -1691,12 +1703,15 @@ font-size: .75rem;
   .team-member-line-item-email {
     width: 49%;
   }
+}
 
   // .ticket-section {
   //   width: 62.5%;
   // }
-}
 
+  // .team-members {
+  //   width: 35%;
+  // }
 
 // .header-kebab-spacer {
 //   width: 5%;
@@ -2215,4 +2230,78 @@ font-size: .75rem;
 // .ticket-info-row-bottom {
 //   display: flex;
 //   margin-bottom: 30px;
+// }
+
+
+// .all-other-modals {
+//   position: absolute;
+//   top: 40%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   padding: 1rem;
+//   border-radius: .75rem;
+//   background-color: white;
+//   width: 30%;
+//   height: auto;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+//   @include mq(small) {
+//     z-index: 500;
+//     position: fixed;
+//     height: fit-content;
+//     width: 80vw;
+//     top: 53vh;
+//   }
+// }
+
+
+/* Edit Ticket Form */
+// .edit-ticket-form {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 10px;
+// }
+
+// .edit-ticket-form {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: left;
+// }
+
+// .edit-ticket-form label {
+// margin-bottom: -.5rem;
+// font-size: .75rem;
+// }
+
+// .edit-ticket-form input {
+//   width: auto;
+// }
+
+// .edit-ticket-form select {
+//   width: 100%;
+// }
+
+// .edit-ticket-form-header {
+//   margin: 0;
+//   font-size: 2rem;
+// }
+
+// .edit-ticket-description {
+//   max-height: 8rem;
+//   min-height: 5rem;
+//   resize: vertical;
+//   font-family: inherit;
+// }
+
+// .edit-ticket-btn {
+//   border: none;
+//   border-radius: 1rem;
+//   padding: 7px 10px;
+//   width: 100%;
+//   cursor: pointer;
+// }
+
+// .edit-ticket-priority {
+//   margin-bottom: .75em;
 // }
