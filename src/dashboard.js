@@ -1,16 +1,9 @@
 import { initializeApp } from 'firebase/app';
-import {
-    getFirestore, collection, onSnapshot,
-    addDoc, deleteDoc, doc, serverTimestamp, Firestore, query,
-  where, getDoc, orderBy, connectFirestoreEmulator, 
-  updateDoc, arrayUnion, arrayRemove,
-} from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, query, where, getDoc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import "./dashboard.css";
-import "./dashboard800.css";
-import "./nav.css";
-import "./darkmode.css";
-
+import "./dashboard.scss";
+import "./nav.scss";
+import "./darkmode.scss";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgs-sGBJrnqvlOBqMbZr_E1hWYJoofA2c",
@@ -34,122 +27,104 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-
-// CONSTANTS ************************************************************************************************
+// Firebase stuff
 const db = getFirestore();
 const colRef = collection(db, "projects");
-// Project populating
+// populateProjectContainers()
 const starredProjectContainer = document.querySelector("#starred-project-container");
 const userProjectContainer = document.querySelector("#project-container");
 const sharedProjectContainer = document.querySelector("#shared-project-container");
+// closeModal()
 const modal = document.getElementsByClassName("modal");
+// setDataIndex()
 const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
+// closeModal()
 const overlay = document.getElementsByClassName("overlay");
-// User icon Constants
-const darkModeBtn = document.querySelector("#darkModeBtn")
+// setThemeDark() & setThemeLight()
 const transparent = document.querySelectorAll(".transparent")
 const solid = document.querySelectorAll(".solid")
 const button = document.querySelectorAll(".button")
 const logo = document.querySelectorAll(".logo")
+// populateUserIconAndTheme()
+const navUserIcon = document.querySelector(".header-right-user-icon")
 const themeBtn = document.querySelector("#themeBtn")
-const honme = document.querySelector('#honme')
 const currentUserIdDiv = document.querySelector('#uid')
 const currentUserDocRefDiv = document.querySelector('#idUid')
-// Creating new projects
-const addProjectForm = document.querySelector(".modal-create-project-button");
-// Deleting projects
-const deleteProjectForm = document.querySelector(".delete");
-// setting data indexes
-const projectCards = document.getElementsByClassName("project-card");
-const starBtnMulti = document.getElementsByClassName("card-content-overlay-favorite-btn-star");
-const starBtnContainer = document.getElementsByClassName("card-content-overlay-favorite-btn-container")
-// MF: Opening and closing dashboards
-const sidebarButton = document.querySelector(".sidebar-button");
-const dashboardMasterMobile = document.querySelector(".dashboard-master")
-const overlayer = document.querySelector(".blurred-overlay");
-// Logging out
+// createProject() & createProjectDiv()
+const addProjectForm = document.querySelector("#modal-create-project-form");
+// projectRedirectLink()
+const projectCards = document.getElementsByClassName("project-section-card");
+// setProjectDataIndex()
+const starBtnMulti = document.getElementsByClassName("project-section-card-favorite-btn-star");
+const starBtnContainer = document.getElementsByClassName("project-section-card-favorite-btn")
+// openSidebar()
+const sidebarButton = document.querySelector(".sidebar-btn-master");
+const dashboardMasterMobile = document.querySelector(".sidebar-master")
+const overlayer = document.querySelector(".overlay-blurred");
+// logOut()
 const logoutButton = document.querySelector("#logoutButton");
-// Close overlay one
+// closeOverlayOne() & turnOffProjectHoverModal(projectCard)
 const overlayOne = document.querySelector("#overlayOne")
-// Darkmode button
+// populateUserIconAndTheme() & setThemeButton(currentUid)
 const darkModeSwitch = document.querySelector("#switch")
-// Populate user info modal
-const userIconMedium = document.querySelector(".user-icon-medium")
-const udoName = document.querySelector(".udo-name")
-const udoemail = document.querySelector(".udo-email")
+// populateUserInfoModal(currentUid)
+const userIconMedium = document.querySelector(".modal-user-dropdown-card-icon-medium")
+const udoName = document.querySelector(".modal-user-dropdown-card-right-name")
+const udoemail = document.querySelector(".modal-user-dropdown-card-right-email")
+// openProjectManager()
+const manageProjectsMaster = document.querySelector("#manageProjectsMaster")
+const projectManagerBtn = document.querySelector("#projectManagerBtn")
 
-
-// FEATURES ************************************************************************************************
 
 populateUserIconAndTheme()
-// setThemeButton()
-// populateUserInfoModal()
 populateProjectContainers()
 closeOverlay()
 createProject()
-deleteProject()
+openProjectManager()
 setDataIndex()
 logOut()
-
-
-// MOBILE FEATURES ************************************************************************************************
 
 openSidebar()
 closeSideBar()
 closeOverlayOne()
 closeSidebarWithOverlay()
 
-// FUNCTIONS ************************************************************************************************
 
 function populateUserIconAndTheme() {
-
   onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
         const userRef = collection(db, 'users')
-
         const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+
         onSnapshot(userCreatorDocRef, (snapshot) => {
           snapshot.docs.forEach((docs) => {
-
               let userListOne = []
               userListOne.push({ ...docs.data(), id: docs.id });
 
-              const navUserIcon = document.querySelector(".nav-user-icon")
               navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
 
               let lightString = String("light")
               let darkString = String("dark")
 
-              // // SF: SET THEME 
+              // // SF: SET THEME
               if (userListOne[0].theme == lightString) {
                 darkModeSwitch.checked = true;
                 themeBtn.innerHTML = "Dark Mode"
                 setThemeLight()
-                      // console.log("blah")
               } else {
                 darkModeSwitch.checked = false;
                 themeBtn.innerHTML = "Light Mode"
                 setThemeDark()
-              // console.log("blee")
-
               }
 
-              // // SF: SET THEME 
-              
               // // // SF: CHANGE THEME 
-
               const currentId = userListOne[0].uid
-              currentUserIdDiv.innerText = currentId
-
-              
-              // Storing user fb id
               const currentUid = userListOne[0].id
-              currentUserDocRefDiv.innerText = currentUid
               const currentUserDocRef = doc(db, 'users', currentUid)
-              // setThemeButton(currentUid)
 
-
+              currentUserIdDiv.innerText = currentId
+              currentUserDocRefDiv.innerText = currentUid
 
               darkModeSwitch.addEventListener("click", (e) => {
                   e.stopPropagation()
@@ -158,71 +133,42 @@ function populateUserIconAndTheme() {
                       updateDoc(currentUserDocRef, {
                           theme: "dark"
                       })
-                      // setThemeLight()
-                      // themeBtn.innerHTML = "Dark Mode"
-                          // console.log("blah")
                   } else {
                       updateDoc(currentUserDocRef, {
                           theme: "light"
                       })
-                      console.log("bligg")
                   }
               })
               populateUserInfoModal(currentUid)
-
-              
-            // SF: CHANGE THEME
           })
         })
       }
   })
 }
 
-function setThemeButton(currentUid) {
-  const asdf = doc(db, 'users', currentUid)
-  getDoc(asdf).then((snapshot) => {
-    console.log("jumpasdjfaslkj")
-    let lightString = String("light")
-    let darkString = String("dark")
+function populateProjectContainers() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
+      const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
+      const userProjects = query(colRef, where("creator", "==", uid));
 
-  if (snapshot.data().theme == lightString) {
-    darkModeSwitch.checked = true;
-  } else {
-    darkModeSwitch.checked = false;
-  }
-
+      populateProjects (starredProjects, starredProjectContainer)
+      populateProjects (userProjects, userProjectContainer)
+      populateProjects (sharedProjects, sharedProjectContainer)
+      populateProjectManager(userProjects, manageProjectsMaster)
+    } else {
+      window.location.replace("signin.html");
+    }
   })
-
-}
-
-function populateUserInfoModal(currentUid) {
-
-  const asdf = doc(db, 'users', currentUid)
-  getDoc(asdf).then((snapshot) => {
-
-    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
-    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
-    const userEmail = snapshot.data().email
-
-    userIconMedium.innerText = userIcon
-    udoName.innerText = fullName
-    udoemail.innerText = userEmail
-
-  })
-
-}
-
-function clearProjects(parentContainer) {
-  while (parentContainer.children[0] != null) {
-    parentContainer.removeChild(parentContainer.children[0]);
-  }
 }
 
 function populateProjects(projectQuery, projectContainer) {
-      // Create project cards
-      let i = 0;
+  let i = 0;
   onSnapshot(projectQuery, (snapshot) => {
     clearProjects(projectContainer);
+
     let sharedProjectsArray = [];
     snapshot.docs.forEach((doc) => {
       sharedProjectsArray.push({ ...doc.data(), id: doc.id });
@@ -231,44 +177,44 @@ function populateProjects(projectQuery, projectContainer) {
     for (i = 0; i < sharedProjectsArray.length; i++) {
       const newProjectUl = document.createElement("ul");
       newProjectUl.setAttribute("id", "projectCardMaster")
+      newProjectUl.classList.add("project-section-card-master");
       projectContainer.appendChild(newProjectUl);
       
       const newProject = document.createElement("li");
       newProjectUl.appendChild(newProject);
-      newProject.classList.add("project-card");
+      newProject.classList.add("project-section-card");
       const fetchedBackgroundURL = sharedProjectsArray[i].background;
       newProject.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-size: cover; background-position: 50%")
 
-
       const cardFadeOverlay = document.createElement("span")
       newProject.appendChild(cardFadeOverlay);
-      cardFadeOverlay.classList.add("card-fade-overlay");
+      cardFadeOverlay.classList.add("project-section-card-fade-overlay");
 
       const cardContentOverlay = document.createElement("span")
       newProject.appendChild(cardContentOverlay);
-      cardContentOverlay.classList.add("card-content-overlay");
+      cardContentOverlay.classList.add("project-section-card-content");
 
       const cardContentOverlayProjectTitle = document.createElement("div")
       cardContentOverlay.appendChild(cardContentOverlayProjectTitle);
       cardContentOverlayProjectTitle.innerText = sharedProjectsArray[i].name;
-      cardContentOverlayProjectTitle.classList.add("card-content-overlay-project-title");
+      cardContentOverlayProjectTitle.classList.add("project-section-card-title");
 
       const cardContentOverlayBottomRow = document.createElement("div")
       cardContentOverlay.appendChild(cardContentOverlayBottomRow);
-      cardContentOverlayBottomRow.classList.add("card-content-overlay-bottom-row");
+      cardContentOverlayBottomRow.classList.add("project-section-card-bottom");
 
       const cardContentOverlayFavoriteBtnContainer = document.createElement("div")
       cardContentOverlayBottomRow.appendChild(cardContentOverlayFavoriteBtnContainer);
-      cardContentOverlayFavoriteBtnContainer.classList.add("card-content-overlay-favorite-btn-container");
+      cardContentOverlayFavoriteBtnContainer.classList.add("project-section-card-favorite-btn");
 
       const cardContentOverlayFavoriteBtnStar = document.createElement("img")
-      cardContentOverlayFavoriteBtnStar.classList.add("card-content-overlay-favorite-btn-star")
+      cardContentOverlayFavoriteBtnStar.classList.add("project-section-card-favorite-btn-star")
       cardContentOverlayFavoriteBtnContainer.appendChild(cardContentOverlayFavoriteBtnStar)
 
       const newProjectId = document.createElement("div");
       newProject.appendChild(newProjectId);
       newProjectId.innerText = sharedProjectsArray[i].id;
-      newProjectId.classList.add("project-id-card");
+      newProjectId.classList.add("project-section-card-id");
 
       const idUid = document.querySelector('#idUid').textContent
       const currentUserDocRef = doc(db, 'users', idUid)
@@ -282,9 +228,160 @@ function populateProjects(projectQuery, projectContainer) {
   });
 }
 
+function openProjectManager() {
+  projectManagerBtn.addEventListener("click", (e) => {
+    e.stopPropagation()
+
+    manageProjectsMaster.classList.toggle("hidden")
+  })
+}
+
+function populateProjectManager(projectQuery, projectContainer) {
+  let i = 0;
+  onSnapshot(projectQuery, (snapshot) => {
+    clearProjects(projectContainer);
+
+    let projectsArray = [];
+
+    snapshot.docs.forEach((doc) => {
+      projectsArray.push({ ...doc.data(), id: doc.id });
+    });
+
+    for (i = 0; i < projectsArray.length; i++) {
+      const projectLiMaster = document.createElement("li");
+      const projectLiSubMaster = document.createElement("div");
+      const projectLiLeft = document.createElement("div")
+      const projectIcon = document.createElement("div")
+      const fetchedBackgroundURL = projectsArray[i].background;
+      const projectLiName = document.createElement("p");
+      const projectLiNameChangerForm = document.createElement("form");
+      const projectLiNameChangerInput = document.createElement("input");
+      const projectLiKebabButton = document.createElement("button");
+      projectContainer.appendChild(projectLiMaster);
+      projectLiMaster.appendChild(projectLiSubMaster);
+      projectLiSubMaster.appendChild(projectLiLeft);
+      projectLiLeft.appendChild(projectIcon);
+      projectLiLeft.appendChild(projectLiName);
+      projectLiLeft.appendChild(projectLiNameChangerForm);
+      projectLiNameChangerForm.appendChild(projectLiNameChangerInput);
+      projectLiSubMaster.appendChild(projectLiKebabButton);
+      projectLiMaster.setAttribute("id", "projectLiMaster")
+      projectLiName.classList.add("sidebar-manage-projects-li-left-name")
+      projectLiNameChangerForm.classList.add("sidebar-manage-projects-li-left-name-changer-form")
+      projectLiSubMaster.classList.add("sidebar-manage-projects-li-sub-master")
+      projectLiMaster.classList.add("sidebar-manage-projects-li-master")
+      projectLiLeft.classList.add("sidebar-manage-projects-li-left")
+      projectIcon.classList.add("sidebar-manage-projects-li-left-icon")
+      projectLiNameChangerForm.classList.add("hidden")
+      projectLiKebabButton.classList.add("sidebar-manage-projects-li-kebab-btn")
+      projectLiKebabButton.classList.add("open-modal-btn")
+      projectLiNameChangerInput.classList.add("sidebar-manage-projects-li-left-name-changer-form-input")
+      projectIcon.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
+      projectLiName.innerText = projectsArray[i].name;
+      projectLiNameChangerInput.value = projectsArray[i].name;
+      projectLiKebabButton.innerText = "..."
+
+      // Project modal
+      const projectLiModalMaster = document.createElement("div")
+      const projectLiModalDeleteButton = document.createElement("button")
+      projectLiModalMaster.classList.add("modal")
+      projectLiModalMaster.classList.add("solid")
+      projectLiModalMaster.classList.add("sidebar-manage-projects-li-delete-btn-modal")
+      projectLiModalDeleteButton.classList.add("sidebar-manage-projects-li-delete-btn")
+      projectLiMaster.appendChild(projectLiModalMaster);
+      projectLiModalMaster.appendChild(projectLiModalDeleteButton);
+      projectLiModalDeleteButton.innerText = "Delete?"
+
+      // Project overlay
+      const projectLiOverlayMaster = document.createElement("div")
+      projectLiOverlayMaster.classList.add("overlay")
+      projectLiOverlayMaster.classList.add("sidebar-manage-projects-overlay")
+      projectLiMaster.appendChild(projectLiOverlayMaster);
+
+      deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster)
+      renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm, projectLiNameChangerInput, projectLiOverlayMaster)
+    }
+    setDataIndex()
+    closeOverlay()
+  })
+
+}
+
+function deleteProject(projectsArray, i, projectLiModalDeleteButton, projectLiOverlayMaster, projectLiModalMaster) {
+  projectLiModalDeleteButton.addEventListener("click", (e) => {
+    e.stopPropagation()
+
+    if (confirm("are you sure you want to delete " + projectsArray[i].name + "?") == true) {
+      const docRef = doc(db, "projects", projectsArray[i].id);
+
+      deleteDoc(docRef).then(() => {
+        setDataIndex()
+        closeOverlay()
+      });
+    } else {
+      projectLiOverlayMaster.classList.remove("open")
+      projectLiModalMaster.classList.remove("open")
+    }
+  })
+}
+
+function renameProject(projectLiName, projectsArray, i, projectLiNameChangerForm, projectLiNameChangerInput, projectLiOverlayMaster) {
+  projectLiName.addEventListener("click", (e) => {
+    e.stopPropagation()
+
+    projectLiNameChangerForm.classList.remove("hidden")
+    projectLiName.classList.add("hidden")
+    projectLiOverlayMaster.classList.add("open")
+  })
+
+  projectLiNameChangerForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    const docRef = doc(db, "projects", projectsArray[i].id);
+    
+    updateDoc(docRef, {
+      name: projectLiNameChangerInput.value
+    })
+
+    projectLiNameChangerForm.classList.add("hidden")
+    projectLiName.classList.remove("hidden")
+    projectLiOverlayMaster.classList.remove("open")
+  })
+
+  projectLiNameChangerInput.addEventListener("click", (e) => {
+    e.stopPropagation()
+  })
+
+  projectLiOverlayMaster.addEventListener("click", () => {
+    projectLiNameChangerForm.classList.add("hidden")
+    projectLiName.classList.remove("hidden")
+    projectLiOverlayMaster.classList.remove("open")
+  })
+}
+
+function populateUserInfoModal(currentUid) {
+  const asdf = doc(db, 'users', currentUid)
+
+  getDoc(asdf).then((snapshot) => {
+    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
+    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
+    const userEmail = snapshot.data().email
+
+    userIconMedium.innerText = userIcon
+    udoName.innerText = fullName
+    udoemail.innerText = userEmail
+  })
+}
+
+function clearProjects(parentContainer) {
+  while (parentContainer.children[0] != null) {
+    parentContainer.removeChild(parentContainer.children[0]);
+  }
+}
 
 function createProjectDiv() {
   const newProject = document.createElement("div");
+  
   projectContainer.appendChild(newProject);
   newProject.innerText = addProjectForm.name.value;
   newProject.classList.add("project-card");
@@ -295,17 +392,16 @@ function createProjectDiv() {
 // closes modal after submitting form for new project
 function closeModal() {
   const overlays = document.querySelectorAll(".overlay");
+  const modals = document.querySelectorAll(".modal");
+  
   overlays.forEach((overlay) => {
     overlay.classList.remove("open")
   })
 
-  const modals = document.querySelectorAll(".modal");
   modals.forEach((modal) => {
       modal.classList.remove("open")
   })
 }
-
-
 
 // function to set theme to light on page load
 function setThemeLight() {
@@ -353,46 +449,43 @@ function setThemeDark() {
   }
 }
 
-
-
 function setDataIndex() {
   let i = 0
-  for (i = 0; i < modalBtnMulti.length; i++)
-  {
+
+  for (i = 0; i < modalBtnMulti.length; i++) {
       modalBtnMulti[i].setAttribute('data-index', i);
       modal[i].setAttribute('data-index', i);
       overlay[i].setAttribute('data-index', i);
   }
 
-  for (i = 0; i < modalBtnMulti.length; i++)
-  {
-      modalBtnMulti[i].onclick = function() {
-          let ElementIndex = this.getAttribute('data-index');
-          modal[ElementIndex].classList.toggle("open")
-          overlay[ElementIndex].classList.toggle("open")
+  for (i = 0; i < modalBtnMulti.length; i++) {
+      modalBtnMulti[i].onclick = function(e) {
+        e.stopPropagation()
+
+        let ElementIndex = this.getAttribute('data-index');
+
+        modal[ElementIndex].classList.toggle("open")
+        overlay[ElementIndex].classList.toggle("open")
       };
   }
 }
 
 function closeOverlay() {
-  for (let i = 0; i < overlay.length; i++)
-  {
-      overlay[i].onclick = function() {
-          let ElementIndex = this.getAttribute('data-index');
-      //   modalparent[ElementIndex].classList.remove("hidden")
-        modal[ElementIndex].classList.remove("open")
-        overlay[ElementIndex].classList.remove("open")
-      };
+  for (let i = 0; i < overlay.length; i++) {
+    overlay[i].onclick = function(e) {
+      e.stopPropagation()
+
+      let ElementIndex = this.getAttribute('data-index');
+
+      modal[ElementIndex].classList.remove("open")
+      overlay[ElementIndex].classList.remove("open")
+    };
   }
 }
 
-
-
-
 function setProjectDataIndex() {
   let i = 0
-  for (i = 0; i < starBtnMulti.length; i++)
-  {
+  for (i = 0; i < starBtnMulti.length; i++) {
       starBtnMulti[i].setAttribute('data-index', i);
       projectCards[i].setAttribute('data-index', i);
       starBtnContainer[i].setAttribute('data-index', i);
@@ -400,95 +493,68 @@ function setProjectDataIndex() {
   }
   
   for (let i = 0; i < starBtnMulti.length; i++) {
-
     const uid = document.querySelector('#uid').textContent
     const idUid = document.querySelector('#idUid').textContent
 
     starBtnMulti[i].onclick = function(e) {
-          e.stopPropagation()
-          let ElementIndex = this.getAttribute('data-index');
+      e.stopPropagation()
 
-          const projectId = projectCards[ElementIndex].lastChild.textContent;
-          const userRef = collection(db, 'users')
+      let ElementIndex = this.getAttribute('data-index');
+      const projectId = projectCards[ElementIndex].lastChild.textContent;
+      const userRef = collection(db, 'users')
+      const currentUserDocRef = doc(db, 'users', idUid)
+      const selectedProject = doc(db, 'projects', projectId)
 
-          const currentUserDocRef = doc(db, 'users', idUid)
-          const selectedProject = doc(db, 'projects', projectId)
+      if (projectCards[i].parentElement.classList.contains("favorited")) {
+        starBtnContainer[i].classList.remove("favorited")
+        starBtnMulti[i].classList.remove("favorited")
+        projectCards[i].parentElement.classList.remove("favorited")
+        starBtnContainer[i].classList.add("not-favorited")
+        starBtnMulti[i].classList.add("not-favorited")
+        projectCards[i].parentElement.classList.add("not-favorited")
 
-          if (projectCards[i].parentElement.classList.contains("favorited")) {
-            starBtnContainer[i].classList.remove("favorited")
-            starBtnMulti[i].classList.remove("favorited")
-            projectCards[i].parentElement.classList.remove("favorited")
-            starBtnContainer[i].classList.add("not-favorited")
-            starBtnMulti[i].classList.add("not-favorited")
-            projectCards[i].parentElement.classList.add("not-favorited")
+        updateDoc(currentUserDocRef, {
+          favorites: arrayRemove(projectId)
+        })
+        .then(() => {
+        })
 
-            updateDoc(currentUserDocRef, {
-              favorites: arrayRemove(projectId)
-            })
-            .then(() => {
-              console.log("unfavorited!")
-            })
+        updateDoc(selectedProject, {
+          favoritedby: arrayRemove(uid)
+        })
+        .then(() => {
+        })
+      } else {
+        starBtnContainer[i].classList.add("favorited")
+        starBtnMulti[i].classList.add("favorited")
+        projectCards[i].parentElement.classList.add("favorited")
+        starBtnContainer[i].classList.remove("not-favorited")
+        starBtnMulti[i].classList.remove("not-favorited")
+        projectCards[i].parentElement.classList.remove("not-favorited")
 
-            updateDoc(selectedProject, {
-              favoritedby: arrayRemove(uid)
-            })
-            .then(() => {
-              console.log("unfavorited!")
-            })
+        updateDoc(currentUserDocRef, {
+          favorites: arrayUnion(projectId)
+        })
+        .then(() => {
+        })
 
-            
-          } else {
-            starBtnContainer[i].classList.add("favorited")
-            starBtnMulti[i].classList.add("favorited")
-            projectCards[i].parentElement.classList.add("favorited")
-            starBtnContainer[i].classList.remove("not-favorited")
-            starBtnMulti[i].classList.remove("not-favorited")
-            projectCards[i].parentElement.classList.remove("not-favorited")
-
-            updateDoc(currentUserDocRef, {
-              favorites: arrayUnion(projectId)
-            })
-            .then(() => {
-              console.log("favorited!")
-            })
-
-            updateDoc(selectedProject, {
-              favoritedby: arrayUnion(uid)
-            })
-            .then(() => {
-              console.log("favorited!")
-            })
-          }
-
-
-      };
+        updateDoc(selectedProject, {
+          favoritedby: arrayUnion(uid)
+        })
+        .then(() => {
+        })
+      }
+    }
+  }
 }
-}
-
-
-
 
 function logOut() {
   logoutButton.addEventListener("click", () => {
-    signOut(auth)
-      .then(() => {
-        console.log("the user signed out");
-        window.location.href = "signin.html";
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  });
-}
-
-
-function deleteProject() {
-  deleteProjectForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const docRef = doc(db, "projects", deleteProjectForm.id.value);
-    deleteDoc(docRef).then(() => {
-      deleteProjectForm.reset();
+    signOut(auth).then(() => {
+      window.location.href = "signin.html";
+    })
+    .catch((err) => {
+      console.log(err.message);
     });
   });
 }
@@ -498,9 +564,9 @@ function createProject() {
     e.preventDefault();
 
     const user = auth.currentUser;
+
     if (user !== null) {
       const uid = user.uid;
-      console.log(uid);
 
       addDoc(colRef, {
         name: addProjectForm.name.value,
@@ -516,54 +582,27 @@ function createProject() {
 }
 
 
-
-
-function populateProjectContainers() {
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      const starredProjects = query(colRef, where("favoritedby", 'array-contains', uid));
-      const sharedProjects = query(colRef, where("collaborators", 'array-contains', uid));
-      const userProjects = query(colRef, where("creator", "==", uid));
-
-      populateProjects (starredProjects, starredProjectContainer)
-      populateProjects (userProjects, userProjectContainer)
-      populateProjects (sharedProjects, sharedProjectContainer)
-    } else {
-      window.location.replace("signin.html");
-    }
-  })
-}
-
-// MOBILE FUNCTIONS ************************************************************************************************
-
-
+// MOBILE FUNCTIONS
 function turnOffProjectHoverModal(projectCard) {
   if (window.innerWidth <= 800) {
-        projectCard.addEventListener('mouseenter', () => {
-        console.log("enter")
-        overlayOne.classList.add("open")
-        });
-
-      //   projectCard.addEventListener('mouseleave', () => {
-      //   console.log("exit")
-      //   overlayOne.classList.remove("open")
-      // });
+    projectCard.addEventListener('mouseenter', () => {
+    overlayOne.classList.add("open")
+    });
   }
 }
 
 function openSidebar() {
   sidebarButton.addEventListener("click", () => {
-      dashboardMasterMobile.setAttribute("style", "left: 0")
-      overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
-      overlayer.classList.add("open")
+    dashboardMasterMobile.setAttribute("style", "left: 0")
+    overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
+    overlayer.classList.add("open")
   })
 }
 
 function closeSideBar() {
   dashboardMasterMobile.addEventListener("click", () => {
-      dashboardMasterMobile.removeAttribute("style", "left")
-      overlayer.classList.remove("open")
+    dashboardMasterMobile.removeAttribute("style", "left")
+    overlayer.classList.remove("open")
   })
 }
 
@@ -571,7 +610,7 @@ function closeOverlayOne() {
   overlayOne.addEventListener("click", () => {
     overlayOne.classList.remove("open")
   })
-  }
+}
 
 function closeSidebarWithOverlay() {
   overlayer.addEventListener("click", () => {
@@ -580,14 +619,15 @@ function closeSidebarWithOverlay() {
   })
 }
 
-
 // click on div to redirect user to project specific page
 function projectRedirectLink() {
-  const projectCards = document.querySelectorAll(".project-card");
+  const projectCards = document.querySelectorAll(".project-section-card");
+  
   projectCards.forEach((card) => {
     card.addEventListener("click", () => {
       const result = card.lastChild.textContent;
       const projectPage = ["project-page.html?project=" + result];
+
       window.location.href = projectPage;
     });
   });
@@ -597,14 +637,11 @@ function assignStarredStatus(currentUserDocRef, projectId, cardContentOverlayFav
   getDoc(currentUserDocRef).then((snapshot) => {
     let userFavorites = snapshot.data().favorites;
 
-    console.log(projectId)
     if (userFavorites.includes(projectId)){
-    newProjectUl.classList.add("favorited")
-    cardContentOverlayFavoriteBtnStar.classList.add("favorited")
-    cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
-      console.log("it's favorited!")
+      newProjectUl.classList.add("favorited")
+      cardContentOverlayFavoriteBtnStar.classList.add("favorited")
+      cardContentOverlayFavoriteBtnContainer.classList.add("favorited")
     } else {
-      console.log("it's not favorited!")
       newProjectUl.classList.add("not-favorited")
     }
   })

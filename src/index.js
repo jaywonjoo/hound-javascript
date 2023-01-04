@@ -1,29 +1,39 @@
-import "./index.css";
+import "./index.scss";
 
-// ****************************************************************************************** //
+// loginRedirectButton()
+const loginButton = document.querySelector(".header-nav-links-login");
+// signUpRedirectButton()
+const signUpButton = document.querySelector(".header-nav-links-register");
+const startDoingButton = document.querySelector("#registerBtn");
+// toggleHamburgerMenu()
+const toggleButton = document.getElementsByClassName('header-toggle-btn')[0]
+const navbarLinks = document.getElementsByClassName('header-nav-links')[0]
 
-// button to take users to the signin page
-const loginButton = document.querySelector(".nav-login");
-loginButton.addEventListener("click", () => {  
-  window.location.href = "signin.html";
-});
+loginRedirectButton()
+signUpRedirectButton()
+toggleHamburgerMenu()
 
-// button to take users to the signup page
-const signUpButton = document.querySelector(".nav-register-bubble");
-signUpButton.addEventListener("click", () => {
-  window.location.href = "signup.html";
-});
+function loginRedirectButton() {
+  loginButton.addEventListener("click", () => {  
+    window.location.href = "signin.html";
+  });
+}
 
+function signUpRedirectButton() {
+  signUpButton.addEventListener("click", () => {
+    window.location.href = "signup.html";
+  });
 
+  startDoingButton.addEventListener("click", () => {
+    window.location.href = "signup.html";
+  });
+}
 
-
-  const toggleButton = document.getElementsByClassName('toggle-button')[0]
-  const navbarLinks = document.getElementsByClassName('navbar-links')[0]
-  const navbarDropdown = document.getElementsByClassName('nav-dropdown')[0]
-
+function toggleHamburgerMenu() {
   toggleButton.addEventListener('click', () => {
-  navbarLinks.classList.toggle('active')
-  })
+    navbarLinks.classList.toggle('active')
+    })  
+}
 
 
 

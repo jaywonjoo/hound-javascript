@@ -6,10 +6,9 @@ import {
   updateDoc, arrayUnion, arrayRemove,
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
-import "./projects.css";
-import "./projects800.css";
-import "./nav.css";
-import "./darkmode.css";
+import "./projects.scss";
+import "./nav.scss";
+import "./darkmode.scss";
 
 
 const firebaseConfig = {
@@ -21,11 +20,10 @@ const firebaseConfig = {
     appId: "1:361705338046:web:f04df4040689f429aa9aef"
   };
 
-// init firebase app
+// Firebase Stuff
 initializeApp(firebaseConfig)
-
-// FEATURE: SECURITY WALL
 const auth = getAuth()
+
 auth.onAuthStateChanged((user) => {
   if (user) {
     document.getElementById("body").style.display = "block";
@@ -33,9 +31,6 @@ auth.onAuthStateChanged((user) => {
     window.location.replace("signin.html")
   }
 });
-
-// CONSTANTS ************************************************************************************************
-
 
 const params = new Proxy(new URLSearchParams(window.location.search), {
     get: (searchParams, prop) => searchParams.get(prop),
@@ -65,7 +60,7 @@ const projectHeaderRef = doc(db, 'projects', projectID)
 // Comment Creation
 const userRef = collection(db, "users");
 // Add Member Form
-const modalAddMemberForm = document.querySelector(".add-member-form")
+const modalAddMemberForm = document.querySelector(".modal-add-members-form")
 // Create Ticket
 const projectRef = collection(db, 'projects')
 const createTicketForm = document.querySelector('.create-ticket-form')
@@ -86,9 +81,9 @@ const pieHigh = document.createElement("div")
 // Edit Ticket Form
 const editTicketForm = document.querySelector(".edit-ticket-form")
 // Mobile: Open Sidebar
-const sidebarButton = document.querySelector(".sidebar-button");
-const dashboardMasterMobile = document.querySelector(".dashboard-master")
-const overlayer = document.querySelector(".blurred-overlay");
+const sidebarButton = document.querySelector(".sidebar-btn-master");
+const dashboardMasterMobile = document.querySelector(".sidebar-master")
+const overlayer = document.querySelector(".overlay-blurred");
 // Custom Background
 const body = document.querySelector("#body")
 // Hide background input on submit
@@ -97,18 +92,19 @@ const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnI
 // Write inputted background to firebase
 const setBackgroundForm = document.querySelector("#setBackgroundForm")
 // Populate collaborators
-const teamMemberBody = document.querySelector(".team-member-body") 
+const teamMemberBody = document.querySelector(".team-members-body") 
 // clearsystemuserlist
 const populatableMemberDiv = document.querySelector("#populatable-member-div")
 // Darkmode button
 const darkModeSwitch = document.querySelector("#switch")
 // Populate user info modal
-const userIconMedium = document.querySelector(".user-icon-medium")
-const udoName = document.querySelector(".udo-name")
-const udoemail = document.querySelector(".udo-email")
-
-
-// FEATURES ************************************************************************************************
+const userIconMedium = document.querySelector(".modal-user-dropdown-user-card-icon-medium")
+const udoName = document.querySelector(".modal-user-dropdown-user-card-right-name")
+const udoemail = document.querySelector(".modal-user-dropdown-user-card-right-email")
+// 
+const bottomDot = document.getElementsByClassName("pie-legend-bottom-dot")
+const middleDot = document.getElementsByClassName("pie-legend-middle-dot")
+const topDot = document.getElementsByClassName("pie-legend-top-dot")
 
 redirectToDashboard()
 logoutUser()
@@ -120,20 +116,15 @@ populateTickets()
 commentCreation()
 addMemberButton()
 createTicketButton()
-pieChartStatus()
 editTicketSubmitButton()
 hideBackgroundInputOnSubmit()
 writeInputtedBackgroundToFirebase()
-// teamMemberLineItemDeleteButtonFn()
-
-// MOBILE FEATURES ************************************************************************************************
 
 openSidebar()
 closeSidebarOnClick()
 closeSidebarWithOverlay()
 loadBackground()
 
-// FUNCTIONS ************************************************************************************************
 
 function redirectToDashboard() {
     dashboardButton.addEventListener('click', () => {
@@ -145,7 +136,6 @@ function logoutUser() {
     logoutButton.addEventListener('click', () => {
     signOut(auth)
         .then(() => {
-        console.log('the user signed out')
         window.location.href = "signin.html";
         })
         .catch((err) => {
@@ -153,71 +143,6 @@ function logoutUser() {
         })
     })
 }
-
-// function populateUserIconAndTheme() {
-//     onAuthStateChanged(auth, (user) => {
-//         if (user) {
-//             // clearUsers()
-//         const uid = user.uid;
-//         const userRef = collection(db, 'users')
-
-//         const userCreatorDocRef = query(userRef, where("uid", "==", uid));
-//         onSnapshot(userCreatorDocRef, (snapshot) => {
-//             snapshot.docs.forEach((docs) => {
-
-//                 let userListOne = []
-//                 userListOne.push({ ...docs.data(), id: docs.id });
-
-//                 const navUserIcon = document.querySelector(".nav-user-icon")
-//                 navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
-
-//                 let lightString = String("light")
-//                 let darkString = String("dark")
-
-//                 // // SUBFEATURE: SET THEME ********************************************************************************
-//                 if (userListOne[0].theme == lightString) {
-//                     setThemeLight()
-//                     themeBtn.innerHTML = "Dark Mode"
-//                         console.log("blah")
-//                 } else {
-//                     setThemeDark()
-//                     themeBtn.innerHTML = "Light Mode"
-//                 console.log("blee")
-
-//                 }
-
-//                 // // SUBFEATURE: SET THEME ********************************************************************************
-                
-//                 // // SUBFEATURE: CHANGE THEME ********************************************************************************
-
-
-//                 const currentUid = userListOne[0].id
-//                 const currentUserDocRef = doc(db, 'users', currentUid)
-
-//                 darkModeBtn.addEventListener("click", (e) => {
-//                     e.stopPropagation()
-
-//                     if (userListOne[0].theme == lightString) {
-//                         updateDoc(currentUserDocRef, {
-//                             theme: "dark"
-//                         })
-//                         // setThemeLight()
-//                         // themeBtn.innerHTML = "Dark Mode"
-//                             // console.log("blah")
-//                     } else {
-//                         updateDoc(currentUserDocRef, {
-//                             theme: "light"
-//                         })
-//                         console.log("bligg")
-//                     }
-//                 })
-                
-//                 // // SUBFEATURE: CHANGE THEME ********************************************************************************
-//             })
-//         })
-//         }
-//     })
-// }
 
 function populateUserIconAndTheme() {
 
@@ -233,42 +158,42 @@ function populateUserIconAndTheme() {
                 let userListOne = []
                 userListOne.push({ ...docs.data(), id: docs.id });
   
-                const navUserIcon = document.querySelector(".nav-user-icon")
+                const navUserIcon = document.querySelector(".header-right-user-icon")
                 navUserIcon.innerText = (userListOne[0].firstName.charAt(0) + userListOne[0].lastName.charAt(0));
   
                 let lightString = String("light")
                 let darkString = String("dark")
   
-                // // SF: SET THEME 
+                // Set theme on page load
                 if (userListOne[0].theme == lightString) {
                   darkModeSwitch.checked = true;
                   themeBtn.innerHTML = "Dark Mode"
                   setThemeLight()
-                        // console.log("blah")
+
+                  let bottom = "rgba(0, 0, 0, .3)"
+                  let middle = "rgba(0, 0, 0, .5)"
+                  let top = "rgba(0, 0, 0, .9)"
+                  pieChartStatus(bottom, middle, top)
+
                 } else {
                   darkModeSwitch.checked = false;
                   themeBtn.innerHTML = "Light Mode"
                   setThemeDark()
-                // console.log("blee")
-  
+
+                  let bottom = "rgba(255, 255, 255, .3)"
+                  let middle = "rgba(255, 255, 255, .5)"
+                  let top = "rgba(255, 255, 255, .9)"
+                  pieChartStatus(bottom, middle, top)
                 }
-  
-                // // SF: SET THEME 
                 
-                // // // SF: CHANGE THEME 
-  
+                // Storing user firebase id
                 const currentId = userListOne[0].uid
                 currentUserIdDiv.innerText = currentId
-  
-                
-                // Storing user fb id
                 const currentUid = userListOne[0].id
                 currentUserDocRefDiv.innerText = currentUid
                 const currentUserDocRef = doc(db, 'users', currentUid)
-                // setThemeButton(currentUid)
   
-  
-  
+                // Change theme with button
                 darkModeSwitch.addEventListener("click", (e) => {
                     e.stopPropagation()
   
@@ -276,20 +201,13 @@ function populateUserIconAndTheme() {
                         updateDoc(currentUserDocRef, {
                             theme: "dark"
                         })
-                        // setThemeLight()
-                        // themeBtn.innerHTML = "Dark Mode"
-                            // console.log("blah")
                     } else {
                         updateDoc(currentUserDocRef, {
                             theme: "light"
                         })
-                        console.log("bligg")
                     }
                 })
                 populateUserInfoModal(currentUid)
-  
-                
-              // SF: CHANGE THEME
             })
           })
         }
@@ -297,20 +215,16 @@ function populateUserIconAndTheme() {
   }
 
 function populateUserInfoModal(currentUid) {
+    const asdf = doc(db, 'users', currentUid)
+    getDoc(asdf).then((snapshot) => {
+        const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
+        const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
+        const userEmail = snapshot.data().email
 
-const asdf = doc(db, 'users', currentUid)
-getDoc(asdf).then((snapshot) => {
-
-    const userIcon = snapshot.data().firstName.charAt(0) + snapshot.data().lastName.charAt(0)
-    const fullName = snapshot.data().firstName + " " + snapshot.data().lastName
-    const userEmail = snapshot.data().email
-
-    userIconMedium.innerText = userIcon
-    udoName.innerText = fullName
-    udoemail.innerText = userEmail
-
-})
-
+        userIconMedium.innerText = userIcon
+        udoName.innerText = fullName
+        udoemail.innerText = userEmail
+    })
 }
 
 function populateProjectName() {
@@ -319,71 +233,37 @@ function populateProjectName() {
     })
 }
 
-// function populateTeamMemberss(){
-
-//     getDoc(ProjectUsersDocRef).then((snapshot) => {
-//         console.log("testo")
-
-//         let collaborators = snapshot.data().collaborators
-
-//         if (collaborators) {
-//             let i = 0
-//             for (i = 0; i < collaborators.length; i++) {
-                
-//                 const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
-//                 const projectCollaborators = doc(db, 'projects', projectID)
-//                 populateMemberList(userCurrentCollaboratorDocRef, projectCollaborators)
-//             }
-//         } else {
-//             setDataIndex()
-//             closeOverlay()
-//         }
-//     })
-// }
-
 function populateTeamMembers(){
+    onSnapshot(ProjectUsersDocRef, (snapshot) => {
+        let collaborators = snapshot.data().collaborators
+        if (collaborators) {
+            let collaboratorList = []
+                clearUsers()
 
-        // const ProjectUsersDocRef = doc(db, 'projects', projectID)
-        onSnapshot(ProjectUsersDocRef, (snapshot) => {
-
-            
-            // console.log(snapshot.data().collaborators)
-            let collaborators = snapshot.data().collaborators
-            if (collaborators) {
-                let collaboratorList = []
-                // clearUsers()
-                // let i = 0
-                // try {
-                    clearUsers()
-            
                 for (let i = 0; i < collaborators.length; i++) {
-                        const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
+                    const userCurrentCollaboratorDocRef = query(userRef, where("uid", "==", collaborators[i]));
 
-                        onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
-                            snapshot.docs.forEach((docs) => {
+                    onSnapshot(userCurrentCollaboratorDocRef, (snapshot) => {
+                        snapshot.docs.forEach((docs) => {
 
-                                collaboratorList.push({ ...docs.data(), id: docs.id });
-                                clearUsers()
+                            collaboratorList.push({ ...docs.data(), id: docs.id });
+                            clearUsers()
 
-                                if (i == collaborators.length - 1) {
-                                    // teamMemberBody.innerHTML = ""
-                                    for (let j = 0; j < collaboratorList.length; j++) {
-                                        populateMemberList(collaboratorList, j)
-                                    }
+                            if (i == collaborators.length - 1) {
+                                for (let j = 0; j < collaboratorList.length; j++) {
+                                    populateMemberList(collaboratorList, j)
                                 }
-
-                            })
+                            }
                         })
-                    }
-                setDataIndex()
-                closeOverlay()
-
-                    
-            } else {
-                setDataIndex()
-                closeOverlay()
-            }
-        })
+                    })
+                }
+            setDataIndex()
+            closeOverlay()                    
+        } else {
+            setDataIndex()
+            closeOverlay()
+        }
+    })
 }
 
 function clearUsers() {
@@ -394,72 +274,62 @@ function clearUsers() {
 
 
 function populateMemberList(collaboratorList, j) {
+    const teamMemberLineItem = document.createElement("div")
+    const teamMemberLineItemName = document.createElement("div")
+    const teamMemberLineItemEmail = document.createElement("div")
+    const teamMemberLineItemPhone = document.createElement("div")
+    const teamMemberLineItemKebabDiv = document.createElement("div")
+    const teamMemberLineItemKebab = document.createElement("button")
+    const teamMemberLineItemKebabText = document.createElement("span")
+    const teamMemberLineItemId = document.createElement("div")
+    const teamMemberLineItemOverlay = document.createElement("div")
+    const teamMemberLineItemModal = document.createElement("div")
+    const teamMemberLineItemDeleteButton = document.createElement("button")
 
-        const teamMemberModals = document.querySelector(".team-member-line-item-modals")
-        const teamMemberOverlays = document.querySelector(".team-member-line-item-overlays")
+    teamMemberBody.appendChild(teamMemberLineItem)
+    teamMemberLineItem.appendChild(teamMemberLineItemName)
+    teamMemberLineItem.appendChild(teamMemberLineItemEmail)
+    teamMemberLineItem.appendChild(teamMemberLineItemPhone)
+    teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
+    teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
+    teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
+    teamMemberLineItem.appendChild(teamMemberLineItemOverlay)
+    teamMemberLineItem.appendChild(teamMemberLineItemModal)
+    teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
+    teamMemberLineItemModal.appendChild(teamMemberLineItemId)
 
-        const teamMemberLineItem = document.createElement("div")
-        const teamMemberLineItemName = document.createElement("div")
-        const teamMemberLineItemEmail = document.createElement("div")
-        const teamMemberLineItemPhone = document.createElement("div")
-        const teamMemberLineItemKebabDiv = document.createElement("div")
-        const teamMemberLineItemKebab = document.createElement("button")
-        const teamMemberLineItemKebabText = document.createElement("span")
-        const teamMemberLineItemId = document.createElement("div")
-        const teamMemberLineItemOverlay = document.createElement("div")
-        const teamMemberLineItemModal = document.createElement("div")
-        const teamMemberLineItemDeleteButton = document.createElement("button")
+    let fullName = collaboratorList[j].firstName + " " + collaboratorList[j].lastName
+    teamMemberLineItemName.innerText = fullName;
+    teamMemberLineItemEmail.innerText = collaboratorList[j].email;
+    teamMemberLineItemPhone.innerText = collaboratorList[j].phoneNumber;
+    teamMemberLineItemKebabText.innerText = "...";
+    teamMemberLineItemDeleteButton.innerText = "delete"
+    teamMemberLineItemId.innerText = collaboratorList[j].uid;
 
-        teamMemberBody.appendChild(teamMemberLineItem)
-        teamMemberLineItem.appendChild(teamMemberLineItemName)
-        teamMemberLineItem.appendChild(teamMemberLineItemEmail)
-        teamMemberLineItem.appendChild(teamMemberLineItemPhone)
-        teamMemberLineItem.appendChild(teamMemberLineItemKebabDiv)
-        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemKebab)
-        teamMemberLineItemKebab.appendChild(teamMemberLineItemKebabText)
-        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemOverlay)
-        teamMemberLineItemKebabDiv.appendChild(teamMemberLineItemModal)
-        teamMemberLineItemModal.appendChild(teamMemberLineItemDeleteButton)
-        teamMemberLineItemModal.appendChild(teamMemberLineItemId)
-
-        let fullName = collaboratorList[j].firstName + " " + collaboratorList[j].lastName
-        teamMemberLineItemName.innerText = fullName;
-        teamMemberLineItemEmail.innerText = collaboratorList[j].email;
-        teamMemberLineItemPhone.innerText = collaboratorList[j].phoneNumber;
-        teamMemberLineItemKebabText.innerText = "...";
-        teamMemberLineItemDeleteButton.innerText = "delete"
-        teamMemberLineItemId.innerText = collaboratorList[j].uid;
-
-        teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
-        teamMemberLineItem.classList.add("team-member-line-item");
-        teamMemberLineItemName.classList.add("team-member-line-item-name");
-        teamMemberLineItemEmail.classList.add("team-member-line-item-email");
-        teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
-        teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
-        teamMemberLineItemKebab.classList.add("open-modal-btn");
-        teamMemberLineItemId.setAttribute("style", "display: none");
-        teamMemberLineItemOverlay.classList.add("overlay");
-        teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
+    teamMemberLineItemKebabDiv.classList.add("team-members-line-item-kebab-div");
+    teamMemberLineItem.classList.add("team-members-line-item");
+    teamMemberLineItemName.classList.add("team-members-categories-name");
+    teamMemberLineItemEmail.classList.add("team-members-categories-email");
+    teamMemberLineItemPhone.classList.add("team-members-categories-phone");
+    teamMemberLineItemKebab.classList.add("team-members-line-item-kebab");
+    teamMemberLineItemKebab.classList.add("open-modal-btn");
+    teamMemberLineItemId.setAttribute("style", "display: none");
+    teamMemberLineItemOverlay.classList.add("overlay");
+    teamMemberLineItemKebabText.classList.add("team-members-line-item-kebab-text");
+        
+    teamMemberLineItemOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+    teamMemberLineItemModal.classList.add("modal");
+    teamMemberLineItemModal.classList.add("delete-button-modal");
+    teamMemberLineItemDeleteButton.classList.add("delete-button");
             
-        teamMemberLineItemOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
-        teamMemberLineItemModal.classList.add("modal");
-        teamMemberLineItemModal.classList.add("delete-button-modal");
-        teamMemberLineItemModal.setAttribute("style", "position: sticky");
-        teamMemberLineItemModal.setAttribute("style", "position: sticky");
-        teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
-                
-
-        teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
-        setDataIndex()
-        closeOverlay()  
+    teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
+    setDataIndex()
+    closeOverlay()  
 }
 
 function addMemberButton() {
     modalAddMemberForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
-        // clearUsers();
-        const newMemberMainDiv = document.querySelector(".new-member-main-div")
         const newMemberCheckboxDiv = document.querySelectorAll(".new-member-checkbox-div")
 
         newMemberCheckboxDiv.forEach((checkbox) => {
@@ -481,31 +351,6 @@ function addMemberButton() {
     })
 }
 
-// function teamMemberLineItemDeleteButtonFn() {
-// //     teamMemberDeleteButton.addEventListener("click", () => {
-
-// //     for (let i = 0; i < modalBtnMulti.length; i++) {
-// //         teamMemberDeleteButton[i].setAttribute('data-index', i);
-// //     }
-// // })
-    
-
-//     // teamMemberLineItemDeleteButton.addEventListener("click", () => {
-//     //     const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
-
-//     //     updateDoc(ProjectUsersDocRef, {
-//     //         collaborators: arrayRemove(selectedUserId)
-//     //     })
-//     //     .then(() => {
-//     //         console.log("user has been removed")
-//     //         teamMemberBody.innerHTML = ""
-//     //         // populateTeamMembers()
-//     //         setDataIndex()
-//     //         closeOverlay()
-//     //     })
-//     // })
-// }
-
 function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody) {
     teamMemberLineItemDeleteButton.addEventListener("click", () => {
         const selectedUserId = teamMemberLineItemModal.lastElementChild.innerText
@@ -514,15 +359,11 @@ function teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMe
             collaborators: arrayRemove(selectedUserId)
         })
         .then(() => {
-            console.log("user has been removed")
-            // teamMemberBody.innerHTML = ""
-            // populateTeamMembers()
             setDataIndex()
             closeOverlay()
         })
     })
 }
-
 
 function clearSystemUsersList() {
     while (populatableMemberDiv.children[0] != null) {
@@ -531,7 +372,6 @@ function clearSystemUsersList() {
 }
 
 function populateAddUserModal() {
-
         const systemUsers = collection(db, 'users')
         const alphabetizedSystemUsers = query(systemUsers, orderBy("firstName"))
 
@@ -539,48 +379,36 @@ function populateAddUserModal() {
             let SystemUsersList = []
             clearSystemUsersList()
             
-            // populatableMemberDiv.innerHTML = ""
-// TEST FAIL: UPDATES ONCE EVERY TIME THEME IS CHANGED
             snapshot.docs.forEach((doc) => {
                 SystemUsersList.push({ ...doc.data(), id: doc.id })
             })
-            console.log(SystemUsersList)
-
 
             let i = 0
             for (i = 0; i < SystemUsersList.length; i++) {
                 const populatableMemberDiv = document.querySelector("#populatable-member-div")
                 
                 const newMemberMainDiv = document.createElement("div")
-                // const newMemberIconDiv = document.createElement("div")
                 const newMemberCheckboxDiv = document.createElement("input")
                 newMemberCheckboxDiv.setAttribute("type", "checkbox");
                 const newMemberNameDiv = document.createElement("div")
                 const newMemberEmailDiv = document.createElement("div")
-                // const newMemberKebabDiv = document.createElement("div")
                 const newMemberIdDiv = document.createElement("div")
 
         
                 populatableMemberDiv.appendChild(newMemberMainDiv);
-                    // newMemberMainDiv.appendChild(newMemberIconDiv);
-                    newMemberMainDiv.appendChild(newMemberCheckboxDiv);
-                    newMemberMainDiv.appendChild(newMemberNameDiv);
-                    newMemberMainDiv.appendChild(newMemberEmailDiv);
-                    // newMemberMainDiv.appendChild(newMemberKebabDiv);
-                    newMemberMainDiv.appendChild(newMemberIdDiv);
+                newMemberMainDiv.appendChild(newMemberCheckboxDiv);
+                newMemberMainDiv.appendChild(newMemberNameDiv);
+                newMemberMainDiv.appendChild(newMemberEmailDiv);
+                newMemberMainDiv.appendChild(newMemberIdDiv);
         
-                // newMemberIconDiv.innerText = (SystemUsersList[i].firstName.charAt(0) + SystemUsersList[i].lastName.charAt(0));
                 newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
                 newMemberEmailDiv.innerText = (SystemUsersList[i].email);
-                // newMemberKebabDiv.innerText = "..."
                 newMemberIdDiv.innerText = (SystemUsersList[i].uid);
         
                 newMemberMainDiv.classList.add("new-member-main-div")
                 newMemberCheckboxDiv.classList.add("new-member-checkbox-div")
-                // newMemberIconDiv.classList.add("new-member-icon-div")
                 newMemberNameDiv.classList.add("new-member-name-div")
                 newMemberEmailDiv.classList.add("new-member-email-div")
-                // newMemberKebabDiv.classList.add("new-member-kebab-div")
                 newMemberIdDiv.classList.add("hidden")
             }
         })
@@ -588,276 +416,215 @@ function populateAddUserModal() {
 }
 
 function populateTickets() {
-
     const orderedTicketsRef = query(colRef, orderBy("createdAt"))
-    // display ticket info in ticket list
-    // 1. link tickets to page
-        onSnapshot(orderedTicketsRef, (snapshot) => {
-    // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-            // create empty array to populate
-            let tickets = []
-            // function to clear tickets array on every refresh
-            clearTickets()
 
-            // then populate it with whatever is in the tickets section
-            snapshot.docs.forEach((doc) => {
-                tickets.push({ ...doc.data(), id: doc.id })
-            });
-    // TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-    console.log("populateTickets()TEST")
+    onSnapshot(orderedTicketsRef, (snapshot) => {
+        let tickets = []
+        clearTickets()
 
-                //console.log(tickets[1])
-                
-                let i = 0;
-                //(2b)
-                for (i = 0; i < tickets.length; i++) {
-                    populateTicket()
+        snapshot.docs.forEach((doc) => {
+            tickets.push({ ...doc.data(), id: doc.id })
+        });
+            
+        let i = 0;
+        for (i = 0; i < tickets.length; i++) {
+            populateTicket()
 
-                    function populateTicket() {
-                        const ticketContainer = document.querySelector("#tickets")
-                        // const ticketLi = document.createElement("li")
-                        const ticketUl = document.createElement("div")
-                        const populateTicketInfoSection = document.createElement("div")
-                        const TicketTitle = document.createElement("div");
-                        const TicketDescription = document.createElement("div");
-                        const TicketAuthor = document.createElement("div");
-                        const ticketId = document.createElement("div")
-                        const ticketKebabDiv = document.createElement("div")
-                        const ticketKebabButton = document.createElement("button")
-                        const ticketKebabButtonText = document.createElement("span")
-                        const ticketOverlay = document.createElement("div")
-                        const ticketModal = document.createElement("div")
-                        const ticketDeleteButton = document.createElement("button")
+            function populateTicket() {
+                const ticketContainer = document.querySelector("#tickets")
+                const ticketUl = document.createElement("div")
+                const populateTicketInfoSection = document.createElement("div")
+                const TicketTitle = document.createElement("div");
+                const TicketDescription = document.createElement("div");
+                const TicketAuthor = document.createElement("div");
+                const ticketId = document.createElement("div")
+                const ticketKebabDiv = document.createElement("div")
+                const ticketKebabButton = document.createElement("button")
+                const ticketKebabButtonText = document.createElement("span")
+                const ticketOverlay = document.createElement("div")
+                const ticketModal = document.createElement("div")
+                const ticketDeleteButton = document.createElement("button")
 
-                        ticketContainer.appendChild(ticketUl)
-                            ticketUl.appendChild(populateTicketInfoSection)
+                ticketContainer.appendChild(ticketUl)
+                ticketUl.appendChild(populateTicketInfoSection)
+                populateTicketInfoSection.appendChild(TicketTitle)
+                populateTicketInfoSection.appendChild(TicketDescription)
+                populateTicketInfoSection.appendChild(TicketAuthor)
+                populateTicketInfoSection.appendChild(ticketId)
+                ticketUl.appendChild(ticketKebabDiv)
+                ticketKebabDiv.appendChild(ticketKebabButton)
+                ticketKebabButton.appendChild(ticketKebabButtonText)
+                ticketUl.appendChild(ticketOverlay)
+                ticketUl.appendChild(ticketModal)
+                ticketModal.appendChild(ticketDeleteButton)
+                    
+                TicketTitle.innerText = tickets[i].title;
+                TicketDescription.innerText = tickets[i].description;
+                TicketAuthor.innerText = tickets[i].author;   
+                ticketKebabButtonText.innerText = "..."          
+                ticketDeleteButton.innerText = "delete"         
+                ticketId.innerText = tickets[i].id;
 
-                        // ticketLi.appendChild(ticketUl)
-                            populateTicketInfoSection.appendChild(TicketTitle)
-                            populateTicketInfoSection.appendChild(TicketDescription)
-                            populateTicketInfoSection.appendChild(TicketAuthor)
-                            populateTicketInfoSection.appendChild(ticketId)
-                                ticketUl.appendChild(ticketKebabDiv)
-                                    ticketKebabDiv.appendChild(ticketKebabButton)
-                                        ticketKebabButton.appendChild(ticketKebabButtonText)
-                                    ticketKebabDiv.appendChild(ticketOverlay)
-                                    ticketKebabDiv.appendChild(ticketModal)
-                                        ticketModal.appendChild(ticketDeleteButton)
-                            
-                        TicketTitle.innerText = tickets[i].title;
-                        TicketDescription.innerText = tickets[i].description;
-                        TicketAuthor.innerText = tickets[i].author;   
-                        ticketKebabButtonText.innerText = "..."          
-                        ticketDeleteButton.innerText = "delete"         
-                        ticketId.innerText = tickets[i].id;
+                ticketUl.classList.add("ticket-ul");
+                populateTicketInfoSection.classList.add("populate-ticket-info-section")
+                populateTicketInfoSection.setAttribute("style", "width: 100%; display: flex; flex-direction: row")
+                ticketId.classList.add("hidden")
+                TicketTitle.classList.add("ticket-title")
+                TicketDescription.classList.add("ticket-description")
+                TicketAuthor.classList.add("ticket-author")
+                ticketKebabDiv.classList.add("ticket-kebab-div")
+                ticketKebabButton.classList.add("ticket-kebab-button")
+                ticketKebabButton.classList.add("open-modal-btn")
+                ticketKebabButtonText.classList.add("ticket-kebab-button-text")
+                ticketOverlay.classList.add("overlay")
+                ticketOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
+                ticketModal.classList.add("modal")
+                ticketModal.classList.add("delete-button-modal")
+                ticketDeleteButton.classList.add("delete-button")
 
+                setDataIndex()
+                closeOverlay()
 
-                        ticketUl.classList.add("ticket-ul");
-                        populateTicketInfoSection.classList.add("populate-ticket-info-section")
-                        populateTicketInfoSection.setAttribute("style", "width: 100%; display: flex; flex-direction: row")
-                        ticketId.classList.add("hidden")
-                        TicketTitle.classList.add("ticket-title")
-                        TicketDescription.classList.add("ticket-description")
-                        TicketAuthor.classList.add("ticket-author")
-                        // ticketKebabDiv.setAttribute("style", "width: 5%")
-                        ticketKebabDiv.classList.add("ticket-kebab-div")
-                        ticketKebabButton.classList.add("ticket-kebab-button")
-                        ticketKebabButton.classList.add("open-modal-btn")
-                        ticketKebabButtonText.classList.add("ticket-kebab-button-text")
-                        // ticketOverlay.setAttribute("id", "overlay")
-                        ticketOverlay.classList.add("overlay")
-
-                        ticketOverlay.setAttribute("style", "position: absolute; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
-                        ticketModal.classList.add("modal")
-                        ticketModal.classList.add("delete-button-modal")
-                        // ticketModal.setAttribute("id", "modal")
-                        ticketModal.setAttribute("style", "position: sticky")
-                        ticketDeleteButton.classList.add("ticket-delete-button")
+                ticketDeleteButton.addEventListener("click", () => {
+                    const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
+                    const docRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId)
+                    deleteDoc(docRef)
+                    .then(() => {
+                        const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                        const populatedAuthorSection = document.querySelector("#populated-author-section")
+                        const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                        const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                        const populatedTicketSection = document.querySelector("#populated-priority-section")
+                        const populatedTypeSection = document.querySelector("#populated-type-section")
+                        const chatbox = document.querySelector(".ticket-info-right-chatbox");
+                        chatbox.innerHTML = "";
 
                         setDataIndex()
                         closeOverlay()
-
-                        ticketDeleteButton.addEventListener("click", () => {
-                            const selectedTicketId = populateTicketInfoSection.lastElementChild.innerText
-                            console.log(selectedTicketId)
-                            const docRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId)
-                            deleteDoc(docRef)
-                            .then(() => {
-
-
-                                const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                                const populatedAuthorSection = document.querySelector("#populated-author-section")
-                                const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                                const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                                const populatedTicketSection = document.querySelector("#populated-priority-section")
-                                const populatedTypeSection = document.querySelector("#populated-type-section")
-                    
-                                // populatedTicketTitleSection.innerHTML = "";
-                                // populatedAuthorSection.innerHTML = "";
-                                // populatedDescriptionSection.innerHTML = "";
-                                // populatedTicketInfoSection.innerHTML = "";
-                                // populatedTicketSection.innerHTML = "";
-                                // populatedTypeSection.innerHTML = "";
-                    
-                                const chatbox = document.querySelector(".chatbox");
-                                chatbox.innerHTML = "";
-
-                                setDataIndex()
-                                closeOverlay()
-                            })
-        
-                        })
-                    }
-                }
-
-                // // click on ticket to redirect user to project specific page
-                populateTicketInfoSection()
-                function populateTicketInfoSection() {
-                const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
-                selectedTicketUl.forEach((ticket) => {
-                    ticket.addEventListener("click", () => {
-                        const selectedTicketId = ticket.lastChild.textContent;
-                        // console.log(selectedTicketId)
-
-                        //paste selectedTicketId into webpage
-                        const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
-                        window.history.pushState( {} , '', projectPage );
-
-
-                        // 4. populate selected ticket info USING TICKET ID!!
-                        const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
-                        getDoc(ticketRef).then((snapshot) => {
-    // TEST PASS: DOESNT UPDATE EVERY TIME THEME IS CHANGED
-    console.log("populateTicketInfoTest()TEST")
-
-                            console.log(snapshot.data().title)
-
-                            const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                            const populatedAuthorSection = document.querySelector("#populated-author-section")
-                            const populatedDescriptionSection = document.querySelector("#populated-description-section")
-                            const populatedTicketInfoSection = document.querySelector("#populated-status-section")
-                            const populatedTicketSection = document.querySelector("#populated-priority-section")
-                            const populatedTypeSection = document.querySelector("#populated-type-section")
-            
-                            populatedTicketTitleSection.innerHTML = snapshot.data().title;
-                            populatedAuthorSection.innerHTML = snapshot.data().author;
-                            populatedDescriptionSection.innerHTML = snapshot.data().description;
-                            populatedTicketInfoSection.innerHTML = snapshot.data().status;
-                            populatedTicketSection.innerHTML = snapshot.data().priority;
-                            populatedTypeSection.innerHTML = snapshot.data().type;
-
-                            populatedTicketInfoSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-                            populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-                            populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
-
-                            // FEATURE: EDIT TICKET INFO ************************************************************************************
-                            const editTicketAuthor = document.querySelector(".edit-ticket-author")
-                            const editTicketDescription = document.querySelector(".edit-ticket-description")
-                            const editTicketTitle = document.querySelector(".edit-ticket-title")
-                            const statusList = document.querySelector(".edit-ticket-status")
-                            const typeList = document.querySelector(".edit-ticket-type")
-                            const priorityList = document.querySelector(".edit-ticket-priority")
-
-
-                            editTicketAuthor.setAttribute("value", snapshot.data().author)
-                            editTicketDescription.setAttribute("value", snapshot.data().description)
-                            editTicketTitle.setAttribute("value", snapshot.data().title)
-
-                            let statusListOptions = statusList.options.length;
-                            for (let i = 0; i < statusListOptions; i++) {
-                                if (statusList.options[i].value == snapshot.data().status) {
-                                    statusList.options[i].selected = true;
-                                    break;
-                                }
-                            }
-
-                            let ticketListOptions = typeList.options.length;
-                            for (let i = 0; i < ticketListOptions; i++) {
-                                if (typeList.options[i].value == snapshot.data().type) {
-                                    typeList.options[i].selected = true;
-                                    break;
-                                }
-                            }
-
-                            let priorityListOptions = priorityList.options.length;
-                            for (let i = 0; i < priorityListOptions; i++) {
-                                if (priorityList.options[i].value == snapshot.data().priority) {
-                                    priorityList.options[i].selected = true;
-                                    break;
-                                }
-                            }
-                        // FEATURE: EDIT TICKET INFO ************************************************************************************
-                            
-                        })
-            
-                        // comments should also load here ***************************************************
-                        const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
-                        const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
-                        
-                        onSnapshot(orderedCommentsRef, (snapshot) => {
-                            let comments = []
-    // TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
-                            // refresh chatbox
-                            const chatbox = document.querySelector(".chatbox");
-
-
-                            clearChatbox();
-                            
-                            function clearChatbox() {
-                                while (chatbox.children[0] != null) {
-                                    chatbox.removeChild(chatbox.children[0]);
-                                }
-                            }
-                            snapshot.docs.forEach((doc) => {
-                                comments.push({ ...doc.data(), id: doc.id })
-                            });
-    // TEST PASS: DOESN'T UPDATE EVERY TIME THEME IS CHANGED
-
-
-                        for (i = 0; i < comments.length; i++) {
-                            const newComment = document.createElement("div");
-                                const userIcon = document.createElement("div");
-                                const commentRight = document.createElement("div");
-                                    const nameAndTimestamp = document.createElement("div");
-                                        const userName = document.createElement("div");
-                                        const timeStamp = document.createElement("div");
-                                    const messageContent = document.createElement("div");
-
-                                    newComment.classList.add("entire-message");
-                                    userIcon.classList.add("user-icon");
-                                    commentRight.classList.add("comment-right");
-                                    nameAndTimestamp.classList.add("name-and-timestamp-section");
-                                    userName.classList.add("user-name");
-                                    timeStamp.classList.add("message-timestamp");
-                                    messageContent.classList.add("message-content");
-            
-                                    userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
-                                    userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
-                                    timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
-                                    messageContent.innerText = comments[i].message;
-
-                            chatbox.appendChild(newComment);
-                                newComment.appendChild(userIcon);
-                                newComment.appendChild(commentRight);
-                                    commentRight.appendChild(nameAndTimestamp);
-                                        nameAndTimestamp.appendChild(userName);
-                                        nameAndTimestamp.appendChild(timeStamp);
-                                    commentRight.appendChild(messageContent);
-
-
-                        }
-                        
-                        // chatbox load bottom
-                        chatbox.scrollTop = chatbox.scrollHeight;
-                        
-                    })
-    
                     })
                 })
             }
-            console.log(tickets)
-        })
+        }
 
+        populateTicketInfoSection()
+        function populateTicketInfoSection() {
+            const selectedTicketUl = document.querySelectorAll(".populate-ticket-info-section")
+            selectedTicketUl.forEach((ticket) => {
+                ticket.addEventListener("click", () => {
+                    const selectedTicketId = ticket.lastChild.textContent;
+                    const projectPage = ["project-page.html?project=" + projectID + "&" + "selectedtickedID=" + selectedTicketId];
+                    window.history.pushState( {} , '', projectPage );
+                    const ticketRef = doc(db, 'projects', projectID, 'tickets', selectedTicketId);
+
+                    getDoc(ticketRef).then((snapshot) => {
+                        const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
+                        const populatedAuthorSection = document.querySelector("#populated-author-section")
+                        const populatedDescriptionSection = document.querySelector("#populated-description-section")
+                        const populatedTicketInfoSection = document.querySelector("#populated-status-section")
+                        const populatedTicketSection = document.querySelector("#populated-priority-section")
+                        const populatedTypeSection = document.querySelector("#populated-type-section")
+        
+                        populatedTicketTitleSection.innerHTML = snapshot.data().title;
+                        populatedAuthorSection.innerHTML = snapshot.data().author;
+                        populatedDescriptionSection.innerHTML = snapshot.data().description;
+                        populatedTicketInfoSection.innerHTML = snapshot.data().status;
+                        populatedTicketSection.innerHTML = snapshot.data().priority;
+                        populatedTypeSection.innerHTML = snapshot.data().type;
+
+                        populatedTicketInfoSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                        populatedTicketSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+                        populatedTypeSection.setAttribute("style", "background-color: black; text-transform: uppercase");
+
+                        const editTicketDescription = document.querySelector(".edit-ticket-description")
+                        const editTicketTitle = document.querySelector(".edit-ticket-title")
+                        const statusList = document.querySelector(".edit-ticket-status")
+                        const typeList = document.querySelector(".edit-ticket-type")
+                        const priorityList = document.querySelector(".edit-ticket-priority")
+
+                        editTicketTitle.setAttribute("value", snapshot.data().title)
+                        // editTicketDescription.setAttribute("value", snapshot.data().description)
+                        editTicketDescription.innerText = snapshot.data().description
+
+
+                        let statusListOptions = statusList.options.length;
+                        for (let i = 0; i < statusListOptions; i++) {
+                            if (statusList.options[i].value == snapshot.data().status) {
+                                statusList.options[i].selected = true;
+                                break;
+                            }
+                        }
+
+                        let ticketListOptions = typeList.options.length;
+                        for (let i = 0; i < ticketListOptions; i++) {
+                            if (typeList.options[i].value == snapshot.data().type) {
+                                typeList.options[i].selected = true;
+                                break;
+                            }
+                        }
+
+                        let priorityListOptions = priorityList.options.length;
+                        for (let i = 0; i < priorityListOptions; i++) {
+                            if (priorityList.options[i].value == snapshot.data().priority) {
+                                priorityList.options[i].selected = true;
+                                break;
+                            }
+                        }
+                    })
+        
+                    const commentsRef = collection(db, 'projects', projectID, 'tickets', selectedTicketId, 'comments')
+                    const orderedCommentsRef = query(commentsRef, orderBy("createdAt"))
+                    
+                    onSnapshot(orderedCommentsRef, (snapshot) => {
+                        let comments = []
+                        const chatbox = document.querySelector(".ticket-info-right-chatbox");
+
+                        clearChatbox();
+                        
+                        function clearChatbox() {
+                            while (chatbox.children[0] != null) {
+                                chatbox.removeChild(chatbox.children[0]);
+                            }
+                        }
+                        snapshot.docs.forEach((doc) => {
+                            comments.push({ ...doc.data(), id: doc.id })
+                        });
+
+                        for (i = 0; i < comments.length; i++) {
+                            const newComment = document.createElement("div");
+                            const userIcon = document.createElement("div");
+                            const commentRight = document.createElement("div");
+                            const nameAndTimestamp = document.createElement("div");
+                            const userName = document.createElement("div");
+                            const timeStamp = document.createElement("div");
+                            const messageContent = document.createElement("div");
+
+                            newComment.classList.add("chatbox-entire-message");
+                            userIcon.classList.add("chatbox-user-icon");
+                            commentRight.classList.add("chatbox-comment-right");
+                            nameAndTimestamp.classList.add("chatbox-name-and-timestamp-section");
+                            userName.classList.add("user-name");
+                            timeStamp.classList.add("message-timestamp");
+                            messageContent.classList.add("chatbox-message-content");
+
+                            userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
+                            userName.innerText = (comments[i].firstName + " " + comments[i].lastName);
+                            timeStamp.innerText = comments[i].createdAt.toDate().toLocaleTimeString('en-US');
+                            messageContent.innerText = comments[i].message;
+
+                            chatbox.appendChild(newComment);
+                            newComment.appendChild(userIcon);
+                            newComment.appendChild(commentRight);
+                            commentRight.appendChild(nameAndTimestamp);
+                            nameAndTimestamp.appendChild(userName);
+                            nameAndTimestamp.appendChild(timeStamp);
+                            commentRight.appendChild(messageContent);
+                        }
+                        chatbox.scrollTop = chatbox.scrollHeight;
+                    })
+                })
+            })
+        }
+    })
 }
 
 function clearTickets() {
@@ -867,45 +634,31 @@ function clearTickets() {
 }
 
 function commentCreation() {
-    
-onAuthStateChanged(auth, (user) => {
-    const uid = user.uid;
-    const currentUser = query(userRef, where("uid", "==", uid));
-// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
-    
-    onSnapshot(currentUser, (snapshot) => {
-        let currentUserList = [];
-// TEST FAIL: FIRES EVERY TIME THEME IS CHANGED
-        snapshot.docs.forEach((doc) => {
-            currentUserList.push({ ...doc.data(), id: doc.uid });
-        });
-        console.log(currentUserList)
-const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
+    onAuthStateChanged(auth, (user) => {
+        const uid = user.uid;
+        const currentUser = query(userRef, where("uid", "==", uid));
+        
+        onSnapshot(currentUser, (snapshot) => {
+            let currentUserList = [];
 
+            snapshot.docs.forEach((doc) => {
+                currentUserList.push({ ...doc.data(), id: doc.uid });
+            });
 
-// FEATURE: COMMENT CREATION ***************************************************************************************************
-            const commentInputForm = document.querySelector(".comment-input-form")
+            const commentInputForm = document.querySelector(".ticket-info-right-comment-form")
 
             commentInputForm.addEventListener('submit', (e) => {
                 e.preventDefault();
 
+                const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
+                    get: (searchParams, prop) => searchParams.get(prop),
+                });
 
-                
+                let globalSelectedticketId = ticketparams.selectedtickedID;
 
-                        //grab global selected ticket id
-                        const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
-                            get: (searchParams, prop) => searchParams.get(prop),
-                        });
-                        // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
-                        let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
-                        console.log(globalSelectedticketId)
+                const commentRef = collection(db, 'projects', projectID, 'tickets', globalSelectedticketId, 'comments')
 
-                        const commentRef = collection(db, 'projects', projectID, 'tickets', globalSelectedticketId, 'comments')
-
-
-                // newProject.innerText = addProjectForm.name.value;
                 addDoc(commentRef, {
-
                     firstName: currentUserList[0].firstName,
                     lastName: currentUserList[0].lastName,
                     message: commentInputForm.comment.value,
@@ -915,28 +668,24 @@ const selectedTicketIdd = "xqPesJdnuLuphiOieXpG"
                     commentInputForm.reset()
                 })
             })
+        })
     })
-})
-
 }
 
 function setDataIndex() {
     let i = 0
-    for (i = 0; i < modalBtnMulti.length; i++)
-    {
+    for (i = 0; i < modalBtnMulti.length; i++) {
         modalBtnMulti[i].setAttribute('data-index', i);
         modal[i].setAttribute('data-index', i);
         overlay[i].setAttribute('data-index', i);
     }
 
-    for (i = 0; i < modalBtnMulti.length; i++)
-    {
+    for (i = 0; i < modalBtnMulti.length; i++) {
         modalBtnMulti[i].onclick = function() {
             let ElementIndex = this.getAttribute('data-index');
             modal[ElementIndex].classList.toggle("open")
             overlay[ElementIndex].classList.toggle("open")
         };
-        
     }
 }
 
@@ -945,23 +694,23 @@ function closeOverlay() {
     {
         overlay[i].onclick = function() {
             let ElementIndex = this.getAttribute('data-index');
-        //   modalparent[ElementIndex].classList.remove("hidden")
-          modal[ElementIndex].classList.remove("open")
-          overlay[ElementIndex].classList.remove("open")
+            modal[ElementIndex].classList.remove("open")
+            overlay[ElementIndex].classList.remove("open")
         };
     }
 }
 
 function closeModal() {
-        const overlays = document.querySelectorAll(".overlay");
-        overlays.forEach((overlay) => {
-            overlay.classList.remove("open")
-        })
+    const overlays = document.querySelectorAll(".overlay");
+    const modals = document.querySelectorAll(".modal");
 
-        const modals = document.querySelectorAll(".modal");
-        modals.forEach((modal) => {
-            modal.classList.remove("open")
-        })
+    overlays.forEach((overlay) => {
+        overlay.classList.remove("open")
+    })
+
+    modals.forEach((modal) => {
+        modal.classList.remove("open")
+    })
 }
 
 function createTicketButton() {
@@ -970,39 +719,32 @@ function createTicketButton() {
         
         const idUid = document.querySelector('#idUid').textContent
         const currentUserDocRef = doc(db, 'users', idUid)
+
         getDoc(currentUserDocRef).then((snapshot) => {
             let ticketAuthor = snapshot.data().firstName + " " + snapshot.data().lastName;
 
-
-        addDoc(colRef, {
-            author: ticketAuthor,
-            description: createTicketForm.description.value,
-            title: createTicketForm.title.value,
-            status: createTicketForm.status.value,
-            priority: createTicketForm.priority.value,
-            type: createTicketForm.type.value,
-            createdAt: serverTimestamp(),
+            addDoc(colRef, {
+                author: ticketAuthor,
+                description: createTicketForm.description.value,
+                title: createTicketForm.title.value,
+                status: createTicketForm.status.value,
+                priority: createTicketForm.priority.value,
+                type: createTicketForm.type.value,
+                createdAt: serverTimestamp(),
+            })
+            .then(() => {
+                createTicketForm.reset()
+                setDataIndex()
+                closeOverlay()
+                closeModal();
+            })
         })
-        .then(() => {
-            createTicketForm.reset()
-            setDataIndex()
-            closeOverlay()
-            closeModal();
-        })
-        })
-
-        
     })    
 }
 
-function pieChartStatus() {
-
-
-// const colRef = collection(db, 'projects', projectID, 'tickets')
-
+function pieChartStatus(bottom, middle, top) {
     onSnapshot(colRef, (snapshot) => {
         let ticketInfoList = []
-// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
 
         while (ticketInfoList[0] != null) {
             ticketInfoList.removeChild(ticketInfoList[0]);
@@ -1013,34 +755,17 @@ function pieChartStatus() {
         });
 
         let statusList = ticketInfoList.map(a => a.status);
-        console.log(statusList)
         let statusCount = statusList.length;
         let unresolvedCount = getOccurrence(statusList, "unresolved")
         let inProgressCount = getOccurrence(statusList, "in progress")
-        // let resolvedCount = getOccurrence(statusList, "resolved")
-
         let typeList = ticketInfoList.map(a => a.type);
-        console.log(typeList)
         let typeCount = typeList.length;
         let bugCount = getOccurrence(typeList, "bug")
         let featureRequestCount = getOccurrence(typeList, "feature request")
-
         let priorityList = ticketInfoList.map(a => a.priority);
-        console.log(priorityList)
         let priorityCount = priorityList.length;
         let mediumCount = getOccurrence(priorityList, "medium")
         let highCount = getOccurrence(priorityList, "high")
-
-        // let statusList = ticketInfoList.map(a => a.status);
-        // // console.log(statusList)
-        // let statusCount = statusList.length;
-        // // let unresolvedCount = getOccurrence(statusList, "unresolved")
-        // let inProgressCount = getOccurrence(statusList, "in progress")
-        // let resolvedCount = getOccurrence(statusList, "resolved")
-
-        // console.log(unresolvedCount)
-        // console.log(inProgressCount)
-        // console.log(resolvedCount)
         
         pieContainerOne.classList.add("pie-container")
         pieUnresolved.classList.add("pie")
@@ -1057,54 +782,30 @@ function pieChartStatus() {
         pieMedium.classList.add("pie")
         pieHigh.classList.add("pie")
 
-        // dashboardMaster.appendChild(pieContainerOne)
         pieContainerOne.appendChild(pieUnresolved)
         pieContainerOne.appendChild(pieInProgress)
         pieContainerOne.appendChild(pieResolved)
 
-        // dashboardMaster.appendChild(pieContainerTwo)
         pieContainerTwo.appendChild(pieIssue)
         pieContainerTwo.appendChild(pieBug)
         pieContainerTwo.appendChild(pieFeatureRequest)
 
-        // dashboardMaster.appendChild(pieContainerThree)
         pieContainerThree.appendChild(pieLow)
         pieContainerThree.appendChild(pieMedium)
         pieContainerThree.appendChild(pieHigh)
 
-        // let width = "70"
-        // let light = "rgba(0, 0, 0, .3)"
-        // let medium = "rgba(0, 0, 0, .5)"
-        // let dark = "rgba(0, 0, 0, 1)"
-        // pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
-        // pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
-        // pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
+        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
 
-        // pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
-        // pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
-        // pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
+        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
 
-        // pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1; width:"+width+"%;")
-        // pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2; width:"+width+"%;")
-        // pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+dark+"; z-index: 3; width:"+width+"%;")
-
-        let light = "rgba(0, 0, 0, .3)"
-        let medium = "rgba(0, 0, 0, .5)"
-        let dark = "rgba(0, 0, 0, 1)"
-        pieResolved.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieInProgress.setAttribute("style", "--p:"+(((unresolvedCount/statusCount)*100)+((inProgressCount/statusCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieUnresolved.setAttribute("style", "--p:"+(unresolvedCount/statusCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
-
-        pieIssue.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieBug.setAttribute("style", "--p:"+(((featureRequestCount/typeCount)*100)+((bugCount/typeCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieFeatureRequest.setAttribute("style", "--p:"+(featureRequestCount/typeCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
-
-        pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+light+"; z-index: 1;")
-        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+medium+"; z-index: 2;")
-        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+dark+"; z-index: 3;")
-
+        pieLow.setAttribute("style", "--p: 100;--b:25px;--c:"+bottom+"; z-index: 1;")
+        pieMedium.setAttribute("style", "--p:"+(((highCount/priorityCount)*100)+((mediumCount/priorityCount)*100))+";--b:25px;--c:"+middle+"; z-index: 2;")
+        pieHigh.setAttribute("style", "--p:"+(highCount/priorityCount)*100+";--b:25px;--c:"+top+"; z-index: 3;")
     })
-
 }
 
 function getOccurrence(array, value) {
@@ -1118,21 +819,18 @@ function clearTicketInfoList(){
 }
 
 function editTicketSubmitButton() {
-
     editTicketForm.addEventListener("submit", (e) => {
-
         const ticketparams = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
         
-        let globalSelectedticketId = ticketparams.selectedtickedID; // "some_value"
+        let globalSelectedticketId = ticketparams.selectedtickedID;
         
         const selectedTicket = doc(db, 'projects', projectID, 'tickets', globalSelectedticketId)
 
         e.preventDefault()
         
         updateDoc(selectedTicket, {
-            author: editTicketForm.author.value,
             description: editTicketForm.description.value,
             title: editTicketForm.title.value,
             status: editTicketForm.status.value,
@@ -1142,34 +840,27 @@ function editTicketSubmitButton() {
         .then(() => {
             editTicketForm.reset()
 
-            console.log("the ticket has been updated!")
-
             getDoc(selectedTicket).then((snapshot) => {
-                console.log(snapshot.data().title)
                 const populatedTicketTitleSection = document.querySelector("#populated-ticket-title-section")
-                const populatedAuthorSection = document.querySelector("#populated-author-section")
                 const populatedDescriptionSection = document.querySelector("#populated-description-section")
                 const populatedTicketInfoSection = document.querySelector("#populated-status-section")
                 const populatedTicketSection = document.querySelector("#populated-priority-section")
                 const populatedTypeSection = document.querySelector("#populated-type-section")
 
                 populatedTicketTitleSection.innerHTML = snapshot.data().title;
-                populatedAuthorSection.innerHTML = snapshot.data().author;
                 populatedDescriptionSection.innerHTML = snapshot.data().description;
                 populatedTicketInfoSection.innerHTML = snapshot.data().status;
                 populatedTicketSection.innerHTML = snapshot.data().priority;
                 populatedTypeSection.innerHTML = snapshot.data().type;
-                // FEATURE: EDIT TICKET INFO ************************************************************************************
-                const editTicketAuthor = document.querySelector(".edit-ticket-author")
+
                 const editTicketDescription = document.querySelector(".edit-ticket-description")
                 const editTicketTitle = document.querySelector(".edit-ticket-title")
                 const statusList = document.querySelector(".edit-ticket-status")
                 const typeList = document.querySelector(".edit-ticket-type")
                 const priorityList = document.querySelector(".edit-ticket-priority")
 
-                editTicketAuthor.setAttribute("value", snapshot.data().author)
-                editTicketDescription.setAttribute("value", snapshot.data().description)
                 editTicketTitle.setAttribute("value", snapshot.data().title)
+                editTicketDescription.setAttribute("value", snapshot.data().description)
 
                 let statusListOptions = statusList.options.length;
                 for (let i = 0; i < statusListOptions; i++) {
@@ -1192,15 +883,11 @@ function editTicketSubmitButton() {
                         break;
                     }
                 }
-            // FEATURE: EDIT TICKET INFO ************************************************************************************
-                
             })
-
             setDataIndex()
             closeOverlay()
             closeModal();
         })
-            
     })
 }
 
@@ -1209,7 +896,6 @@ function openSidebar() {
         dashboardMasterMobile.setAttribute("style", "left: 0")
         overlayer.setAttribute("style", "position: fixed; height: 100vh; left: 0%;")
         overlayer.classList.add("open")
-
     })
 }
 
@@ -1229,7 +915,6 @@ function closeSidebarWithOverlay() {
 
 function loadBackground() {
     getDoc(ProjectUsersDocRef).then((snapshot) => {
-// TEST PASS: DOESN'T FIRE EVERY TIME THEME IS CHANGED
         let fetchedBackgroundURL = snapshot.data().background;
         body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"')")
     })
@@ -1275,6 +960,12 @@ function setThemeLight() {
         logo[i].classList.add("light-mode-logo")
         logo[i].classList.remove("dark-mode-logo")
     }
+
+    for (let i = 0; i < bottomDot.length; i++ ) {
+        bottomDot[i].setAttribute("style", "background-color: rgb(0,0,0,.3);")
+        middleDot[i].setAttribute("style", "background-color: rgb(0,0,0,.6);")
+        topDot[i].setAttribute("style", "background-color: rgb(0,0,0);")
+    }
 }
 
 function setThemeDark() {
@@ -1296,5 +987,11 @@ function setThemeDark() {
     for (let i = 0; i < logo.length; i++) {
         logo[i].classList.add("dark-mode-logo")
         logo[i].classList.remove("light-mode-logo")
+    }
+
+    for (let i = 0; i < bottomDot.length; i++ ) {
+        bottomDot[i].setAttribute("style", "background-color: rgb(255, 255, 255, .3);")
+        middleDot[i].setAttribute("style", "background-color: rgb(255, 255, 255, .6);")
+        topDot[i].setAttribute("style", "background-color: rgb(255, 255, 255);")
     }
 }

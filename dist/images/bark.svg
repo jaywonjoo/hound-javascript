@@ -1,0 +1,12 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+	<title>sparkle</title>
+	<style>
+		.s0 { fill: #000000 } 
+		.s1 { fill: #ffffff } 
+	</style>
+	<path id="Layer 7" class="s0" d="m100 52.8v3.5h-18.8v-3.5m-175.2-56.3"/>
+	<path id="Layer 7 copy" class="s0" d="m95.3 35.6l1.7 3-16.3 9.3-1.7-3"/>
+	<path id="Layer 7 copy 2" class="s0" d="m81.6 23l3 1.8-9.6 16.1-3-1.8"/>
+	<path id="Layer 6" class="s0" d="m10 62.6l-4.9-17.6 16.8 3.8 31-34.8 16.5 27.1-12.8 23.2 15.4 1.3-23.1 25.7-48.9-20.6"/>
+	<path id="Layer 8" class="s1" d="m32.1 48.8c0.3 5.2 7.9 9.3 10.3 1.3 0.7-8.9-10.5-6.4-10.3-1.3z"/>
+</svg>

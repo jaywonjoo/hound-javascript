@@ -1,0 +1,154 @@
+@use 'sass:map';
+
+$breakpoints: (
+    small: 800px,
+);
+
+@mixin mq($key) {
+	$size: map.get($breakpoints, $key);
+	
+	@media (max-width: $size) {
+		@content;
+	}
+};
+
+body {
+    display: flex;
+    justify-content: center;
+    /* font-family: Graphik, Helvetica, sans-serif; */
+    font-family: Helvetica;
+    background: rgb(255, 255, 255); 
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.parent-card {
+    height: fit-content;
+    width: 25em;
+    border: 10px;
+    padding: 10px 10px 50px 10px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    top: 45%;
+    left: 50%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include mq(small) {
+        box-shadow: none;
+        padding: 0
+    }    
+}
+
+.home-btn {
+    display: flex;
+    align-items: center;
+    margin: 28px 0px 0px 0px;
+    cursor: pointer;
+
+    &-logo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: -3px;
+        opacity: 0.9;
+    }
+
+    &-text {
+        display: flex;
+        flex-direction: row;
+        font-size: 4rem;
+        margin: .5rem;
+        font-family: Graphik-Semibold,sans-serif;
+        font-weight: 600;
+        color: rgb(63, 63, 63);
+    }
+}
+
+.auth-message {
+    margin-bottom: .5em;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: rgb(63, 63, 63);
+}
+
+.auth {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: .5em;
+    }
+
+    &-input {
+        border-style: solid rgb(0, 0, 0, .25);
+        border-radius: .75em;
+        width: 74%;
+        padding: .5em 1em;
+        /* font-size: 1em; */
+        margin: 0 0 1em 0;
+    }
+
+    &-btn {
+        border-style: none;
+        background-color: rgb(63, 63, 63);
+        color: white;
+        border-radius: .75em;
+        width: 81%;
+        padding: .65em 0;
+        /* font-size: 1em; */
+        margin: 0 0 1em 0;
+    }
+}
+
+.or-space {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.alt-link {
+    &-container {
+        width: 80%;
+    }
+
+    &-text {
+        font-size: .75em;
+        width: 80%;
+        color: rgba(0, 0, 0, 0.5);
+        margin: 0;
+    }
+}
+
+a {
+    color: #5384f5
+}
+
+.error-message {
+    display: none;
+    margin: -1em 0 0 0;
+    color: rgb(255, 0, 0);
+    font-size: .75em;
+
+    &-container {
+        width: 78%;
+        display: flex;
+        justify-content: left;
+    }
+}
+
+.is-focused {
+    border-color: red;
+    border-style: solid;
+    background-color: white;
+}
+
+.hidden-sign-in-form {
+    display: none;
+}

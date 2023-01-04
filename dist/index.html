@@ -1,62 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hound</title>
-    <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
-    <script defer src="index.bundle.js"></script>
-</head>
-<body>
-    <!-- <button id="loginButton">login</button>
-    <button id="signUpButton">signup</button> -->
-  
-    <!-- Nav Bar --> 
-    <nav class='navbar'>
-      <div class='nav-left'>
-        <img loading="lazy" class='nav-logo' src="../images/hound.svg"/>
-        <div class='brand-title'>Hound</div>
-      </div>
-      
-      <a href="#" class='toggle-button'>
-        <span class='bar'></span>
-        <span class='bar'></span>
-        <span class='bar'></span>
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Hound</title>
+      <link rel="shortcut icon" type="image/x-icon" href="images/hound.svg">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+      <script defer src="index.bundle.js"></script>
+  </head>
+
+  <body>
+    <div class="hero-doggo-head-container">
+      <img class="hero-doggo-head" src=images/hound-hero-doggo.svg>
+    </div>
+    
+    <header class="header">
+      <a class='header-left'>
+        <img loading="lazy" class='header-logo' style="width:1.8em;height:1.8em" src="images/hound.svg"/>
+        <h1 class='header-title'>Hound</h1>
       </a>
-      <div class='navbar-links'>
-        <div class="navbar-links-left">
-          <button class="navbar-link-button">Features</button>
-          <button class="navbar-link-button">Solutions</button>
-          <button class="navbar-link-button">Plans</button>
-          <button class="navbar-link-button">Pricing</button>
-          <button class="navbar-link-button">Resources</button>
+
+      <a href="#" class='header-toggle-btn'>
+        <span class='header-toggle-btn-bar'></span>
+        <span class='header-toggle-btn-bar'></span>
+        <span class='header-toggle-btn-bar'></span>
+      </a>
+
+      <nav class='header-nav-links'>
+        <ul class="header-nav-links-left"></ul>
+        <ul class="header-nav-links-right">
+          <li><a class='header-nav-links-login' href="#">Log In</a></li>
+          <li><a class='header-nav-links-register' href="#">Register</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class='hero'>
+      <div class='hero-text-master'>
+        <h2 class="hero-text-main">Bring all your tasks, teammates, and tools together</h1>
+        <!-- <p class='hero-text-body'>Keep everything in the same place—even if your team isn’t.</p> -->
+        <p class='hero-text-body text-muted'>Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with Hound.</p>
+      </div>
+      <div class='hero-image-master'>
+        <!-- <img class='hero-image' src=../images/hound_hero_image.png> -->
+      </div>
+    </section>
+
+    <div class="container px-4 pt-5" style="width: 80%" id="hanging-icons">
+      <h2 class="pb-2 border-bottom">Features</h2>
+      <div class="features-container row g-4 row-cols-1 row-cols-lg-3">
+
+        <div class="col d-flex align-items-start">
+          <div class="icon-square d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 mx-2 my-1">
+            <img class="bi features-icon-sm" src="images/layers-half.svg"/>
+          </div>
+          <div>
+            <h3 class="fs-2">Track</h3>
+            <p>Track the progress of your projects with ease using Hound's summary charts and status indicators.</p>
+            <!-- <a href="#" class="btn btn-primary">
+              Primary button
+            </a> -->
+          </div>
         </div>
 
-        <ul>
-          <li><a class='nav-login' href="#">Log In</a></li>
-          <div class='nav-register-bubble'><li><a href="#">Register</a></li></div> 
-          <div class='dropdown-fill'></div>
-        </ul>
+        <div class="col d-flex align-items-start">
+          <div class="icon-square d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 mx-2 my-1">
+            <img class="bi features-icon-lg" src="images/bark.svg"/>
+          </div>
+          <div>
+            <h3 class="fs-2">Communicate</h3>
+            <p>Share projects with anyone in your your organization and keep up to speed with them using Hounds built in team and chat features.</p>
+            <!-- <a href="#" class="btn btn-primary">
+              Primary button
+            </a> -->
+          </div>
+        </div>
+
+        <div class="col d-flex align-items-start">
+          <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 mx-2 my-1">
+            <img class="bi features-icon-md" src="images/sparkle.svg"/>
+          </div>
+          <div>
+            <h3 class="fs-2">Personalize</h3>
+            <p>Express your individuality using Hounds custom background and project card features.</p>
+            <!-- <a href="#" class="btn btn-primary">
+              Primary button
+            </a> -->
+          </div>
+        </div>
       </div>
-      
-    </nav>
-
-    <!-- Hero Section -->
-    <div class='hero-section'>
-      <div class='hero-text'>
-        <h1>Bring all your tasks, teammates, and tools together</h1>
-        <p class='HPparagraph'>Keep everything in the same place—even if your team isn’t.</p>
-      
-          <input type="text" class='hero-email-input' placeholder="Email"/>
-
-          <button class='hero-register-button'>Register</button>
-      </div>
-
-      <img class='hero-image' src=../images/hound_hero_image.png>
     </div>
 
+    <section class="text-center container" style="width: 80%">
+      <img width="100%" src=images/hound-projects-page.png class="teaser-image">
+      <div class="row py-lg-5">
+        <div class="col-lg-8 col-md-8 mx-auto">
+          <h2 class="fw-light">It’s more than work. It’s a way of working together.</h2>
+          <p class="teaser-image-caption-sm lead text-muted">Start with a Hound board. Customize and expand with more features as your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one place.</p>
+          <p>
+            <button id="registerBtn" class="btn btn-primary my-2">Start doing</button>
+          </p>
+        </div>
+      </div>
+    </section>
 
+    <footer class="index-footer">
+      <div class="container" style="width: 80%;">
+        <footer>
+          <div class="d-flex flex-column flex-sm-row justify-content-between">
+            <ul class="nav justify-content-center align-items-center">
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">HTML</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">BootStrap</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">SASS</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">JavaScript</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Webpack</a></li>
+              <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Firebase</a></li>
+            </ul>
 
-</body>
+            <!-- <p>✦ Created by Jaywon Joo. Thanks for stopping by!</p> -->
+            <ul class="social-links list-unstyled d-flex pt-3">
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://github.com/jaywonjoo/hound-javascript"><img class="bi" width="24" height="24" src="images/github.svg"/></a></li>
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://www.linkedin.com/in/jaywon-joo-56815612a/"><img class="bi" width="24" height="24" src="images/linkedin.svg"/></a></li>
+              <li class="ms-3"><a class="link-dark" target="_blank" href="https://www.artstation.com/jaywonjoo"><img class="bi" width="24" height="24" src="images/artstation.svg"/></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
 </html>

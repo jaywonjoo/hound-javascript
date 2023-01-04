@@ -5,76 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="shortcut icon" type="image/x-icon" href="hound.svg">
+    <link rel="shortcut icon" type="image/x-icon" href="images/hound.svg">
     <script defer src="signup.bundle.js"></script>
 
 </head>
-<body>
-    <div class="parent-card">
+    <body>
+        <section class="parent-card">
+            <div class="home-btn">
+                <img loading="lazy" class='home-btn-logo' style="width:3.5em;height:3.5em" src="images/hound.svg"/>
+                <a class="home-btn-text">Hound</a>
+            </div>
 
-        <div class="logo-home-button-container">
-            <img loading="lazy" class='main-logo' src="../images/hound.svg"/>
-            <div class="logo-home-button">Hound</div>
-        </div>
+            <h1 class="auth-message">Sign up for your account!</h1>
 
-        <div class="sign-up-message">Sign up for your account!</div>
+            <form id="signupForm" class="auth-form">
+                <input class="auth-input" id="firstName" type="text" name="firstName" placeholder="First name" required>
+                <input class="auth-input" id="lastName" type="text" name="lastName" class="lastName" placeholder="Last name" required>
+                <input class="auth-input" type="email" name="email" placeholder="Enter email" required>
+                <input class="auth-input" type="password" name="password" placeholder="Enter password" required>
+                
+                <button class="auth-btn">signup</button>
+            </form>
 
-        <form id="signupForm" class="sign-up-form">
+            <section class="alt-link-container">
+                <p class="alt-link-text">Already have an account? <a id="signInLink">sign-in!</a></p>
+                <p class="alt-link-text">sign in as a <a id="demoUserLink">demo-user</a></p>
+            </section>
+        </section>
 
-            <!-- <label for="firstName">firstName:</label> -->
-            <input class="input" id="firstName" type="text" name="firstName" placeholder="First name" required>
-            <!-- <input type="text" name="firstName" class="firstName" required> -->
-
-            <!-- <label for="lastName">lastName:</label> -->
-            <input class="input" id="lastName" type="text" name="lastName" class="lastName" placeholder="Last name" required>
-            
-            <!-- <label for="email">email:</label> -->
-            <input class="input" type="email" name="email" placeholder="Enter email" required>
-
-            <!-- <label for="password">Password:</label> -->
-            <input class="input" type="password" name="password" placeholder="Enter password" required>
-
-            <button class="sign-up-button">signup</button>
+        <form id="signinForm" class="hidden-sign-in-form">
+            <input id="emailAuthInput" type="email" name="email" required>
+            <input id="passwordAuthInput" type="password" name="password" required>
+            <button class="sign-in-button">Sign in</button>
         </form>
-
-        <span class="or-space" >OR</span>
-
-        <div class="provider-container">
-            <img class="provider-logo" src="../images/google-icon.svg">
-
-                <div class="provider-message">
-                    Continue with Google
-                </div>
-        </div>
-
-        <div class="provider-container">
-            <img class="provider-logo" src="../images/microsoft-icon.svg">
-
-                <div class="provider-message">
-                    Continue with Microsoft
-                </div>
-        </div>
-
-        <div class="provider-container">
-            <img class="provider-logo" src="../images/apple-icon.svg">
-
-                <div class="provider-message">
-                    Continue with Apple
-                </div>
-        </div>
-
-        <div class="alt-link-container">
-            <p class="sign-in-link">Already have an account? <a id="signInLink">sign-in!</a></p>
-            <p class="sign-up-link">sign in as a <a id="demoUserLink">demo-user</a></p>
-        </div>
-
-
-    </div>
-
-    <form id="signinForm" class="hidden-sign-in-form">
-        <input id="emailAuthInput" type="email" name="email" required>
-        <input id="passwordAuthInput" type="password" name="password" required>
-        <button class="sign-in-button">Sign in</button>
-    </form>
-</body>
+    </body>
 </html>
