@@ -1054,6 +1054,95 @@ button {
   }
 }
 
+.ticket {
+  &-section {
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
+    z-index: 1;
+
+    @include mq(medium) {
+      width: 62.5%;
+    }
+
+    @include mq(small) {
+      width: 90%;
+      margin-bottom: 1em;
+      height: 55vh;
+    }
+
+    &-header-label {
+      padding-left: 10px;
+
+      @include mq(small) {
+        padding-left: 3%;
+      }
+    }
+  }
+
+  &-header {
+    width: 100%;
+    height: 1.3em;
+    display: flex;
+    border-bottom-style: solid;
+    border-width: 1.5px;
+    border-color: black;
+
+    &-left {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+    }
+
+    &-kebab-spacer {
+      width: 5%;
+    }
+  }
+
+  &-title {
+    width: 30%;
+    height: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: .75rem;
+
+    @include mq(small) {
+      margin-left: 3%;
+      width: 45%;
+      white-space: unset;
+    }
+  }
+
+  &-description {
+    width: 45%;
+    height: 1em;
+    overflow: hidden;
+    margin-left: .75rem;
+    
+    @include mq(small) {
+      display: none;
+    }
+  }
+
+  &-author {
+    width: 20%;
+    height: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: .75rem;
+
+    @include mq(small) {
+      width: 45%;
+    }
+  }
+}
 
 
 
@@ -1082,23 +1171,7 @@ button {
   bottom: 0;
 }
 
-/* top row */
 
-
-// .top-row-top-section {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin: 0;
-//   padding: 0;
-//   width: 100%;
-//   border-radius: 15px 15px 0 0;
-//   border-width: 1.5px;
-//   border-bottom-style: solid;
-//   border-color: rgb(28, 28, 28);
-//   height: 2.5em;
-// }
 
 #memberModalBtn {
   border-radius: 25px;
@@ -1112,35 +1185,6 @@ button {
   align-items: center;
 }
 
-/* team member section */
-// .team-member-body {
-//   width: 100%;
-// }
-
-
-
-// .team-members-header-label {
-//   padding-left: 10px;
-// }
-
-// .team-member-header {
-//   width: 100%;
-//   height: 1.3em;
-//   display: flex;
-//   border-bottom-style: solid;
-//   border-width: 1.5px;
-//   border-color: black;
-// }
-
-// .team-member-body {
-//   overflow: scroll;
-//   -ms-overflow-style: none;  /* IE and Edge */
-//   scrollbar-width: none;  /* Firefox */
-// }
-
-// .team-member-body::-webkit-scrollbar {
-// display: none;
-// }
 
 .team-member-line-item {
   display: flex;
@@ -1169,43 +1213,10 @@ button {
   justify-content: right;
 }
 
-// .header-kebab-spacer {
+
+
+// .ticket-header-kebab-spacer {
 //   width: 5%;
-//   margin-left: .75rem;
-// }
-
-.ticket-header-kebab-spacer {
-  width: 5%;
-}
-
-// .team-member-line-item-name {
-//   width: 35%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .team-member-line-item-email {
-//   width: 33%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .team-member-line-item-phone {
-//   width: 27%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
 // }
 
 .team-member-line-item-kebab {
@@ -1284,38 +1295,38 @@ button {
 //   gap: 10px;
 // }
 
-.ticket-section {
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  width: 65%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: top;
-  align-items: center;
-  border-radius: 15px;
-  box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
-  z-index: 1;
-}
+// .ticket-section {
+//   backdrop-filter: blur(40px);
+//   -webkit-backdrop-filter: blur(40px);
+//   width: 65%;
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: top;
+//   align-items: center;
+//   border-radius: 15px;
+//   box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
+//   z-index: 1;
+// }
 
-.ticket-section-header-label {
-  padding-left: 10px;
-}
+// .ticket-section-header-label {
+//   padding-left: 10px;
+// }
 
-.ticket-header {
-  width: 100%;
-  height: 1.3em;
-  display: flex;
-  border-bottom-style: solid;
-  border-width: 1.5px;
-  border-color: black;
-}
+// .ticket-header {
+//   width: 100%;
+//   height: 1.3em;
+//   display: flex;
+//   border-bottom-style: solid;
+//   border-width: 1.5px;
+//   border-color: black;
+// }
 
-.ticket-header-left {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
+// .ticket-header-left {
+//   display: flex;
+//   flex-direction: row;
+//   width: 100%;
+// }
 
 #ticketModalBtn {
   border-radius: 25px;
@@ -1362,28 +1373,28 @@ button {
   background-color: rgb(0, 0, 0, .3);
 }
 
-.ticket-title {
-  width: 30%;
-  height: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-left: .75rem;
-}
+// .ticket-title {
+//   width: 30%;
+//   height: 1em;
+//   overflow: hidden;
+//   white-space: nowrap;
+//   margin-left: .75rem;
+// }
 
-.ticket-description {
-  width: 45%;
-  height: 1em;
-  overflow: hidden;
-  margin-left: .75rem;
-}
+// .ticket-description {
+//   width: 45%;
+//   height: 1em;
+//   overflow: hidden;
+//   margin-left: .75rem;
+// }
 
-.ticket-author {
-  width: 20%;
-  height: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-left: .75rem;
-}
+// .ticket-author {
+//   width: 20%;
+//   height: 1em;
+//   overflow: hidden;
+//   white-space: nowrap;
+//   margin-left: .75rem;
+// }
 
 .ticket-kebab-div {
   width: 5%;
@@ -1637,50 +1648,6 @@ font-size: .75rem;
   margin-bottom: .75em;
 }
 
-// .create-ticket-form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: left;
-// }
-
-// .create-ticket-form label {
-// margin-bottom: -.5rem;
-// font-size: .75rem;
-// }
-
-// .create-ticket-form input {
-//   width: auto;
-// }
-
-// .create-ticket-form select {
-//   width: 100%;
-// }
-
-// .create-ticket-form-header {
-//   margin: 0;
-//   font-size: 2rem;
-// }
-
-// .create-ticket-description {
-//   max-height: 8rem;
-//   min-height: 5rem;
-//   resize: vertical;
-//   font-family: inherit;
-// }
-
-// .create-ticket-btn {
-//   border: none;
-//   border-radius: 1rem;
-//   padding: 7px 10px;
-//   width: 100%;
-//   cursor: pointer;
-// }
-
-// .create-ticket-priority {
-//   margin-bottom: .75em;
-// }
-
 @media (max-width: 1300px) {
   .lower-half {
 
@@ -1690,23 +1657,14 @@ font-size: .75rem;
     margin: 1.5rem 0 1% 0;
   }
 
-
-
-
-
-
-
  .sidebar-button-bar-spacer {
       width: 18px;
   }
-
-
 
   .content-section {
       width: 100vw;
       margin: 0 25px;
   }
-
 
   .mobile-spacer {
     height: 5vh;
@@ -1730,10 +1688,16 @@ font-size: .75rem;
     width: 49%;
   }
 
-  .ticket-section {
-    width: 62.5%;
-  }
+  // .ticket-section {
+  //   width: 62.5%;
+  // }
 }
+
+
+// .header-kebab-spacer {
+//   width: 5%;
+//   margin-left: .75rem;
+// }
 
 // .user-dropdown-overlay {
 //   position: fixed;
@@ -1957,4 +1921,126 @@ font-size: .75rem;
 //   left: 0;
 //   right: 0;
 //   bottom: 0;
+// }
+
+
+
+/* team member section */
+// .team-member-body {
+//   width: 100%;
+// }
+
+/* top row */
+
+
+// .top-row-top-section {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin: 0;
+//   padding: 0;
+//   width: 100%;
+//   border-radius: 15px 15px 0 0;
+//   border-width: 1.5px;
+//   border-bottom-style: solid;
+//   border-color: rgb(28, 28, 28);
+//   height: 2.5em;
+// }
+
+// .team-members-header-label {
+//   padding-left: 10px;
+// }
+
+// .team-member-header {
+//   width: 100%;
+//   height: 1.3em;
+//   display: flex;
+//   border-bottom-style: solid;
+//   border-width: 1.5px;
+//   border-color: black;
+// }
+
+// .team-member-body {
+//   overflow: scroll;
+//   -ms-overflow-style: none;  /* IE and Edge */
+//   scrollbar-width: none;  /* Firefox */
+// }
+
+// .team-member-body::-webkit-scrollbar {
+// display: none;
+// }
+
+// .team-member-line-item-name {
+//   width: 35%;
+//   overflow: hidden;
+//   display: flex;
+//   align-items: center;
+//   line-height: 1em;
+//   white-space: nowrap;
+//   margin-left: .75rem;
+// }
+
+// .team-member-line-item-email {
+//   width: 33%;
+//   overflow: hidden;
+//   display: flex;
+//   align-items: center;
+//   line-height: 1em;
+//   white-space: nowrap;
+//   margin-left: .75rem;
+// }
+
+// .team-member-line-item-phone {
+//   width: 27%;
+//   overflow: hidden;
+//   display: flex;
+//   align-items: center;
+//   line-height: 1em;
+//   white-space: nowrap;
+//   margin-left: .75rem;
+// }
+
+// .create-ticket-form {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: left;
+// }
+
+// .create-ticket-form label {
+// margin-bottom: -.5rem;
+// font-size: .75rem;
+// }
+
+// .create-ticket-form input {
+//   width: auto;
+// }
+
+// .create-ticket-form select {
+//   width: 100%;
+// }
+
+// .create-ticket-form-header {
+//   margin: 0;
+//   font-size: 2rem;
+// }
+
+// .create-ticket-description {
+//   max-height: 8rem;
+//   min-height: 5rem;
+//   resize: vertical;
+//   font-family: inherit;
+// }
+
+// .create-ticket-btn {
+//   border: none;
+//   border-radius: 1rem;
+//   padding: 7px 10px;
+//   width: 100%;
+//   cursor: pointer;
+// }
+
+// .create-ticket-priority {
+//   margin-bottom: .75em;
 // }
