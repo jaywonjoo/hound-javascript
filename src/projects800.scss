@@ -5,8 +5,6 @@
 @media (max-width: 900px) {
     /* top row */
 
-
-
     #logoutButton {
         border: none;
         background-color: transparent;
@@ -14,7 +12,261 @@
         margin-bottom: .5em;
     }
 
+    .sidebar-button-bar-spacer {
+        width: 18px;
+    }
 
+    .pie-container {
+        height: unset;
+        width: 80%;
+    }
+
+    .content-section {
+        width: 100vw;
+        margin: 0;
+    }
+
+    .page-header {
+        padding-left: 5%;
+        margin: .75rem 0 2% 0;
+    }
+
+    // .ticket-info-section {
+    //     width: 33%;
+    // }
+
+    #populated-description-section {
+        min-height: 2em;
+    }
+
+    // .ticket-info-row-bottom {
+    //     margin-top: 1em;
+    //     margin-bottom: 0;
+    // }
+
+    .chatbox {
+        width: 100%;
+        height: 49vh;
+    }
+
+    .right-chat-section {
+        width: 100%;
+        border: none;
+        height: 49vh;
+    }
+
+    .udo-link {
+        padding: .5em 0;
+        font-size: .9em;
+    }
+
+    .team-member-line-item-kebab-div {
+        width: 6%;
+    }
+
+    #tickets {
+        height: 75%;
+    }
+
+    .ticket-kebab-div {
+        width: 20px;
+    }
+
+    .new-member-main-div {
+        gap: 5%;
+    }
+
+    .new-member-name-div {
+        font-size: .75rem;
+    }
+
+    .new-member-email-div {
+        font-size: .75rem;
+        overflow-x: hidden;
+    }
+
+    .edit-ticket-form {
+        height: 100%;
+    }
+
+    .edit-ticket-description {
+        height: 100%;
+    }
+}
+
+
+    // .pie-box {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     justify-content: center;
+    //     padding-bottom: 4vh;
+    // }
+
+    // .top-row {
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     height: 85vh;
+    // }
+
+    // .team-members {
+    //     width: 90%;
+    //     margin-bottom: 1em;
+    //     height: 30vh;
+    // }
+
+    // .ticket-section {
+    //     width: 90%;
+    //     margin-bottom: 1em;
+    //     height: 55vh;
+    // }
+
+    // .bottom-row {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     margin: 0 0 1em 0;
+    //     height: 39.5em;
+    // }
+
+    // .big-wrap {
+    //     margin: 0;
+    //     width: 90%;
+    // }
+
+    // .ticket-info {
+    //     display: flex;
+    //     flex-direction: column;
+    // }
+
+    // .left-ticket-info-section {
+    //     border-bottom: solid 1px black;
+    //     height: 26vh;
+    //     overflow-y: scroll;
+    //     overflow-x: hidden;
+    //     padding: .5em .5em .5em 3%;
+    //     box-sizing: border-box;
+    //     width: 100%;
+    // }
+
+    // .mobile-top {
+    //     display: flex;
+    //     min-height: 3em;
+    //     width: 100%;
+    // }
+
+    // .mobile-bottom-ticket-info-section {
+    //     width: 100%;
+    // }
+
+    // .ticket-info-row-top {
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin-bottom: 0;
+    // }
+
+    /* NONUNIVERSAL */
+
+    // .all-other-modals {
+    //     z-index: 500;
+    //     position: fixed;
+    //     height: fit-content;
+    //     width: 80vw;
+    //     top: 53vh;
+    // }
+
+    // .blurred-overlay {
+    //     position: fixed;
+    //     height: 100vh;
+    //     width: 100vw;
+    //     left: 0%;
+    // }
+
+    // .user-dropdown-overlay {
+    //     position: fixed;
+    //     width: 100vw;
+    //     height: 100vh;
+    //     border-radius: 10px;
+    // }
+
+    // .udo-dark-mode-btn {
+    //     background-color: black;
+    //     border: none;
+    //     width: 4.5em;
+    //     height: 2em;
+    //     border-radius: 15em;
+    // }
+    
+    // .team-member-line-item-name {
+    //     margin-left: 3%;
+    // }
+
+    // .team-member-line-item-phone {
+    //     display: none;
+    // }
+
+    // .team-member-line-item-email {
+    //     width: 56%;
+    // }
+
+    // .team-members-header-label {
+    //     padding-left: 3%;
+    // }
+
+    // .ticket-section-header-label {
+    //     padding-left: 3%;
+    // }
+
+    // .selected-ticket-info-header {
+    //     padding-left: 3%;
+    //     width: 60%;
+    // }
+
+    // .header-kebab-spacer {
+    //     width: 6%;
+    //     height: 10px;
+    // }
+
+    // .ticket-description {
+    //     display: none;
+    // }
+
+    // .ticket-title {
+    //     margin-left: 3%;
+    //     width: 45%;
+    //     white-space: unset;
+    // }
+
+    // .ticket-author {
+    //     width: 45%;
+    // }
+
+    // .populatable-member-modal {
+    //     z-index: 500;
+    //     position: fixed;
+    //     height: 80vh;
+    //     width: 85vw;
+    //     top: 53vh;
+    //     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    // }
+
+    // .add-member-form {
+    //     height: 100%;
+    // }
+    
+    // .populatable-member-div {
+    //     height: 100%;
+    // }
+
+    // .create-ticket-form {
+    //     height: 100%;
+    // }
+
+    // .create-ticket-description {
+    //     height: 100%;
+    // }
 
     // .sidebar-button-circle {
     //     border-radius: 50px;
@@ -56,9 +308,6 @@
     //     -webkit-backdrop-filter: blur(40px);
     // }
 
-    .sidebar-button-bar-spacer {
-        width: 18px;
-    }
 
     // .dashboard-master {
     //     z-index: 1002;
@@ -74,256 +323,3 @@
     // .dashboard-links {
     //     margin: 0 50px;
     // }
-
-    .pie-container {
-        height: unset;
-        width: 80%;
-    }
-
-    // .pie-box {
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     justify-content: center;
-    //     padding-bottom: 4vh;
-    // }
-
-    .content-section {
-        width: 100vw;
-        margin: 0;
-    }
-
-    .page-header {
-        padding-left: 5%;
-        margin: .75rem 0 2% 0;
-    }
-
-    // .top-row {
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    //     height: 85vh;
-    // }
-
-    // .team-members {
-    //     width: 90%;
-    //     margin-bottom: 1em;
-    //     height: 30vh;
-    // }
-
-    // .ticket-section {
-    //     width: 90%;
-    //     margin-bottom: 1em;
-    //     height: 55vh;
-    // }
-
-    // .bottom-row {
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    //     align-items: center;
-    //     margin: 0 0 1em 0;
-    //     height: 39.5em;
-    // }
-
-    // .big-wrap {
-    //     margin: 0;
-    //     width: 90%;
-    // }
-
-    // .ticket-info {
-    //     display: flex;
-    //     flex-direction: column;
-    // }
-
-    .ticket-info-section {
-        width: 33%;
-    }
-
-    // .left-ticket-info-section {
-    //     border-bottom: solid 1px black;
-    //     height: 26vh;
-    //     overflow-y: scroll;
-    //     overflow-x: hidden;
-    //     padding: .5em .5em .5em 3%;
-    //     box-sizing: border-box;
-    //     width: 100%;
-    // }
-
-    // .mobile-top {
-    //     display: flex;
-    //     min-height: 3em;
-    //     width: 100%;
-    // }
-
-    .mobile-bottom-ticket-info-section {
-        width: 100%;
-    }
-
-    // .ticket-info-row-top {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin-bottom: 0;
-    // }
-
-    #populated-description-section {
-        min-height: 2em;
-    }
-
-    .ticket-info-row-bottom {
-        margin-top: 1em;
-        margin-bottom: 0;
-    }
-
-    .chatbox {
-        width: 100%;
-        height: 49vh;
-    }
-
-    .right-chat-section {
-        width: 100%;
-        border: none;
-        height: 49vh;
-    }
-
-    /* NONUNIVERSAL */
-
-    // .all-other-modals {
-    //     z-index: 500;
-    //     position: fixed;
-    //     height: fit-content;
-    //     width: 80vw;
-    //     top: 53vh;
-    // }
-
-    // .blurred-overlay {
-    //     position: fixed;
-    //     height: 100vh;
-    //     width: 100vw;
-    //     left: 0%;
-    // }
-
-    // .user-dropdown-overlay {
-    //     position: fixed;
-    //     width: 100vw;
-    //     height: 100vh;
-    //     border-radius: 10px;
-    // }
-
-
-    .udo-link {
-        padding: .5em 0;
-        font-size: .9em;
-    }
-
-
-    // .udo-dark-mode-btn {
-    //     background-color: black;
-    //     border: none;
-    //     width: 4.5em;
-    //     height: 2em;
-    //     border-radius: 15em;
-    // }
-    
-    // .team-member-line-item-name {
-    //     margin-left: 3%;
-    // }
-
-    // .team-member-line-item-phone {
-    //     display: none;
-    // }
-
-    // .team-member-line-item-email {
-    //     width: 56%;
-    // }
-
-    .team-member-line-item-kebab-div {
-        width: 6%;
-    }
-
-    // .team-members-header-label {
-    //     padding-left: 3%;
-    // }
-
-    // .ticket-section-header-label {
-    //     padding-left: 3%;
-    // }
-
-    // .selected-ticket-info-header {
-    //     padding-left: 3%;
-    //     width: 60%;
-    // }
-
-    #tickets {
-        height: 75%;
-    }
-
-    // .header-kebab-spacer {
-    //     width: 6%;
-    //     height: 10px;
-    // }
-
-    // .ticket-description {
-    //     display: none;
-    // }
-
-    // .ticket-title {
-    //     margin-left: 3%;
-    //     width: 45%;
-    //     white-space: unset;
-    // }
-
-    // .ticket-author {
-    //     width: 45%;
-    // }
-
-    .ticket-kebab-div {
-        width: 20px;
-    }
-
-    // .populatable-member-modal {
-    //     z-index: 500;
-    //     position: fixed;
-    //     height: 80vh;
-    //     width: 85vw;
-    //     top: 53vh;
-    //     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    // }
-
-    .new-member-main-div {
-        gap: 5%;
-    }
-
-    // .add-member-form {
-    //     height: 100%;
-    // }
-    
-    // .populatable-member-div {
-    //     height: 100%;
-    // }
-
-    .new-member-name-div {
-        font-size: .75rem;
-    }
-
-    .new-member-email-div {
-        font-size: .75rem;
-        overflow-x: hidden;
-    }
-
-    // .create-ticket-form {
-    //     height: 100%;
-    // }
-
-    // .create-ticket-description {
-    //     height: 100%;
-    // }
-
-    .edit-ticket-form {
-        height: 100%;
-    }
-
-    .edit-ticket-description {
-        height: 100%;
-    }
-}
