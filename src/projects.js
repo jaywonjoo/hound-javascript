@@ -307,21 +307,21 @@ function populateMemberList(collaboratorList, j) {
     teamMemberLineItemDeleteButton.innerText = "delete"
     teamMemberLineItemId.innerText = collaboratorList[j].uid;
 
-    teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
-    teamMemberLineItem.classList.add("team-member-line-item");
+    teamMemberLineItemKebabDiv.classList.add("team-members-line-item-kebab-div");
+    teamMemberLineItem.classList.add("team-members-line-item");
     teamMemberLineItemName.classList.add("team-members-categories-name");
     teamMemberLineItemEmail.classList.add("team-members-categories-email");
     teamMemberLineItemPhone.classList.add("team-members-categories-phone");
-    teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
+    teamMemberLineItemKebab.classList.add("team-members-line-item-kebab");
     teamMemberLineItemKebab.classList.add("open-modal-btn");
     teamMemberLineItemId.setAttribute("style", "display: none");
     teamMemberLineItemOverlay.classList.add("overlay");
-    teamMemberLineItemKebabText.classList.add("team-member-line-item-kebab-text");
+    teamMemberLineItemKebabText.classList.add("team-members-line-item-kebab-text");
         
     teamMemberLineItemOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
     teamMemberLineItemModal.classList.add("modal");
     teamMemberLineItemModal.classList.add("delete-button-modal");
-    teamMemberLineItemDeleteButton.classList.add("team-member-delete-button");
+    teamMemberLineItemDeleteButton.classList.add("delete-button");
             
     teamMemberLineItemDeleteButtonFn(teamMemberLineItemDeleteButton, teamMemberLineItemModal, ProjectUsersDocRef, teamMemberBody)
     setDataIndex()
@@ -481,7 +481,7 @@ function populateTickets() {
                 ticketOverlay.setAttribute("style", "position: fixed; top: -100vh; left: -100vw; padding: 100vh 100vw; backdrop-filter: none; background-color: rgb(255, 255, 255, 0);");
                 ticketModal.classList.add("modal")
                 ticketModal.classList.add("delete-button-modal")
-                ticketDeleteButton.classList.add("ticket-delete-button")
+                ticketDeleteButton.classList.add("delete-button")
 
                 setDataIndex()
                 closeOverlay()
@@ -599,13 +599,13 @@ function populateTickets() {
                             const timeStamp = document.createElement("div");
                             const messageContent = document.createElement("div");
 
-                            newComment.classList.add("entire-message");
-                            userIcon.classList.add("user-icon");
-                            commentRight.classList.add("comment-right");
-                            nameAndTimestamp.classList.add("name-and-timestamp-section");
+                            newComment.classList.add("chatbox-entire-message");
+                            userIcon.classList.add("chatbox-user-icon");
+                            commentRight.classList.add("chatbox-comment-right");
+                            nameAndTimestamp.classList.add("chatbox-name-and-timestamp-section");
                             userName.classList.add("user-name");
                             timeStamp.classList.add("message-timestamp");
-                            messageContent.classList.add("message-content");
+                            messageContent.classList.add("chatbox-message-content");
 
                             userIcon.innerText = (comments[i].firstName.charAt(0) + comments[i].lastName.charAt(0));
                             userName.innerText = (comments[i].firstName + " " + comments[i].lastName);

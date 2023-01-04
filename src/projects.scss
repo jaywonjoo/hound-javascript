@@ -466,7 +466,7 @@ button {
     @include mq(small) {
       z-index: 500;
       position: fixed;
-      height: fit-content;
+      // height: fit-content;
       width: 85vw;
       top: 53vh;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -526,7 +526,6 @@ button {
     @include mq(small) {
       z-index: 500;
       position: fixed;
-      height: fit-content;
       width: 80vw;
       top: 53vh;
     }
@@ -590,6 +589,9 @@ button {
 }
 
 .mobile-spacer {
+  @include mq(large) {
+    height: 5vh;
+  }
   @include mq(small) {
     height: 3em;
   }
@@ -779,6 +781,11 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include mq(small) {
+      height: unset;
+      width: 80%;
+    }
   }
 
   &-box {
@@ -847,11 +854,30 @@ button {
 .content-section {
   width: 100%;
   margin: 0 2% 0 2%;
+  
+  @include mq(large) {
+    width: 100vw;
+    margin: 0 25px;
+  }
+
+  @include mq(small) {
+    width: 100vw;
+    margin: 0;
+  }
 }
 
 .page-header {
   margin: 1.5rem 0 1% 0;
   font-size: 2.5rem;
+
+  @include mq(large) {
+    margin: 1.5rem 0 1% 0;
+  }
+
+  @include mq(small) {
+    padding-left: 5%;
+    margin: .75rem 0 2% 0;
+  }
 }
 
 .top-row {
@@ -868,7 +894,6 @@ button {
     height: 85vh;
   }
 }
-
 
 .team-members {
   &-master {
@@ -941,6 +966,10 @@ button {
       white-space: nowrap;
       margin-left: .75rem;
       
+      @include mq(medium) {
+        width: 37%;
+      }
+
       @include mq(small) {
         margin-left: 3%;
       }
@@ -954,6 +983,10 @@ button {
       line-height: 1em;
       white-space: nowrap;
       margin-left: .75rem;
+
+      @include mq(medium) {
+        width: 49%;
+      }
 
       @include mq(small) {
         width: 56%;
@@ -996,9 +1029,70 @@ button {
     }
   }
 
+  &-line-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-bottom: solid 1px black;
+    height: 1.5em;
+    font-weight: 100;
+    font-size: .75em;
+    align-items: center;
+    white-space: nowrap;
+    position: relative;
 
+    &:hover {
+      background-color: rgb(0, 0, 0, .3);
+    }
+
+    &-kebab {
+      padding: 0;
+      width: 1.5em;
+      border-radius: 2px;
+      height: 100%;
+      background-color: transparent;
+      border: transparent;
+      margin-right: 2px;
+
+      &:hover {
+        background-color: rgb(0, 0, 0, .3);
+      }
+
+      &-div {
+        width: 5%;
+        margin-left: .75rem;
+        display: flex;
+        justify-content: right;
+
+        @include mq(small) {
+          width: 6%;
+        }
+      }
+
+      &-text {
+        writing-mode: vertical-rl;
+        position: relative;
+        top: 1.5px;
+        left: 3px;
+      }
+    }
+  }
+
+  &-add-member-btn {
+    border-radius: 25px;
+    border-style: none;
+    padding: 7px 10px;
+    margin: 0 6px;
+    cursor: pointer;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
-
 
 .create-ticket {
   &-form {
@@ -1173,7 +1267,6 @@ button {
   }
 }
 
-/* Selected Ticket Info Section */
 .ticket-info {
   &-header {
     padding-left: 10px;
@@ -1405,18 +1498,7 @@ button {
   }
 }
 
-
-
-
-
-
-
-.delete-button-modal {
-  position: absolute;
-  width: 100%;
-}
-  
-.team-member-delete-button {
+.delete-button {
   background-color: red;
   border: none;
   border-radius: 2px;
@@ -1424,125 +1506,69 @@ button {
   right: 0;
   top: -2.1vh;
   animation: fadeIn .15s, slideIn .15s linear;
-}
 
-.clear-overlay {
+ &-modal {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-#memberModalBtn {
-  border-radius: 25px;
-  border-style: none;
-  padding: 7px 10px;
-  margin: 0 6px;
-  cursor: pointer;
-  height: 2em;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.team-member-line-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
   width: 100%;
-  padding: 0;
-  margin: 0;
-  border-bottom: solid 1px black;
-  height: 1.5em;
-  font-weight: 100;
-  font-size: .75em;
-  align-items: center;
-  white-space: nowrap;
-  position: relative;
+ }
 }
 
-.team-member-line-item:hover {
-  background-color: rgb(0, 0, 0, .3);
+.new-member {
+  &-main-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    height: auto;
+    width: auto;
+    gap: 10%;
+    padding: 3%;
+    border-bottom: solid 1px;
+
+    @include mq(small) {
+      gap: 5%;
+    }
+  }
+
+  &-checkbox-div {
+    padding: auto;
+  }
+
+  &-icon-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(184, 184, 184);
+    color: white;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    margin: 3px 8px 0 10px
+  }
+
+  &-name-div {
+    width: 40%;
+    height: auto;
+    min-width: fit-content;
+
+    @include mq(small) {
+      font-size: .75rem;
+    }
+  }
+
+  &-email-div {
+    height: auto;
+    width: 50%;
+    font-size: .75em;
+
+    @include mq(small) {
+      font-size: .75rem;
+      overflow-x: hidden;
+    }
+  }
 }
-
-.team-member-line-item-kebab-div {
-  width: 5%;
-  margin-left: .75rem;
-  display: flex;
-  justify-content: right;
-}
-
-.team-member-line-item-kebab {
-  padding: 0;
-  width: 1.5em;
-  border-radius: 2px;
-  height: 100%;
-  background-color: transparent;
-  border: transparent;
-  margin-right: 2px;
-}
-
-.team-member-line-item-kebab:hover {
-  background-color: rgb(0, 0, 0, .3);
-}
-
-.team-member-line-item-kebab-text {
-  writing-mode: vertical-rl;
-  position: relative;
-  top: 1.5px;
-  left: 3px;
-}
-
-.populated-member-list {
-  border: solid black;
-  width: 90%;
-  min-height: auto;
-}
-
-.new-member-main-div {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-items: center;
-  height: auto;
-  width: auto;
-  gap: 10%;
-  padding: 3%;
-  border-bottom: solid 1px;
-}
-
-.new-member-checkbox-div {
-  padding: auto;
-}
-
-.new-member-icon-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(184, 184, 184);
-  color: white;
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 50%;
-  margin: 3px 8px 0 10px
-}
-
-.new-member-name-div {
-  width: 40%;
-  height: auto;
-  min-width: fit-content;
-}
-
-.new-member-email-div {
-  height: auto;
-  width: 50%;
-  font-size: .75em;
-}
-
-
 
 #ticketModalBtn {
   border-radius: 25px;
@@ -1564,744 +1590,131 @@ button {
   overflow: scroll;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-}
 
-#tickets::-webkit-scrollbar {
-  display: none;
-}
-
-.ticket-ul {
-  width: 100%;
-  display: flex;
-  justify-content: left;
-  border-bottom: solid 1px black;
-  list-style-type: none;
-  overflow: hidden;
-  height: 1.5em;
-  font-weight: 100;
-  font-size: .75em;
-  max-height: 5vh;
-  align-items: center;
-  position: relative;
-}
-
-.ticket-ul:hover {
-  background-color: rgb(0, 0, 0, .3);
-}
-
-.ticket-kebab-div {
-  width: 5%;
-  display: flex;
-  justify-content: right;
-}
-
-.ticket-kebab-button {
-  padding: 0;
-  width: 1.5em;
-  height: 100%;
-  border-radius: 2px;
-  background-color: transparent;
-  border: transparent;
-  margin-right: 2px;
-}
-
-.ticket-kebab-button:hover {
-  background-color: rgb(0, 0, 0, .3);
-}
-
-.ticket-kebab-button-text {
-  writing-mode: vertical-rl;
-  position: relative;
-  top: 1.5px;
-  left: 1px;
-}
-
-.ticket-delete-button {
-  background-color: red;
-  border: none;
-  border-radius: 2px;
-  width: 100%;
-  right: 0;
-  top: -2.1vh;
-  animation: fadeIn .15s, slideIn .15s linear;
-}
-
-.entire-message {
-  display: flex;
-  padding: 10px;
-}
-
-.user-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgb(184, 184, 184);
-  color: white;
-  min-width: 40px;
-  min-height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 50%;
-  margin: 3px 8px 0 10px
-}
-
-.comment-right {
-  width: 50%;
-  padding-bottom: 15px;
-}
-
-.name-and-timestamp-section {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  font-weight: light;
-  color: gray;
-  font-size: .75em;
-}
-
-.message-content {
-  background-color: rgb(50, 125, 255);
-  color: white;
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: .75em;
-}
-
-@media (max-width: 1300px) {
-  .lower-half {
-
+  @include mq(small) {
+    height: 75%;
   }
 
-  .page-header {
-    margin: 1.5rem 0 1% 0;
-  }
-
- .sidebar-button-bar-spacer {
-      width: 18px;
-  }
-
-  .content-section {
-      width: 100vw;
-      margin: 0 25px;
-  }
-
-  .mobile-spacer {
-    height: 5vh;
-  }
-}
-
-@media (max-width: 1150px) {
-  .team-member-line-item-phone {
+  &::-webkit-scrollbar {
     display: none;
   }
+}
 
-  .team-member-line-item-name {
-    width: 37%;
-  }
+.ticket {
+  &-ul {
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    border-bottom: solid 1px black;
+    list-style-type: none;
+    overflow: hidden;
+    height: 1.5em;
+    font-weight: 100;
+    font-size: .75em;
+    max-height: 5vh;
+    align-items: center;
+    position: relative;
   
-  .team-member-line-item-email {
-    width: 49%;
+    &:hover {
+      background-color: rgb(0, 0, 0, .3);
+    }
+  }
+
+  &-kebab-div {
+    width: 5%;
+    display: flex;
+    justify-content: right;
+
+    @include mq(small) {
+      width: 20px;
+    }
+  }
+
+  &-kebab-button {
+    padding: 0;
+    width: 1.5em;
+    height: 100%;
+    border-radius: 2px;
+    background-color: transparent;
+    border: transparent;
+    margin-right: 2px;
+
+    &:hover {
+      background-color: rgb(0, 0, 0, .3);
+    }
+
+    &-text {
+      writing-mode: vertical-rl;
+      position: relative;
+      top: 1.5px;
+      left: 1px;
+    }
+  }
+
+  &-delete-button {
+    background-color: red;
+    border: none;
+    border-radius: 2px;
+    width: 100%;
+    right: 0;
+    top: -2.1vh;
+    animation: fadeIn .15s, slideIn .15s linear;
   }
 }
 
-  // .ticket-section {
-  //   width: 62.5%;
-  // }
-
-  // .team-members {
-  //   width: 35%;
-  // }
-
-// .header-kebab-spacer {
-//   width: 5%;
-//   margin-left: .75rem;
-// }
-
-// .user-dropdown-overlay {
-//   position: fixed;
-//   width: 100vw;
-//   height: 100vh;
-//   border-radius: 10px;
-// }
-
-// .udo-dark-mode-btn {
-//   background-color: black;
-//   border: none;
-//   width: 4.5em;
-//   height: 2em;
-//   border-radius: 15em;
-// }
-
-// .dashboard-master {
-//   width: 20em;
-//   height: 95vh;
-//   backdrop-filter: blur(40px);
-//   -webkit-backdrop-filter: blur(40px);
-//   border-right: solid 1px rgb(0, 0, 0, .25);
-//   box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
-
-// .text {
-//   display: flex;
-//   flex-direction: row;
-//   width: auto;
-// }
-
-// .bottom-dot {
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-// }
-
-// .middle-dot {
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-// }
-
-// .top-dot {
-//   width: 10px;
-//   height: 10px;
-//   border-radius: 50%;
-// }
-
-// .pie {
-//   height: 100%;
-//   aspect-ratio: 1;
-//   position: absolute;
-//   display: inline-grid;
-//   place-content: center;
-//   font-size: 25px;
-//   font-weight: bold;
-//   font-family: sans-serif;
-// }
-
-// .pie:before {
-//   content: "";
-//   position: absolute;
-//   border-radius: 50%;
-//   inset: 0;
-//   background: conic-gradient(var(--c) calc(var(--p)*1%),#0000 0);
-//   mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-//   -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
-// }
-
-// .pie-box {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .pie-container {
-//   position: relative;
-//   aspect-ratio: 1;
-//   height: 16.5%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .pie-title {
-//   justify-content: center;
-//   display: flex;
-//   margin-top: 1em;
-// }
-
-// .pie-header {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-// }
-
-// .legend {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   gap: 5%;
-//   align-items: center;
-//   font-size: 10px;
-//   margin: 0 0 10px 0;
-// }
-
-// .sidebar-button-circle {
-//   display: none;
-// }
-
-// .sidebar-button {
-//   display: none;
-// }
-
-/* Selected Ticket Info Section */
-/* toggle button */
-
-// .populatable-member-modal {
-//   position: absolute;
-//   top: 40%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   padding: 1rem;
-//   border-radius: .75rem;
-//   background-color: white;
-//   width: 25rem;
-//   height: auto;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-// }
-
-// .add-member-form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// .add-member-form-header {
-//   margin: 0 0 1rem 0;
-//   font-size: 2rem;
-// }
-
-// .populatable-member-div {
-//   overflow-y: scroll;
-//   height: 15rem;
-//   border: solid 1px;
-//   border-radius: .5rem;
-//   margin-bottom: 1rem;
-//   width: 100%;
-//   overflow-x: hidden;
-// }
-
-// .add-member-btn {
-//   border: none;
-//   border-radius: 1rem;
-//   padding: 7px 10px;
-//   width: 100%;
-//   cursor: pointer;
-// }
-
-  // .sidebar-button-circle {
-  //     border-radius: 50px;
-  //     aspect-ratio: 1;
-  //     width: 25px;
-  //     height: 25px;
-  //     border-width: 1px;
-  //     border-style: solid;
-  //     backdrop-filter: blur(40px);
-  //     -webkit-backdrop-filter: blur(40px);
-  //     position: fixed;
-  //     left: 0;
-  //     top: 4.6rem;
-  //     z-index: 3;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     margin-left: 4px;
-  //     font-size: .75em;
-  //     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-  // }
-
-  // .sidebar-button {
-  //     display: block;
-  //     background-color: transparent;
-  //     border: none;
-  //     width: 18px;
-  // }   
-
-  // .sidebar-button-bar {
-  //     width: 18px;
-  //     height: 160vh;
-  //     top: 0%;
-  //     left: 0;
-  //     position: fixed;
-  //     border-width: 1px;
-  //     border-right-style: solid;
-  //     backdrop-filter: blur(40px);
-  //     -webkit-backdrop-filter: blur(40px);
-  // }
-  
-    // .dashboard-master {
-  //     z-index: 800;
-  //     width: 16rem;
-  //     position: fixed;
-  //     left: calc(-75vw - 1px);
-  //     top: 5vh;
-  // }
-
-  // .blurred-overlay {
-//   background-color: transparent;
-//   backdrop-filter: blur(5px);
-//   -webkit-backdrop-filter: blur(5px);
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-// }
-
-
-
-/* team member section */
-// .team-member-body {
-//   width: 100%;
-// }
-
-/* top row */
-
-
-// .top-row-top-section {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin: 0;
-//   padding: 0;
-//   width: 100%;
-//   border-radius: 15px 15px 0 0;
-//   border-width: 1.5px;
-//   border-bottom-style: solid;
-//   border-color: rgb(28, 28, 28);
-//   height: 2.5em;
-// }
-
-// .team-members-header-label {
-//   padding-left: 10px;
-// }
-
-// .team-member-header {
-//   width: 100%;
-//   height: 1.3em;
-//   display: flex;
-//   border-bottom-style: solid;
-//   border-width: 1.5px;
-//   border-color: black;
-// }
-
-// .team-member-body {
-//   overflow: scroll;
-//   -ms-overflow-style: none;  /* IE and Edge */
-//   scrollbar-width: none;  /* Firefox */
-// }
-
-// .team-member-body::-webkit-scrollbar {
-// display: none;
-// }
-
-// .team-member-line-item-name {
-//   width: 35%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .team-member-line-item-email {
-//   width: 33%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .team-member-line-item-phone {
-//   width: 27%;
-//   overflow: hidden;
-//   display: flex;
-//   align-items: center;
-//   line-height: 1em;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .create-ticket-form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: left;
-// }
-
-// .create-ticket-form label {
-// margin-bottom: -.5rem;
-// font-size: .75rem;
-// }
-
-// .create-ticket-form input {
-//   width: auto;
-// }
-
-// .create-ticket-form select {
-//   width: 100%;
-// }
-
-// .create-ticket-form-header {
-//   margin: 0;
-//   font-size: 2rem;
-// }
-
-// .create-ticket-description {
-//   max-height: 8rem;
-//   min-height: 5rem;
-//   resize: vertical;
-//   font-family: inherit;
-// }
-
-// .create-ticket-btn {
-//   border: none;
-//   border-radius: 1rem;
-//   padding: 7px 10px;
-//   width: 100%;
-//   cursor: pointer;
-// }
-
-// .create-ticket-priority {
-//   margin-bottom: .75em;
-// }
-
-/* ticket section */
-// .create-ticket-form {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-// }
-
-// .ticket-section {
-//   backdrop-filter: blur(40px);
-//   -webkit-backdrop-filter: blur(40px);
-//   width: 65%;
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: top;
-//   align-items: center;
-//   border-radius: 15px;
-//   box-shadow: 0 0 20px 0px rgb(0, 0, 0, .25);
-//   z-index: 1;
-// }
-
-// .ticket-section-header-label {
-//   padding-left: 10px;
-// }
-
-// .ticket-header {
-//   width: 100%;
-//   height: 1.3em;
-//   display: flex;
-//   border-bottom-style: solid;
-//   border-width: 1.5px;
-//   border-color: black;
-// }
-
-// .ticket-header-left {
-//   display: flex;
-//   flex-direction: row;
-//   width: 100%;
-// }
-
-// .ticket-title {
-//   width: 30%;
-//   height: 1em;
-//   overflow: hidden;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .ticket-description {
-//   width: 45%;
-//   height: 1em;
-//   overflow: hidden;
-//   margin-left: .75rem;
-// }
-
-// .ticket-author {
-//   width: 20%;
-//   height: 1em;
-//   overflow: hidden;
-//   white-space: nowrap;
-//   margin-left: .75rem;
-// }
-
-// .ticket-header-kebab-spacer {
-//   width: 5%;
-// }
-
-// .left-ticket-info-section {
-//   height: 100%;
-//   width: 60%;
-//   padding: 1rem .75rem;
-//   box-sizing: border-box;
-// }
-
-// .mobile-top {
-//   display: flex;
-//   flex-direction: row;
-//   width: 66%;
-// }
-
-// .mobile-top-ticket-info-section {
-//   width: 50%;
-//   display: flex;
-//   flex-direction: column;
-// }
-
-
-// .ticket-info {
-//   height: 85%;
-//   border-radius: 0 0 15px 15px;
-//   display: flex;
-//   justify-content: space-between;
-// }
-
-// .ticket-info-row-top {
-//   display: flex;
-//   margin-bottom: 30px;
-// }
-
-// .ticket-properties {
-//   font-size: .75em;
-//   font-weight: 100;
-//   margin-top: .5em;
-// }
-
-// .ticket-characteristics {
-//   color: white;
-//   width: fit-content;
-//   padding: .25em .5em;
-//   border-radius: 1em;
-//   font-size: .6em;
-//   font-weight: 100;
-//   margin-top: .5em;
-// }
-
-// .right-chat-section {
-//   width: 40%;
-//   height: 100%;
-//   border-left: solid black 1px;
-//   border-radius: 0 0 15px 0;
-
-// }
-
-/* Chatbox Section  */
-// .chatbox {
-//   height: 90%;
-//   width: 100%;
-//   overflow: auto;
-// }
-
-// .comment-input-form {
-//   width: 100%;
-//   height: 10%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 10px;
-// }
-
-// .comment-input-form-input {
-//   width: 70%;
-//   border-radius: 10px;
-// }
-
-// .comment-input-form-button {
-//   border-radius: 10px;
-//   border: solid rgb(50, 125, 255);
-//   background-color: rgb(50, 125, 255);
-//   color: white;
-// }
-
-// .mobile-bottom-ticket-info-section {
-//   width: 33%;
-//   display: flex;
-//   flex-direction: column;
-// }
-
-// .ticket-info-section {
-//   display: flex;
-//   flex-direction: column;
-//   width: 33%;
-// }
-
-// .ticket-info-row-bottom {
-//   display: flex;
-//   margin-bottom: 30px;
-// }
-
-
-// .all-other-modals {
-//   position: absolute;
-//   top: 40%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   padding: 1rem;
-//   border-radius: .75rem;
-//   background-color: white;
-//   width: 30%;
-//   height: auto;
-//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-
-//   @include mq(small) {
-//     z-index: 500;
-//     position: fixed;
-//     height: fit-content;
-//     width: 80vw;
-//     top: 53vh;
-//   }
-// }
-
-
-/* Edit Ticket Form */
-// .edit-ticket-form {
-//   display: flex;
-//   flex-direction: column;
-//   gap: 10px;
-// }
-
-// .edit-ticket-form {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: left;
-// }
-
-// .edit-ticket-form label {
-// margin-bottom: -.5rem;
-// font-size: .75rem;
-// }
-
-// .edit-ticket-form input {
-//   width: auto;
-// }
-
-// .edit-ticket-form select {
-//   width: 100%;
-// }
-
-// .edit-ticket-form-header {
-//   margin: 0;
-//   font-size: 2rem;
-// }
-
-// .edit-ticket-description {
-//   max-height: 8rem;
-//   min-height: 5rem;
-//   resize: vertical;
-//   font-family: inherit;
-// }
-
-// .edit-ticket-btn {
-//   border: none;
-//   border-radius: 1rem;
-//   padding: 7px 10px;
-//   width: 100%;
-//   cursor: pointer;
-// }
-
-// .edit-ticket-priority {
-//   margin-bottom: .75em;
-// }
+.chatbox {
+  &-entire-message {
+    display: flex;
+    padding: 10px;
+  }
+
+  &-user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(184, 184, 184);
+    color: white;
+    min-width: 40px;
+    min-height: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 50%;
+    margin: 3px 8px 0 10px
+  }
+
+  &-comment-right {
+    width: 50%;
+    padding-bottom: 15px;
+  }
+
+  &-name-and-timestamp-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: light;
+    color: gray;
+    font-size: .75em;
+  }
+
+  &-message-content {
+    background-color: rgb(50, 125, 255);
+    color: white;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: .75em;
+  }
+}
+
+#populated-description-section {
+  @include mq(small) {
+    min-height: 2em;
+  }
+}
+
+.modal-user-dropdown-link {
+  @include mq(small) {
+    padding: .5em 0;
+    font-size: .9em;
+  }
+}
