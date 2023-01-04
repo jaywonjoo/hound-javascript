@@ -155,6 +155,7 @@ a {
             
             @include mq(medium) {
                 text-align: center;
+                width: 90%;
             }
         }
 
@@ -173,17 +174,21 @@ a {
         }
 
         &-register {
-            background-color: rgb(59, 59, 70);
+            background-color: rgb(59, 63, 70);
             color: white;
             padding: 3px 17px;
             border-radius: 25px;
             cursor: pointer;
+
+            @include mq(medium) {
+                border-radius: .4rem;
+            }
         }
 
         &-right {
             @include mq(medium) {
                 height: 100vh;
-                background-color: #e9e9e9;
+                background-color: #ffffff;
             }
         }
     }
