@@ -43,6 +43,7 @@ const modal = document.getElementsByClassName("modal");
 const modalBtnMulti = document.getElementsByClassName("open-modal-btn");
 const overlay = document.getElementsByClassName("overlay");
 const dashboardButton = document.querySelector('#dashboardButton')
+const headerLink = document.querySelector('#headerLink')
 const logoutButton = document.querySelector('#logoutButton')
 // Dashboard button
 const darkModeBtn = document.querySelector("#darkModeBtn")
@@ -129,7 +130,11 @@ loadBackground()
 function redirectToDashboard() {
     dashboardButton.addEventListener('click', () => {
         window.location.href = "dashboard.html";
-    })    
+    })
+
+    headerLink.addEventListener('click', () => {
+        window.location.href = "dashboard.html";
+    })
 }
 
 function logoutUser() {
