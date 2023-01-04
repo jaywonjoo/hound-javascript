@@ -117,54 +117,54 @@
     //     height: 55vh;
     // }
 
-    .bottom-row {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0 0 1em 0;
-        height: 39.5em;
-    }
+    // .bottom-row {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     align-items: center;
+    //     margin: 0 0 1em 0;
+    //     height: 39.5em;
+    // }
 
-    .big-wrap {
-        margin: 0;
-        width: 90%;
-    }
+    // .big-wrap {
+    //     margin: 0;
+    //     width: 90%;
+    // }
 
-    .ticket-info {
-        display: flex;
-        flex-direction: column;
-    }
+    // .ticket-info {
+    //     display: flex;
+    //     flex-direction: column;
+    // }
 
     .ticket-info-section {
         width: 33%;
     }
 
-    .left-ticket-info-section {
-        border-bottom: solid 1px black;
-        height: 26vh;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        padding: .5em .5em .5em 3%;
-        box-sizing: border-box;
-        width: 100%;
-    }
+    // .left-ticket-info-section {
+    //     border-bottom: solid 1px black;
+    //     height: 26vh;
+    //     overflow-y: scroll;
+    //     overflow-x: hidden;
+    //     padding: .5em .5em .5em 3%;
+    //     box-sizing: border-box;
+    //     width: 100%;
+    // }
 
-    .mobile-top {
-        display: flex;
-        min-height: 3em;
-        width: 100%;
-    }
+    // .mobile-top {
+    //     display: flex;
+    //     min-height: 3em;
+    //     width: 100%;
+    // }
 
     .mobile-bottom-ticket-info-section {
         width: 100%;
     }
 
-    .ticket-info-row-top {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0;
-    }
+    // .ticket-info-row-top {
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin-bottom: 0;
+    // }
 
     #populated-description-section {
         min-height: 2em;
@@ -249,10 +249,10 @@
     //     padding-left: 3%;
     // }
 
-    .selected-ticket-info-header {
-        padding-left: 3%;
-        width: 60%;
-    }
+    // .selected-ticket-info-header {
+    //     padding-left: 3%;
+    //     width: 60%;
+    // }
 
     #tickets {
         height: 75%;
