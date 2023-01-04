@@ -93,7 +93,7 @@ const setBackgroundFormBtnInput = document.querySelector("#setBackgroundFormBtnI
 // Write inputted background to firebase
 const setBackgroundForm = document.querySelector("#setBackgroundForm")
 // Populate collaborators
-const teamMemberBody = document.querySelector(".team-member-body") 
+const teamMemberBody = document.querySelector(".team-members-body") 
 // clearsystemuserlist
 const populatableMemberDiv = document.querySelector("#populatable-member-div")
 // Darkmode button
@@ -309,9 +309,9 @@ function populateMemberList(collaboratorList, j) {
 
     teamMemberLineItemKebabDiv.classList.add("team-member-line-item-kebab-div");
     teamMemberLineItem.classList.add("team-member-line-item");
-    teamMemberLineItemName.classList.add("team-member-line-item-name");
-    teamMemberLineItemEmail.classList.add("team-member-line-item-email");
-    teamMemberLineItemPhone.classList.add("team-member-line-item-phone");
+    teamMemberLineItemName.classList.add("team-members-categories-name");
+    teamMemberLineItemEmail.classList.add("team-members-categories-email");
+    teamMemberLineItemPhone.classList.add("team-members-categories-phone");
     teamMemberLineItemKebab.classList.add("team-member-line-item-kebab");
     teamMemberLineItemKebab.classList.add("open-modal-btn");
     teamMemberLineItemId.setAttribute("style", "display: none");
