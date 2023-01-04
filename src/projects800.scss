@@ -191,7 +191,7 @@
     .all-other-modals {
         z-index: 500;
         position: fixed;
-        height: 80vh;
+        height: fit-content;
         width: 80vw;
         top: 53vh;
     }
@@ -281,26 +281,26 @@
         width: 20px;
     }
 
-    .populatable-member-modal {
-        z-index: 500;
-        position: fixed;
-        height: 80vh;
-        width: 85vw;
-        top: 53vh;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
+    // .populatable-member-modal {
+    //     z-index: 500;
+    //     position: fixed;
+    //     height: 80vh;
+    //     width: 85vw;
+    //     top: 53vh;
+    //     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    // }
 
     .new-member-main-div {
         gap: 5%;
     }
 
-    .add-member-form {
-        height: 100%;
-    }
+    // .add-member-form {
+    //     height: 100%;
+    // }
     
-    .populatable-member-div {
-        height: 100%;
-    }
+    // .populatable-member-div {
+    //     height: 100%;
+    // }
 
     .new-member-name-div {
         font-size: .75rem;

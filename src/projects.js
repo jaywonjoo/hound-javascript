@@ -61,7 +61,7 @@ const projectHeaderRef = doc(db, 'projects', projectID)
 // Comment Creation
 const userRef = collection(db, "users");
 // Add Member Form
-const modalAddMemberForm = document.querySelector(".add-member-form")
+const modalAddMemberForm = document.querySelector(".modal-add-members-form")
 // Create Ticket
 const projectRef = collection(db, 'projects')
 const createTicketForm = document.querySelector('.create-ticket-form')

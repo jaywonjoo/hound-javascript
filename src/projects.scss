@@ -450,6 +450,66 @@ button {
       }
     }
   }
+
+  &-add-members {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    border-radius: .75rem;
+    background-color: white;
+    width: 25rem;
+    height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    @include mq(small) {
+      z-index: 500;
+      position: fixed;
+      height: fit-content;
+      width: 85vw;
+      top: 53vh;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    &-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      
+      @include mq(small) {
+        height: 100%;
+      }
+
+      &-header {
+        margin: 0 0 1rem 0;
+        font-size: 2rem;
+      }
+
+      &-container {
+        overflow-y: scroll;
+        height: 15rem;
+        border: solid 1px;
+        border-radius: .5rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        overflow-x: hidden;
+
+        @include mq(small) {
+          height: 100%;
+        }
+      }
+    }
+
+    &-btn {
+      border: none;
+      border-radius: 1rem;
+      padding: 7px 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
 }
 
 .delineator {
@@ -763,27 +823,19 @@ button {
   }
 }
 
-
+.content-section {
+  width: 100%;
+  margin: 0 2% 0 2%;
+}
 
 .page-header {
   margin: 1.5rem 0 1% 0;
   font-size: 2.5rem;
 }
 
-// .sidebar-button-circle {
-//   display: none;
-// }
-
-// .sidebar-button {
-//   display: none;
-// }
 
 
 
-.content-section {
-  width: 100%;
-  margin: 0 2% 0 2%;
-}
 
 
 
@@ -1363,54 +1415,7 @@ display: none;
   gap: 10px;
 }
 
-/* Selected Ticket Info Section */
-/* toggle button */
 
-
-
-
-.populatable-member-modal {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1rem;
-  border-radius: .75rem;
-  background-color: white;
-  width: 25rem;
-  height: auto;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.add-member-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.add-member-form-header {
-  margin: 0 0 1rem 0;
-  font-size: 2rem;
-}
-
-.populatable-member-div {
-  overflow-y: scroll;
-  height: 15rem;
-  border: solid 1px;
-  border-radius: .5rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-.add-member-btn {
-  border: none;
-  border-radius: 1rem;
-  padding: 7px 10px;
-  width: 100%;
-  cursor: pointer;
-}
 
 .edit-ticket-form {
   display: flex;
@@ -1513,57 +1518,13 @@ font-size: .75rem;
 
 
 
-  // .sidebar-button-circle {
-  //     border-radius: 50px;
-  //     aspect-ratio: 1;
-  //     width: 25px;
-  //     height: 25px;
-  //     border-width: 1px;
-  //     border-style: solid;
-  //     backdrop-filter: blur(40px);
-  //     -webkit-backdrop-filter: blur(40px);
-  //     position: fixed;
-  //     left: 0;
-  //     top: 4.6rem;
-  //     z-index: 3;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     margin-left: 4px;
-  //     font-size: .75em;
-  //     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
-  // }
 
-  // .sidebar-button {
-  //     display: block;
-  //     background-color: transparent;
-  //     border: none;
-  //     width: 18px;
-  // }   
-
-  // .sidebar-button-bar {
-  //     width: 18px;
-  //     height: 160vh;
-  //     top: 0%;
-  //     left: 0;
-  //     position: fixed;
-  //     border-width: 1px;
-  //     border-right-style: solid;
-  //     backdrop-filter: blur(40px);
-  //     -webkit-backdrop-filter: blur(40px);
-  // }
 
  .sidebar-button-bar-spacer {
       width: 18px;
   }
 
-  // .dashboard-master {
-  //     z-index: 800;
-  //     width: 16rem;
-  //     position: fixed;
-  //     left: calc(-75vw - 1px);
-  //     top: 5vh;
-  // }
+
 
   .content-section {
       width: 100vw;
@@ -1708,3 +1669,105 @@ font-size: .75rem;
 //   font-size: 10px;
 //   margin: 0 0 10px 0;
 // }
+
+// .sidebar-button-circle {
+//   display: none;
+// }
+
+// .sidebar-button {
+//   display: none;
+// }
+
+/* Selected Ticket Info Section */
+/* toggle button */
+
+// .populatable-member-modal {
+//   position: absolute;
+//   top: 40%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   padding: 1rem;
+//   border-radius: .75rem;
+//   background-color: white;
+//   width: 25rem;
+//   height: auto;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+// }
+
+// .add-member-form {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// .add-member-form-header {
+//   margin: 0 0 1rem 0;
+//   font-size: 2rem;
+// }
+
+// .populatable-member-div {
+//   overflow-y: scroll;
+//   height: 15rem;
+//   border: solid 1px;
+//   border-radius: .5rem;
+//   margin-bottom: 1rem;
+//   width: 100%;
+//   overflow-x: hidden;
+// }
+
+// .add-member-btn {
+//   border: none;
+//   border-radius: 1rem;
+//   padding: 7px 10px;
+//   width: 100%;
+//   cursor: pointer;
+// }
+
+  // .sidebar-button-circle {
+  //     border-radius: 50px;
+  //     aspect-ratio: 1;
+  //     width: 25px;
+  //     height: 25px;
+  //     border-width: 1px;
+  //     border-style: solid;
+  //     backdrop-filter: blur(40px);
+  //     -webkit-backdrop-filter: blur(40px);
+  //     position: fixed;
+  //     left: 0;
+  //     top: 4.6rem;
+  //     z-index: 3;
+  //     display: flex;
+  //     justify-content: center;
+  //     align-items: center;
+  //     margin-left: 4px;
+  //     font-size: .75em;
+  //     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+  // }
+
+  // .sidebar-button {
+  //     display: block;
+  //     background-color: transparent;
+  //     border: none;
+  //     width: 18px;
+  // }   
+
+  // .sidebar-button-bar {
+  //     width: 18px;
+  //     height: 160vh;
+  //     top: 0%;
+  //     left: 0;
+  //     position: fixed;
+  //     border-width: 1px;
+  //     border-right-style: solid;
+  //     backdrop-filter: blur(40px);
+  //     -webkit-backdrop-filter: blur(40px);
+  // }
+  
+    // .dashboard-master {
+  //     z-index: 800;
+  //     width: 16rem;
+  //     position: fixed;
+  //     left: calc(-75vw - 1px);
+  //     top: 5vh;
+  // }
