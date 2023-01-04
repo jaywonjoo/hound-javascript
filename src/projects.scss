@@ -1288,6 +1288,53 @@ button {
     font-weight: 100;
     margin-top: .5em;
   }
+
+  &-right {
+    &-chat-section {
+      width: 40%;
+      height: 100%;
+      border-left: solid black 1px;
+      border-radius: 0 0 15px 0;
+  
+      @include mq(small) {
+        width: 100%;
+        border: none;
+        height: 49vh;
+      }
+    }
+
+    &-chatbox {
+      height: 90%;
+      width: 100%;
+      overflow: auto;
+  
+      @include mq(small) {
+        width: 100%;
+        height: 49vh;
+      }
+    }
+
+    &-comment-form {
+      width: 100%;
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      &-input {
+        width: 70%;
+        border-radius: 10px;
+      }
+
+      &-btn {
+        border-radius: 10px;
+        border: solid rgb(50, 125, 255);
+        background-color: rgb(50, 125, 255);
+        color: white;
+      }
+    }
+  }
 }
 
 
@@ -1508,73 +1555,6 @@ button {
   right: 0;
   top: -2.1vh;
   animation: fadeIn .15s, slideIn .15s linear;
-}
-
-// .mobile-bottom-ticket-info-section {
-//   width: 33%;
-//   display: flex;
-//   flex-direction: column;
-// }
-
-
-// .ticket-info-section {
-//   display: flex;
-//   flex-direction: column;
-//   width: 33%;
-// }
-
-
-
-// .ticket-info-row-bottom {
-//   display: flex;
-//   margin-bottom: 30px;
-// }
-
-
-// .ticket-characteristics {
-//   color: white;
-//   width: fit-content;
-//   padding: .25em .5em;
-//   border-radius: 1em;
-//   font-size: .6em;
-//   font-weight: 100;
-//   margin-top: .5em;
-// }
-
-.right-chat-section {
-  width: 40%;
-  height: 100%;
-  border-left: solid black 1px;
-  border-radius: 0 0 15px 0;
-
-}
-
-/* Chatbox Section  */
-.chatbox {
-  height: 90%;
-  width: 100%;
-  overflow: auto;
-}
-
-.comment-input-form {
-  width: 100%;
-  height: 10%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-.comment-input-form-input {
-  width: 70%;
-  border-radius: 10px;
-}
-
-.comment-input-form-button {
-  border-radius: 10px;
-  border: solid rgb(50, 125, 255);
-  background-color: rgb(50, 125, 255);
-  color: white;
 }
 
 .entire-message {
@@ -2172,4 +2152,67 @@ font-size: .75rem;
 //   font-size: .75em;
 //   font-weight: 100;
 //   margin-top: .5em;
+// }
+
+// .ticket-characteristics {
+//   color: white;
+//   width: fit-content;
+//   padding: .25em .5em;
+//   border-radius: 1em;
+//   font-size: .6em;
+//   font-weight: 100;
+//   margin-top: .5em;
+// }
+
+// .right-chat-section {
+//   width: 40%;
+//   height: 100%;
+//   border-left: solid black 1px;
+//   border-radius: 0 0 15px 0;
+
+// }
+
+/* Chatbox Section  */
+// .chatbox {
+//   height: 90%;
+//   width: 100%;
+//   overflow: auto;
+// }
+
+// .comment-input-form {
+//   width: 100%;
+//   height: 10%;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
+// }
+
+// .comment-input-form-input {
+//   width: 70%;
+//   border-radius: 10px;
+// }
+
+// .comment-input-form-button {
+//   border-radius: 10px;
+//   border: solid rgb(50, 125, 255);
+//   background-color: rgb(50, 125, 255);
+//   color: white;
+// }
+
+// .mobile-bottom-ticket-info-section {
+//   width: 33%;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .ticket-info-section {
+//   display: flex;
+//   flex-direction: column;
+//   width: 33%;
+// }
+
+// .ticket-info-row-bottom {
+//   display: flex;
+//   margin-bottom: 30px;
 // }

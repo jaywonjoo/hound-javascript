@@ -497,7 +497,7 @@ function populateTickets() {
                         const populatedTicketInfoSection = document.querySelector("#populated-status-section")
                         const populatedTicketSection = document.querySelector("#populated-priority-section")
                         const populatedTypeSection = document.querySelector("#populated-type-section")
-                        const chatbox = document.querySelector(".chatbox");
+                        const chatbox = document.querySelector(".ticket-info-right-chatbox");
                         chatbox.innerHTML = "";
 
                         setDataIndex()
@@ -577,7 +577,7 @@ function populateTickets() {
                     
                     onSnapshot(orderedCommentsRef, (snapshot) => {
                         let comments = []
-                        const chatbox = document.querySelector(".chatbox");
+                        const chatbox = document.querySelector(".ticket-info-right-chatbox");
 
                         clearChatbox();
                         
@@ -646,7 +646,7 @@ function commentCreation() {
                 currentUserList.push({ ...doc.data(), id: doc.uid });
             });
 
-            const commentInputForm = document.querySelector(".comment-input-form")
+            const commentInputForm = document.querySelector(".ticket-info-right-comment-form")
 
             commentInputForm.addEventListener('submit', (e) => {
                 e.preventDefault();
