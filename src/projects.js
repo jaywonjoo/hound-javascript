@@ -7,7 +7,6 @@ import {
 } from 'firebase/firestore';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import "./projects.scss";
-import "./projects800.scss";
 import "./nav.scss";
 import "./darkmode.scss";
 
