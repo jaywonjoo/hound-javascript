@@ -3,6 +3,7 @@
 $breakpoints: (
     small: 800px,
     medium: 1100px,
+    large: 1500px,
 );
 
 @mixin mq($key) {
@@ -225,8 +226,9 @@ a {
     &-doggo-head {
         width: 55vw;
 
-        @include bsmq(medium) {
-            max-width: 80vh;
+        @include bsmq(large) {
+            max-width: 92vh;
+            min-width: 50vw;
         }
     }
 
@@ -258,7 +260,7 @@ a {
     }
 
     &-text-main {
-        font-size: min(4.5vw, 10rem);
+        font-size: min(4.5vw, 50rem);
         line-height: 1;
         font-family: Graphik-Semibold,sans-serif;
         margin: 30px 0;
@@ -274,7 +276,7 @@ a {
     &-text-body {
         font-family: Graphik-Semibold,sans-serif;
         display: block;
-        font-size: min(2vw, 25px);
+        font-size: min(2vw, 10rem);
         width: 70%;
 
         @include mq(small) {
