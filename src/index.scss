@@ -13,6 +13,14 @@ $breakpoints: (
 	}
 };
 
+@mixin bsmq($key) {
+	$size: map.get($breakpoints, $key);
+	
+	@media (min-width: $size) {
+		@content;
+	}
+};
+
 * {
     box-sizing: border-box;
 }
@@ -216,6 +224,10 @@ a {
 
     &-doggo-head {
         width: 55vw;
+
+        @include bsmq(medium) {
+            max-width: 80vh;
+        }
     }
 
     &-text-master {
@@ -246,7 +258,7 @@ a {
     }
 
     &-text-main {
-        font-size: min(4.5vw, 100px);
+        font-size: min(4.5vw, 10rem);
         line-height: 1;
         font-family: Graphik-Semibold,sans-serif;
         margin: 30px 0;
