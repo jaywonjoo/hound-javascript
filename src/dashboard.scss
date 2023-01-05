@@ -106,9 +106,7 @@ button {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   padding: 0px 25px;
-  min-height: 40px;
-  height: 5vh;
-  max-height: 50px;
+  height: 40px;
   transition: box-shadow .25s;
   border-width: 1.5px;
   border-bottom-style: solid;
@@ -237,8 +235,8 @@ button {
 
   &-user-dropdown {
     position:fixed;
-    right: .2em;
-    top: calc( 5vh + .2em );
+    right: 5px;
+    top: calc( 40px + 5px );
     border-radius: 5px;
     height: fit-content;
     width: fit-content;
