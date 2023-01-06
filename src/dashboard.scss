@@ -869,6 +869,9 @@ button {
       justify-content: space-between;
       padding: 10px 0 10px 10px;
       border-radius: 10px;
+
+      @include mq(mobile) {
+      width: auto;
     }
 
     &-title {
