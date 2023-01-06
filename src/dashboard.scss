@@ -871,7 +871,8 @@ button {
       border-radius: 10px;
 
       @include mq(mobile) {
-      width: auto;
+        width: auto;
+      }
     }
 
     &-title {
