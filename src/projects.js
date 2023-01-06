@@ -377,47 +377,53 @@ function clearSystemUsersList() {
 }
 
 function populateAddUserModal() {
-        const systemUsers = collection(db, 'users')
-        const alphabetizedSystemUsers = query(systemUsers, orderBy("firstName"))
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const uid = user.uid;
+            const systemUsers = collection(db, 'users')
+            const userFriends = query(systemUsers, where("friends", "array-contains", uid))
 
-        onSnapshot(alphabetizedSystemUsers, (snapshot) => {
-            let SystemUsersList = []
-            clearSystemUsersList()
-            
-            snapshot.docs.forEach((doc) => {
-                SystemUsersList.push({ ...doc.data(), id: doc.id })
-            })
-
-            let i = 0
-            for (i = 0; i < SystemUsersList.length; i++) {
-                const populatableMemberDiv = document.querySelector("#populatable-member-div")
+            onSnapshot(userFriends, (snapshot) => {
+                let SystemUsersList = []
+                clearSystemUsersList()
                 
-                const newMemberMainDiv = document.createElement("div")
-                const newMemberCheckboxDiv = document.createElement("input")
-                newMemberCheckboxDiv.setAttribute("type", "checkbox");
-                const newMemberNameDiv = document.createElement("div")
-                const newMemberEmailDiv = document.createElement("div")
-                const newMemberIdDiv = document.createElement("div")
+                snapshot.docs.forEach((doc) => {
+                    SystemUsersList.push({ ...doc.data(), id: doc.id })
+                })
 
-        
-                populatableMemberDiv.appendChild(newMemberMainDiv);
-                newMemberMainDiv.appendChild(newMemberCheckboxDiv);
-                newMemberMainDiv.appendChild(newMemberNameDiv);
-                newMemberMainDiv.appendChild(newMemberEmailDiv);
-                newMemberMainDiv.appendChild(newMemberIdDiv);
-        
-                newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
-                newMemberEmailDiv.innerText = (SystemUsersList[i].email);
-                newMemberIdDiv.innerText = (SystemUsersList[i].uid);
-        
-                newMemberMainDiv.classList.add("new-member-main-div")
-                newMemberCheckboxDiv.classList.add("new-member-checkbox-div")
-                newMemberNameDiv.classList.add("new-member-name-div")
-                newMemberEmailDiv.classList.add("new-member-email-div")
-                newMemberIdDiv.classList.add("hidden")
-            }
-        })
+                console.log(SystemUsersList)
 
+                let i = 0
+                for (i = 0; i < SystemUsersList.length; i++) {
+                    const populatableMemberDiv = document.querySelector("#populatable-member-div")
+                    
+                    const newMemberMainDiv = document.createElement("div")
+                    const newMemberCheckboxDiv = document.createElement("input")
+                    newMemberCheckboxDiv.setAttribute("type", "checkbox");
+                    const newMemberNameDiv = document.createElement("div")
+                    const newMemberEmailDiv = document.createElement("div")
+                    const newMemberIdDiv = document.createElement("div")
+
+            
+                    populatableMemberDiv.appendChild(newMemberMainDiv);
+                    newMemberMainDiv.appendChild(newMemberCheckboxDiv);
+                    newMemberMainDiv.appendChild(newMemberNameDiv);
+                    newMemberMainDiv.appendChild(newMemberEmailDiv);
+                    newMemberMainDiv.appendChild(newMemberIdDiv);
+            
+                    newMemberNameDiv.innerText = (SystemUsersList[i].firstName + " " + SystemUsersList[i].lastName);
+                    newMemberEmailDiv.innerText = (SystemUsersList[i].email);
+                    newMemberIdDiv.innerText = (SystemUsersList[i].uid);
+            
+                    newMemberMainDiv.classList.add("new-member-main-div")
+                    newMemberCheckboxDiv.classList.add("new-member-checkbox-div")
+                    newMemberNameDiv.classList.add("new-member-name-div")
+                    newMemberEmailDiv.classList.add("new-member-email-div")
+                    newMemberIdDiv.classList.add("hidden")
+                }
+            })
+        }
+    })
 }
 
 function populateTickets() {
