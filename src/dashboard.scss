@@ -555,7 +555,7 @@ button {
   &-master {
     width: 20em;
     min-width: 10em;
-    height: 95vh;
+    height: calc(100vh - 40px);
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     border-right: solid 1px rgb(0, 0, 0, .25);
