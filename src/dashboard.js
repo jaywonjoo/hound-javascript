@@ -30,6 +30,7 @@ auth.onAuthStateChanged((user) => {
 // Firebase stuff
 const db = getFirestore();
 const colRef = collection(db, "projects");
+
 // populateProjectContainers()
 const starredProjectContainer = document.querySelector("#starred-project-container");
 const userProjectContainer = document.querySelector("#project-container");
@@ -74,9 +75,12 @@ const udoemail = document.querySelector(".modal-user-dropdown-card-right-email")
 // openProjectManager()
 const manageProjectsMaster = document.querySelector("#manageProjectsMaster")
 const projectManagerBtn = document.querySelector("#projectManagerBtn")
+// Custom Background
+const body = document.querySelector("#body")
 
 
 populateUserIconAndTheme()
+loadBackground()
 populateProjectContainers()
 closeOverlay()
 createProject()
@@ -144,6 +148,23 @@ function populateUserIconAndTheme() {
         })
       }
   })
+}
+
+function loadBackground() {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+      const userRef = collection(db, 'users')
+
+      const userCreatorDocRef = query(userRef, where("uid", "==", uid));
+      onSnapshot(userCreatorDocRef, (snapshot) => {
+        snapshot.docs.forEach((docs) => {
+          let fetchedBackgroundURL = docs.data().background;
+          body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-repeat: no-repeat; background-position-x: right; background-position-y: bottom; background-size: contain")
+        })
+      })
+    }}
+  )
 }
 
 function populateProjectContainers() {
