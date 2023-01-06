@@ -160,7 +160,7 @@ function loadBackground() {
       onSnapshot(userCreatorDocRef, (snapshot) => {
         snapshot.docs.forEach((docs) => {
           let fetchedBackgroundURL = docs.data().background;
-          body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"'); background-repeat: no-repeat; background-position-x: right; background-position-y: bottom; background-size: contain")
+          body.setAttribute("style", "background-image: url('"+ fetchedBackgroundURL +"');")
         })
       })
     }}

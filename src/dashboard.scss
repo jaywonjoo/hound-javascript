@@ -6,6 +6,7 @@ $theme: (
 );
 
 $breakpoints: (
+    mobile: 400px,
     small: 800px,
     medium: 1100px,
 );
@@ -61,6 +62,10 @@ body {
   padding: 0;
   margin: 0;
   overflow-y: hidden;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+  background-size: contain;
 
   @include theme(light) {
     background-color: #f5f5f5;
@@ -75,6 +80,11 @@ body {
   @include mq(small) {
     background-attachment: fixed;
     overflow-y: auto;
+  }
+
+  @include mq(mobile) {
+    background-size: 150%;
+    background-position-x: left;
   }
 }
 
